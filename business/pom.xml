@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.clinica</groupId>
+		<artifactId>clinicaVeterinaria</artifactId>
+		<version>${revision}</version>
+	</parent>
+	<artifactId>business</artifactId>
+	<packaging>jar</packaging>
+
+	<name>business</name>
+	<description>Módulo de la capa de lógica de negocio</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.clinica</groupId>
+			<artifactId>domain</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-excelant</artifactId>
+			<version>5.2.3</version>
+		</dependency>
+	</dependencies>
+
+</project>

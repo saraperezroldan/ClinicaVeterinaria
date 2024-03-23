@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.clinica</groupId>
+		<artifactId>clinicaVeterinaria</artifactId>
+		<version>${revision}</version>
+	</parent>
+	<artifactId>web</artifactId>
+	<packaging>war</packaging>
+
+	<name>web</name>
+	<description>Módulo de la capa web</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.clinica</groupId>
+			<artifactId>rest</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.clinica</groupId>
+			<artifactId>persistence</artifactId>
+			<version>${revision}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${war.name}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

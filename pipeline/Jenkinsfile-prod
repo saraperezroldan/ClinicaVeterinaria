@@ -1,0 +1,36 @@
+#!groovy
+
+pipeline {
+    environment {
+        JAVA_TOOL_OPTIONS = "-Dhttps.protocols=TLSv1.2 -Duser.home=/var/maven"
+    }
+    agent {
+        docker {
+            image "maven:3.6.1-jdk-8"
+            label "docker-agent"
+            args '-v $HOME/.m2:/var/maven/.m2 -e MAVEN_CONFIG=/var/maven/.m2'
+        }
+    }
+
+    stages {
+        stage("Build") {
+            steps {
+                sh "mvn -version"
+                sh "mvn -f ${WORKSPACE}/edugestor/pom.xml clean install -P prod"
+
+            }
+        }
+        stage('PROD Deploy') {
+            steps {
+            echo "deploying to PROD Env"
+            deploy adapters: [tomcat9(credentialsId: 'tomcat-edugestor-prod-deploy', url: 'https://edugestor.psoplaneta.com/')], contextPath: 'edugestor', war: '**/edugestor.war'
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

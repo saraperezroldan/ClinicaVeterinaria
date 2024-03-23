@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.clarins</groupId>
+		<artifactId>bowi</artifactId>
+		<version>${revision}</version>
+	</parent>
+	<artifactId>persistence</artifactId>
+	<packaging>jar</packaging>
+
+	<name>persistence</name>
+	<description>Módulo con la implementación de la capa de persistencia</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.clarins</groupId>
+			<artifactId>business</artifactId>
+			<version>${revision}</version>
+		</dependency>
+	</dependencies>
+
+</project>

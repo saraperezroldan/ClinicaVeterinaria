@@ -22,8 +22,8 @@ public class MascotaDTO {
     private String urlImagen;
     private Date fechaNacimiento;
     private Date fechaAlta;
-    private Especie especie;
-    private Usuario usuario;
+    private EspecieDTO especie;
+    private UsuarioDTO usuario;
 
     public static MascotaDTO toDTO(Mascota mascota){
         return MascotaDTO.toDTO(mascota, Arrays.asList(EspecieDTO.class, UsuarioDTO.class));
@@ -44,15 +44,13 @@ public class MascotaDTO {
         mascotaDTO.setUrlImagen(mascota.getUrlImagen());
         mascotaDTO.setFechaNacimiento(mascota.getFechaNacimiento());
         mascotaDTO.setFechaAlta(mascota.getFechaAlta());
-        mascotaDTO.setEspecie(mascota.getEspecie());
-        mascotaDTO.setUsuario(mascota.getUsuario());
 
-        /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(EspecieDTO.class)){
+        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(EspecieDTO.class)){
             mascotaDTO.setEspecie(EspecieDTO.toDTO(mascota.getEspecie()));
-        }*/
-        /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
+        }
+        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
             mascotaDTO.setUsuario(UsuarioDTO.toDTO(mascota.getUsuario()));
-        }*/
+        }
         return mascotaDTO;
     }
 
@@ -92,8 +90,8 @@ public class MascotaDTO {
         mascota.setUrlImagen(mascotaDTO.getUrlImagen());
         mascota.setFechaNacimiento(mascotaDTO.getFechaNacimiento());
         mascota.setFechaAlta(mascotaDTO.getFechaAlta());
-        //mascota.setEspecie(EspecieDTO.toDomain(mascotaDTO.getEspecie()));
-        //mascota.setUsuario(UsuarioDTO.toDomain(mascotaDTO.getUsuario()));
+        mascota.setEspecie(EspecieDTO.toDomain(mascotaDTO.getEspecie()));
+        mascota.setUsuario(UsuarioDTO.toDomain(mascotaDTO.getUsuario()));
 
         return mascota;
     }
@@ -180,19 +178,19 @@ public class MascotaDTO {
         this.fechaAlta = fechaAlta;
     }
 
-    public Especie getEspecie() {
+    public EspecieDTO getEspecie() {
         return especie;
     }
 
-    public void setEspecie(Especie especie) {
+    public void setEspecie(EspecieDTO especie) {
         this.especie = especie;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 }

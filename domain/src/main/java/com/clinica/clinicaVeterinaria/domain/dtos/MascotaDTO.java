@@ -50,9 +50,9 @@ public class MascotaDTO {
         /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(EspecieDTO.class)){
             mascotaDTO.setEspecie(EspecieDTO.toDTO(mascota.getEspecie()));
         }*/
-        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
+        /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
             mascotaDTO.setUsuario(UsuarioDTO.toDTO(mascota.getUsuario()));
-        }
+        }*/
         return mascotaDTO;
     }
 
@@ -92,8 +92,8 @@ public class MascotaDTO {
         mascota.setUrlImagen(mascotaDTO.getUrlImagen());
         mascota.setFechaNacimiento(mascotaDTO.getFechaNacimiento());
         mascota.setFechaAlta(mascotaDTO.getFechaAlta());
-        mascota.setEspecie(EspecieDTO.toDomain(mascotaDTO.getEspecie()));
-        mascota.setUsuario(UsuarioDTO.toDomain(mascotaDTO.getUsuario()));
+        //mascota.setEspecie(EspecieDTO.toDomain(mascotaDTO.getEspecie()));
+        //mascota.setUsuario(UsuarioDTO.toDomain(mascotaDTO.getUsuario()));
 
         return mascota;
     }

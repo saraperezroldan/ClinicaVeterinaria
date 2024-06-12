@@ -17,10 +17,10 @@ public class Usuario {
     private String password;
     private String telefono;
     private String direccion;
-    private String ciudad;
+    private String poblacion;
     private String provincia;
     private String codigoPostal;
-    private String imagenURL;
+    private String imagen;
     private Date fechaAlta;
 
     @ManyToOne(
@@ -48,10 +48,10 @@ public class Usuario {
         this.password = password;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.ciudad = ciudad;
+        this.poblacion = poblacion;
         this.provincia = provincia;
         this.codigoPostal = codigoPostal;
-        this.imagenURL = imagenURL;
+        this.imagen = imagen;
         this.fechaAlta = fechaAlta;
         this.rol = rol;
     }
@@ -121,11 +121,11 @@ public class Usuario {
     }
 
     public String getCiudad() {
-        return ciudad;
+        return poblacion;
     }
 
     public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+        this.poblacion = ciudad;
     }
 
     public String getProvincia() {
@@ -144,12 +144,16 @@ public class Usuario {
         this.codigoPostal = codigoPostal;
     }
 
-    public String getImagenURL() {
-        return imagenURL;
+    public String getPoblacion() {return poblacion;}
+
+    public void setPoblacion(String poblacion) {this.poblacion = poblacion;}
+
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenURL(String imagenURL) {
-        this.imagenURL = imagenURL;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public Date getFechaAlta() {

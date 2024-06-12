@@ -2,6 +2,8 @@ package com.clinica.clinicaVeterinaria.rest.usuario;
 
 import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioService;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
+import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,28 +18,32 @@ public class UsuarioControllerImpl implements IUsuarioController {
     IUsuarioService usuarioService;
 
     @Override
-    public List<UsuarioDTO> getAllUsuarios() {
-        return usuarioService.getAllUsuarios();
+    public ResponseEntity<List<UsuarioDTO>> getUsuarios() {
+        return new ResponseEntity<>(usuarioService.getUsuarios(), HttpStatus.OK);
     }
 
     @Override
-    public UsuarioDTO getUsuarioPorId(int idUsuario) throws URISyntaxException {
-        return usuarioService.getUsuarioPorId(idUsuario);
+    public ResponseEntity<UsuarioDTO> getUsuarioById(int idUsuario) {
+        return new ResponseEntity<>(usuarioService.getUsuarioById(idUsuario), HttpStatus.OK);
     }
 
     @Override
-    public UsuarioDTO anadirUsuario(UsuarioDTO usuarioDTO) {
-       return usuarioService.anadirUsuario (usuarioDTO);
-
+    public ResponseEntity<PageableResult<UsuarioDTO>> filtradoUsuario(UsuarioFiltroDTO filtro) {
+        return new ResponseEntity<>(usuarioService.filtradoUsuario(filtro), HttpStatus.OK);
     }
 
     @Override
-    public UsuarioDTO modificarUsuario(UsuarioDTO usuarioDTO) {
-        return  usuarioService.modificarUsuario (usuarioDTO);
+    public ResponseEntity<UsuarioDTO> crearUsuario(UsuarioDTO usuarioDTO) {
+        return new ResponseEntity<>(usuarioService.crearUsuario(usuarioDTO), HttpStatus.OK);
     }
 
     @Override
-    public UsuarioDTO eliminarUsuario(int idUsuario) {
-        return usuarioService.eliminarUsuario(idUsuario);
+    public ResponseEntity<UsuarioDTO> modificarUsuario(UsuarioDTO usuarioDTO) {
+        return new ResponseEntity<>(usuarioService.modificarUsuario(usuarioDTO), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<UsuarioDTO> eliminarUsuario(int idUsuario) {
+        return new ResponseEntity<>(usuarioService.eliminarUsuario(idUsuario), HttpStatus.OK);
     }
 }

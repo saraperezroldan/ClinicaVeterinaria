@@ -1,6 +1,9 @@
 package com.clinica.clinicaVeterinaria.rest.usuario;
 
+import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
+import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,18 +14,19 @@ import java.util.List;
 public interface IUsuarioController {
 
     @GetMapping("getUsuarios")
-    List<UsuarioDTO> getAllUsuarios() throws URISyntaxException;
+    public ResponseEntity<List<UsuarioDTO>> getUsuarios();
 
-    @GetMapping("getUsuarioPorId/{id}")
-    UsuarioDTO getUsuarioPorId(@PathVariable("id") int idUsuario) throws URISyntaxException;
+    @GetMapping("getUsuarioById/{id}")
+    public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable("id") int idUsuario);
 
-    @PostMapping("anadirUsuario")
-    UsuarioDTO anadirUsuario(@RequestBody UsuarioDTO usuarioDTO);
+    @PostMapping("getUsuarioPorFiltro")
+    public ResponseEntity<PageableResult<UsuarioDTO>> filtradoUsuario (@RequestBody UsuarioFiltroDTO filtro);
+    @PostMapping("crearUsuario")
+    public ResponseEntity<UsuarioDTO> crearUsuario(UsuarioDTO usuarioDTO);
 
     @PostMapping("modificarUsuario")
-    UsuarioDTO modificarUsuario(@RequestBody UsuarioDTO usuarioDTO);
+    public ResponseEntity<UsuarioDTO> modificarUsuario(UsuarioDTO usuarioDTO);
 
     @DeleteMapping("eliminarUsuario/{id}")
-    UsuarioDTO eliminarUsuario(@PathVariable("id") int idUsuario);
-
+    public ResponseEntity<UsuarioDTO> eliminarUsuario(@PathVariable("id") int idUsuario);
 }

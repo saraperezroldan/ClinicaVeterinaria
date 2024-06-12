@@ -1,8 +1,9 @@
 package com.clinica.clinicaVeterinaria.domain.dtos;
 
-import com.clinica.clinicaVeterinaria.domain.entities.Rol;
 import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
+import com.nimbusds.oauth2.sdk.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -18,14 +19,17 @@ public class UsuarioDTO {
     private String password;
     private String telefono;
     private String direccion;
-    private String ciudad;
+    private String poblacion;
     private String provincia;
     private String codigoPostal;
-    private String imagenURL;
+    private String imagen;
     private Date fechaAlta;
-    private Rol rol;
+    private RolDTO rol;
 
-    public static UsuarioDTO toDTO(Usuario usuario) {
+    public static UsuarioDTO toDTO(Usuario usuario){
+        return UsuarioDTO.toDTO(usuario, Arrays.asList(RolDTO.class));
+    }
+    public static UsuarioDTO toDTO(Usuario usuario, List<Class<?>> includeRelacion) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
         if (usuario == null) {
@@ -40,13 +44,14 @@ public class UsuarioDTO {
         usuarioDTO.setPassword(StringUtils.hasText(usuario.getPassword()) ? usuario.getPassword().trim() : "");
         usuarioDTO.setTelefono(StringUtils.hasText(usuario.getTelefono()) ? usuario.getTelefono().trim() : "");
         usuarioDTO.setDireccion(StringUtils.hasText(usuario.getDireccion()) ? usuario.getDireccion().trim() : "");
-        usuarioDTO.setCiudad(StringUtils.hasText(usuario.getCiudad()) ? usuario.getCiudad().trim() : "");
+        usuarioDTO.setPoblacion(StringUtils.hasText(usuario.getCiudad()) ? usuario.getCiudad().trim() : "");
         usuarioDTO.setProvincia(StringUtils.hasText(usuario.getProvincia()) ? usuario.getProvincia().trim() : "");
         usuarioDTO.setCodigoPostal(StringUtils.hasText(usuario.getCodigoPostal()) ? usuario.getCodigoPostal().trim() : "");
-        usuarioDTO.setImagenURL(StringUtils.hasText(usuario.getImagenURL()) ? usuario.getImagenURL().trim() : "");
+        usuarioDTO.setImagen(StringUtils.hasText(usuario.getImagen()) ? usuario.getImagen().trim() : "");
         usuarioDTO.setFechaAlta(usuario.getFechaAlta());
-        //usuarioDTO.setRol(usuario.getRol());
-
+        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RolDTO.class)){
+            usuarioDTO.setRol(RolDTO.toDTO(usuario.getRol()));
+        }
         return usuarioDTO;
     }
 
@@ -70,16 +75,16 @@ public class UsuarioDTO {
         usuario.setApellidos(StringUtils.hasText(usuarioDTO.getApellidos()) ? usuarioDTO.getApellidos().trim() : "");
         usuario.setDni(StringUtils.hasText(usuarioDTO.getDni()) ? usuarioDTO.getDni().trim() : "");
         usuario.setEmail(StringUtils.hasText(usuarioDTO.getEmail()) ? usuarioDTO.getEmail().trim() : "");
-        usuario.setCiudad(StringUtils.hasText(usuarioDTO.getCiudad()) ? usuarioDTO.getCiudad().trim() : "");
+        usuario.setCiudad(StringUtils.hasText(usuarioDTO.getPoblacion()) ? usuarioDTO.getPoblacion().trim() : "");
         usuario.setPassword(StringUtils.hasText(usuarioDTO.getPassword()) ? usuarioDTO.getPassword().trim() : "");
         usuario.setTelefono(StringUtils.hasText(usuarioDTO.getTelefono()) ? usuarioDTO.getTelefono().trim() : "");
         usuario.setDireccion(StringUtils.hasText(usuarioDTO.getDireccion()) ? usuarioDTO.getDireccion().trim() : "");
-        usuario.setCiudad(StringUtils.hasText(usuarioDTO.getCiudad()) ? usuarioDTO.getCiudad().trim() : "");
+        usuario.setCiudad(StringUtils.hasText(usuarioDTO.getPoblacion()) ? usuarioDTO.getPoblacion().trim() : "");
         usuario.setProvincia(StringUtils.hasText(usuarioDTO.getProvincia()) ? usuarioDTO.getProvincia().trim() : "");
         usuario.setCodigoPostal(StringUtils.hasText(usuarioDTO.getCodigoPostal()) ? usuarioDTO.getCodigoPostal().trim() : "");
-        usuario.setImagenURL(StringUtils.hasText(usuarioDTO.getImagenURL()) ? usuarioDTO.getImagenURL().trim() : "");
+        usuario.setImagen(StringUtils.hasText(usuarioDTO.getImagen()) ? usuarioDTO.getImagen().trim() : "");
         usuario.setFechaAlta(usuarioDTO.getFechaAlta());
-        //usuario.setRol(usuarioDTO.getRol());
+        usuario.setRol(RolDTO.toDomain(usuarioDTO.getRol()));
 
         return usuario;
     }
@@ -111,18 +116,16 @@ public class UsuarioDTO {
     public void setTelefono(String telefono) {this.telefono = telefono;}
     public String getDireccion() {return direccion;}
     public void setDireccion(String direccion) {this.direccion = direccion;}
-    public String getCiudad() {return ciudad;}
-    public void setCiudad(String ciudad) {this.ciudad = ciudad;}
+    public String getPoblacion() {return poblacion;}
+    public void setPoblacion(String poblacion) {this.poblacion = poblacion;}
     public String getProvincia() {return provincia;}
     public void setProvincia(String provincia) {this.provincia = provincia;}
     public String getCodigoPostal() {return codigoPostal;}
     public void setCodigoPostal(String codigoPostal) {this.codigoPostal = codigoPostal;}
-    public String getImagenURL() {return imagenURL;}
-    public void setImagenURL(String imagenURL) {this.imagenURL = imagenURL;}
+    public String getImagen() {return imagen;}
+    public void setImagen(String imagenURL) {this.imagen = imagenURL;}
     public Date getFechaAlta() {return fechaAlta;}
     public void setFechaAlta(Date fechaAlta) {this.fechaAlta = fechaAlta;}
-
-    public Rol getRol() {return rol;}
-
-    public void setRol(Rol rol) {this.rol = rol;}
+    public RolDTO getRol() {return rol;}
+    public void setRol(RolDTO rol) {this.rol = rol;}
 }

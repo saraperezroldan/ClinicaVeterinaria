@@ -15,7 +15,7 @@ public interface IMascotaController {
     public ResponseEntity<MascotaDTO> getMascotaById(@PathVariable("id") int idMascota);
 
     @PostMapping("crearMascota")
-    public ResponseEntity<MascotaDTO> crearMascota(MascotaDTO mascotaDTO);
+    public ResponseEntity<MascotaDTO> crearMascota(@RequestBody MascotaDTO mascotaDTO);
 
     @PostMapping("modificarMascota")
     public ResponseEntity<MascotaDTO> modificarMascota(MascotaDTO mascotaDTO);

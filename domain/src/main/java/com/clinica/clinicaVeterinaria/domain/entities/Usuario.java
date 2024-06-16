@@ -21,39 +21,17 @@ public class Usuario {
     private String provincia;
     private String codigoPostal;
     private String imagen;
+    private int activo;
     private Date fechaAlta;
+    private Date fechaModificacion;
+    private Date fechaBaja;
 
-    @ManyToOne(
-            optional = true,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
-    @JoinColumn(
-            name = "id_rol"
-    )
+
+    @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "id_rol")
     private Rol rol;
 
-
     public Usuario() {
-    }
-
-    public Usuario(int idUsuario, String nombre, String apellidos, String dni, String email, String password, String telefono, String direccion, String ciudad, String provincia, String codigoPostal, String imagenURL, Date fechaAlta, Rol rol) {
-        this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-        this.email = email;
-        this.password = password;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.poblacion = poblacion;
-        this.provincia = provincia;
-        this.codigoPostal = codigoPostal;
-        this.imagen = imagen;
-        this.fechaAlta = fechaAlta;
-        this.rol = rol;
     }
 
     public int getIdUsuario() {
@@ -156,12 +134,36 @@ public class Usuario {
         this.imagen = imagen;
     }
 
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
     public Date getFechaAlta() {
         return fechaAlta;
     }
 
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
+    }
+
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    public Date getFechaBaja() {
+        return fechaBaja;
+    }
+
+    public void setFechaBaja(Date fechaBaja) {
+        this.fechaBaja = fechaBaja;
     }
 
     public Rol getRol() {

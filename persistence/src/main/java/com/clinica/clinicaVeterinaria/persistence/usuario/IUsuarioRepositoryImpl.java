@@ -45,20 +45,20 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
 
-        TypedQuery<Integer> typedQuery = em.createQuery(query + queryConditions, Integer.class);
+        TypedQuery<Long> typedQuery = em.createQuery(query + queryConditions, Long.class);
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {
             typedQuery.setParameter(entry.getKey(),entry.getValue());
         }
-        return typedQuery.getSingleResult();
+        return typedQuery.getSingleResult().intValue();
     }
 
 
     private String getConditions(UsuarioFiltroDTO filtro) {
         String queryConditions = "";
 
-        /*if (StringUtils.hasText(filtro.())) {
-            queryConditions += " AND (u.idUsuario LIKE :idUsuario) ";
-        }*/
+        if (StringUtils.hasText(filtro.getDni())) {
+            queryConditions += " AND (u.dni LIKE :dni) ";
+        }
 
         return queryConditions;
     }
@@ -66,16 +66,16 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
     private Map<String,Object> getParameters(UsuarioFiltroDTO filtro) {
         Map<String,Object> parameters = new HashMap<>();
 
-        /*if (StringUtils.hasText(filtro.getNombre())) {
-            parameters.put("nombre", "%" + filtro.getNombre() + "%");
-        }*/
+        if (StringUtils.hasText(filtro.getDni())) {
+            parameters.put("dni", "%" + filtro.getDni() + "%");
+        }
 
         return parameters;
     }
 
     private String getOrder(UsuarioFiltroDTO filtro) {
         String orderQuery = " ORDER BY u.idUsuario ";
-
+    //Posible futura ordenacion
         return orderQuery;
     }
 }

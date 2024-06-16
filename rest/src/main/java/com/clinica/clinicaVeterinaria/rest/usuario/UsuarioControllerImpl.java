@@ -28,8 +28,13 @@ public class UsuarioControllerImpl implements IUsuarioController {
     }
 
     @Override
-    public ResponseEntity<PageableResult<UsuarioDTO>> filtradoUsuario(UsuarioFiltroDTO filtro) {
-        return new ResponseEntity<>(usuarioService.filtradoUsuario(filtro), HttpStatus.OK);
+    public ResponseEntity<List<UsuarioDTO>> getUsuariosByIdRol(int idRol) {
+        return new ResponseEntity<>(usuarioService.getUsuariosByIdRol(idRol), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<PageableResult<UsuarioDTO>> getUsuarioConFiltro(UsuarioFiltroDTO filtro) {
+        return new ResponseEntity<>(usuarioService.getUsuarioConFiltro(filtro), HttpStatus.OK);
     }
 
     @Override

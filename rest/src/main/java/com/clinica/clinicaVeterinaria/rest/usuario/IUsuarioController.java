@@ -19,13 +19,17 @@ public interface IUsuarioController {
     @GetMapping("getUsuarioById/{id}")
     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable("id") int idUsuario);
 
-    @PostMapping("getUsuarioPorFiltro")
-    public ResponseEntity<PageableResult<UsuarioDTO>> filtradoUsuario (@RequestBody UsuarioFiltroDTO filtro);
+    @GetMapping("getUsuariosByIdRol/{idRol}")
+    public ResponseEntity<List<UsuarioDTO>> getUsuariosByIdRol(@PathVariable("idRol") int idRol);
+
+    @PostMapping("getUsuarioConFiltro")
+    public ResponseEntity<PageableResult<UsuarioDTO>> getUsuarioConFiltro (@RequestBody UsuarioFiltroDTO filtro);
+
     @PostMapping("crearUsuario")
-    public ResponseEntity<UsuarioDTO> crearUsuario(UsuarioDTO usuarioDTO);
+    public ResponseEntity<UsuarioDTO> crearUsuario(@RequestBody UsuarioDTO usuarioDTO);
 
     @PostMapping("modificarUsuario")
-    public ResponseEntity<UsuarioDTO> modificarUsuario(UsuarioDTO usuarioDTO);
+    public ResponseEntity<UsuarioDTO> modificarUsuario(@RequestBody UsuarioDTO usuarioDTO);
 
     @DeleteMapping("eliminarUsuario/{id}")
     public ResponseEntity<UsuarioDTO> eliminarUsuario(@PathVariable("id") int idUsuario);

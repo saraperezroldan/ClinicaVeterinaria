@@ -69,9 +69,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
     public PageableResult<UsuarioDTO> getUsuarioConFiltro (UsuarioFiltroDTO filtro) {
         List<Usuario> usuarios = usuarioRepository.findUsuarioPorFiltro(filtro);
         int resultMax = usuarioRepository.getResultMax(filtro);
-        List<UsuarioDTO> canalesComercialesDTOs = UsuarioDTO.toDTO(usuarios);
+        List<UsuarioDTO> usuariosDTOs = UsuarioDTO.toDTO(usuarios);
 
-        return new PageableResult<>(filtro.getPageNumber(),resultMax ,canalesComercialesDTOs);
+        return new PageableResult<>(filtro.getPageNumber(),resultMax ,usuariosDTOs);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     private void validarUsuario(Usuario usuario) {
         existeUsuario(usuario);
 
-        if (usuario.getIdUsuario() == 0) {
+        if (usuario.getIdUsuario() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoIdUsuario");
         }
 

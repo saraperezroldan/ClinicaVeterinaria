@@ -10,7 +10,6 @@ public interface IUsuarioService {
 
     List<UsuarioDTO> getUsuarios();
     UsuarioDTO getUsuarioById(int idUsuario);
-
     List<UsuarioDTO> getUsuariosByIdRol (int idRol);
     PageableResult<UsuarioDTO> getUsuarioConFiltro (UsuarioFiltroDTO filtro);
     UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO);

@@ -1,6 +1,10 @@
 package com.clinica.clinicaVeterinaria.rest.mascota;
 
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
+import com.clinica.clinicaVeterinaria.domain.filtros.MascotaFiltroDTO;
+import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +17,12 @@ public interface IMascotaController {
 
     @GetMapping("getMascotaById/{id}")
     public ResponseEntity<MascotaDTO> getMascotaById(@PathVariable("id") int idMascota);
+
+    @GetMapping("getMascotasByIdUsuario/{idUsuario}")
+    public ResponseEntity<List<MascotaDTO>> getMascotasByIdUsuario(@PathVariable("idUsuario") int idUsuario);
+
+    @PostMapping("getMascotaConFiltro")
+    public ResponseEntity<PageableResult<MascotaDTO>> getMascotaConFiltro (@RequestBody MascotaFiltroDTO filtro);
 
     @PostMapping("crearMascota")
     public ResponseEntity<MascotaDTO> crearMascota(@RequestBody MascotaDTO mascotaDTO);

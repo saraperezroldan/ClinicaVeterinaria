@@ -1,10 +1,8 @@
 package com.clinica.clinicaVeterinaria.domain.dtos;
 
-import com.clinica.clinicaVeterinaria.domain.entities.Especie;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
-import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
 import com.nimbusds.oauth2.sdk.util.CollectionUtils;
-
+import org.springframework.util.StringUtils;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -12,21 +10,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MascotaDTO {
-
     private int idMascota;
     private String nombre;
     private int edad;
     private float peso;
-    private boolean genero;
+    private String genero;
     private String complexion;
-    private String urlImagen;
+    private String imagen;
+    private int activo;
     private Date fechaNacimiento;
     private Date fechaAlta;
-    private EspecieDTO especie;
+    private Date fechaModificacion;
+    private Date fechaBaja;
+    private RazaDTO raza;
     private UsuarioDTO usuario;
 
+    public MascotaDTO(){}
+
     public static MascotaDTO toDTO(Mascota mascota){
-        return MascotaDTO.toDTO(mascota, Arrays.asList(EspecieDTO.class, UsuarioDTO.class));
+        return MascotaDTO.toDTO(mascota, Arrays.asList(RazaDTO.class, UsuarioDTO.class));
     }
 
     public static MascotaDTO toDTO(Mascota mascota, List<Class<?>> includeRelacion) {
@@ -35,18 +37,21 @@ public class MascotaDTO {
         if(mascota == null)
             return mascotaDTO;
 
-        mascotaDTO.setIdMascota(mascota.getIdMascota());
-        mascotaDTO.setNombre(mascota.getNombre());
-        mascotaDTO.setEdad(mascota.getEdad());
-        mascotaDTO.setPeso(mascota.getPeso());
-        mascotaDTO.setGenero(mascota.isGenero());
-        mascotaDTO.setComplexion(mascota.getComplexion());
-        mascotaDTO.setUrlImagen(mascota.getUrlImagen());
+        mascotaDTO.setIdMascota(Math.max(mascota.getIdMascota(), 0));
+        mascotaDTO.setNombre(StringUtils.hasText(mascota.getNombre()) ? mascota.getNombre().trim() : "");
+        mascotaDTO.setEdad(Math.max(mascota.getEdad(), 0));
+        mascotaDTO.setPeso(mascota.getPeso() > 0 ? mascota.getPeso() : 0);
+        mascotaDTO.setGenero(StringUtils.hasText(mascota.getGenero()) ? mascota.getGenero().trim() : "");
+        mascotaDTO.setComplexion(StringUtils.hasText(mascota.getComplexion()) ? mascota.getComplexion().trim() : "");
+        mascotaDTO.setImagen(StringUtils.hasText(mascota.getImagen()) ? mascota.getImagen().trim() : "");
         mascotaDTO.setFechaNacimiento(mascota.getFechaNacimiento());
-        mascotaDTO.setFechaAlta(mascota.getFechaAlta());
+        mascotaDTO.setActivo(Math.max(mascota.getActivo(), 0));
+        mascotaDTO.setFechaAlta(mascota.getFechaAlta()!= null ? mascota.getFechaBaja() : new Date());
+        mascotaDTO.setFechaModificacion(mascota.getFechaModificacion()!= null ? mascota.getFechaBaja() : null);
+        mascotaDTO.setFechaBaja(mascota.getFechaBaja() != null ? mascota.getFechaBaja() : null);
 
-        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(EspecieDTO.class)){
-            mascotaDTO.setEspecie(EspecieDTO.toDTO(mascota.getEspecie()));
+        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RazaDTO.class)){
+            mascotaDTO.setRaza(RazaDTO.toDTO(mascota.getRaza()));
         }
         if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
             mascotaDTO.setUsuario(UsuarioDTO.toDTO(mascota.getUsuario()));
@@ -81,16 +86,20 @@ public class MascotaDTO {
             return null;
         }
 
-        mascota.setIdMascota(mascotaDTO.getIdMascota());
-        mascota.setNombre(mascotaDTO.getNombre());
-        mascota.setEdad(mascotaDTO.getEdad());
-        mascota.setPeso(mascotaDTO.getPeso());
-        mascota.setGenero(mascotaDTO.isGenero());
-        mascota.setComplexion(mascotaDTO.getComplexion());
-        mascota.setUrlImagen(mascotaDTO.getUrlImagen());
-        mascota.setFechaNacimiento(mascotaDTO.getFechaNacimiento());
-        mascota.setFechaAlta(mascotaDTO.getFechaAlta());
-        mascota.setEspecie(EspecieDTO.toDomain(mascotaDTO.getEspecie()));
+        mascota.setIdMascota(Math.max(mascotaDTO.getIdMascota(), 0));
+        mascota.setNombre(StringUtils.hasText(mascotaDTO.getNombre()) ? mascotaDTO.getNombre().trim() : "");
+        mascota.setEdad(Math.max(mascotaDTO.getEdad(), 0));
+        mascota.setPeso(mascotaDTO.getPeso() > 0 ? mascotaDTO.getPeso() : 0);
+        mascota.setGenero(StringUtils.hasText(mascotaDTO.getGenero()) ? mascotaDTO.getGenero().trim() : "");
+        mascota.setComplexion(StringUtils.hasText(mascotaDTO.getComplexion()) ? mascotaDTO.getComplexion().trim() : "");
+        mascota.setImagen(StringUtils.hasText(mascotaDTO.getImagen()) ? mascotaDTO.getImagen().trim() : "");
+        mascota.setFechaNacimiento(mascotaDTO.getFechaNacimiento() != null ? mascotaDTO.getFechaNacimiento() : null);
+        mascota.setActivo(Math.max(mascotaDTO.getActivo(), 1));
+        mascota.setFechaAlta(mascotaDTO.getFechaAlta()!= null ? mascotaDTO.getFechaAlta() : new Date());
+        mascota.setFechaModificacion(mascotaDTO.getFechaModificacion() != null ? mascotaDTO.getFechaModificacion() : null);
+        mascota.setFechaBaja(mascotaDTO.getFechaBaja()!= null ? mascotaDTO.getFechaBaja() : null);
+
+        mascota.setRaza(RazaDTO.toDomain(mascotaDTO.getRaza()));
         mascota.setUsuario(UsuarioDTO.toDomain(mascotaDTO.getUsuario()));
 
         return mascota;
@@ -138,13 +147,9 @@ public class MascotaDTO {
         this.peso = peso;
     }
 
-    public boolean isGenero() {
-        return genero;
-    }
+    public String getGenero() {return genero;}
 
-    public void setGenero(boolean genero) {
-        this.genero = genero;
-    }
+    public void setGenero(String genero) {this.genero = genero;}
 
     public String getComplexion() {
         return complexion;
@@ -154,13 +159,9 @@ public class MascotaDTO {
         this.complexion = complexion;
     }
 
-    public String getUrlImagen() {
-        return urlImagen;
-    }
+    public String getImagen() {return imagen;}
 
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
+    public void setImagen(String imagen) {this.imagen = imagen;}
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
@@ -168,6 +169,12 @@ public class MascotaDTO {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public int getActivo() {return activo;}
+
+    public void setActivo(int activo) {
+        this.activo = activo;
     }
 
     public Date getFechaAlta() {
@@ -178,12 +185,22 @@ public class MascotaDTO {
         this.fechaAlta = fechaAlta;
     }
 
-    public EspecieDTO getEspecie() {
-        return especie;
+    public Date getFechaModificacion() {
+        return fechaModificacion;
     }
 
-    public void setEspecie(EspecieDTO especie) {
-        this.especie = especie;
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    public Date getFechaBaja() {return fechaBaja;}
+
+    public void setFechaBaja(Date fechaBaja) {this.fechaBaja = fechaBaja;}
+
+    public RazaDTO getRaza() {return raza;}
+
+    public void setRaza(RazaDTO raza) {
+        this.raza = raza;
     }
 
     public UsuarioDTO getUsuario() {

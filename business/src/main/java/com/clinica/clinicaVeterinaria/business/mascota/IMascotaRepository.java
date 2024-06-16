@@ -9,12 +9,14 @@ import java.util.List;
 public interface IMascotaRepository extends JpaRepository<Mascota, Integer>, IMascotaRepositoryCustom {
 
     @Query("SELECT distinct m FROM Mascota m "
-            + "LEFT JOIN FETCH m.especie "
             + "WHERE m.idMascota = :idMascota")
-    public Mascota findMascotaById(int idMascota);
+    Mascota findMascotaById(int idMascota);
     @Override
     List<Mascota> findAll();
 
+    @Query("SELECT m FROM Mascota m " +
+            "WHERE m.usuario.idUsuario = :idUsuario")
+    List<Mascota> findMascotasByIdUsuario(int idUsuario);
 
 
 }

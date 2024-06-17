@@ -7,12 +7,14 @@ import {MaterialModule} from "./material/material.module";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
 import { InicioUsuarioComponent } from './pages/inicio-usuario/inicio-usuario.component';
+import { InfoMascotaComponent } from './pages/info-mascota/info-mascota.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PerfilUsuarioComponent,
-    InicioUsuarioComponent
+    InicioUsuarioComponent,
+    InfoMascotaComponent
   ],
   imports: [
     BrowserModule,

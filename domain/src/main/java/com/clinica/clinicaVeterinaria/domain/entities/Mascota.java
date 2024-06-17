@@ -13,52 +13,24 @@ public class Mascota {
     private String nombre;
     private int edad;
     private float peso;
-    private boolean genero;
+    private String genero;
+    private String imagen;
     private String complexion;
-    private String urlImagen;
+    private int activo;
     private Date fechaNacimiento;
     private Date fechaAlta;
+    private Date fechaModificacion;
+    private Date fechaBaja;
 
-    @ManyToOne(
-            optional = true,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
-    @JoinColumn(
-            name = "id_usuario"
-    )
+    @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @ManyToOne(
-            optional = true,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
-    @JoinColumn(
-            name = "id_especie"
-    )
-    private Especie especie;
+    @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "id_raza")
+    private Raza raza;
 
-    public Mascota() {
-    }
-
-    public Mascota(int idMascota, String nombre, int edad, float peso, boolean genero, String complexion, String urlImagen, Date fechaNacimiento, Date fechaAlta, Usuario usuario, Especie especie) {
-        this.idMascota = idMascota;
-        this.nombre = nombre;
-        this.edad = edad;
-        this.peso = peso;
-        this.genero = genero;
-        this.complexion = complexion;
-        this.urlImagen = urlImagen;
-        this.fechaNacimiento = fechaNacimiento;
-        this.fechaAlta = fechaAlta;
-        this.usuario = usuario;
-        this.especie = especie;
-    }
+    public Mascota(){}
 
     public int getIdMascota() {
         return idMascota;
@@ -92,13 +64,9 @@ public class Mascota {
         this.peso = peso;
     }
 
-    public boolean isGenero() {
-        return genero;
-    }
+    public String getGenero() {return genero;}
 
-    public void setGenero(boolean genero) {
-        this.genero = genero;
-    }
+    public void setGenero(String genero) {this.genero = genero;}
 
     public String getComplexion() {
         return complexion;
@@ -108,13 +76,9 @@ public class Mascota {
         this.complexion = complexion;
     }
 
-    public String getUrlImagen() {
-        return urlImagen;
-    }
+    public String getImagen() {return imagen;}
 
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
+    public void setImagen(String imagen) {this.imagen = imagen;}
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
@@ -124,6 +88,10 @@ public class Mascota {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public int getActivo() {return activo;}
+
+    public void setActivo(int activo) {this.activo = activo;}
+
     public Date getFechaAlta() {
         return fechaAlta;
     }
@@ -132,19 +100,19 @@ public class Mascota {
         this.fechaAlta = fechaAlta;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+    public Date getFechaModificacion() {return fechaModificacion;}
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    public void setFechaModificacion(Date fechaModificacion) {this.fechaModificacion = fechaModificacion;}
 
-    public Especie getEspecie() {
-        return especie;
-    }
+    public Date getFechaBaja() {return fechaBaja;}
 
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
-    }
+    public void setFechaBaja(Date fechaBaja) {this.fechaBaja = fechaBaja;}
+
+    public Usuario getUsuario() {return usuario;}
+
+    public void setUsuario(Usuario usuario) {this.usuario = usuario;}
+
+    public Raza getRaza() {return raza;}
+
+    public void setRaza(Raza raza) {this.raza = raza;}
 }

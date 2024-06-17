@@ -1,4 +1,7 @@
 package com.clinica.clinicaVeterinaria.domain.filtros;
 
-public class MascotaFiltroDTO {
+import com.clinica.clinicaVeterinaria.domain.entities.Raza;
+
+public class MascotaFiltroDTO extends BaseFiltroDTO{
+
 }

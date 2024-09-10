@@ -16,29 +16,29 @@
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" value="tintin@gmail.com" disabled>
+          <input type="email" id="email" [value]="usuario?.email" disabled>
         </div>
         <div class="form-group">
           <label for="address">Dirección</label>
-          <input type="text" id="address" value="Calle Fuencarral, 46, Madrid" disabled>
+          <input type="text" id="address" [value]="usuario?.direccion" disabled>
         </div>
         <div class="form-group">
           <label for="fecha-alta">Fecha alta</label>
-          <input type="text" id="fecha-alta" value="27/04/2023" disabled>
+          <input type="text" id="fecha-alta" [value]="usuario?.fechaAlta" disabled>
         </div>
         <div class="form-group">
           <label for="telefono">Teléfono</label>
-          <input type="text" id="telefono" value="666666666" disabled>
+          <input type="text" id="telefono" [value]="usuario?.telefono" disabled>
         </div>
         <div class="form-group">
           <label for="dni">DNI</label>
-          <input type="text" id="dni" value="123456789A" disabled>
+          <input type="text" id="dni" [value]="usuario?.dni" disabled>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
           <div class="contenedor">
-            <input type="password" id="password" value="***************************" disabled>
+            <input type="password" id="password" [value]="usuario?.password" disabled>
           </div>
           <button type="submit" class="btn-change">Cambiar</button>
         </div>

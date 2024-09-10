@@ -8,12 +8,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
 import { InicioUsuarioComponent } from './pages/inicio-usuario/inicio-usuario.component';
 import {HttpClientModule} from "@angular/common/http";
+import {DateFormatPipe} from "./shared/pipes/DateFormatPipe";
 
 @NgModule({
   declarations: [
     AppComponent,
     PerfilUsuarioComponent,
-    InicioUsuarioComponent
+    InicioUsuarioComponent,
+    DateFormatPipe
   ],
   imports: [
     BrowserModule,

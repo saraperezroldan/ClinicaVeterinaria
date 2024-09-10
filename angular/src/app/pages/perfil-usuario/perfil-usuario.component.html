@@ -1,7 +1,7 @@
 <div class="container">
   <div class="foto-perfil">
     <div class="profile-section">
-      <img src="https://tse1.mm.bing.net/th?id=OIP.7O4_GREtLbxqPdJCTmfatQHaHa&pid=Api" alt="Profile Image" class="profile-image">
+      <img [src]="usuario?.imagen" alt="Profile Image" class="profile-image">
     </div>
     <button class="btn-change">Cambiar</button>
   </div>
@@ -12,7 +12,7 @@
       <form>
         <div class="form-group">
           <label for="name">Nombre</label>
-          <input type="text" id="name" [value]="usuario?.nombre" disabled>
+          <input type="text" id="name" [value]="usuario? (usuario.nombre + ' ' + usuario.apellidos) : '' " disabled>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
@@ -20,11 +20,11 @@
         </div>
         <div class="form-group">
           <label for="address">Dirección</label>
-          <input type="text" id="address" [value]="usuario?.direccion" disabled>
+          <input type="text" id="address" [value]="usuario? (usuario.direccion + ', ' + usuario.poblacion) : ''" disabled>
         </div>
         <div class="form-group">
           <label for="fecha-alta">Fecha alta</label>
-          <input type="text" id="fecha-alta" [value]="usuario?.fechaAlta" disabled>
+          <input type="text" id="fecha-alta" [value]="(usuario?.fechaAlta || '') | dateFormat" disabled>
         </div>
         <div class="form-group">
           <label for="telefono">Teléfono</label>

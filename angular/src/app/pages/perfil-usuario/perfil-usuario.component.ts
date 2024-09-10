@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {UsuarioService} from "../../services/usuario.service";
 import {Usuario} from "../../models/usuario.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -9,16 +10,16 @@ import {Usuario} from "../../models/usuario.model";
 })
 export class PerfilUsuarioComponent {
 
-  public usuario : Usuario = {idUsuario: 0, nombre: "", apellidos: "",dni:"", email: "", telefono: "", password:"", direccion: "",poblacion:"", provincia: "", codigoPostal: "", imagen: "", fechaAlta: "", fechaModificacion: "", fechaNacimiento: "", fechaBaja: "", rol: {idRol: 0, nombre: ""}};
-
-  constructor(public usuarioService : UsuarioService) { }
+  usuario : Usuario | undefined;
+  constructor(private usuarioService : UsuarioService, private  route : ActivatedRoute) { }
 
   ngOnInit( ): void {
     this.getInfoUsuario();
   }
 
   getInfoUsuario(){
-    this.usuarioService.getInfoUsuario().subscribe( usuario => {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.usuarioService.getInfoUsuarioById(id).subscribe( usuario => {
       this.usuario = usuario;
     });
   }

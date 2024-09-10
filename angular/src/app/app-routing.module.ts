@@ -9,7 +9,7 @@ const routes: Routes = [
     component : InicioUsuarioComponent
   },
   {
-    path: 'perfil',
+    path: 'perfil-usuario/:id',
     component : PerfilUsuarioComponent
   }
 ];

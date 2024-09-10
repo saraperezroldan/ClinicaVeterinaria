@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {Usuario} from "../models/usuario.model";
 import {Injectable} from "@angular/core";
 
-const URLSERVER = 'http://localhost:8080/';
+const URLSERVER = 'http://localhost:8080/clinica_veterinaria/rest/';
 
 @Injectable({
     providedIn: 'root'
@@ -24,8 +24,8 @@ export class UsuarioService {
   }
 
   // Info usuario
-  getInfoUsuario() : Observable<Usuario>{
-    return this.http.get<Usuario>(URLSERVER + 'usuario/getUserioById/${id}');
+  getInfoUsuarioById(id: number) : Observable<Usuario>{
+    return this.http.get<Usuario>(`${URLSERVER}usuario/getUsuarioById/${id}`);
   }
 
 }

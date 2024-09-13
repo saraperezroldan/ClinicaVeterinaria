@@ -17,17 +17,15 @@ import java.util.List;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
-
     @Autowired
     private IUsuarioRepository usuarioRepository;
-
 
     @Override
     public List<UsuarioDTO> getUsuarios() {
         List<Usuario> usuarios = null;
         List<UsuarioDTO> usuariosDTO = new ArrayList<>();
 
-        usuarios = usuarioRepository.findAll();
+        usuarios = usuarioRepository.findUsuariosActivos();
 
         if (usuarios != null && !usuarios.isEmpty()) {
             usuarios.forEach(usuario -> usuariosDTO.add(UsuarioDTO.toDTO(usuario)));
@@ -76,7 +74,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuarioNuevo = UsuarioDTO.toDomain(usuarioDTO);
-        //validarUsuario(usuarioNuevo);
+        validarUsuario(usuarioNuevo);
 
         Usuario usuarioOld = usuarioRepository.findUsuarioById(usuarioNuevo.getIdUsuario());
         if (usuarioOld != null) {
@@ -90,7 +88,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public UsuarioDTO modificarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuarioEditar = UsuarioDTO.toDomain(usuarioDTO);
-        //validarUsuario(usuarioEditar);
+        validarUsuario(usuarioEditar);
 
         Usuario usuarioOld = usuarioRepository.findUsuarioById(usuarioEditar.getIdUsuario());
         if (usuarioOld == null) {
@@ -105,10 +103,8 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public UsuarioDTO eliminarUsuario(int idUsuario) {
         Usuario usuarioBorrar = usuarioRepository.findUsuarioById(idUsuario);
-        //validarUsuario(usuarioBorrar);
 
-        Usuario usuarioOld = usuarioRepository.findUsuarioById(usuarioBorrar.getIdUsuario());
-        if (usuarioOld == null) {
+        if (usuarioBorrar == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontrado");
         }
         usuarioBorrar.setActivo(0);

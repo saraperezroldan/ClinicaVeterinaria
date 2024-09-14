@@ -80,7 +80,6 @@ public class MascotaServiceImpl implements IMascotaService{
         if (mascotaOld != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mascota.yaExisteUsuario");
         }
-        mascotaNuevo.setActivo(1);
         mascotaNuevo.setFechaAlta(new Date());
         mascotaRepository.save(mascotaNuevo);
 
@@ -89,28 +88,27 @@ public class MascotaServiceImpl implements IMascotaService{
 
     @Override
     public MascotaDTO modificarMascota(MascotaDTO mascotaDTO) {
-        Mascota mascotaOld = mascotaRepository.findMascotaById(mascotaDTO.getIdMascota());
+        Mascota mascotaUpdate = mascotaRepository.findMascotaById(mascotaDTO.getIdMascota());
 
-        existeMascota(mascotaOld);
+        existeMascota(mascotaUpdate);
         validarMascota(MascotaDTO.toDomain(mascotaDTO));
 
-        mascotaOld.setNombre(mascotaDTO.getNombre());
-        mascotaOld.setGenero(mascotaDTO.getGenero());
-        mascotaOld.setComplexion(mascotaDTO.getComplexion());
-        mascotaOld.setFechaNacimiento(mascotaDTO.getFechaNacimiento());
+        mascotaUpdate.setNombre(mascotaDTO.getNombre());
+        mascotaUpdate.setGenero(mascotaDTO.getGenero());
+        mascotaUpdate.setComplexion(mascotaDTO.getComplexion());
+        mascotaUpdate.setFechaNacimiento(mascotaDTO.getFechaNacimiento());
         String edad = Utils.calcularEdadEnAniosYMeses(Utils.convertirDateALocalDate(mascotaDTO.getFechaNacimiento()));
         System.out.println(edad);
-        mascotaOld.setFechaModificacion(new Date());
+        mascotaUpdate.setFechaModificacion(new Date());
 
-        mascotaRepository.save(mascotaOld);
+        mascotaRepository.save(mascotaUpdate);
 
-        return MascotaDTO.toDTO(mascotaOld);
+        return MascotaDTO.toDTO(mascotaUpdate);
     }
 
     @Override
     public MascotaDTO eliminarMascota(int idMascota) {
         Mascota mascotaBorrar = mascotaRepository.findMascotaById(idMascota);
-        //validarMascota(mascotaBorrar);
 
         if (mascotaBorrar == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mascota.noEncontrado");

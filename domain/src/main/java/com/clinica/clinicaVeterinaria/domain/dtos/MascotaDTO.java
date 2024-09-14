@@ -22,16 +22,14 @@ public class MascotaDTO {
     private Date fechaAlta;
     private Date fechaModificacion;
     private Date fechaBaja;
-    //private RazaDTO raza;
+    private RazaDTO raza;
     private UsuarioDTO usuario;
 
     public MascotaDTO(){}
 
     public static MascotaDTO toDTO(Mascota mascota){
-        return MascotaDTO.toDTO(mascota, Arrays.asList(UsuarioDTO.class));
+        return MascotaDTO.toDTO(mascota, Arrays.asList(RazaDTO.class, UsuarioDTO.class));
     }
-    //RazaDTO.class,
-
     public static MascotaDTO toDTO(Mascota mascota, List<Class<?>> includeRelacion) {
         MascotaDTO mascotaDTO = new MascotaDTO();
 
@@ -47,13 +45,13 @@ public class MascotaDTO {
         mascotaDTO.setImagen(StringUtils.hasText(mascota.getImagen()) ? mascota.getImagen().trim() : "");
         mascotaDTO.setFechaNacimiento(mascota.getFechaNacimiento());
         mascotaDTO.setActivo(Math.max(mascota.getActivo(), 0));
-        mascotaDTO.setFechaAlta(mascota.getFechaAlta()!= null ? mascota.getFechaBaja() : new Date());
+        mascotaDTO.setFechaAlta(mascota.getFechaAlta()!= null ? mascota.getFechaAlta() : null);
         mascotaDTO.setFechaModificacion(mascota.getFechaModificacion()!= null ? mascota.getFechaBaja() : null);
         mascotaDTO.setFechaBaja(mascota.getFechaBaja() != null ? mascota.getFechaBaja() : null);
 
-        /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RazaDTO.class)){
+        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RazaDTO.class)){
             mascotaDTO.setRaza(RazaDTO.toDTO(mascota.getRaza()));
-        }*/
+        }
         if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
             mascotaDTO.setUsuario(UsuarioDTO.toDTO(mascota.getUsuario()));
         }
@@ -96,11 +94,11 @@ public class MascotaDTO {
         mascota.setImagen(StringUtils.hasText(mascotaDTO.getImagen()) ? mascotaDTO.getImagen().trim() : "");
         mascota.setFechaNacimiento(mascotaDTO.getFechaNacimiento() != null ? mascotaDTO.getFechaNacimiento() : null);
         mascota.setActivo(Math.max(mascotaDTO.getActivo(), 1));
-        mascota.setFechaAlta(mascotaDTO.getFechaAlta()!= null ? mascotaDTO.getFechaAlta() : new Date());
+        mascota.setFechaAlta(mascotaDTO.getFechaAlta()!= null ? mascotaDTO.getFechaAlta() : null);
         mascota.setFechaModificacion(mascotaDTO.getFechaModificacion() != null ? mascotaDTO.getFechaModificacion() : null);
         mascota.setFechaBaja(mascotaDTO.getFechaBaja()!= null ? mascotaDTO.getFechaBaja() : null);
 
-        //mascota.setRaza(RazaDTO.toDomain(mascotaDTO.getRaza()));
+        mascota.setRaza(RazaDTO.toDomain(mascotaDTO.getRaza()));
         mascota.setUsuario(UsuarioDTO.toDomain(mascotaDTO.getUsuario()));
 
         return mascota;
@@ -140,10 +138,8 @@ public class MascotaDTO {
     public void setFechaModificacion(Date fechaModificacion) {this.fechaModificacion = fechaModificacion;}
     public Date getFechaBaja() {return fechaBaja;}
     public void setFechaBaja(Date fechaBaja) {this.fechaBaja = fechaBaja;}
-
     public UsuarioDTO getUsuario() {return usuario;}
-
     public void setUsuario(UsuarioDTO usuario) {this.usuario = usuario;}
-    //public RazaDTO getRaza() {return raza;}
-    //public void setRaza(RazaDTO raza) {this.raza = raza;}
+    public RazaDTO getRaza() {return raza;}
+    public void setRaza(RazaDTO raza) {this.raza = raza;}
 }

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="foto-perfil">
     <div class="profile-section">
-      <img src="https://tse4.mm.bing.net/th?id=OIP.fgL7rbtfZsEahPyuW9t0PQHaIO&pid=Api" alt="Profile Image" class="profile-image">
+      <img [src]="mascota?.imagen" alt="Profile Image" class="profile-image">
     </div>
     <button class="btn-change">Cambiar</button>
   </div>
@@ -14,7 +14,7 @@
         <form>
           <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" id="name" value="Milú" disabled>
+            <input type="text" id="name" [value]="mascota?.nombre" disabled>
           </div>
           <div class="form-group">
             <label for="especie">Especie</label>
@@ -26,19 +26,19 @@
           </div>
           <div class="form-group">
             <label for="edad">Edad</label>
-            <input type="text" id="edad" value="1 año" disabled>
+            <input type="text" id="edad" [value]="mascota?.edad + ' año'" disabled>
           </div>
           <div class="form-group">
             <label for="peso">Peso</label>
-            <input type="text" id="peso" value="3kg" disabled>
+            <input type="text" id="peso" [value]="mascota?.peso + 'kg'" disabled>
           </div>
           <div class="form-group">
             <label for="fecha-nacimiento">Nacimiento</label>
-            <input type="text" id="fecha-nacimiento" value="27/04/2023" disabled>
+            <input type="text" id="fecha-nacimiento" [value]="(mascota?.fechaNacimiento || '') | dateFormat" disabled>
           </div>
           <div class="form-group">
             <label for="fecha-alta">Fecha alta</label>
-            <input type="text" id="fecha-alta" value="27/04/2023" disabled>
+            <input type="text" id="fecha-alta" [value]="(mascota?.fechaAlta || '') | dateFormat" disabled>
           </div>
         </form>
       </div>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="imagen-section">
-          <img src="../../../assets/images/Imagen2.png" class="imagen"/>
+            <img src="../../../assets/images/Imagen2.png" class="imagen"/>
           <p>Próximos tratamientos</p>
         </div>
       </div>

@@ -6,6 +6,7 @@ import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
 import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
 import com.clinica.clinicaVeterinaria.domain.filtros.MascotaFiltroDTO;
+import com.clinica.clinicaVeterinaria.domain.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -73,7 +74,7 @@ public class MascotaServiceImpl implements IMascotaService{
     @Override
     public MascotaDTO crearMascota(MascotaDTO mascotaDTO) {
         Mascota mascotaNuevo = MascotaDTO.toDomain(mascotaDTO);
-        //validarMascota(mascotaNuevo);
+        validarMascota(mascotaNuevo);
 
         Mascota mascotaOld = mascotaRepository.findMascotaById(mascotaNuevo.getIdMascota());
         if (mascotaOld != null) {
@@ -88,10 +89,22 @@ public class MascotaServiceImpl implements IMascotaService{
 
     @Override
     public MascotaDTO modificarMascota(MascotaDTO mascotaDTO) {
-        Mascota mascotaSaved = MascotaDTO.toDomain(mascotaDTO);
-        mascotaSaved = mascotaRepository.save(mascotaSaved);
+        Mascota mascotaOld = mascotaRepository.findMascotaById(mascotaDTO.getIdMascota());
 
-        return MascotaDTO.toDTO(mascotaSaved);
+        existeMascota(mascotaOld);
+        validarMascota(MascotaDTO.toDomain(mascotaDTO));
+
+        mascotaOld.setNombre(mascotaDTO.getNombre());
+        mascotaOld.setGenero(mascotaDTO.getGenero());
+        mascotaOld.setComplexion(mascotaDTO.getComplexion());
+        mascotaOld.setFechaNacimiento(mascotaDTO.getFechaNacimiento());
+        String edad = Utils.calcularEdadEnAniosYMeses(Utils.convertirDateALocalDate(mascotaDTO.getFechaNacimiento()));
+        System.out.println(edad);
+        mascotaOld.setFechaModificacion(new Date());
+
+        mascotaRepository.save(mascotaOld);
+
+        return MascotaDTO.toDTO(mascotaOld);
     }
 
     @Override

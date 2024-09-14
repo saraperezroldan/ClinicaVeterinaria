@@ -1,19 +1,20 @@
-
 package com.clinica.clinicaVeterinaria.business.usuario;
 
-import com.clinica.clinicaVeterinaria.business.utils.Constantes;
+import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
 import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
@@ -74,12 +75,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuarioNuevo = UsuarioDTO.toDomain(usuarioDTO);
-        validarUsuario(usuarioNuevo);
+        validarUsuario(usuarioNuevo, 1);
 
-        Usuario usuarioOld = usuarioRepository.findUsuarioById(usuarioNuevo.getIdUsuario());
-        if (usuarioOld != null) {
+        Usuario findUsuario = usuarioRepository.findUsuarioById(usuarioDTO.getIdUsuario());
+        if (findUsuario != null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.yaExisteUsuario");
         }
+        usuarioNuevo.setFechaAlta(new Date());
         usuarioRepository.save(usuarioNuevo);
 
         return UsuarioDTO.toDTO(usuarioNuevo);
@@ -87,17 +89,21 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public UsuarioDTO modificarUsuario(UsuarioDTO usuarioDTO) {
-        Usuario usuarioEditar = UsuarioDTO.toDomain(usuarioDTO);
-        validarUsuario(usuarioEditar);
+        Usuario usuarioUpdate = usuarioRepository.findUsuarioById(usuarioDTO.getIdUsuario());
 
-        Usuario usuarioOld = usuarioRepository.findUsuarioById(usuarioEditar.getIdUsuario());
-        if (usuarioOld == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontrado");
-        }
-        usuarioEditar.setFechaModificacion(new Date());
-        usuarioRepository.save(usuarioEditar);
+        existeUsuario(usuarioUpdate);
+        validarUsuario(usuarioUpdate, 2);
 
-        return UsuarioDTO.toDTO(usuarioEditar);
+        usuarioUpdate.setNombre(usuarioDTO.getNombre());
+        usuarioUpdate.setApellidos(usuarioDTO.getApellidos());
+        usuarioUpdate.setDireccion(usuarioDTO.getDireccion());
+        usuarioUpdate.setTelefono(usuarioDTO.getTelefono());
+        usuarioUpdate.setDni(usuarioDTO.getDni());
+        usuarioUpdate.setFechaModificacion(new Date());
+
+        usuarioRepository.save(usuarioUpdate);
+
+        return UsuarioDTO.toDTO(usuarioUpdate);
     }
 
     @Override
@@ -119,23 +125,63 @@ public class UsuarioServiceImpl implements IUsuarioService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontrado");
         }
     }
-    private void validarUsuario(Usuario usuario) {
-        existeUsuario(usuario);
-
-        if (usuario.getIdUsuario() <= 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoIdUsuario");
-        }
-
-        if (usuario.getNombre().length() > Constantes.USUARIO_NOMBRE_MAX) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxNombre");
-        }
-
-        if (usuario.getApellidos().length() > Constantes.USUARIO_APELLIDOS_MAX) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxApellidos");
-        }
-
-        if (usuario.getRol().getIdRol() <= 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.rolNoEncontrado");
+    private void validarUsuario(Usuario usuario, int tipo) {
+        if (tipo == 1) {
+            if (usuario.getIdUsuario() <= 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoIdUsuario");
+            }
+            if (!StringUtils.hasText(usuario.getNombre())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoNombre");
+            }
+            if (usuario.getNombre().length() > Constantes.USUARIO_NOMBRE_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxNombre");
+            }
+            if (!StringUtils.hasText(usuario.getApellidos())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoApellidos");
+            }
+            if (usuario.getApellidos().length() > Constantes.USUARIO_APELLIDOS_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxApellidos");
+            }
+            if (!StringUtils.hasText(usuario.getDni())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDNI");
+            }
+            if (usuario.getDni().length() > Constantes.USUARIO_DNI_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDNI");
+            }
+            if (!StringUtils.hasText(usuario.getDireccion())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDireccion");
+            }
+            if (usuario.getDireccion().length() > Constantes.USUARIO_DIRECCION_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDireccion");
+            }
+            if (usuario.getRol().getIdRol() <= 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.rolNoEncontrado");
+            }
+        } else if (tipo == 2) {
+            if (!StringUtils.hasText(usuario.getNombre())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoNombre");
+            }
+            if (usuario.getNombre().length() > Constantes.USUARIO_NOMBRE_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxNombre");
+            }
+            if (!StringUtils.hasText(usuario.getApellidos())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoApellidos");
+            }
+            if (usuario.getApellidos().length() > Constantes.USUARIO_APELLIDOS_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxApellidos");
+            }
+            if (!StringUtils.hasText(usuario.getDni())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDNI");
+            }
+            if (usuario.getDni().length() > Constantes.USUARIO_DNI_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDNI");
+            }
+            if (!StringUtils.hasText(usuario.getDireccion())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDireccion");
+            }
+            if (usuario.getDireccion().length() > Constantes.USUARIO_DIRECCION_MAX) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDireccion");
+            }
         }
     }
 

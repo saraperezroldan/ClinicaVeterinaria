@@ -1,0 +1,131 @@
+.container {
+  border: 1px solid #ccc;
+  background-color: #EFEFEF;
+  display: flex;
+  width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-top: 3%;
+}
+
+.foto-perfil{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-section {
+  background-color: #f7f9fc;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  max-height: 25%;
+  margin-bottom: 7%;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+}
+
+.btn-change{
+  background-color: #8cb4d2;
+  border: none;
+  color: white;
+  padding: 6px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.container-data{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.subcontainer{
+  display: flex;
+}
+
+.details-section {
+  width: 80%;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  background-color: white;
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:20px;
+  margin-right:10px;
+  border: 1px solid #8cb4d2;
+
+}
+
+.right-section {
+  width: 20%;
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-right: 20px;
+  margin-left:10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 1px solid #ccc;
+  color: #555;
+  background-color: #ccc;
+  padding: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.form-group label {
+  width: 100px;
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  line-height: 35px;
+}
+
+.form-group input {
+  width: 20%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.imagen-section{
+  background-color: white;
+  border: 1px solid #8cb4d2;
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagen{
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+p{
+  margin-top: 0;
+  margin-bottom: 3px;
+  text-align: center;
+}

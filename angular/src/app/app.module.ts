@@ -9,12 +9,14 @@ import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.co
 import { InicioUsuarioComponent } from './pages/inicio-usuario/inicio-usuario.component';
 import {HttpClientModule} from "@angular/common/http";
 import {DateFormatPipe} from "./shared/pipes/DateFormatPipe";
+import {InfoMascotaComponent} from "./pages/info-mascota/info-mascota.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     PerfilUsuarioComponent,
     InicioUsuarioComponent,
+    InfoMascotaComponent,
     DateFormatPipe
   ],
   imports: [

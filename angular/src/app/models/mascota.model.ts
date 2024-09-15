@@ -1,4 +1,5 @@
 import {Usuario} from "./usuario.model";
+import {Raza} from "./raza.model";
 
 export interface Mascota{
     idMascota: number;
@@ -15,4 +16,5 @@ export interface Mascota{
     fechaModificacion: string;
     fechaBaja: string;
     usuario: Usuario;
+    raza: Raza;
 }

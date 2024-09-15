@@ -18,11 +18,11 @@
           </div>
           <div class="form-group">
             <label for="especie">Especie</label>
-            <input type="text" id="especie" value="Perro" disabled>
+            <input type="text" id="especie" [value]="mascota?.raza?.especie?.nombre" disabled>
           </div>
           <div class="form-group">
             <label for="raza">Raza</label>
-            <input type="text" id="raza" value="Bichón Maltés" disabled>
+            <input type="text" id="raza" [value]="mascota?.raza?.nombre" disabled>
           </div>
           <div class="form-group">
             <label for="edad">Edad</label>

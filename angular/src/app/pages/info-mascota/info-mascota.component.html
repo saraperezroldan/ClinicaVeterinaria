@@ -12,33 +12,52 @@
     <div class="subcontainer">
       <div class="details-section">
         <form>
-          <div class="form-group">
+          <div class="half-width">
             <label for="name">Nombre</label>
             <input type="text" id="name" [value]="mascota?.nombre" disabled>
           </div>
-          <div class="form-group">
-            <label for="especie">Especie</label>
-            <input type="text" id="especie" [value]="mascota?.raza?.especie?.nombre" disabled>
+          <div class="row">
+            <div class="half-width">
+              <label for="especie">Especie</label>
+              <input type="text" id="especie" [value]="mascota?.raza?.especie?.nombre" disabled>
+            </div>
+            <div class="half-width">
+              <label for="raza">Raza</label>
+              <input type="text" id="raza" [value]="mascota?.raza?.nombre" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="raza">Raza</label>
-            <input type="text" id="raza" [value]="mascota?.raza?.nombre" disabled>
+          <div class="row">
+            <div class="half-width">
+              <label for="edad">Edad</label>
+              <input type="text" id="edad" [value]="(mascota?.edad || 0) | edadFormat" disabled>
+            </div>
+            <div class="half-width">
+              <label for="peso">Peso</label>
+              <input type="text" id="peso" [value]="mascota?.peso + 'kg'" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="edad">Edad</label>
-            <input type="text" id="edad" [value]="mascota?.edad + ' año'" disabled>
+          <div class="row">
+            <div class="half-width">
+              <label for="fecha-nacimiento">Nacimiento</label>
+              <input type="text" id="fecha-nacimiento" [value]="(mascota?.fechaNacimiento || '') | dateFormat" disabled>
+            </div>
+            <div class="half-width">
+              <label for="fecha-alta">Fecha alta</label>
+              <input type="text" id="fecha-alta" [value]="(mascota?.fechaAlta || '') | dateFormat" disabled>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="peso">Peso</label>
-            <input type="text" id="peso" [value]="mascota?.peso + 'kg'" disabled>
-          </div>
-          <div class="form-group">
-            <label for="fecha-nacimiento">Nacimiento</label>
-            <input type="text" id="fecha-nacimiento" [value]="(mascota?.fechaNacimiento || '') | dateFormat" disabled>
-          </div>
-          <div class="form-group">
-            <label for="fecha-alta">Fecha alta</label>
-            <input type="text" id="fecha-alta" [value]="(mascota?.fechaAlta || '') | dateFormat" disabled>
+          <div class="row">
+            <div class="half-width">
+              <label>Genero</label>
+              <mat-radio-group>
+                <mat-radio-button value="M" color="primary" checked>M</mat-radio-button>
+                <mat-radio-button value="H" color="primary">H</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="half-width">
+              <label for="complexion">Complexión</label>
+              <input type="text" id="complexion" [value]="(mascota?.complexion)" disabled>
+            </div>
           </div>
         </form>
       </div>

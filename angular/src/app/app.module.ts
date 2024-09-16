@@ -10,6 +10,16 @@ import { InicioUsuarioComponent } from './pages/inicio-usuario/inicio-usuario.co
 import {HttpClientModule} from "@angular/common/http";
 import {DateFormatPipe} from "./shared/pipes/DateFormatPipe";
 import {InfoMascotaComponent} from "./pages/info-mascota/info-mascota.component";
+import {EdadFormatPipe} from "./shared/pipes/EdadFormatPipe";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -17,13 +27,24 @@ import {InfoMascotaComponent} from "./pages/info-mascota/info-mascota.component"
     PerfilUsuarioComponent,
     InicioUsuarioComponent,
     InfoMascotaComponent,
-    DateFormatPipe
+    DateFormatPipe,
+    EdadFormatPipe
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     provideAnimationsAsync()

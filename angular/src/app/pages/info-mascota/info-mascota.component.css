@@ -57,14 +57,13 @@
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   background-color: white;
   margin-top:20px;
   margin-bottom:20px;
   margin-left:20px;
   margin-right:10px;
   border: 1px solid #8cb4d2;
-
 }
 
 .right-section {
@@ -76,7 +75,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
 
 h2 {
@@ -86,26 +84,6 @@ h2 {
   color: #555;
   background-color: #ccc;
   padding: 10px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  display: flex;
-}
-
-.form-group label {
-  width: 100px;
-  text-align: left;
-  margin-left: 5px;
-  margin-right: 5px;
-  line-height: 35px;
-}
-
-.form-group input {
-  width: 20%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 .imagen-section{
@@ -129,3 +107,60 @@ p{
   margin-bottom: 3px;
   text-align: center;
 }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-width {
+  width: 48%;
+  margin-bottom: 5px;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.half-width label {
+  width: 100px;
+  text-align: left;
+  margin-right: 5px;
+  line-height: 35px;
+  display: inline-block;
+}
+
+.half-width input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: auto;
+}
+
+mat-radio-group {
+  display: flex;
+  align-items: center;
+}
+
+mat-radio-button {
+  margin-right: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-width label {
+  width: 100px;
+  text-align: left;
+  margin-right: 5px;
+  line-height: 35px;
+  display: inline-block;
+}
+
+.full-width input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  width: auto;
+}
+

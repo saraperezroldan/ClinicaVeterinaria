@@ -8,8 +8,6 @@ export interface Mascota{
     peso: number;
     genero: string;
     complexion: string;
-    /*especie: string;
-    raza: string;*/
     fechaNacimiento: string;
     imagen: string;
     fechaAlta: string;

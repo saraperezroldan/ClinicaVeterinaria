@@ -1,0 +1,74 @@
+.toolbar {
+  background-color: #1273AD;
+  opacity: 46%;
+  width: 100%;
+  height: 12%;
+  padding-left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  object-fit: contain;
+  max-width: 17%;
+  height: 100%;
+}
+
+.title{
+  color: white;
+  font-family: Garamond, serif;
+  font-size: 2em;
+}
+
+mat-icon {
+  color: white;
+}
+
+.nombreUsuario {
+  color: white;
+  font-weight: lighter;
+  font-family: Loto, sans-serif;
+  margin-left: 7px;
+}
+
+.logout{
+  transform: scale(2);
+
+}
+
+.sidenav{
+  padding-top: 15%;
+  background-color: #1273AD;
+}
+
+.sidenav-container{
+  height: calc(100vh - 12%);
+}
+
+mat-sidenav{
+  background-color: #1273AD;
+  opacity: 18%;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-icon{
+  color: #0D0E0E;
+  transform: scale(1.5);
+  padding-left: 5%;
+  padding-right: 2%;
+  cursor: pointer;
+  text-align: center;
+}

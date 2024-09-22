@@ -9,6 +9,9 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer>, IUs
     @Query("SELECT distinct u FROM Usuario u WHERE u.idUsuario = :idUsuario")
     Usuario findUsuarioById (int idUsuario);
 
+    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
+    Usuario findUsuarioByEmail (String email);
+
     @Query("SELECT u FROM Usuario u WHERE u.rol.idRol = :idRol")
     List<Usuario> findUsuariosByIdRol(int idRol);
 

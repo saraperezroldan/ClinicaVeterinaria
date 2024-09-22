@@ -20,6 +20,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { CabeceraComponent } from './pages/cabecera/cabecera.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {MatNativeDateModule} from "@angular/material/core";
     InicioUsuarioComponent,
     InfoMascotaComponent,
     DateFormatPipe,
-    EdadFormatPipe
+    EdadFormatPipe,
+    CabeceraComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

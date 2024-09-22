@@ -34,6 +34,11 @@ public class UsuarioControllerImpl implements IUsuarioController {
     }
 
     @Override
+    public ResponseEntity<UsuarioDTO> getUsuarioByEmail(String email) {
+        return new ResponseEntity<>(usuarioService.getUsuarioByEmail(email), HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<PageableResult<UsuarioDTO>> getUsuarioConFiltro(UsuarioFiltroDTO filtro) {
         return new ResponseEntity<>(usuarioService.getUsuarioConFiltro(filtro), HttpStatus.OK);
     }

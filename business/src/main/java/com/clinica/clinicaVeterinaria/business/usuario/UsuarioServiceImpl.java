@@ -64,6 +64,22 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
+    public UsuarioDTO getUsuarioByEmail(String email) {
+        Usuario usuarioEncontrado = null;
+
+        if (StringUtils.hasText(email)) {
+            usuarioEncontrado = usuarioRepository.findUsuarioByEmail(email);
+            if (usuarioEncontrado != null) {
+                return UsuarioDTO.toDTO(usuarioEncontrado);
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontrado");
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoEmail");
+        }
+    }
+
+    @Override
     public PageableResult<UsuarioDTO> getUsuarioConFiltro (UsuarioFiltroDTO filtro) {
         List<Usuario> usuarios = usuarioRepository.findUsuarioPorFiltro(filtro);
         int resultMax = usuarioRepository.getResultMax(filtro);

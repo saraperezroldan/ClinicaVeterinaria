@@ -1,36 +1,37 @@
 <mat-toolbar class="toolbar">
 
   <div class="toolbar-left">
-    <mat-icon class="menu-icon" (click)="toggleSidenav()">menu</mat-icon>
+    <!--<mat-icon class="menu-icon" (click)="toggleSidenav()">menu</mat-icon> -->
     <img src="../assets/images/Logo.png" class="logo"/>
     <h1 class="title">VetCare</h1>
   </div>
   <div class="toolbar-right">
     <mat-icon>person</mat-icon>
-    <h3 class="nombreUsuario">Nombre</h3>
-    <a class="marginleft" mat-button href="./logout">
+    <h3 class="nombreUsuario">{{currentUser.nombre}}</h3>
+    <a class="marginleft" mat-button (click)="onLogout()">
       <mat-icon class="logout">power_settings_new</mat-icon>
     </a>
   </div>
 </mat-toolbar>
-
+<!--
 <mat-sidenav-container class="sidenav-container">
-  <router-outlet></router-outlet>
+ <router-outlet></router-outlet>
 
-  <!--  <mat-sidenav #sidenav mode="side" opened>
-     <mat-nav-list class="nav-list" *ngFor="let menu of menuList">
-       <span class="full-width" style="margin-left:10px;" [ngClass]="{'parent-expanded' : menu.selected}">{{menu.title}}</span>
-       <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list class="nav-list" *ngFor="let menu of menuList">
+      <span class="full-width" style="margin-left:10px;" [ngClass]="{'parent-expanded' : menu.selected}">{{menu.title}}</span>
+      <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
 
-     </mat-nav-list>
-   </mat-sidenav>
+    </mat-nav-list>
+  </mat-sidenav>
 
-   <div *ngIf="userService.getRoles().length > 0" class="container">
-     <router-outlet></router-outlet>
-   </div>
+  <div *ngIf="userService.getRoles().length > 0" class="container">
+    <router-outlet></router-outlet>
+  </div>
 
-   <div *ngIf="userService.getRoles().length == 0">
-     <h2 class="text_sidenav">{{unauthorizedMsg}}</h2>
-   </div> -->
+  <div *ngIf="userService.getRoles().length == 0">
+    <h2 class="text_sidenav">{{unauthorizedMsg}}</h2>
+  </div>
 
 </mat-sidenav-container>
+-->

@@ -10,22 +10,24 @@ const URLSERVER = 'http://localhost:8080/clinica_veterinaria/rest/';
 })
 
 export class UsuarioService {
-  private roles: string[] = [];
+  private currentUser: any = null;
 
   constructor(private http: HttpClient) {
   }
 
-  public getRoles(): string[]{
-    return this.roles;
-  }
-
-  public setRoles(roles: string[]){
-    this.roles = roles;
-  }
-
-  // Info usuario
   getInfoUsuarioById(id: number) : Observable<Usuario>{
     return this.http.get<Usuario>(`${URLSERVER}usuario/getUsuarioById/${id}`);
   }
 
+  setCurrentUser(user: any){
+    this.currentUser = user;
+  }
+
+  getCurrentUser(){
+    return this.currentUser;
+  }
+
+  clearUser(){
+    this.currentUser = null;
+  }
 }

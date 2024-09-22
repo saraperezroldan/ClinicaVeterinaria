@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar">
 
   <div class="toolbar-left">
-    <!--<mat-icon class="menu-icon" (click)="toggleSidenav()">menu</mat-icon> -->
+    <mat-icon class="menu-icon" (click)="toggleSidenav()">menu</mat-icon>
     <img src="../assets/images/Logo.png" class="logo"/>
     <h1 class="title">VetCare</h1>
   </div>
@@ -13,25 +13,25 @@
     </a>
   </div>
 </mat-toolbar>
-<!--
+
 <mat-sidenav-container class="sidenav-container">
  <router-outlet></router-outlet>
 
-  <mat-sidenav #sidenav mode="side" opened>
-    <mat-nav-list class="nav-list" *ngFor="let menu of menuList">
-      <span class="full-width" style="margin-left:10px;" [ngClass]="{'parent-expanded' : menu.selected}">{{menu.title}}</span>
-      <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>
-
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <mat-nav-list>
+      <ng-container *ngIf="isUsuario()">
+        <a mat-list-item *ngFor="let opcion of ususarioMenuOpciones" [routerLink]="opcion.route">
+          <mat-icon>{{opcion.icon}}</mat-icon>
+          <span>{{opcion.label}}</span>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="!isUsuario()">
+        <a mat-list-item *ngFor="let opcion of veterinarioMenuOpciones" [routerLink]="opcion.route">
+          <mat-icon>{{opcion.icon}}</mat-icon>
+          <span>{{opcion.label}}</span>
+        </a>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
+  </mat-sidenav-container>
 
-  <div *ngIf="userService.getRoles().length > 0" class="container">
-    <router-outlet></router-outlet>
-  </div>
-
-  <div *ngIf="userService.getRoles().length == 0">
-    <h2 class="text_sidenav">{{unauthorizedMsg}}</h2>
-  </div>
-
-</mat-sidenav-container>
--->

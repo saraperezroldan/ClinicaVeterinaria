@@ -4,12 +4,10 @@ import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {LoginService} from "../../services/login.service";
 
-export interface Menu {
-  title:          string;
-  selected:      boolean;
-  icon:           string;
-  rol:            string;
-  links:         string[];
+export interface Menu{
+  label: string;
+  icon: string;
+  route: string;
 }
 
 @Component({
@@ -19,47 +17,21 @@ export interface Menu {
 })
 export class CabeceraComponent implements OnInit{
 
-  public urlImage: string = 'http://localhost:4200/assets/images/logo.png';
-  public completeName: string = "";
-  public unauthorizedMsg: string = "";
-
-  public menuList: Menu[] = [];
-
-  public menuListOptions: Menu[] = [
-    {
-      title: "Inicio",
-      selected: false,
-      rol: "ESMAD_TALEND_PROPUESTAS_AFV",
-      icon: "shopping_basket",
-      links: ["/inicio"],
-    },
-    {
-      title: "Gestion de citas",
-      selected: false,
-      rol: "ESMAD_TALEND_PROPUESTAS_AFV",
-      icon: "shopping_basket",
-      links: ["/propuestas","/agrupaciones","/crearPropuesta","/verPropuesta","/verAgrupacion"],
-    },
-    {
-      title: "Gestion de consultas",
-      selected: false,
-      rol: "ESMAD_TALEND_PROPUESTAS_AFV",
-      icon: "shopping_basket",
-      links: ["/propuestas","/agrupaciones","/crearPropuesta","/verPropuesta","/verAgrupacion"],
-    },
-    {
-      title: "Mi perfil",
-      selected: false,
-      rol: "ESMAD_TALEND_PROPUESTAS_AFV",
-      icon: "shopping_basket",
-      links: ["/perfil"],
-    }
-  ];
-
-
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
+  opened = false;
   currentUser: any;
+
+  ususarioMenuOpciones: Menu[] = [
+    {label: 'Inicio', icon: 'home', route: '/inicio'},
+    {label: 'Mi perfil', icon: 'person', route: '/perfil'},
+  ];
+  veterinarioMenuOpciones: Menu[] = [
+    {label: 'Inicio', icon: 'home', route: '/inicio'},
+    {label: 'Gestion citas', icon: 'person', route: '/perfil'},
+    {label: 'Gestion consultas', icon: 'pets', route: '/pacientes'},
+    {label: 'Mi perfil', icon: 'event', route: '/citas'},
+  ];
 
   constructor(private usuarioService : UsuarioService, private loginService : LoginService, private router : Router) {}
 
@@ -77,12 +49,12 @@ export class CabeceraComponent implements OnInit{
     this.sidenav.toggle();
   }
 
-  public selectOptionMenu(menuSelected: string){
-    this.menuList.forEach(menu => {
-      menu.selected = menuSelected == menu.title;
-    });
-
+  isUsuario(){
+    return this.currentUser.rol.nombre === 'Usuario';
   }
+
+
+
 
 
 }

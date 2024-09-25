@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit{
 
         if(rol === 'Administrador'){
           console.log('Eres admin');
-          this.router.navigate(['/inicio']);
+          this.router.navigate(['/usuario/inicio']);
         }else if(rol === 'Veterinario'){
           console.log('Eres veterinario');
-          this.router.navigate(['/inicio']);
+          this.router.navigate(['/usuario/inicio']);
         }
       }
     });

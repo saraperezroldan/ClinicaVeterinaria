@@ -1,5 +1,4 @@
 <mat-toolbar class="toolbar">
-
   <div class="toolbar-left">
     <mat-icon class="menu-icon" (click)="toggleSidenav()">menu</mat-icon>
     <img src="../assets/images/Logo.png" class="logo"/>
@@ -15,23 +14,30 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
- <router-outlet></router-outlet>
-
   <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-    <mat-nav-list>
-      <ng-container *ngIf="isUsuario()">
-        <a mat-list-item *ngFor="let opcion of ususarioMenuOpciones" [routerLink]="opcion.route">
-          <mat-icon>{{opcion.icon}}</mat-icon>
-          <span>{{opcion.label}}</span>
-        </a>
-      </ng-container>
-      <ng-container *ngIf="!isUsuario()">
-        <a mat-list-item *ngFor="let opcion of veterinarioMenuOpciones" [routerLink]="opcion.route">
-          <mat-icon>{{opcion.icon}}</mat-icon>
-          <span>{{opcion.label}}</span>
-        </a>
-      </ng-container>
-    </mat-nav-list>
+    <div class="sidenav-content">
+      <mat-nav-list>
+        <ng-container *ngIf="isUsuario()">
+          <a mat-list-item *ngFor="let opcion of ususarioMenuOpciones" [routerLink]="opcion.route" routerLinkActive="active">
+            <div class="option">
+              <i class="material-icons">{{opcion.icon}}</i>
+              <span>{{opcion.label}}</span>
+            </div>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="!isUsuario()">
+          <a mat-list-item *ngFor="let opcion of veterinarioMenuOpciones" [routerLink]="opcion.route" routerLinkActive="active">
+            <div class="option">
+              <i class="material-icons">{{opcion.icon}}</i>
+              <span>{{opcion.label}}</span>
+            </div>
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </div>
   </mat-sidenav>
-  </mat-sidenav-container>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 

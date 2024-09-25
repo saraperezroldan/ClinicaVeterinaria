@@ -56,12 +56,14 @@ mat-icon {
   height: calc(100vh - 12%);
 }
 
+
 mat-sidenav{
-  background-color: #1273AD;
-  opacity: 18%;
+  background-color: #cfe2f3;
   width: 250px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-icon{
@@ -72,3 +74,47 @@ mat-sidenav{
   cursor: pointer;
   text-align: center;
 }
+
+.option{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+
+.option span{
+  color: #626161FF;
+  font-size: 16px;
+  line-height: 48px;
+}
+
+mat-nav-list{
+  padding: 5%;
+  width: auto;
+  margin-bottom: 20%;
+}
+
+mat-nav-list a{
+  margin-bottom: 15%;
+  font-size: large;
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+i{
+  color: #1273AD;
+  opacity: 46%;
+  font-size: 30px;
+  margin-right: 16px;
+}
+
+
+
+
+
+

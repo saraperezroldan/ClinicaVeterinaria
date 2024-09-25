@@ -8,21 +8,27 @@ import {LoginComponent} from "./pages/login/login.component";
 
 const routes: Routes = [
   {
-    path: 'inicio',
-    component : InicioUsuarioComponent
-  },
-  {
-    path: 'perfil-usuario/:id',
-    component : PerfilUsuarioComponent
-  },
-  {
-    path: 'mascota/:id',
-    component : InfoMascotaComponent
-  },
-  {
     path: '',
     component : LoginComponent
-  }
+  },
+  {
+    path: 'usuario',
+    component : CabeceraComponent,
+    children: [
+      {
+        path: 'inicio',
+        component : InicioUsuarioComponent
+      },
+      {
+        path: 'perfil',
+        component : PerfilUsuarioComponent
+      },
+      {
+        path: 'mascota/:id',
+        component : InfoMascotaComponent
+      },
+    ]
+  },
 ];
 
 @NgModule({

@@ -14,14 +14,11 @@ export class PerfilUsuarioComponent {
   constructor(private usuarioService : UsuarioService, private  route : ActivatedRoute) { }
 
   ngOnInit( ): void {
-    this.getInfoUsuario();
+    const usuarioJSON = localStorage.getItem('currentUser');
+    if(usuarioJSON){
+      this.usuario = JSON.parse(usuarioJSON);
+    }
   }
 
-  getInfoUsuario(){
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.usuarioService.getInfoUsuarioById(id).subscribe( usuario => {
-      this.usuario = usuario;
-    });
-  }
 
 }

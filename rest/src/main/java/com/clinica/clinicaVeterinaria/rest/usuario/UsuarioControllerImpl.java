@@ -39,6 +39,11 @@ public class UsuarioControllerImpl implements IUsuarioController {
     }
 
     @Override
+    public ResponseEntity<UsuarioDTO> getUsuarioByDni(String dni) {
+        return new ResponseEntity<>(usuarioService.getUsuarioByDni(dni), HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<PageableResult<UsuarioDTO>> getUsuarioConFiltro(UsuarioFiltroDTO filtro) {
         return new ResponseEntity<>(usuarioService.getUsuarioConFiltro(filtro), HttpStatus.OK);
     }

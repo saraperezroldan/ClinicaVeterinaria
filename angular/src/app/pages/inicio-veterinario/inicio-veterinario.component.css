@@ -1,0 +1,133 @@
+
+h1 {
+  font-family: 'Georgia', serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 20px;
+}
+
+/* Barra de búsqueda */
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  padding: 10px;
+  font-size: 14px;
+  width: 300px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-right: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+.search-container input::placeholder {
+  color: #bbb;
+}
+
+.search-container button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button i {
+  font-size: 18px;
+  color: #333;
+}
+
+/* Botón de "Nuevo Cliente" */
+.btn-nuevo-cliente {
+  background-color: #89c4f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.btn-nuevo-cliente:hover {
+  background-color: #79b3e3;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+thead th {
+  background-color: #d3d3d3;
+  color: #4a4a4a;
+}
+
+tbody td {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #e6f7ff;
+}
+
+tbody a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+tbody a:hover {
+  text-decoration: underline;
+}
+
+/* Acciones (iconos de editar y eliminar) */
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button i {
+  font-size: 16px;
+  color: #333;
+}
+
+button i.fa-edit:hover {
+  color: #007bff;
+}
+
+button i.fa-trash:hover {
+  color: #ff4d4d;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .search-container input {
+    width: 200px;
+  }
+
+  table th, table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .btn-nuevo-cliente {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+}

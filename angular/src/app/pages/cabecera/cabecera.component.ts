@@ -27,7 +27,7 @@ export class CabeceraComponent implements OnInit{
     {label: 'Mi perfil', icon: 'person', route: '/usuario/perfil'},
   ];
   veterinarioMenuOpciones: Menu[] = [
-    {label: 'Inicio', icon: 'home', route: '/usuario/inicio'},
+    {label: 'Inicio', icon: 'home', route: '/usuario/inicio-veterinario'},
     {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/citas'},
     {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/consultas'},
     {label: 'Mi perfil', icon: 'person', route: '/usuario/perfil'},
@@ -51,6 +51,14 @@ export class CabeceraComponent implements OnInit{
 
   isUsuario(){
     return this.currentUser.rol.nombre === 'Usuario';
+  }
+
+  isVeterinario(){
+    return this.currentUser.rol.nombre === 'Veterinario';
+  }
+
+  isAdministador(){
+    return this.currentUser.rol.nombre === 'Administrador';
   }
 
 

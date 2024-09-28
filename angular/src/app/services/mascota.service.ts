@@ -20,4 +20,8 @@ export class MascotaService {
     return this.http.get<Mascota>(`${URLSERVER}mascota/getMascotaById/${id}`);
   }
 
+  getMascotasByUsuarioId(id: number) : Observable<Mascota[]>{
+    return this.http.get<Mascota[]>(`${URLSERVER}mascota/getMascotasByIdUsuario/${id}`);
+  }
+
 }

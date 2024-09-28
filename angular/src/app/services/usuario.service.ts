@@ -30,4 +30,12 @@ export class UsuarioService {
   clearUser(){
     this.currentUser = null;
   }
+
+  getUsuarioByDNI(dni: string) : Observable<Usuario>{
+    return this.http.get<Usuario>(`${URLSERVER}usuario/getUsuarioByDNI/${dni}`);
+  }
+
+  eliminarUsuario(id: number) : Observable<any>{
+    return this.http.delete(`${URLSERVER}usuario/eliminarUsuario/${id}`);
+  }
 }

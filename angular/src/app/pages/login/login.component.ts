@@ -35,12 +35,12 @@ export class LoginComponent implements OnInit{
         this.usuarioService.setCurrentUser(usuario);
         this.loginService.saveUserToLocalStorage(usuario);
 
-        if(rol === 'Administrador'){
-          console.log('Eres admin');
+        if(rol === 'Usuario'){
+          console.log('Eres usuario');
           this.router.navigate(['/usuario/inicio']);
         }else if(rol === 'Veterinario'){
           console.log('Eres veterinario');
-          this.router.navigate(['/usuario/inicio']);
+          this.router.navigate(['/usuario/inicio-veterinario']);
         }
       }
     });

@@ -22,6 +22,7 @@ import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import { CabeceraComponent } from './pages/cabecera/cabecera.component';
 import { LoginComponent } from './pages/login/login.component';
+import { InicioVeterinarioComponent } from './pages/inicio-veterinario/inicio-veterinario.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LoginComponent } from './pages/login/login.component';
     DateFormatPipe,
     EdadFormatPipe,
     CabeceraComponent,
-    LoginComponent
+    LoginComponent,
+    InicioVeterinarioComponent
   ],
   imports: [
     BrowserModule,

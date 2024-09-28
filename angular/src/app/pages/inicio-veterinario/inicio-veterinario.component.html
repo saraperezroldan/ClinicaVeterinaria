@@ -1,0 +1,44 @@
+<h1>Bienvenido Dr. García</h1>
+
+<!-- Barra de búsqueda -->
+<div class="search-container">
+  <input type="text" placeholder="Introduce el DNI del cliente..." [(ngModel)]="searchDNI" />
+  <button (click)="buscarUsuario()">
+    <i class="fa fa-search"></i>
+  </button>
+</div>
+
+<!-- Botón para añadir un nuevo cliente -->
+<button (click)="nuevoUsuario()" class="btn-nuevo-cliente">Nuevo cliente</button>
+
+<!-- Tabla de clientes -->
+<table>
+  <thead>
+  <tr>
+    <th>idCliente</th>
+    <th>Nombre</th>
+    <th>Apellidos</th>
+    <th>DNI</th>
+    <th>Email</th>
+    <th>Fecha alta</th>
+    <th>Última vista</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><a [routerLink]="['/info-usuario', usuario?.idUsuario]">{{ usuario?.idUsuario }}</a></td>
+    <td>{{ usuario?.nombre }}</td>
+    <td>{{ usuario?.apellidos }}</td>
+    <td>{{ usuario?.dni }}</td>
+    <td>{{ usuario?.email }}</td>
+    <td>{{ usuario?.fechaAlta }}</td>
+    <td>{{ usuario?.fechaNacimiento }}</td>
+    <td>
+      <!-- Botones de editar y eliminar -->
+      <button (click)="editarUsuario(usuario!.idUsuario)"><i class="fa fa-edit"></i></button>
+      <button (click)="eliminarUsuario(usuario!.idUsuario)"><i class="fa fa-trash"></i></button>
+    </td>
+  </tr>
+  </tbody>
+</table>

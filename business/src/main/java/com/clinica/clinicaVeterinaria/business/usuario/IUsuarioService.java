@@ -13,6 +13,7 @@ public interface IUsuarioService {
     UsuarioDTO getUsuarioById(int idUsuario);
     List<UsuarioDTO> getUsuariosByIdRol (int idRol);
     UsuarioDTO getUsuarioByEmail (String email);
+    UsuarioDTO getUsuarioByDni (String dni);
     PageableResult<UsuarioDTO> getUsuarioConFiltro (UsuarioFiltroDTO filtro);
     UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO);
     UsuarioDTO modificarUsuario(UsuarioDTO usuarioDTO);

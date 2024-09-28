@@ -5,6 +5,7 @@ import {InicioUsuarioComponent} from "./pages/inicio-usuario/inicio-usuario.comp
 import {InfoMascotaComponent} from "./pages/info-mascota/info-mascota.component";
 import {CabeceraComponent} from "./pages/cabecera/cabecera.component";
 import {LoginComponent} from "./pages/login/login.component";
+import {InicioVeterinarioComponent} from "./pages/inicio-veterinario/inicio-veterinario.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'mascota/:id',
         component : InfoMascotaComponent
       },
+      {
+        path: 'inicio-veterinario',
+        component : InicioVeterinarioComponent
+      }
     ]
   },
 ];

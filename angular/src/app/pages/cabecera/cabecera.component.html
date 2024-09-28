@@ -25,7 +25,7 @@
             </div>
           </a>
         </ng-container>
-        <ng-container *ngIf="!isUsuario()">
+        <ng-container *ngIf="isVeterinario()">
           <a mat-list-item *ngFor="let opcion of veterinarioMenuOpciones" [routerLink]="opcion.route" routerLinkActive="active">
             <div class="option">
               <i class="material-icons">{{opcion.icon}}</i>

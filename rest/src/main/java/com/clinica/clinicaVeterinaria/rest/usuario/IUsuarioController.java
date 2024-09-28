@@ -22,6 +22,9 @@ public interface IUsuarioController {
     @GetMapping("getUsuarioByEmail/{email}")
     public ResponseEntity<UsuarioDTO> getUsuarioByEmail(@PathVariable("email") String email);
 
+    @GetMapping("getUsuarioByDni/{dni}")
+    public ResponseEntity<UsuarioDTO> getUsuarioByDni(@PathVariable("dni") String dni);
+
     @PostMapping("getUsuarioConFiltro")
     public ResponseEntity<PageableResult<UsuarioDTO>> getUsuarioConFiltro (@RequestBody UsuarioFiltroDTO filtro);
 

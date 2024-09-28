@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from "../../services/usuario.service";
 import {Usuario} from "../../models/usuario.model";
 import {ActivatedRoute} from "@angular/router";
@@ -8,7 +8,7 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './perfil-usuario.component.html',
   styleUrl: './perfil-usuario.component.css'
 })
-export class PerfilUsuarioComponent {
+export class PerfilUsuarioComponent implements OnInit{
 
   usuario : Usuario | undefined;
   constructor(private usuarioService : UsuarioService, private  route : ActivatedRoute) { }

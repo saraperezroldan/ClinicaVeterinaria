@@ -23,6 +23,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import { CabeceraComponent } from './pages/cabecera/cabecera.component';
 import { LoginComponent } from './pages/login/login.component';
 import { InicioVeterinarioComponent } from './pages/inicio-veterinario/inicio-veterinario.component';
+import { InfoClienteComponent } from './pages/info-cliente/info-cliente.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { InicioVeterinarioComponent } from './pages/inicio-veterinario/inicio-ve
     EdadFormatPipe,
     CabeceraComponent,
     LoginComponent,
-    InicioVeterinarioComponent
+    InicioVeterinarioComponent,
+    InfoClienteComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import {InfoMascotaComponent} from "./pages/info-mascota/info-mascota.component"
 import {CabeceraComponent} from "./pages/cabecera/cabecera.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {InicioVeterinarioComponent} from "./pages/inicio-veterinario/inicio-veterinario.component";
+import {InfoClienteComponent} from "./pages/info-cliente/info-cliente.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'inicio-veterinario',
         component : InicioVeterinarioComponent
+      },
+      {
+        path: 'info-cliente/:idUsuario',
+        component: InfoClienteComponent
       }
     ]
   },

@@ -1,44 +1,68 @@
-<h1>Bienvenido Dr. García</h1>
+<div class="contenedor">
+  <h1>Bienvenido Dr. {{veterinario?.apellidos}}</h1>
 
-<!-- Barra de búsqueda -->
-<div class="search-container">
-  <input type="text" placeholder="Introduce el DNI del cliente..." [(ngModel)]="searchDNI" />
-  <button (click)="buscarUsuario()">
-    <i class="fa fa-search"></i>
-  </button>
+  <div class="contenedorBotones">
+    <div class="search-container">
+      <input type="text" placeholder="Introduce el DNI del cliente" [(ngModel)]="searchDNI" />
+      <button class="search-button" (click)="buscarUsuario()">Buscar</button>
+    </div>
+
+    <button (click)="nuevoUsuario()" class="btn-nuevo-cliente">Nuevo cliente</button>
+  </div>
+
+  <table mat-table *ngIf="usuario" [dataSource]="[usuario]">
+
+    <ng-container matColumnDef="idUsuario">
+      <th mat-header-cell *matHeaderCellDef> idCliente </th>
+      <td mat-cell *matCellDef="let element">
+        <a [routerLink]="['/usuario/info-cliente', element.idUsuario]"> {{element.idUsuario}} </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="apellidos">
+      <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+      <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dni">
+      <th mat-header-cell *matHeaderCellDef> DNI </th>
+      <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+      <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaAlta">
+      <th mat-header-cell *matHeaderCellDef> Fecha alta </th>
+      <td mat-cell *matCellDef="let element"> {{element.fechaAlta | date:"shortDate"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button  class="btn-editar" color="primary" (click)="editarUsuario(element)">
+          <span class="material-icons">edit</span> Editar
+        </button>
+        <button mat-raised-button class="btn-eliminar" color="warn" (click)="eliminarUsuario(element)">
+          <span class="material-icons">delete</span> Eliminar
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
 </div>
-
-<!-- Botón para añadir un nuevo cliente -->
-<button (click)="nuevoUsuario()" class="btn-nuevo-cliente">Nuevo cliente</button>
-
-<!-- Tabla de clientes -->
-<table>
-  <thead>
-  <tr>
-    <th>idCliente</th>
-    <th>Nombre</th>
-    <th>Apellidos</th>
-    <th>DNI</th>
-    <th>Email</th>
-    <th>Fecha alta</th>
-    <th>Última vista</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td><a [routerLink]="['/info-usuario', usuario?.idUsuario]">{{ usuario?.idUsuario }}</a></td>
-    <td>{{ usuario?.nombre }}</td>
-    <td>{{ usuario?.apellidos }}</td>
-    <td>{{ usuario?.dni }}</td>
-    <td>{{ usuario?.email }}</td>
-    <td>{{ usuario?.fechaAlta }}</td>
-    <td>{{ usuario?.fechaNacimiento }}</td>
-    <td>
-      <!-- Botones de editar y eliminar -->
-      <button (click)="editarUsuario(usuario!.idUsuario)"><i class="fa fa-edit"></i></button>
-      <button (click)="eliminarUsuario(usuario!.idUsuario)"><i class="fa fa-trash"></i></button>
-    </td>
-  </tr>
-  </tbody>
-</table>

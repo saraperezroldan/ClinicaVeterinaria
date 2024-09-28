@@ -1,0 +1,68 @@
+<div class="container">
+
+  <div class="profile-section">
+    <img [src]="cliente?.imagen" alt="Profile Image" class="profile-image">
+  </div>
+
+
+  <div class="container-data">
+    <h2>Datos Personales de {{cliente?.nombre}}</h2>
+
+    <div class="subcontainer">
+      <div class="details-section">
+        <form>
+          <div class="row">
+            <div class="half-width">
+              <label for="idCliente">IdCliente</label>
+              <input type="text" id="idCliente" [value]="cliente?.idUsuario" disabled>
+            </div>
+            <div class="half-width">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" [value]="cliente?.direccion" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="half-width">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" [value]="cliente?.nombre" disabled>
+            </div>
+            <div class="half-width">
+              <label for="poblacion">Población</label>
+              <input type="text" id="poblacion" [value]="cliente?.poblacion" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="half-width">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" id="apellidos" [value]="cliente?.apellidos" disabled>
+            </div>
+            <div class="half-width">
+              <label for="codigo-postal">Código postal</label>
+              <input type="text" id="codigo-postal" [value]="cliente?.codigoPostal" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="half-width">
+              <label for="dni">DNI</label>
+              <input type="text" id="dni" [value]="cliente?.dni" disabled>
+            </div>
+            <div class="half-width">
+              <label for="email">Email</label>
+              <input type="text" id="email" [value]="(cliente?.email)" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="half-width">
+              <label for="telefono">Teléfono</label>
+              <input type="text" id="telefono" [value]="(cliente?.telefono)" disabled>
+            </div>
+            <button class="save-button">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -32,7 +32,11 @@ export class UsuarioService {
   }
 
   getUsuarioByDNI(dni: string) : Observable<Usuario>{
-    return this.http.get<Usuario>(`${URLSERVER}usuario/getUsuarioByDNI/${dni}`);
+    return this.http.get<Usuario>(`${URLSERVER}usuario/getUsuarioByDni/${dni}`);
+  }
+
+  getUsuarioById(id: number) : Observable<Usuario>{
+    return this.http.get<Usuario>(`${URLSERVER}usuario/getUsuarioById/${id}`);
   }
 
   eliminarUsuario(id: number) : Observable<any>{

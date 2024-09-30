@@ -24,6 +24,7 @@ import { CabeceraComponent } from './pages/cabecera/cabecera.component';
 import { LoginComponent } from './pages/login/login.component';
 import { InicioVeterinarioComponent } from './pages/inicio-veterinario/inicio-veterinario.component';
 import { InfoClienteComponent } from './pages/info-cliente/info-cliente.component';
+import { NuevoClienteComponent } from './pages/nuevo-cliente/nuevo-cliente.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { InfoClienteComponent } from './pages/info-cliente/info-cliente.componen
     CabeceraComponent,
     LoginComponent,
     InicioVeterinarioComponent,
-    InfoClienteComponent
+    InfoClienteComponent,
+    NuevoClienteComponent
   ],
   imports: [
     BrowserModule,

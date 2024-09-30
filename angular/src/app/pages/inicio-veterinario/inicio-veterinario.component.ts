@@ -43,7 +43,7 @@ export class InicioVeterinarioComponent implements OnInit{
   }
 
   nuevoUsuario(): void {
-    this.router.navigate(['/cliente/nuevo']);
+    this.router.navigate(['/usuario/nuevo-cliente']);
   }
 
   editarUsuario(id: number): void {

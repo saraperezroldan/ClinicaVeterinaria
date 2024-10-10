@@ -66,7 +66,50 @@
 </div>
 <div class="container-mascotas">
   <h2>   Información de las mascotas</h2>
-  <button class="add-mascota-button">Nueva mascota</button>
+  <div class="table-contenedor">
+    <table mat-table [dataSource]="dataSource" class="table">
+
+      <ng-container matColumnDef="idMascota">
+        <th mat-header-cell *matHeaderCellDef> idMascota </th>
+        <td mat-cell *matCellDef="let element">
+          <a [routerLink]="['/usuario/info-mascota', element.idMascota]"> {{element.idMascota}} </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="especie">
+        <th mat-header-cell *matHeaderCellDef> Especie </th>
+        <td mat-cell *matCellDef="let element"> {{element.raza.especie.nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="raza">
+        <th mat-header-cell *matHeaderCellDef> Raza </th>
+        <td mat-cell *matCellDef="let element"> {{element.raza.nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaAlta">
+        <th mat-header-cell *matHeaderCellDef> Fecha alta </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechaAlta | date:"shortDate"}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+          <span class="material-icons">edit</span>
+          <span class="material-icons">delete</span>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <button class="add-mascota-button" (click)="nuevaMascota()">Nueva mascota</button>
 </div>
 
 

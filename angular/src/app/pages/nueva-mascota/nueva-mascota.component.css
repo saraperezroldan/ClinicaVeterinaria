@@ -1,0 +1,42 @@
+
+.container-mascotas{
+  width: 60%;
+  margin: auto;
+  border: 1px solid #ccc;
+  background-color: #EFEFEF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-data-mascotas{
+  display: flex;
+}
+
+.subcontainer-mascotas{
+  background-color: white;
+  margin: 2%;
+  padding: 2%;
+  width: 100%;
+}
+
+
+.save-button{
+  background-color: #8cb4d2;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 7px;
+  height: 35px;
+  width: 100px;
+}
+
+.seccion-boton{
+  margin-right: 2%;
+  margin-bottom: 2%;
+  display: flex;
+  align-items: flex-end;
+}
+
+

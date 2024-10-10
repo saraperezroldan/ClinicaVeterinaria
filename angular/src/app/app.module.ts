@@ -25,6 +25,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { InicioVeterinarioComponent } from './pages/inicio-veterinario/inicio-veterinario.component';
 import { InfoClienteComponent } from './pages/info-cliente/info-cliente.component';
 import { NuevoClienteComponent } from './pages/nuevo-cliente/nuevo-cliente.component';
+import { NuevaMascotaComponent } from './pages/nueva-mascota/nueva-mascota.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NuevoClienteComponent } from './pages/nuevo-cliente/nuevo-cliente.compo
     LoginComponent,
     InicioVeterinarioComponent,
     InfoClienteComponent,
-    NuevoClienteComponent
+    NuevoClienteComponent,
+    NuevaMascotaComponent
   ],
   imports: [
     BrowserModule,

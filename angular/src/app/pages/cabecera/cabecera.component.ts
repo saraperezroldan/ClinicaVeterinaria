@@ -23,7 +23,7 @@ export class CabeceraComponent implements OnInit{
   currentUser: any;
 
   ususarioMenuOpciones: Menu[] = [
-    {label: 'Inicio', icon: 'home', route: '/usuario/inicio'},
+    {label: 'Inicio', icon: 'home', route: '/usuario/inicio-usuario'},
     {label: 'Mi perfil', icon: 'person', route: '/usuario/perfil'},
   ];
   veterinarioMenuOpciones: Menu[] = [
@@ -31,6 +31,12 @@ export class CabeceraComponent implements OnInit{
     {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/citas'},
     {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/consultas'},
     {label: 'Mi perfil', icon: 'person', route: '/usuario/perfil'},
+  ];
+  administradorMenuOpciones: Menu[] = [
+    {label: 'Personal', icon: 'person', route: '/usuario/inicio-administrador'},
+    {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/citas'},
+    {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/consultas'},
+    {label: 'Tratamientos', icon: 'medical_services', route: '/usuario/tratamientos'},
   ];
 
   constructor(private usuarioService : UsuarioService, private loginService : LoginService, private router : Router) {}

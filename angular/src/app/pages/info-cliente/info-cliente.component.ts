@@ -5,6 +5,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MascotaService} from "../../services/mascota.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {Mascota} from "../../models/mascota.model";
+import {ConfirmDeleteClienteComponent} from "../../shared/confirm-delete-cliente/confirm-delete-cliente.component";
+import {ConfirmDeleteMascotaComponent} from "../../shared/confirm-delete-mascota/confirm-delete-mascota.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-info-cliente',
@@ -17,7 +20,7 @@ export class InfoClienteComponent implements OnInit {
   displayedColumns: string[] = ['idMascota','nombre', 'especie', 'raza', 'fechaAlta', 'acciones'];
   dataSource: MatTableDataSource<Mascota> = new MatTableDataSource<Mascota>([]);
 
-  constructor( private usuarioService : UsuarioService, private mascotaService : MascotaService,  private route : ActivatedRoute, private router : Router) {}
+  constructor( private usuarioService : UsuarioService, private mascotaService : MascotaService,  private route : ActivatedRoute, private router : Router, public dialog : MatDialog) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['idUsuario'];
@@ -45,6 +48,10 @@ export class InfoClienteComponent implements OnInit {
 
   nuevaMascota(): void {
     this.router.navigate(['/usuario/nueva-mascota']);
+  }
+
+  eliminarMascota(id:number){
+    const dialogRef = this.dialog.open(ConfirmDeleteMascotaComponent, { });
   }
 
 

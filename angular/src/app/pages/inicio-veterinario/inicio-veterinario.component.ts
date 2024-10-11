@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {Usuario} from "../../models/usuario.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDeleteClienteComponent} from "../../shared/confirm-delete/confirm-delete-cliente.component";
+import {ConfirmDeleteClienteComponent} from "../../shared/confirm-delete-cliente/./confirm-delete-cliente.component";
 
 @Component({
   selector: 'app-inicio-veterinario',

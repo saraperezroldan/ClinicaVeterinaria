@@ -1,1 +1,21 @@
-<h1>Dale a tu cuerpo alegría macarena</h1>
+<div class="container-mascotas">
+  <div class="titulo">
+    <mat-icon>pets</mat-icon>
+    <p>Mis mascotas</p>
+  </div>
+  <mat-divider></mat-divider>
+  <div *ngFor="let mascota of mascotas">
+
+    <div class="container">
+
+      <div class="profile-section">
+        <img alt="Profile Image" class="profile-image" [src]="mascota.imagen" [routerLink]="['/usuario/info-mascota', mascota.idMascota]">
+      </div>
+      <div class="container-data">
+        <h2 [routerLink]="['/usuario/info-mascota', mascota.idMascota]">{{mascota.nombre}}</h2>
+      </div>
+
+    </div>
+
+  </div>
+</div>

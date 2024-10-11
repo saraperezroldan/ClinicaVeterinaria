@@ -33,6 +33,14 @@
             </div>
           </a>
         </ng-container>
+        <ng-container *ngIf="isAdministador()">
+          <a mat-list-item *ngFor="let opcion of administradorMenuOpciones" [routerLink]="opcion.route" routerLinkActive="active">
+            <div class="option">
+              <i class="material-icons">{{opcion.icon}}</i>
+              <span>{{opcion.label}}</span>
+            </div>
+          </a>
+        </ng-container>
       </mat-nav-list>
     </div>
   </mat-sidenav>

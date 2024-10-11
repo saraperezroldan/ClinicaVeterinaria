@@ -39,10 +39,13 @@ export class LoginComponent implements OnInit{
 
         if(rol === 'Usuario'){
           console.log('Eres usuario');
-          this.router.navigate(['/usuario/inicio']);
+          this.router.navigate(['/usuario/inicio-usuario']);
         }else if(rol === 'Veterinario'){
           console.log('Eres veterinario');
           this.router.navigate(['/usuario/inicio-veterinario']);
+        }else if(rol === 'Administrador'){
+          console.log('Eres administrador');
+          this.router.navigate(['/usuario/inicio-administrador']);
         }
       } else {
         this.errorMensaje = 'Usuario o contraseña incorrectos';

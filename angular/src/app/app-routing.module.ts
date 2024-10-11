@@ -9,6 +9,7 @@ import {InicioVeterinarioComponent} from "./pages/inicio-veterinario/inicio-vete
 import {InfoClienteComponent} from "./pages/info-cliente/info-cliente.component";
 import {NuevoClienteComponent} from "./pages/nuevo-cliente/nuevo-cliente.component";
 import {NuevaMascotaComponent} from "./pages/nueva-mascota/nueva-mascota.component";
+import {InicioAdministradorComponent} from "./pages/inicio-administrador/inicio-administrador.component";
 
 const routes: Routes = [
   {
@@ -20,8 +21,16 @@ const routes: Routes = [
     component : CabeceraComponent,
     children: [
       {
-        path: 'inicio',
+        path: 'inicio-usuario',
         component : InicioUsuarioComponent
+      },
+      {
+        path: 'inicio-veterinario',
+        component : InicioVeterinarioComponent
+      },
+      {
+        path: 'inicio-administrador',
+        component: InicioAdministradorComponent
       },
       {
         path: 'perfil',
@@ -30,10 +39,6 @@ const routes: Routes = [
       {
         path: 'info-mascota/:idMascota',
         component : InfoMascotaComponent
-      },
-      {
-        path: 'inicio-veterinario',
-        component : InicioVeterinarioComponent
       },
       {
         path: 'info-cliente/:idUsuario',

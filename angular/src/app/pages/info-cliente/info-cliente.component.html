@@ -99,8 +99,15 @@
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element">
-          <span class="material-icons">edit</span>
-          <span class="material-icons">delete</span>
+          <div class="contenedorIconos">
+            <div class="material-icon-editar">
+              <span class="material-icons">edit</span>
+            </div>
+            <div class="material-icon-eliminar">
+              <span class="material-icons">delete</span>
+            </div>
+          </div>
+
         </td>
       </ng-container>
 

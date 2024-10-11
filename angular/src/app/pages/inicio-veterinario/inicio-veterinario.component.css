@@ -7,7 +7,7 @@
 .contenedorBotones{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2%;
+  margin-bottom: 0;
 }
 
 h1 {
@@ -69,7 +69,6 @@ h1 {
   background-color: #79b3e3;
 }
 
-/* Tabla */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -104,19 +103,27 @@ button {
 }
 
 .btn-editar{
-  background-color: #e0e0e0;
+  background-color: #deebf6;
   margin-right: 5%;
   color: #626161;
+  letter-spacing: normal;
 }
 
 .btn-eliminar{
   background-color: #ffb7b7;
   color: #626161;
+  letter-spacing: normal;
 }
 
 .material-icons {
   vertical-align: middle;
   margin-right: 5px;
   font-size: 20px;
+}
+
+.errorDNI {
+  color: red;
+  font-size: 12px;
+  margin-left: 10px;
 }
 

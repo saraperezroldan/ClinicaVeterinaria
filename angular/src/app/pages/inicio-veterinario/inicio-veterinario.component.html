@@ -7,7 +7,12 @@
       <button class="search-button" (click)="buscarUsuario()">Buscar</button>
     </div>
 
+
     <button (click)="nuevoUsuario()" class="btn-nuevo-cliente">Nuevo cliente</button>
+  </div>
+
+  <div *ngIf="errorMensaje" class="errorDNI">
+    {{errorMensaje}}
   </div>
 
   <table mat-table *ngIf="usuario" [dataSource]="[usuario]">
@@ -52,7 +57,7 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button  class="btn-editar" color="primary" (click)="editarUsuario(element)">
+        <button mat-raised-button  class="btn-editar" color="primary" [routerLink]="['/usuario/info-cliente', element.idUsuario]">
           <span class="material-icons">edit</span> Editar
         </button>
         <button mat-raised-button class="btn-eliminar" color="warn" (click)="eliminarUsuario(element)">

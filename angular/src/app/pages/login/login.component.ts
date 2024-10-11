@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
 
+  errorMensaje : string = '';
+
   constructor(private fb: FormBuilder, private loginService : LoginService, private router : Router, private usuarioService : UsuarioService) { }
 
   ngOnInit(): void {
@@ -42,6 +44,8 @@ export class LoginComponent implements OnInit{
           console.log('Eres veterinario');
           this.router.navigate(['/usuario/inicio-veterinario']);
         }
+      } else {
+        this.errorMensaje = 'Usuario o contraseña incorrectos';
       }
     });
   }

@@ -92,6 +92,11 @@ button {
   cursor: pointer;
 }
 
+.errorMensaje{
+  color: red;
+  font-size: 12px;
+  float: left;
+}
 
 
 

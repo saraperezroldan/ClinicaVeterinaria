@@ -11,6 +11,10 @@
       <label for="password">Introduzca su contraseña</label>
       <input type="password" id="password" formControlName="password" required>
 
+      <div *ngIf="errorMensaje" class="errorMensaje">
+        {{errorMensaje}}
+      </div>
+
       <button type="submit">Iniciar sesión</button>
     </form>
   </div>

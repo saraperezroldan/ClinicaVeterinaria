@@ -1,0 +1,11 @@
+<div class="popup">
+  <mat-toolbar class="toolbar"></mat-toolbar>
+  <mat-dialog-content>
+    <p class="dialog-text">¿Está seguro de eliminar este cliente?</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onClose()" class="botonCancelar">Cancelar</button>
+    <button mat-button (click)="onSubmit()" class="botonAceptar">Aceptar</button>
+  </mat-dialog-actions>
+</div>

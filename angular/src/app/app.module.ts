@@ -26,6 +26,7 @@ import { InicioVeterinarioComponent } from './pages/inicio-veterinario/inicio-ve
 import { InfoClienteComponent } from './pages/info-cliente/info-cliente.component';
 import { NuevoClienteComponent } from './pages/nuevo-cliente/nuevo-cliente.component';
 import { NuevaMascotaComponent } from './pages/nueva-mascota/nueva-mascota.component';
+import { ConfirmDeleteClienteComponent } from './shared/confirm-delete/confirm-delete-cliente.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NuevaMascotaComponent } from './pages/nueva-mascota/nueva-mascota.compo
     InicioVeterinarioComponent,
     InfoClienteComponent,
     NuevoClienteComponent,
-    NuevaMascotaComponent
+    NuevaMascotaComponent,
+    ConfirmDeleteClienteComponent
   ],
   imports: [
     BrowserModule,

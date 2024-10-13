@@ -1,1 +1,20 @@
-<p>inicio-administrador works!</p>
+<div class="container-veterinarios">
+  <div class="titulo">
+    <mat-icon>account_circle</mat-icon>
+    <span>Personal</span>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div class="contenedorBotones">
+    <div class="search-container">
+      <input type="text" placeholder="Introduce el nombre del veterinario" [(ngModel)]="searchQuery"/>
+      <button class="search-button" (click)="searchVeterinarios()">Buscar</button>
+    </div>
+
+
+    <button class="btn-nuevo-veterinario" (click)="nuevoVeterinario()">Nuevo veterinario</button>
+  </div>
+  <div *ngFor="let veterinario of veterinariosFiltered">
+    {{veterinario.nombre}}
+  </div>
+</div>

@@ -42,4 +42,8 @@ export class UsuarioService {
   eliminarUsuario(id: number) : Observable<any>{
     return this.http.delete(`${URLSERVER}usuario/eliminarUsuario/${id}`);
   }
+
+  getUsariosByRol(rol: number) : Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(`${URLSERVER}usuario/getUsuariosByIdRol/${rol}`);
+  }
 }

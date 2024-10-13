@@ -1,0 +1,100 @@
+.container-veterinarios {
+  width: 80%;
+  margin: auto;
+}
+
+.titulo{
+  display: flex;
+  align-items: center;
+  font-family: 'Georgia', serif;
+  color: #626161;
+  margin-top: 3%;
+  min-height: 50px;
+}
+
+mat-divider{
+  margin-bottom: 2%;
+}
+
+span{
+  margin-left: 5px;
+  font-size: 25px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+mat-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  box-sizing: content-box;
+  overflow: visible;
+  font-size: 40px;
+  color: #626161;
+  margin-right: 10px;
+}
+
+.contenedorBotones{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.search-container {
+  display: flex;;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  padding: 10px;
+  font-size: 14px;
+  width: 300px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-right: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+.search-container input::placeholder {
+  color: #bbb;
+}
+
+.search-button {
+  background-color: #8cb4d2;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 7px;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+.search-button:hover {
+  background-color: #79b3e3;
+}
+
+.btn-nuevo-veterinario {
+  background-color: #8cb4d2;
+  color: white;
+  border-radius: 7px;
+  padding: 10px 20px;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.btn-nuevo-veterinario:hover {
+  background-color: #79b3e3;
+}

@@ -10,6 +10,7 @@ import {InfoClienteComponent} from "./pages/info-cliente/info-cliente.component"
 import {NuevoClienteComponent} from "./pages/nuevo-cliente/nuevo-cliente.component";
 import {NuevaMascotaComponent} from "./pages/nueva-mascota/nueva-mascota.component";
 import {InicioAdministradorComponent} from "./pages/inicio-administrador/inicio-administrador.component";
+import {NuevoVeterinarioComponent} from "./pages/nuevo-veterinario/nuevo-veterinario.component";
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'nueva-mascota',
         component: NuevaMascotaComponent
+      },
+      {
+        path: 'nuevo-veterinario',
+        component: NuevoVeterinarioComponent
       },
     ]
   },

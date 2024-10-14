@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from "../../services/usuario.service";
 import {Usuario} from "../../models/usuario.model";
 import {Router} from "@angular/router";
+import {ConfirmDeleteClienteComponent} from "../../shared/confirm-delete-cliente/confirm-delete-cliente.component";
+import {
+  ConfirmDeleteVeterinarioComponent
+} from "../../shared/confirm-delete-veterinario/confirm-delete-veterinario.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-inicio-administrador',
@@ -14,7 +19,7 @@ export class InicioAdministradorComponent implements OnInit{
   veterinariosFiltered : Usuario[] = [];
   searchQuery : string = '';
 
-  constructor(private usuarioService : UsuarioService, private router: Router) { }
+  constructor(private usuarioService : UsuarioService, private router: Router, public dialog : MatDialog) { }
 
   ngOnInit() {
     this.getVeterinarios();
@@ -45,6 +50,10 @@ export class InicioAdministradorComponent implements OnInit{
 
   nuevoVeterinario(){
     this.router.navigate(['/usuario/nuevo-veterinario']);
+  }
+
+  eliminarVeterinario(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteVeterinarioComponent, { });
   }
 
 }

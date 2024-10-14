@@ -98,3 +98,72 @@ button {
 .btn-nuevo-veterinario:hover {
   background-color: #79b3e3;
 }
+
+.container {
+  border: 1px solid #ccc;
+  background-color: #EFEFEF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  height: 120px;
+  margin: auto;
+  margin-top: 3%;
+  font-family: 'Arial', sans-serif;
+}
+
+.profile-section {
+  background-color: #f7f9fc;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  max-height: 100px;
+  flex: none;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.container-data{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subcontainer{
+  background-color: white;
+  margin: 2%;
+  padding: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.details-section{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+p{
+  margin: 0;
+}
+
+.btn-eliminar{
+  background-color: #ffb7b7;
+  color: #626161;
+  letter-spacing: normal;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 7px 15px;
+}
+
+.btn-eliminar:hover {
+  background-color: #ff9999;
+}

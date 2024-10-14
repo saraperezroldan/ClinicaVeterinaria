@@ -14,7 +14,20 @@
 
     <button class="btn-nuevo-veterinario" (click)="nuevoVeterinario()">Nuevo veterinario</button>
   </div>
-  <div *ngFor="let veterinario of veterinariosFiltered">
-    {{veterinario.nombre}}
+  <div *ngFor="let veterinario of veterinariosFiltered" class="container">
+    <div class="profile-section">
+      <img alt="Profile Image" class="profile-image" [src]="veterinario.imagen">
+    </div>
+
+
+    <div class="container-data">
+      <div class="subcontainer">
+        <div class="details-section">
+          <p>{{veterinario.nombre}}</p>
+          <p>{{veterinario.apellidos}}</p>
+        </div>
+        <button class="btn-eliminar" (click)="eliminarVeterinario(veterinario.idUsuario)">Eliminar</button>
+      </div>
+    </div>
   </div>
 </div>

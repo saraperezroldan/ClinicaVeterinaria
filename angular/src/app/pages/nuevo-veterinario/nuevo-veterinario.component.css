@@ -6,7 +6,7 @@
   flex-direction: row;
   width: 60%;
   margin: auto;
-  margin-top: 3%;
+  margin-top: 0;
   font-family: 'Arial', sans-serif;
 }
 
@@ -49,6 +49,7 @@ h2 {
   padding-bottom: 2px;
   padding-left: 2%;
   box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
 .imagen-section{
@@ -90,6 +91,7 @@ p{
   margin-right: 5px;
   line-height: 35px;
   display: inline-block;
+  font-family: 'Arial', sans-serif;
 }
 
 .half-width input {
@@ -97,6 +99,24 @@ p{
   border: 1px solid #ccc;
   border-radius: 4px;
   width: auto;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.half-width input:focus {
+  outline: none;
+  border: 1px solid #8cb4d2;
+  box-shadow: none;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: white !important;
+}
+
+.half-width input:-webkit-autofill,
+.half-width input:-webkit-autofill:focus {
+  background-color: #FFF !important;
+  -webkit-box-shadow: 0 0 0px 1000px #FFF inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .save-button{
@@ -113,3 +133,25 @@ p{
   margin-top: 10px;
   float: right;
 }
+
+.icon-container{
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  overflow: visible;
+}
+
+.back-icon {
+  font-size: 38px;
+  cursor: pointer;
+  color: #8cb4d2;
+  padding: 7px;
+}
+
+.back-icon:hover {
+  color: #5597c9;
+}
+

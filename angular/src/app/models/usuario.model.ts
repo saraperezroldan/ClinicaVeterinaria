@@ -15,7 +15,8 @@ export interface Usuario {
     fechaModificacion: string;
     fechaNacimiento: string;
     fechaBaja: string;
-    rol: Rol;
+    rol: number;
+    activo: number;
 }
 
 export interface Rol {

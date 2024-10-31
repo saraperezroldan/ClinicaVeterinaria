@@ -18,6 +18,7 @@ export class InicioAdministradorComponent implements OnInit{
   veterinarios : Usuario[] = [];
   veterinariosFiltered : Usuario[] = [];
   searchQuery : string = '';
+  errorMensaje: string = '';
 
   constructor(private usuarioService : UsuarioService, private router: Router, public dialog : MatDialog) { }
 
@@ -29,8 +30,8 @@ export class InicioAdministradorComponent implements OnInit{
     this.usuarioService.getUsariosByRol(2).subscribe(
       veterinarios => {
         console.log(veterinarios);
-        this.veterinarios = veterinarios;
-        this.veterinariosFiltered = veterinarios;
+        this.veterinarios = veterinarios.filter(veterinario => veterinario.activo === 1);
+        this.veterinariosFiltered = this.veterinarios;
       }
     )
   }
@@ -39,11 +40,20 @@ export class InicioAdministradorComponent implements OnInit{
     const query = this.searchQuery.trim().toLowerCase();
     if (query === ''){
       this.veterinariosFiltered = this.veterinarios;
+      this.errorMensaje = '';
       return;
     }else{
       this.veterinariosFiltered = this.veterinarios.filter(
         veterinario => veterinario.nombre.toLowerCase().includes(query) || veterinario.apellidos.toLowerCase().includes(query)
-      )
+      );
+      if(this.veterinariosFiltered.length === 0){
+        this.errorMensaje = 'No se ha encontrado ningun veterinario con ese nombre. Por favor, inténtalo de nuevo.';
+        this.veterinariosFiltered = this.veterinarios;
+      }
+      else {
+        this.errorMensaje = '';
+      }
+
     }
     this.searchQuery = '';
   }
@@ -54,6 +64,21 @@ export class InicioAdministradorComponent implements OnInit{
 
   eliminarVeterinario(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDeleteVeterinarioComponent, { });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.usuarioService.eliminarUsuario(id).subscribe(
+          response => {
+            console.log('Veterinario eliminado:', response);
+            alert('El veterinario ha sido eliminado correctamente');
+            this.getVeterinarios();
+          },
+          error => {
+            console.error('Error al eliminar el veterinario:', error);
+          }
+        );
+      }
+    });
   }
 
 }

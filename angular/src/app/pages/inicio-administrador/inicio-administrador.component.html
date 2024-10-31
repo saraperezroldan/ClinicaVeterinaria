@@ -10,9 +10,10 @@
       <input type="text" placeholder="Introduce el nombre del veterinario" [(ngModel)]="searchQuery"/>
       <button class="search-button" (click)="searchVeterinarios()">Buscar</button>
     </div>
-
-
     <button class="btn-nuevo-veterinario" (click)="nuevoVeterinario()">Nuevo veterinario</button>
+  </div>
+  <div *ngIf="errorMensaje" class="errorMensaje">
+    {{errorMensaje}}
   </div>
   <div *ngFor="let veterinario of veterinariosFiltered" class="container">
     <div class="profile-section">

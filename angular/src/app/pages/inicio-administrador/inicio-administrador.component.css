@@ -167,3 +167,9 @@ p{
 .btn-eliminar:hover {
   background-color: #ff9999;
 }
+
+.errorMensaje {
+  color: red;
+  font-size: 12px;
+  margin-left: 10px;
+}

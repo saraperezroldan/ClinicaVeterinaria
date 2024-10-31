@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../services/login.service";
 import {Router} from "@angular/router";
 import {UsuarioService} from "../../services/usuario.service";
+import {Rol} from "../../models/usuario.model";
 
 @Component({
   selector: 'app-login',
@@ -33,17 +34,19 @@ export class LoginComponent implements OnInit{
       console.log(usuario);
       if(usuario.password === this.loginForm.value.password){
         console.log('Login correcto');
-        const rol = usuario.rol.nombre;
+        const rol : number = usuario.rol;
+        console.log(rol)
+        console.log(usuario.rol);
         this.usuarioService.setCurrentUser(usuario);
         this.loginService.saveUserToLocalStorage(usuario);
 
-        if(rol === 'Usuario'){
+        if(rol === 3){
           console.log('Eres usuario');
           this.router.navigate(['/usuario/inicio-usuario']);
-        }else if(rol === 'Veterinario'){
+        }else if(rol === 2){
           console.log('Eres veterinario');
           this.router.navigate(['/usuario/inicio-veterinario']);
-        }else if(rol === 'Administrador'){
+        }else if(rol === 1){
           console.log('Eres administrador');
           this.router.navigate(['/usuario/inicio-administrador']);
         }

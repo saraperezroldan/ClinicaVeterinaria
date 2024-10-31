@@ -56,15 +56,15 @@ export class CabeceraComponent implements OnInit{
   }
 
   isUsuario(){
-    return this.currentUser.rol.nombre === 'Usuario';
+    return this.currentUser.rol === 3;
   }
 
   isVeterinario(){
-    return this.currentUser.rol.nombre === 'Veterinario';
+    return this.currentUser.rol === 2;
   }
 
   isAdministador(){
-    return this.currentUser.rol.nombre === 'Administrador';
+    return this.currentUser.rol === 1;
   }
 
 

@@ -1,5 +1,7 @@
 package com.clinica.clinicaVeterinaria.business.usuario;
 
+import com.clinica.clinicaVeterinaria.business.rol.IRolService;
+import com.clinica.clinicaVeterinaria.domain.entities.Rol;
 import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
@@ -20,6 +22,9 @@ import java.util.Objects;
 public class UsuarioServiceImpl implements IUsuarioService {
     @Autowired
     private IUsuarioRepository usuarioRepository;
+
+    @Autowired
+    private IRolService rolService;
 
     @Override
     public List<UsuarioDTO> getUsuarios() {
@@ -107,12 +112,15 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuarioNuevo = UsuarioDTO.toDomain(usuarioDTO);
-        validarUsuario(usuarioNuevo, 1);
 
-        Usuario findUsuario = usuarioRepository.findUsuarioById(usuarioDTO.getIdUsuario());
-        if (findUsuario != null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.yaExisteUsuario");
+        Rol rol = rolService.findById(usuarioDTO.getRol()).orElse(null);
+        if (rol == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.rolNoEncontrado");
         }
+
+        //validarUsuario(usuarioNuevo, 1);
+
+        usuarioNuevo.setRol(rol);
         usuarioNuevo.setFechaAlta(new Date());
         usuarioRepository.save(usuarioNuevo);
 
@@ -159,9 +167,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
     private void validarUsuario(Usuario usuario, int tipo) {
         if (tipo == 1) {
-            if (usuario.getIdUsuario() <= 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoIdUsuario");
-            }
             if (!StringUtils.hasText(usuario.getNombre())) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoNombre");
             }

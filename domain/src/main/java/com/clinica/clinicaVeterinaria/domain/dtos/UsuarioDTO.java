@@ -1,11 +1,9 @@
 package com.clinica.clinicaVeterinaria.domain.dtos;
 
+import com.clinica.clinicaVeterinaria.domain.entities.Rol;
 import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
-import com.nimbusds.oauth2.sdk.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.Null;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -29,12 +27,9 @@ public class UsuarioDTO {
     private Date fechaAlta;
     private Date fechaModificacion;
     private Date fechaBaja;
-    private RolDTO rol;
+    private Integer rol;
 
-    public static UsuarioDTO toDTO(Usuario usuario){
-        return UsuarioDTO.toDTO(usuario, Arrays.asList(RolDTO.class));
-    }
-    public static UsuarioDTO toDTO(Usuario usuario, List<Class<?>> includeRelacion) {
+    public static UsuarioDTO toDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
         if (usuario == null) {
@@ -51,16 +46,14 @@ public class UsuarioDTO {
         usuarioDTO.setDireccion(StringUtils.hasText(usuario.getDireccion()) ? usuario.getDireccion().trim() : "");
         usuarioDTO.setPoblacion(StringUtils.hasText(usuario.getCiudad()) ? usuario.getCiudad().trim() : "");
         usuarioDTO.setProvincia(StringUtils.hasText(usuario.getProvincia()) ? usuario.getProvincia().trim() : "");
-        usuarioDTO.setPoblacion(StringUtils.hasText(usuario.getPoblacion()) ? usuario.getPoblacion().trim() : "");
         usuarioDTO.setCodigoPostal(StringUtils.hasText(usuario.getCodigoPostal()) ? usuario.getCodigoPostal().trim() : "");
         usuarioDTO.setImagen(StringUtils.hasText(usuario.getImagen()) ? usuario.getImagen().trim() : "");
         usuarioDTO.setActivo(Math.max(usuario.getActivo(), 0));
         usuarioDTO.setFechaAlta(usuario.getFechaAlta() != null ? usuario.getFechaAlta() : new Date());
         usuarioDTO.setFechaModificacion(usuario.getFechaModificacion() != null ? usuario.getFechaModificacion() : null);
         usuarioDTO.setFechaBaja(usuario.getFechaBaja() != null ? usuario.getFechaBaja() : null);
-        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RolDTO.class)){
-            usuarioDTO.setRol(RolDTO.toDTO(usuario.getRol()));
-        }
+        usuarioDTO.setRol(usuario.getRol() != null ? usuario.getRol().getIdRol() : null);
+
         return usuarioDTO;
     }
 
@@ -84,7 +77,6 @@ public class UsuarioDTO {
         usuario.setApellidos(StringUtils.hasText(usuarioDTO.getApellidos()) ? usuarioDTO.getApellidos().trim() : "");
         usuario.setDni(StringUtils.hasText(usuarioDTO.getDni()) ? usuarioDTO.getDni().trim() : "");
         usuario.setEmail(StringUtils.hasText(usuarioDTO.getEmail()) ? usuarioDTO.getEmail().trim() : "");
-        usuario.setCiudad(StringUtils.hasText(usuarioDTO.getPoblacion()) ? usuarioDTO.getPoblacion().trim() : "");
         usuario.setPassword(StringUtils.hasText(usuarioDTO.getPassword()) ? usuarioDTO.getPassword().trim() : "");
         usuario.setTelefono(StringUtils.hasText(usuarioDTO.getTelefono()) ? usuarioDTO.getTelefono().trim() : "");
         usuario.setDireccion(StringUtils.hasText(usuarioDTO.getDireccion()) ? usuarioDTO.getDireccion().trim() : "");
@@ -97,7 +89,9 @@ public class UsuarioDTO {
         usuario.setFechaAlta(usuarioDTO.getFechaAlta() != null ? usuarioDTO.getFechaAlta() : new Date());
         usuario.setFechaModificacion(usuarioDTO.getFechaModificacion() != null ? usuarioDTO.getFechaModificacion() : null);
         usuario.setFechaBaja(usuarioDTO.getFechaBaja() != null ? usuarioDTO.getFechaBaja() : null);
-        usuario.setRol(RolDTO.toDomain(usuarioDTO.getRol()));
+        Rol rol = new Rol();
+        rol.setIdRol(usuarioDTO.getRol());
+        usuario.setRol(rol);
 
         return usuario;
     }
@@ -148,6 +142,6 @@ public class UsuarioDTO {
 
     public void setFechaBaja(Date fechaBaja) {this.fechaBaja = fechaBaja;}
 
-    public RolDTO getRol() {return rol;}
-    public void setRol(RolDTO rol) {this.rol = rol;}
+    public Integer getRol() {return rol;}
+    public void setRol(Integer rol) {this.rol = rol;}
 }

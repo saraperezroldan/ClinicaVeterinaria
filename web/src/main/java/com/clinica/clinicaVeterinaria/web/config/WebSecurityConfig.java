@@ -3,9 +3,13 @@ package com.clinica.clinicaVeterinaria.web.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
@@ -25,7 +29,9 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		
 		if(isAuthenticated) {
 			// all request authenticated
-			http.authorizeRequests((requests) -> requests.anyRequest().authenticated());			
+			http.authorizeRequests((requests) -> requests
+					.antMatchers(HttpMethod.POST, "/usuario/crearUsuario").permitAll()
+					.anyRequest().authenticated());
 
 			// OKTA configuration
 			// enables OAuth redirect login
@@ -39,5 +45,17 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		}
 		
 		return http.build();
+	}
+
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.addAllowedOriginPattern("*"); // Permite todos los orígenes
+		configuration.addAllowedMethod("*");        // Permite todos los métodos (GET, POST, etc.)
+		configuration.addAllowedHeader("*");        // Permite todos los encabezados
+		configuration.setAllowCredentials(true);    // Permitir credenciales (si es necesario)
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
 	}
 }

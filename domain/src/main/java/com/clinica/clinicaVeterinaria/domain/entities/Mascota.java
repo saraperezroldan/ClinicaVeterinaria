@@ -29,6 +29,7 @@ public class Mascota {
     @JoinColumn(name = "id_raza")
     private Raza raza;
 
+
     public Mascota(){}
 
     public int getIdMascota() {return idMascota;}

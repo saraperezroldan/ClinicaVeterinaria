@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface IRazaService {
     List<RazaDTO> getRazas();
+    RazaDTO getRazaById(int idRaza);
 }

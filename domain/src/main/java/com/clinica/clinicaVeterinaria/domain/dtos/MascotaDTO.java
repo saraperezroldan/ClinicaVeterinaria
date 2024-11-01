@@ -1,6 +1,6 @@
 package com.clinica.clinicaVeterinaria.domain.dtos;
 
-import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
+import com.clinica.clinicaVeterinaria.domain.entities.*;
 import com.nimbusds.oauth2.sdk.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import java.util.Arrays;
@@ -22,8 +22,8 @@ public class MascotaDTO {
     private Date fechaAlta;
     private Date fechaModificacion;
     private Date fechaBaja;
+    private Integer usuario;
     private RazaDTO raza;
-    private UsuarioDTO usuario;
 
     public MascotaDTO(){}
 
@@ -48,13 +48,15 @@ public class MascotaDTO {
         mascotaDTO.setFechaAlta(mascota.getFechaAlta()!= null ? mascota.getFechaAlta() : null);
         mascotaDTO.setFechaModificacion(mascota.getFechaModificacion()!= null ? mascota.getFechaBaja() : null);
         mascotaDTO.setFechaBaja(mascota.getFechaBaja() != null ? mascota.getFechaBaja() : null);
+        mascotaDTO.setUsuario(mascota.getUsuario() != null ? mascota.getUsuario().getIdUsuario() : null);
 
         if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RazaDTO.class)){
             mascotaDTO.setRaza(RazaDTO.toDTO(mascota.getRaza()));
         }
-        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
+
+        /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
             mascotaDTO.setUsuario(UsuarioDTO.toDTO(mascota.getUsuario()));
-        }
+        }*/
         return mascotaDTO;
     }
 
@@ -97,9 +99,10 @@ public class MascotaDTO {
         mascota.setFechaAlta(mascotaDTO.getFechaAlta()!= null ? mascotaDTO.getFechaAlta() : null);
         mascota.setFechaModificacion(mascotaDTO.getFechaModificacion() != null ? mascotaDTO.getFechaModificacion() : null);
         mascota.setFechaBaja(mascotaDTO.getFechaBaja()!= null ? mascotaDTO.getFechaBaja() : null);
-
         mascota.setRaza(RazaDTO.toDomain(mascotaDTO.getRaza()));
-        mascota.setUsuario(UsuarioDTO.toDomain(mascotaDTO.getUsuario()));
+        Usuario usuario = new Usuario();
+        usuario.setIdUsuario(mascotaDTO.getUsuario());
+        mascota.setUsuario(usuario);
 
         return mascota;
     }
@@ -138,8 +141,8 @@ public class MascotaDTO {
     public void setFechaModificacion(Date fechaModificacion) {this.fechaModificacion = fechaModificacion;}
     public Date getFechaBaja() {return fechaBaja;}
     public void setFechaBaja(Date fechaBaja) {this.fechaBaja = fechaBaja;}
-    public UsuarioDTO getUsuario() {return usuario;}
-    public void setUsuario(UsuarioDTO usuario) {this.usuario = usuario;}
+    public Integer getUsuario() {return usuario;}
+    public void setUsuario(Integer usuario) {this.usuario = usuario;}
     public RazaDTO getRaza() {return raza;}
     public void setRaza(RazaDTO raza) {this.raza = raza;}
 }

@@ -20,4 +20,9 @@ public class RazaControllerImpl implements IRazaController{
     public ResponseEntity<List<RazaDTO>> getRazas() {
         return new ResponseEntity<>(razaService.getRazas(), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<RazaDTO> getRazaById (int idRaza) {
+        return new ResponseEntity<>(razaService.getRazaById(idRaza), HttpStatus.OK);
+    }
 }

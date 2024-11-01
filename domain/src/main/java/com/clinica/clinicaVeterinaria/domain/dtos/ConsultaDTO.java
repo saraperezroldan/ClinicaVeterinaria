@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class ConsultaDTO {
     private int idConsulta;
+    private String motivo;
     private String observaciones;
-    private String diagnostico;
     private Date fechaCita;
     private Date fechaAlta;
     private Date fechaUltima;
@@ -30,7 +30,7 @@ public class ConsultaDTO {
 
         consultaDTO.setIdConsulta(consulta.getIdConsulta());
         consultaDTO.setObservaciones(consulta.getObservaciones());
-        consultaDTO.setDiagnostico(consulta.getDiagnostico());
+        consultaDTO.setMotivo(consulta.getMotivo());
         consultaDTO.setFechaCita(consulta.getFechaCita());
         consultaDTO.setFechaAlta(consulta.getFechaAlta());
         consultaDTO.setFechaUltima(consulta.getFechaUltima());
@@ -72,7 +72,7 @@ public class ConsultaDTO {
 
         consulta.setIdConsulta(consultaDTO.getIdConsulta());
         consulta.setObservaciones(consultaDTO.getObservaciones());
-        consulta.setDiagnostico(consultaDTO.getDiagnostico());
+        consulta.setMotivo(consultaDTO.getMotivo());
         consulta.setFechaCita(consultaDTO.getFechaCita());
         consulta.setFechaAlta(consultaDTO.getFechaAlta());
         consulta.setFechaUltima(consultaDTO.getFechaUltima());
@@ -109,12 +109,12 @@ public class ConsultaDTO {
         this.observaciones = observaciones;
     }
 
-    public String getDiagnostico() {
-        return diagnostico;
+    public String getMotivo() {
+        return motivo;
     }
 
-    public void setDiagnostico(String diagnostico) {
-        this.diagnostico = diagnostico;
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
 
     public Date getFechaCita() {

@@ -11,7 +11,7 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idConsulta;
     private String observaciones;
-    private String diagnostico;
+    private String motivo;
     private Date fechaAlta;
     private Date fechaCita;
     private Date fechaUltima;
@@ -25,10 +25,10 @@ public class Consulta {
 
     public Consulta() {}
 
-    public Consulta(int idConsulta, String observaciones, String diagnostico, Date fechaCita, Date fechaAlta, Date fechaUltima, Mascota mascota) {
+    public Consulta(int idConsulta, String observaciones, String motivo, Date fechaCita, Date fechaAlta, Date fechaUltima, Mascota mascota) {
         this.idConsulta = idConsulta;
         this.observaciones = observaciones;
-        this.diagnostico = diagnostico;
+        this.motivo = motivo;
         this.fechaCita = fechaCita;
         this.fechaAlta = fechaAlta;
         this.fechaUltima = fechaUltima;
@@ -43,9 +43,9 @@ public class Consulta {
 
     public void setObservaciones(String observaciones) {this.observaciones = observaciones;}
 
-    public String getDiagnostico() {return diagnostico;}
+    public String getMotivo() {return motivo;}
 
-    public void setDiagnostico(String diagnostico) {this.diagnostico = diagnostico;}
+    public void setMotivo(String motivo) {this.motivo = motivo;}
 
     public Date getFechaCita() {return fechaCita;}
 

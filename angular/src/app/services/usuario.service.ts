@@ -54,4 +54,8 @@ export class UsuarioService {
   borrarUsuario(id: number) : Observable<any>{
     return this.http.delete(`${URLSERVER}usuario/eliminarUsuario/${id}`);
   }
+
+  editarUsuario(usuario: Usuario) : Observable<Usuario>{
+    return this.http.post<Usuario>(`${URLSERVER}usuario/modificarUsuario`, usuario);
+  }
 }

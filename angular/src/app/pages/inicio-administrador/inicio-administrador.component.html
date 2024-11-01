@@ -16,7 +16,7 @@
     {{errorMensaje}}
   </div>
   <div *ngFor="let veterinario of veterinariosFiltered" class="container">
-    <div class="profile-section">
+    <div class="profile-section" [routerLink]="['/usuario/info-veterinario', veterinario.idUsuario]">
       <img alt="Profile Image" class="profile-image" [src]="veterinario.imagen">
     </div>
 

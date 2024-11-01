@@ -179,6 +179,26 @@ mat-radio-button {
   --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
 }
 
+.icon-container{
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  position: absolute;
+}
+
+.back-icon {
+  font-size: 38px;
+  cursor: pointer;
+  color: #8cb4d2;
+  padding: 7px;
+}
+
+.back-icon:hover {
+  color: #5597c9;
+}
 
 
 

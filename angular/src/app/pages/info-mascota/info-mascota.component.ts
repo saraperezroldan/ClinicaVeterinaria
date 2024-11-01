@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Mascota} from "../../models/mascota.model";
 import {MascotaService} from "../../services/mascota.service";
 
@@ -12,7 +12,7 @@ export class InfoMascotaComponent implements OnInit{
 
   mascota! : Mascota;
   idMascota! : number;
-  constructor(private mascotaService : MascotaService, private  route : ActivatedRoute) { }
+  constructor(private mascotaService : MascotaService, private  route : ActivatedRoute, private ruta: Router) { }
 
   ngOnInit( ): void {
     this.idMascota = this.route.snapshot.params['idMascota'];
@@ -27,6 +27,10 @@ export class InfoMascotaComponent implements OnInit{
         this.mascota = mascota;
       }
     );
+  }
+
+  goBack(){
+    this.ruta.navigate(['/usuario/inicio-usuario']);
   }
 
 }

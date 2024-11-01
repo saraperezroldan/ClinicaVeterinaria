@@ -15,7 +15,7 @@ export class NuevoVeterinarioComponent {
     apellidos: '',
     dni: '',
     email: '',
-    password: '',
+    password: 'password',
     telefono: '',
     direccion: '',
     poblacion: '',

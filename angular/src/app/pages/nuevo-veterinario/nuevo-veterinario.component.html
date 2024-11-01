@@ -1,5 +1,5 @@
 <div class="icon-container">
-  <mat-icon class="back-icon" (click)="goBack()">arrow_back</mat-icon>
+  <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
 </div>
 <div class="container">
 
@@ -20,24 +20,35 @@
               <input type="text" id="nombre" [(ngModel)]="usuario.nombre" name="nombre" required>
             </div>
             <div class="half-width">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" id="apellidos" [(ngModel)]="usuario.apellidos" name="apellidos" required>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="half-width">
+              <label for="dni">DNI</label>
+              <input type="text" id="dni" [(ngModel)]="usuario.dni" name="dni" required>
+            </div>
+            <div class="half-width">
+              <label for="telefono">Teléfono</label>
+              <input type="text" id="telefono" [(ngModel)]="usuario.telefono" name="telefono" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="half-width">
+              <label for="email">Email</label>
+              <input type="email" id="email" [(ngModel)]="usuario.email" name="email" required>
+            </div>
+            <div class="half-width">
               <label for="direccion">Dirección</label>
               <input type="text" id="direccion" [(ngModel)]="usuario.direccion" name="direccion" required>
             </div>
           </div>
           <div class="row">
             <div class="half-width">
-              <label for="apellidos">Apellidos</label>
-              <input type="text" id="apellidos" [(ngModel)]="usuario.apellidos" name="apellidos" required>
-            </div>
-            <div class="half-width">
               <label for="poblacion">Población</label>
               <input type="text" id="poblacion" [(ngModel)]="usuario.poblacion" name="poblacion" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="dni">DNI</label>
-              <input type="text" id="dni" [(ngModel)]="usuario.dni" name="dni" required>
             </div>
             <div class="half-width">
               <label for="codigo-postal">Código postal</label>
@@ -46,15 +57,11 @@
           </div>
           <div class="row">
             <div class="half-width">
-              <label for="telefono">Teléfono</label>
-              <input type="text" id="telefono" [(ngModel)]="usuario.telefono" name="telefono" required>
+              <label for="provincia">Provincia</label>
+              <input type="text" id="provincia" [(ngModel)]="usuario.provincia" name="provincia" required>
             </div>
-            <div class="half-width">
-              <label for="email">Email</label>
-              <input type="email" id="email" [(ngModel)]="usuario.email" name="email" required>
-            </div>
+            <button type="submit" class="save-button">Guardar</button>
           </div>
-          <button type="submit" class="save-button">Guardar</button>
         </form>
       </div>
     </div>

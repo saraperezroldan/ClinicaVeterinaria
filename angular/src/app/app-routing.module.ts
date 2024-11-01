@@ -11,6 +11,7 @@ import {NuevoClienteComponent} from "./pages/nuevo-cliente/nuevo-cliente.compone
 import {NuevaMascotaComponent} from "./pages/nueva-mascota/nueva-mascota.component";
 import {InicioAdministradorComponent} from "./pages/inicio-administrador/inicio-administrador.component";
 import {NuevoVeterinarioComponent} from "./pages/nuevo-veterinario/nuevo-veterinario.component";
+import {InfoVeterinarioComponent} from "./pages/info-veterinario/info-veterinario.component";
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
         path: 'nuevo-veterinario',
         component: NuevoVeterinarioComponent
       },
+      {
+        path: 'info-veterinario/:idUsuario',
+        component: InfoVeterinarioComponent
+      }
     ]
   },
 ];

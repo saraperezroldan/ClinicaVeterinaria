@@ -31,6 +31,7 @@ import { ConfirmDeleteMascotaComponent } from './shared/confirm-delete-mascota/c
 import { InicioAdministradorComponent } from './pages/inicio-administrador/inicio-administrador.component';
 import { NuevoVeterinarioComponent } from './pages/nuevo-veterinario/nuevo-veterinario.component';
 import { ConfirmDeleteVeterinarioComponent } from './shared/confirm-delete-veterinario/confirm-delete-veterinario.component';
+import { InfoVeterinarioComponent } from './pages/info-veterinario/info-veterinario.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ConfirmDeleteVeterinarioComponent } from './shared/confirm-delete-veter
     ConfirmDeleteMascotaComponent,
     InicioAdministradorComponent,
     NuevoVeterinarioComponent,
-    ConfirmDeleteVeterinarioComponent
+    ConfirmDeleteVeterinarioComponent,
+    InfoVeterinarioComponent
   ],
   imports: [
     BrowserModule,

@@ -120,6 +120,7 @@ button {
   border-bottom: 1px solid #ccc;
   max-height: 100px;
   flex: none;
+  cursor: pointer;
 }
 
 .profile-image {

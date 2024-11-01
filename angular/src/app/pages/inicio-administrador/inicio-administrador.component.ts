@@ -63,10 +63,10 @@ export class InicioAdministradorComponent implements OnInit{
   }
 
   eliminarVeterinario(id: number): void {
-    const dialogRef = this.dialog.open(ConfirmDeleteVeterinarioComponent, { });
+    const dialogRef = this.dialog.open(ConfirmDeleteVeterinarioComponent, {});
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
+      if (result) {
         this.usuarioService.eliminarUsuario(id).subscribe(
           response => {
             console.log('Veterinario eliminado:', response);

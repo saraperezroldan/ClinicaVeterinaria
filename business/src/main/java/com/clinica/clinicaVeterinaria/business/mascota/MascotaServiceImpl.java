@@ -1,5 +1,6 @@
 package com.clinica.clinicaVeterinaria.business.mascota;
 
+import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioRepository;
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
@@ -20,6 +21,9 @@ public class MascotaServiceImpl implements IMascotaService{
 
     @Autowired
     private IMascotaRepository mascotaRepository;
+
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
 
     @Override
     public List<MascotaDTO> getMascotas() {

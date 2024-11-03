@@ -1,7 +1,7 @@
 import {Especie} from "./especie.model";
 
 export interface Raza {
-  idRaza: number;
+  idRaza: number | null;
   nombre: string;
   especie: Especie;
 }

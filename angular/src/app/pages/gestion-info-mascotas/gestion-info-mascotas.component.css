@@ -295,4 +295,46 @@ mat-radio-button {
     width: 68%;
 }
 
+.half-width select:focus {
+    outline: none;
+    border: 1px solid #8cb4d2;
+    box-shadow: none;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: white !important;
+}
+
+.half-width ng-select {
+    width: 68%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.half-width ng-select:focus {
+    outline: none;
+    border: 1px solid #8cb4d2;
+    box-shadow: none;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: white !important;
+}
+
+::ng-deep ng-select .ng-option {
+    padding: 10px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+::ng-deep ng-select .ng-option:hover {
+    background-color: #f0f8ff;
+    color: #333;
+}
+
+::ng-deep ng-select .ng-option.selected {
+    background-color: #8cb4d2;
+    color: white;
+}
 

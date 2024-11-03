@@ -13,7 +13,7 @@ export interface Mascota{
     fechaAlta: string;
     fechaModificacion: string;
     fechaBaja: string;
-    usuario: Usuario;
+    usuario: number;
     raza: Raza;
     activo : number;
 }

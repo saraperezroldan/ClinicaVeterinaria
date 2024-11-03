@@ -77,11 +77,29 @@
               <div class="row">
                 <div class="half-width">
                   <label for="especie">Especie</label>
-                  <input type="text" id="especie">
+                  <ng-select
+                          id="especie"
+                          name="especie"
+                          [(ngModel)]="mascota.raza.especie.idEspecie"
+                          [items]="especies"
+                          bindLabel="nombre"
+                          bindValue="idEspecie"
+                          (change)="onEspecieChange($event)"
+                          [searchable]="true">
+                  </ng-select>
                 </div>
                 <div class="half-width">
                   <label for="raza">Raza</label>
-                  <input type="text" id="raza">
+                  <ng-select
+                          id="raza"
+                          name="raza"
+                          [(ngModel)]="mascota.raza.idRaza"
+                          [items]="razaOptions"
+                          bindLabel="nombre"
+                          bindValue="idRaza"
+                          (change)="onRazaChange($event)"
+                          [searchable]="true">
+                  </ng-select>
                 </div>
               </div>
               <div class="row">
@@ -108,6 +126,14 @@
                 <div class="half-width">
                   <label for="genero">Genero</label>
                   <input type="text" id="genero">
+                </div>
+                <div class="half-width">
+                  <label for="complexion">Complexión</label>
+                  <select id="complexion" [(ngModel)]="mascota.complexion" name="complexion" required>
+                    <option value="Pequeño">Pequeño</option>
+                    <option value="Estándar">Estándar</option>
+                    <option value="Grande">Grande</option>
+                  </select>
                 </div>
               </div>
             </form>

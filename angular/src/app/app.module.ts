@@ -33,6 +33,7 @@ import { NuevoVeterinarioComponent } from './pages/nuevo-veterinario/nuevo-veter
 import { ConfirmDeleteVeterinarioComponent } from './shared/confirm-delete-veterinario/confirm-delete-veterinario.component';
 import { InfoVeterinarioComponent } from './pages/info-veterinario/info-veterinario.component';
 import { GestionInfoMascotasComponent } from './pages/gestion-info-mascotas/gestion-info-mascotas.component';
+import {NgSelectModule} from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { GestionInfoMascotasComponent } from './pages/gestion-info-mascotas/gest
     NuevoVeterinarioComponent,
     ConfirmDeleteVeterinarioComponent,
     InfoVeterinarioComponent,
-    GestionInfoMascotasComponent
+    GestionInfoMascotasComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +71,8 @@ import { GestionInfoMascotasComponent } from './pages/gestion-info-mascotas/gest
     MatFormFieldModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgSelectModule
   ],
   providers: [
     provideAnimationsAsync()

@@ -29,7 +29,7 @@ export class MascotaService {
   }
 
   editarMascota(mascota: Mascota) : Observable<any>{
-    return this.http.put(`${URLSERVER}mascota/modificarMascota`, mascota);
+    return this.http.post(`${URLSERVER}mascota/modificarMascota`, mascota);
   }
 
 }

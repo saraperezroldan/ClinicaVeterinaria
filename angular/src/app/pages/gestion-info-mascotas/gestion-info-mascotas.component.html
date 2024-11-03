@@ -36,11 +36,27 @@
                             <div class="row">
                                 <div class="half-width">
                                     <label for="especie">Especie</label>
-                                    <input type="text" id="especie" [(ngModel)]="mascota.raza.especie.nombre" name="especie" required>
+                                    <ng-select
+                                            id="especie"
+                                            name="especie"
+                                            [(ngModel)]="mascota.raza.especie.idEspecie"
+                                            (change)="onEspecieChange($event)">
+                                        <ng-option *ngFor="let especie of especies" [value]="especie.idEspecie">
+                                            {{ especie.nombre }}
+                                        </ng-option>
+                                    </ng-select>
                                 </div>
                                 <div class="half-width">
                                     <label for="raza">Raza</label>
-                                    <input type="text" id="raza" [(ngModel)]="mascota.raza.nombre" name="raza" required>
+                                    <ng-select
+                                            id="raza"
+                                            name="raza"
+                                            [(ngModel)]="mascota.raza.idRaza"
+                                            [disabled]="!razaOptions.length">
+                                        <ng-option *ngFor="let raza of razaOptions" [value]="raza.idRaza">
+                                            {{ raza.nombre }}
+                                        </ng-option>
+                                    </ng-select>
                                 </div>
                             </div>
                             <div class="row">

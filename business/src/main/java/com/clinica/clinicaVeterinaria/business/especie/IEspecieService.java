@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface IEspecieService {
 
-    public List<EspecieDTO> getEspecies();
+    List<EspecieDTO> getEspecies();
+
+    EspecieDTO getEspecieById(int idEspecie);
 }

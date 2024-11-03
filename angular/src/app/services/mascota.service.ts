@@ -24,4 +24,12 @@ export class MascotaService {
     return this.http.get<Mascota[]>(`${URLSERVER}mascota/getMascotasByIdUsuario/${id}`);
   }
 
+  eliminarMascota(id: number) : Observable<any>{
+    return this.http.delete(`${URLSERVER}mascota/eliminarMascota/${id}`);
+  }
+
+  editarMascota(mascota: Mascota) : Observable<any>{
+    return this.http.put(`${URLSERVER}mascota/modificarMascota`, mascota);
+  }
+
 }

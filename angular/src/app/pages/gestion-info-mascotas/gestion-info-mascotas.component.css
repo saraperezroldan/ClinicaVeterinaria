@@ -144,7 +144,23 @@ p{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: auto;
+    width: 60%;
+}
+
+.half-width input:focus {
+    outline: none;
+    border: 1px solid #8cb4d2;
+    box-shadow: none;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: white !important;
+}
+
+.half-width input:-webkit-autofill,
+.half-width input:-webkit-autofill:focus {
+    background-color: #FFF !important;
+    -webkit-box-shadow: 0 0 0px 1000px #FFF inset !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 mat-radio-group {
@@ -270,12 +286,13 @@ mat-radio-button {
     margin-top: 30px;
     float: right;
     margin-left: 20px;
-
 }
 
-
-
-
-
+.half-width select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 68%;
+}
 
 

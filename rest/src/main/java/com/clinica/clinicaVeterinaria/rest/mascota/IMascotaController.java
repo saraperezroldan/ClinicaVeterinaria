@@ -26,7 +26,7 @@ public interface IMascotaController {
     public ResponseEntity<MascotaDTO> crearMascota(@RequestBody MascotaDTO mascotaDTO);
 
     @PostMapping("modificarMascota")
-    public ResponseEntity<MascotaDTO> modificarMascota(MascotaDTO mascotaDTO);
+    public ResponseEntity<MascotaDTO> modificarMascota(@RequestBody MascotaDTO mascotaDTO);
 
     @DeleteMapping("eliminarMascota/{id}")
     public ResponseEntity<MascotaDTO> eliminarMascota(@PathVariable("id") int idMascota);

@@ -15,4 +15,5 @@ export interface Mascota{
     fechaBaja: string;
     usuario: Usuario;
     raza: Raza;
+    activo : number;
 }

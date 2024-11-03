@@ -11,11 +11,11 @@ export class ConfirmDeleteMascotaComponent {
   constructor(public dialogRef: MatDialogRef<ConfirmDeleteMascotaComponent>) { }
 
   onClose(){
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onSubmit(){
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
 }

@@ -46,7 +46,7 @@ public class MascotaDTO {
         mascotaDTO.setFechaNacimiento(mascota.getFechaNacimiento());
         mascotaDTO.setActivo(Math.max(mascota.getActivo(), 0));
         mascotaDTO.setFechaAlta(mascota.getFechaAlta()!= null ? mascota.getFechaAlta() : null);
-        mascotaDTO.setFechaModificacion(mascota.getFechaModificacion()!= null ? mascota.getFechaBaja() : null);
+        mascotaDTO.setFechaModificacion(mascota.getFechaModificacion()!= null ? mascota.getFechaModificacion() : null);
         mascotaDTO.setFechaBaja(mascota.getFechaBaja() != null ? mascota.getFechaBaja() : null);
         mascotaDTO.setUsuario(mascota.getUsuario() != null ? mascota.getUsuario().getIdUsuario() : null);
 

@@ -2,6 +2,7 @@ package com.clinica.clinicaVeterinaria.business.mascota;
 
 import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioRepository;
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.RazaDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
@@ -78,12 +79,15 @@ public class MascotaServiceImpl implements IMascotaService{
     @Override
     public MascotaDTO crearMascota(MascotaDTO mascotaDTO) {
         Mascota mascotaNuevo = MascotaDTO.toDomain(mascotaDTO);
-        validarMascota(mascotaNuevo);
+        if (mascotaNuevo == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mascota.noEncontrado");
+        }
+        //validarMascota(mascotaNuevo);
 
-        Mascota mascotaOld = mascotaRepository.findMascotaById(mascotaNuevo.getIdMascota());
+        /*Mascota mascotaOld = mascotaRepository.findMascotaById(mascotaNuevo.getIdMascota());
         if (mascotaOld != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mascota.yaExisteUsuario");
-        }
+        }*/
         mascotaNuevo.setFechaAlta(new Date());
         mascotaRepository.save(mascotaNuevo);
 
@@ -101,6 +105,9 @@ public class MascotaServiceImpl implements IMascotaService{
         mascotaUpdate.setGenero(mascotaDTO.getGenero());
         mascotaUpdate.setComplexion(mascotaDTO.getComplexion());
         mascotaUpdate.setFechaNacimiento(mascotaDTO.getFechaNacimiento());
+        mascotaUpdate.setPeso(mascotaDTO.getPeso());
+        mascotaUpdate.setRaza(RazaDTO.toDomain(mascotaDTO.getRaza()));
+
         String edad = Utils.calcularEdadEnAniosYMeses(Utils.convertirDateALocalDate(mascotaDTO.getFechaNacimiento()));
         System.out.println(edad);
         mascotaUpdate.setFechaModificacion(new Date());

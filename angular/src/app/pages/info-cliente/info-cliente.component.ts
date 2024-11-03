@@ -32,7 +32,8 @@ export class InfoClienteComponent implements OnInit {
         if (this.cliente && this.cliente.idUsuario) {
           this.mascotaService.getMascotasByUsuarioId(this.cliente.idUsuario).subscribe(
             (mascotas) => {
-              this.dataSource.data = mascotas; // Asigna las mascotas a la tabla
+              const mascotasActivas = mascotas.filter(mascota => mascota.activo === 1);
+              this.dataSource.data = mascotasActivas;
             },
             (error) => {
               console.error('Error al buscar mascotas', error);
@@ -50,12 +51,8 @@ export class InfoClienteComponent implements OnInit {
     this.router.navigate(['/usuario/nueva-mascota']);
   }
 
-  eliminarMascota(id:number){
-    const dialogRef = this.dialog.open(ConfirmDeleteMascotaComponent, { });
-  }
-
   goBack(){
-    this.router.navigate(['/usuario/inicio-veterinario']);
+    window.history.back();
   }
 
   editarCliente(){
@@ -67,6 +64,25 @@ export class InfoClienteComponent implements OnInit {
         console.error("Error al actualizar el cliente:", error);
       }
     );
+  }
+
+  eliminarMascota(id:number){
+    const dialogRef = this.dialog.open(ConfirmDeleteMascotaComponent, { });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.mascotaService.eliminarMascota(id).subscribe(
+            response => {
+              console.log('Mascota eliminada:', response);
+              alert('La mascota ha sido eliminada correctamente');
+                this.ngOnInit();
+            },
+            error => {
+              console.error('Error al eliminar la mascota:', error);
+            }
+        );
+      }
+    });
   }
 
 

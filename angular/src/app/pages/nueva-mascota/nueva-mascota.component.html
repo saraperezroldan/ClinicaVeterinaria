@@ -1,60 +1,63 @@
-<div class="container">
-
-  <div class="profile-section">
-    <img alt="Profile Image" class="profile-image" src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg">
+<div class="main-container">
+  <div class="icon-container">
+    <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
   </div>
 
+  <div class="container">
 
-  <div class="container-data">
-    <h2>Nueva mascota</h2>
+    <div class="profile-section">
+      <img alt="Profile Image" class="profile-image" src="https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg">
+    </div>
 
-    <div class="subcontainer">
-      <div class="details-section">
-        <form>
-          <div class="row">
-            <div class="half-width">
-              <label for="especie">Especie</label>
-              <input type="text" id="especie">
+
+    <div class="container-data">
+      <h2>Nueva mascota</h2>
+
+      <div class="subcontainer">
+        <div class="details-section">
+          <form>
+            <div class="row">
+              <div class="half-width">
+                <label for="especie">Especie</label>
+                <input type="text" id="especie">
+              </div>
+              <div class="half-width">
+                <label for="raza">Raza</label>
+                <input type="text" id="raza">
+              </div>
             </div>
-            <div class="half-width">
-              <label for="raza">Raza</label>
-              <input type="text" id="raza">
+            <div class="row">
+              <div class="half-width">
+                <label for="nombreAnimal">Nombre</label>
+                <input type="text" id="nombreAnimal">
+              </div>
+              <div class="half-width">
+                <label for="peso">Peso</label>
+                <input type="text" id="peso">
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="nombreAnimal">Nombre</label>
-              <input type="text" id="nombreAnimal">
+            <div class="row">
+              <div class="half-width">
+                <label for="edad">Edad</label>
+                <input type="text" id="edad">
+              </div>
+              <div class="half-width">
+                <label for="fechaNacimiento">Nacimiento</label>
+                <input type="text" id="fechaNacimiento">
+              </div>
             </div>
-            <div class="half-width">
-              <label for="peso">Peso</label>
-              <input type="text" id="peso">
+            <div class="row">
+              <div class="half-width">
+                <label for="genero">Genero</label>
+                <input type="text" id="genero">
+              </div>
+              <div>
+                <button class="save-button">Guardar</button>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="edad">Edad</label>
-              <input type="text" id="edad">
-            </div>
-            <div class="half-width">
-              <label for="fechaNacimiento">Nacimiento</label>
-              <input type="text" id="fechaNacimiento">
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="genero">Genero</label>
-              <input type="text" id="genero">
-            </div>
-            <div>
-              <button class="save-button">Guardar</button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
-
-

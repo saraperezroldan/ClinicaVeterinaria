@@ -180,17 +180,18 @@ mat-radio-button {
 }
 
 .icon-container{
-  width: 60px;
-  height: 60px;
+  width: auto;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: visible;
   position: absolute;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .back-icon {
-  font-size: 38px;
+  font-size: 35px;
   cursor: pointer;
   color: #8cb4d2;
   padding: 7px;
@@ -198,6 +199,12 @@ mat-radio-button {
 
 .back-icon:hover {
   color: #5597c9;
+}
+
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  margin: auto;
 }
 
 

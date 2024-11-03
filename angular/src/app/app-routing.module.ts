@@ -12,6 +12,7 @@ import {NuevaMascotaComponent} from "./pages/nueva-mascota/nueva-mascota.compone
 import {InicioAdministradorComponent} from "./pages/inicio-administrador/inicio-administrador.component";
 import {NuevoVeterinarioComponent} from "./pages/nuevo-veterinario/nuevo-veterinario.component";
 import {InfoVeterinarioComponent} from "./pages/info-veterinario/info-veterinario.component";
+import {GestionInfoMascotasComponent} from "./pages/gestion-info-mascotas/gestion-info-mascotas.component";
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'info-veterinario/:idUsuario',
         component: InfoVeterinarioComponent
+      },
+      {
+        path: 'gestion-info-mascota/:idMascota',
+        component : GestionInfoMascotasComponent
       }
     ]
   },

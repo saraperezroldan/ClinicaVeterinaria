@@ -112,3 +112,30 @@ p{
   width: 100px;
   margin-top: 10px;
 }
+
+.icon-container{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.back-icon {
+  font-size: 35px;
+  cursor: pointer;
+  color: #8cb4d2;
+  padding: 7px;
+}
+
+.back-icon:hover {
+  color: #5597c9;
+}
+
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  margin: auto;
+}

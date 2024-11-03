@@ -1,82 +1,83 @@
-<div class="icon-container">
-  <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
-</div>
-
-<div class="container">
-  <div class="foto-perfil">
-    <div class="profile-section">
-      <img [src]="mascota.imagen" alt="Profile Image" class="profile-image">
-    </div>
-    <button class="btn-change">Cambiar</button>
+<div class="main-container">
+  <div class="icon-container">
+    <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
   </div>
 
-  <div class="container-data">
-    <h2>Datos de la mascota</h2>
-
-    <div class="subcontainer">
-      <div class="details-section">
-        <form>
-          <div class="half-width">
-            <label for="name">Nombre</label>
-            <input type="text" id="name" [value]="mascota.nombre" disabled>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="especie">Especie</label>
-              <input type="text" id="especie" [value]="mascota.raza.especie.nombre" disabled>
-            </div>
-            <div class="half-width">
-              <label for="raza">Raza</label>
-              <input type="text" id="raza" [value]="mascota.raza.nombre" disabled>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="edad">Edad</label>
-              <input type="text" id="edad" [value]="(mascota.edad || 0) | edadFormat" disabled>
-            </div>
-            <div class="half-width">
-              <label for="peso">Peso</label>
-              <input type="text" id="peso" [value]="mascota.peso + 'kg'" disabled>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="fecha-nacimiento">Nacimiento</label>
-              <input type="text" id="fecha-nacimiento" [value]="(mascota.fechaNacimiento || '') | dateFormat" disabled>
-            </div>
-            <div class="half-width">
-              <label for="fecha-alta">Fecha alta</label>
-              <input type="text" id="fecha-alta" [value]="(mascota.fechaAlta || '') | dateFormat" disabled>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label>Genero</label>
-              <mat-radio-group>
-                <mat-radio-button value="M" class="custom-radio" checked>M</mat-radio-button>
-                <mat-radio-button value="H" class="custom-radio">H</mat-radio-button>
-              </mat-radio-group>
-            </div>
-            <div class="half-width">
-              <label for="complexion">Complexión</label>
-              <input type="text" id="complexion" [value]="(mascota.complexion)" disabled>
-            </div>
-          </div>
-        </form>
+  <div class="container">
+    <div class="foto-perfil">
+      <div class="profile-section">
+        <img [src]="mascota.imagen" alt="Profile Image" class="profile-image">
       </div>
-      <div class="right-section">
-        <div class="imagen-section">
-          <img src="../../../assets/images/Imagen1.png" class="imagen"/>
-          <p>Historial clínico</p>
-        </div>
+      <button class="btn-change">Cambiar</button>
+    </div>
 
-        <div class="imagen-section">
+    <div class="container-data">
+      <h2>Datos de la mascota</h2>
+
+      <div class="subcontainer">
+        <div class="details-section">
+          <form>
+            <div class="half-width">
+              <label for="name">Nombre</label>
+              <input type="text" id="name" [value]="mascota.nombre" disabled>
+            </div>
+            <div class="row">
+              <div class="half-width">
+                <label for="especie">Especie</label>
+                <input type="text" id="especie" [value]="mascota.raza.especie.nombre" disabled>
+              </div>
+              <div class="half-width">
+                <label for="raza">Raza</label>
+                <input type="text" id="raza" [value]="mascota.raza.nombre" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <div class="half-width">
+                <label for="edad">Edad</label>
+                <input type="text" id="edad" [value]="(mascota.edad || 0) | edadFormat" disabled>
+              </div>
+              <div class="half-width">
+                <label for="peso">Peso</label>
+                <input type="text" id="peso" [value]="mascota.peso + 'kg'" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <div class="half-width">
+                <label for="fecha-nacimiento">Nacimiento</label>
+                <input type="text" id="fecha-nacimiento" [value]="(mascota.fechaNacimiento || '') | dateFormat" disabled>
+              </div>
+              <div class="half-width">
+                <label for="fecha-alta">Fecha alta</label>
+                <input type="text" id="fecha-alta" [value]="(mascota.fechaAlta || '') | dateFormat" disabled>
+              </div>
+            </div>
+            <div class="row">
+              <div class="half-width">
+                <label>Genero</label>
+                <mat-radio-group>
+                  <mat-radio-button value="M" class="custom-radio" checked>M</mat-radio-button>
+                  <mat-radio-button value="H" class="custom-radio">H</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="half-width">
+                <label for="complexion">Complexión</label>
+                <input type="text" id="complexion" [value]="(mascota.complexion)" disabled>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="right-section">
+          <div class="imagen-section">
+            <img src="../../../assets/images/Imagen1.png" class="imagen"/>
+            <p>Historial clínico</p>
+          </div>
+
+          <div class="imagen-section">
             <img src="../../../assets/images/Imagen2.png" class="imagen"/>
-          <p>Próximos tratamientos</p>
+            <p>Próximos tratamientos</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

@@ -16,7 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class InfoClienteComponent implements OnInit {
 
-  cliente : Usuario | undefined;
+  cliente! : Usuario;
   displayedColumns: string[] = ['idMascota','nombre', 'especie', 'raza', 'fechaAlta', 'acciones'];
   dataSource: MatTableDataSource<Mascota> = new MatTableDataSource<Mascota>([]);
 
@@ -52,6 +52,21 @@ export class InfoClienteComponent implements OnInit {
 
   eliminarMascota(id:number){
     const dialogRef = this.dialog.open(ConfirmDeleteMascotaComponent, { });
+  }
+
+  goBack(){
+    this.router.navigate(['/usuario/inicio-veterinario']);
+  }
+
+  editarCliente(){
+    this.usuarioService.editarUsuario(this.cliente).subscribe(
+      () => {
+        alert("Cliente actualizado con éxito");
+      },
+      (error) => {
+        console.error("Error al actualizar el cliente:", error);
+      }
+    );
   }
 
 

@@ -121,5 +121,41 @@ h2 {
   align-items: flex-end;
 }
 
+.icon-container{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.back-icon {
+  font-size: 35px;
+  cursor: pointer;
+  color: #8cb4d2;
+  padding: 7px;
+}
+
+.back-icon:hover {
+  color: #5597c9;
+}
+
+.main-container {
+  display: flex;
+  align-items: flex-start;
+  margin: auto;
+}
+
+.data-containers{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+
 
 

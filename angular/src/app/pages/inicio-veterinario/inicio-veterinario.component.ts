@@ -23,7 +23,7 @@ export class InicioVeterinarioComponent implements OnInit{
   public dataSource = new MatTableDataSource<Usuario>();
   public displayedColumns: string[] = ['idUsuario', 'nombre', 'apellidos', 'dni', 'telefono', 'email', 'fechaAlta', 'acciones'];
 
-  ngOnInit( ): void {
+  ngOnInit(): void {
     const usuarioJSON = localStorage.getItem('currentUser');
     if(usuarioJSON){
       this.veterinario = JSON.parse(usuarioJSON);
@@ -35,13 +35,20 @@ export class InicioVeterinarioComponent implements OnInit{
     if (this.searchDNI) {
       this.usuarioService.getUsuarioByDNI(this.searchDNI).subscribe(
         (data) => {
-          this.usuario = data;
-          this.searchDNI = '';
-          this.errorMensaje = '';
+          if(data.activo === 1){
+            this.usuario = data;
+            this.searchDNI = '';
+            this.errorMensaje = '';
+          }else{
+            this.errorMensaje = 'No se ha encontrado ningún cliente con ese DNI';
+            this.usuario = undefined;
+          }
+
         },
         (error) => {
           console.error('Error al buscar cliente', error);
           this.errorMensaje = 'No se ha encontrado ningún cliente con ese DNI';
+          this.usuario = undefined;
         }
       );
     }
@@ -51,9 +58,29 @@ export class InicioVeterinarioComponent implements OnInit{
     this.router.navigate(['/usuario/nuevo-cliente']);
   }
 
-  eliminarUsuario(id: number): void {
+  eliminarUsuario(): void {
     const dialogRef = this.dialog.open(ConfirmDeleteClienteComponent, { });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if(this.usuario)
+        {
+            this.usuarioService.eliminarUsuario(this.usuario.idUsuario).subscribe(
+                response => {
+                    console.log('Cliente eliminado:', response);
+                    alert('El cliente ha sido eliminado correctamente');
+                    this.usuario = undefined;
+                },
+                error => {
+                    console.error('Error al eliminar el cliente:', error);
+                }
+            );
+        }
+
+      }
+    });
   }
+
+
 
 
 }

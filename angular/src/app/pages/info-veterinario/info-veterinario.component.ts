@@ -11,28 +11,7 @@ import {Mascota} from "../../models/mascota.model";
 })
 export class InfoVeterinarioComponent implements OnInit{
 
-  usuario: Usuario = {
-    idUsuario: 0,
-    nombre: '',
-    apellidos: '',
-    dni: '',
-    email: '',
-    password: 'password',
-    telefono: '',
-    direccion: '',
-    poblacion: '',
-    provincia: '',
-    codigoPostal: '',
-    fechaNacimiento: '',
-    imagen: "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg",
-    fechaAlta: new Date().toISOString(),
-    fechaModificacion: '',
-    fechaBaja: '',
-    rol: 2,
-    activo: 1
-  };
-
-  veterinario! : Usuario;
+  usuario! : Usuario;
   idUsuario! : number;
 
   constructor(private usuarioService: UsuarioService, private route : ActivatedRoute, private ruta : Router) { }

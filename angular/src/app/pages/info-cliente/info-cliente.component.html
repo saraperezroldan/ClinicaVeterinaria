@@ -1,123 +1,129 @@
-<div class="container">
-
-  <div class="profile-section">
-    <img [src]="cliente?.imagen" alt="Profile Image" class="profile-image">
+<div class="main-container">
+  <div class="icon-container">
+    <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
   </div>
 
+  <div class="data-containers">
+    <div class="container">
 
-  <div class="container-data">
-    <h2>Datos Personales de {{cliente?.nombre}}</h2>
-
-    <div class="subcontainer">
-      <div class="details-section">
-        <form>
-          <div class="row">
-            <div class="half-width">
-              <label for="idCliente">IdCliente</label>
-              <input type="text" id="idCliente" [value]="cliente?.idUsuario" disabled>
-            </div>
-            <div class="half-width">
-              <label for="direccion">Dirección</label>
-              <input type="text" id="direccion" [value]="cliente?.direccion" disabled>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" [value]="cliente?.nombre" disabled>
-            </div>
-            <div class="half-width">
-              <label for="poblacion">Población</label>
-              <input type="text" id="poblacion" [value]="cliente?.poblacion" disabled>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="apellidos">Apellidos</label>
-              <input type="text" id="apellidos" [value]="cliente?.apellidos" disabled>
-            </div>
-            <div class="half-width">
-              <label for="codigo-postal">Código postal</label>
-              <input type="text" id="codigo-postal" [value]="cliente?.codigoPostal" disabled>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="dni">DNI</label>
-              <input type="text" id="dni" [value]="cliente?.dni" disabled>
-            </div>
-            <div class="half-width">
-              <label for="email">Email</label>
-              <input type="text" id="email" [value]="(cliente?.email)" disabled>
-            </div>
-          </div>
-          <div class="row">
-            <div class="half-width">
-              <label for="telefono">Teléfono</label>
-              <input type="text" id="telefono" [value]="(cliente?.telefono)" disabled>
-            </div>
-            <button class="save-button">Guardar</button>
-          </div>
-        </form>
+      <div class="profile-section">
+        <img [src]="cliente?.imagen" alt="Profile Image" class="profile-image">
       </div>
+
+
+      <div class="container-data">
+        <h2>Datos Personales de {{cliente?.nombre}}</h2>
+
+        <div class="subcontainer">
+          <div class="details-section">
+            <form>
+              <div class="row">
+                <div class="half-width">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombre" [(ngModel)]="cliente.nombre" name="nombre" required>
+                </div>
+                <div class="half-width">
+                  <label for="apellidos">Apellidos</label>
+                  <input type="text" id="apellidos" [(ngModel)]="cliente.apellidos" name="apellidos" required>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="half-width">
+                  <label for="dni">DNI</label>
+                  <input type="text" id="dni" [(ngModel)]="cliente.dni" name="dni" required>
+                </div>
+                <div class="half-width">
+                  <label for="telefono">Teléfono</label>
+                  <input type="text" id="telefono" [(ngModel)]="cliente.telefono" name="telefono" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="half-width">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" [(ngModel)]="cliente.email" name="email" required>
+                </div>
+                <div class="half-width">
+                  <label for="direccion">Dirección</label>
+                  <input type="text" id="direccion" [(ngModel)]="cliente.direccion" name="direccion" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="half-width">
+                  <label for="poblacion">Población</label>
+                  <input type="text" id="poblacion" [(ngModel)]="cliente.poblacion" name="poblacion" required>
+                </div>
+                <div class="half-width">
+                  <label for="codigo-postal">Código postal</label>
+                  <input type="text" id="codigo-postal" [(ngModel)]="cliente.codigoPostal" name="codigoPostal" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="half-width">
+                  <label for="provincia">Provincia</label>
+                  <input type="text" id="provincia" [(ngModel)]="cliente.provincia" name="provincia" required>
+                </div>
+                <button type="submit" class="save-button" (click)="editarCliente()">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="container-mascotas">
+      <h2>   Información de las mascotas</h2>
+      <div class="table-contenedor">
+        <table mat-table [dataSource]="dataSource" class="table">
+
+          <ng-container matColumnDef="idMascota">
+            <th mat-header-cell *matHeaderCellDef> idMascota </th>
+            <td mat-cell *matCellDef="let element">
+              <a [routerLink]="['/usuario/gestion-info-mascota', element.idMascota]"> {{element.idMascota}} </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="especie">
+            <th mat-header-cell *matHeaderCellDef> Especie </th>
+            <td mat-cell *matCellDef="let element"> {{element.raza.especie.nombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="raza">
+            <th mat-header-cell *matHeaderCellDef> Raza </th>
+            <td mat-cell *matCellDef="let element"> {{element.raza.nombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fechaAlta">
+            <th mat-header-cell *matHeaderCellDef> Fecha alta </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaAlta | date:"shortDate"}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="contenedorIconos">
+                <div class="material-icon-editar">
+                  <span class="material-icons">edit</span>
+                </div>
+                <div class="material-icon-eliminar">
+                  <span class="material-icons" (click)="eliminarMascota(element)">delete</span>
+                </div>
+              </div>
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <button class="add-mascota-button" (click)="nuevaMascota()">Nueva mascota</button>
     </div>
   </div>
-
 </div>
-<div class="container-mascotas">
-  <h2>   Información de las mascotas</h2>
-  <div class="table-contenedor">
-    <table mat-table [dataSource]="dataSource" class="table">
-
-      <ng-container matColumnDef="idMascota">
-        <th mat-header-cell *matHeaderCellDef> idMascota </th>
-        <td mat-cell *matCellDef="let element">
-          <a [routerLink]="['/usuario/info-mascota', element.idMascota]"> {{element.idMascota}} </a>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="especie">
-        <th mat-header-cell *matHeaderCellDef> Especie </th>
-        <td mat-cell *matCellDef="let element"> {{element.raza.especie.nombre}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="raza">
-        <th mat-header-cell *matHeaderCellDef> Raza </th>
-        <td mat-cell *matCellDef="let element"> {{element.raza.nombre}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="fechaAlta">
-        <th mat-header-cell *matHeaderCellDef> Fecha alta </th>
-        <td mat-cell *matCellDef="let element"> {{element.fechaAlta | date:"shortDate"}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let element">
-          <div class="contenedorIconos">
-            <div class="material-icon-editar">
-              <span class="material-icons">edit</span>
-            </div>
-            <div class="material-icon-eliminar">
-              <span class="material-icons" (click)="eliminarMascota(element)">delete</span>
-            </div>
-          </div>
-
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
-
-  <button class="add-mascota-button" (click)="nuevaMascota()">Nueva mascota</button>
-</div>
-
-
-

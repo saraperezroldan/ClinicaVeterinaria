@@ -1,10 +1,12 @@
 package com.clinica.clinicaVeterinaria.business.mascota;
 
+import com.clinica.clinicaVeterinaria.business.raza.IRazaRepository;
 import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioRepository;
+
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
-import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
+import com.clinica.clinicaVeterinaria.domain.entities.Raza;
 import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
 import com.clinica.clinicaVeterinaria.domain.filtros.MascotaFiltroDTO;
 import com.clinica.clinicaVeterinaria.domain.utils.Utils;
@@ -12,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +29,9 @@ public class MascotaServiceImpl implements IMascotaService{
 
     @Autowired
     private IUsuarioRepository usuarioRepository;
+
+    @Autowired
+    private IRazaRepository razaRepository;
 
     @Override
     public List<MascotaDTO> getMascotas() {
@@ -82,10 +90,21 @@ public class MascotaServiceImpl implements IMascotaService{
 
         Mascota mascotaOld = mascotaRepository.findMascotaById(mascotaNuevo.getIdMascota());
         if (mascotaOld != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mascota.yaExisteUsuario");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mascota.yaExisteMascota");
         }
+        Usuario usuario = usuarioRepository.findUsuarioById(mascotaNuevo.getUsuario().getIdUsuario());
+        if (usuario == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontrado");
+        }
+        Raza raza = razaRepository.findRazaById(mascotaNuevo.getRaza().getIdRaza());
+        if (raza == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "raza.noEncontrado");
+        }
+        mascotaNuevo.getRaza().setIdRaza(raza.getIdRaza());
+        mascotaNuevo.getUsuario().setFechaAlta(usuario.getFechaAlta());
+        mascotaNuevo.getUsuario().setRol(usuario.getRol());
         mascotaNuevo.setFechaAlta(new Date());
-        mascotaRepository.save(mascotaNuevo);
+        mascotaRepository.saveAndFlush(mascotaNuevo);
 
         return MascotaDTO.toDTO(mascotaNuevo);
     }

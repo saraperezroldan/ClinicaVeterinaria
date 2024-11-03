@@ -23,7 +23,7 @@ public class MascotaDTO {
     private Date fechaModificacion;
     private Date fechaBaja;
     private Integer usuario;
-    private RazaDTO raza;
+    private Integer raza;
 
     public MascotaDTO(){}
 
@@ -45,14 +45,15 @@ public class MascotaDTO {
         mascotaDTO.setImagen(StringUtils.hasText(mascota.getImagen()) ? mascota.getImagen().trim() : "");
         mascotaDTO.setFechaNacimiento(mascota.getFechaNacimiento());
         mascotaDTO.setActivo(Math.max(mascota.getActivo(), 0));
-        mascotaDTO.setFechaAlta(mascota.getFechaAlta()!= null ? mascota.getFechaAlta() : null);
+        mascotaDTO.setFechaAlta(mascota.getFechaAlta()!= null ? mascota.getFechaAlta() : new Date());
         mascotaDTO.setFechaModificacion(mascota.getFechaModificacion()!= null ? mascota.getFechaBaja() : null);
         mascotaDTO.setFechaBaja(mascota.getFechaBaja() != null ? mascota.getFechaBaja() : null);
         mascotaDTO.setUsuario(mascota.getUsuario() != null ? mascota.getUsuario().getIdUsuario() : null);
+        mascotaDTO.setRaza(mascota.getRaza() != null ? mascota.getRaza().getIdRaza() : null);
 
-        if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RazaDTO.class)){
+        /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(RazaDTO.class)){
             mascotaDTO.setRaza(RazaDTO.toDTO(mascota.getRaza()));
-        }
+        }*/
 
         /*if(!CollectionUtils.isEmpty(includeRelacion) && includeRelacion.contains(UsuarioDTO.class)){
             mascotaDTO.setUsuario(UsuarioDTO.toDTO(mascota.getUsuario()));
@@ -87,7 +88,7 @@ public class MascotaDTO {
             return null;
         }
 
-        mascota.setIdMascota(Math.max(mascotaDTO.getIdMascota(), 0));
+        mascota.setIdMascota(mascotaDTO.getIdMascota());
         mascota.setNombre(StringUtils.hasText(mascotaDTO.getNombre()) ? mascotaDTO.getNombre().trim() : "");
         mascota.setEdad(Math.max(mascotaDTO.getEdad(), 0));
         mascota.setPeso(mascotaDTO.getPeso() > 0 ? mascotaDTO.getPeso() : 0);
@@ -96,13 +97,17 @@ public class MascotaDTO {
         mascota.setImagen(StringUtils.hasText(mascotaDTO.getImagen()) ? mascotaDTO.getImagen().trim() : "");
         mascota.setFechaNacimiento(mascotaDTO.getFechaNacimiento() != null ? mascotaDTO.getFechaNacimiento() : null);
         mascota.setActivo(Math.max(mascotaDTO.getActivo(), 1));
-        mascota.setFechaAlta(mascotaDTO.getFechaAlta()!= null ? mascotaDTO.getFechaAlta() : null);
+        mascota.setFechaAlta(mascotaDTO.getFechaAlta() != null ? mascotaDTO.getFechaAlta() : new Date());
         mascota.setFechaModificacion(mascotaDTO.getFechaModificacion() != null ? mascotaDTO.getFechaModificacion() : null);
         mascota.setFechaBaja(mascotaDTO.getFechaBaja()!= null ? mascotaDTO.getFechaBaja() : null);
-        mascota.setRaza(RazaDTO.toDomain(mascotaDTO.getRaza()));
+        //mascota.setRaza(RazaDTO.toDomain(mascotaDTO.getRaza()));
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(mascotaDTO.getUsuario());
         mascota.setUsuario(usuario);
+
+        Raza raza = new Raza();
+        raza.setIdRaza(mascotaDTO.getRaza());
+        mascota.setRaza(raza);
 
         return mascota;
     }
@@ -143,6 +148,6 @@ public class MascotaDTO {
     public void setFechaBaja(Date fechaBaja) {this.fechaBaja = fechaBaja;}
     public Integer getUsuario() {return usuario;}
     public void setUsuario(Integer usuario) {this.usuario = usuario;}
-    public RazaDTO getRaza() {return raza;}
-    public void setRaza(RazaDTO raza) {this.raza = raza;}
+    public Integer getRaza() {return raza;}
+    public void setRaza(Integer raza) {this.raza = raza;}
 }

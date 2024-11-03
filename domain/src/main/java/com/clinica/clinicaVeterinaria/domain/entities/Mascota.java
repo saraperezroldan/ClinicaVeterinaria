@@ -17,6 +17,7 @@ public class Mascota {
     private String complexion;
     private int activo;
     private Date fechaNacimiento;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaAlta;
     private Date fechaModificacion;
     private Date fechaBaja;

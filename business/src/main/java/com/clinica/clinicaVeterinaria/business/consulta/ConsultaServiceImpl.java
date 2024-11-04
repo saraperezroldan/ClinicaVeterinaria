@@ -2,11 +2,11 @@ package com.clinica.clinicaVeterinaria.business.consulta;
 
 import com.clinica.clinicaVeterinaria.domain.dtos.ConsultaDTO;
 import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
-import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +46,7 @@ public class ConsultaServiceImpl implements IConsultaService{
         if (consultaEncontrada != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.yaExisteConsulta");
         }
+        validarConsulta(consultaNueva);
         consultaNueva.setFechaAlta(new Date());
         consultaRepository.save(consultaNueva);
 
@@ -82,5 +83,11 @@ public class ConsultaServiceImpl implements IConsultaService{
         }
     }
     private void validarConsulta(Consulta consulta) {
+        LocalDate fechaCita = consulta.getFechaCita();
+        LocalDate fechaActual = LocalDate.now();
+        if (fechaCita.isBefore(fechaActual)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.fechaCitaPasada");
+        }
+
     }
 }

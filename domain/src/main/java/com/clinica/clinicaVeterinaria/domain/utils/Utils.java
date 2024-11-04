@@ -1,9 +1,12 @@
 package com.clinica.clinicaVeterinaria.domain.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Locale;
 
 public class Utils {
 
@@ -31,5 +34,46 @@ public class Utils {
         } else {
             throw new IllegalArgumentException("La fecha de nacimiento no puede ser futura o nula");
         }
+    }
+    /**
+     * Devuelve la fecha actual como un String con el formato que se indique.
+     * @return Fecha actual como un String con el formato que se indique.
+     */
+    public static String convertToDateFormatted(Date date, String pattern) {
+        SimpleDateFormat formato = new SimpleDateFormat(pattern);
+        String fechaAhoraFormateada = formato.format(new Date());
+
+        return fechaAhoraFormateada;
+    }
+    /**
+     * Parsea / valida a un tipo de dato fecha a partir de una cadena formateada de fecha
+     * @param dateFormatted Cadena con la fecha formateada
+     * @param pattern Patrón de fecha
+     * @return Date con la fecha
+     * @throws ParseException Excepción que se lanzará cuando el patrón no coincida con una fecha.
+     */
+    public static Date parseDate(String dateFormatted, String pattern) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
+        dateFormat.setLenient(false);
+        Date date = dateFormat.parse(dateFormatted);
+        return date;
+    }
+
+    /**
+     * Compara un rango de fechas con formato y devuelve:
+     * 	1. El valor 0 si el argumento dateInitialFormatted es igual a dateFinishFormatted.
+     *  2. Un valor menor que 0 si dateInitialFormatted es anterior al argumento dateFinishFormatted.
+     *  3. Un valor mayor que 0 si dateInitialFormatted es posterior al argumento dateFinishFormatted.
+     * @param dateFromFormatted Cadena de fecha desde
+     * @param dateUntilFormatted  Cadena de fecha hasta
+     * @param pattern			   Patrón de fecha del rango de fechas
+     * @return
+     * @throws ParseException Excepción si alguna de las fechas no es parseable.
+     */
+    public static Integer compareDatesFormatted(String dateFromFormatted, String dateUntilFormatted, String pattern) throws ParseException {
+        Date dateFrom = parseDate(dateFromFormatted, pattern);
+        Date dateUntil = parseDate(dateUntilFormatted, pattern);
+
+        return dateFrom.compareTo(dateUntil);
     }
 }

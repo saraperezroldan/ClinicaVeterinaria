@@ -1,6 +1,7 @@
 package com.clinica.clinicaVeterinaria.domain.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public class Consulta {
     private String observaciones;
     private String motivo;
     private Date fechaAlta;
-    private Date fechaCita;
+    private LocalDate fechaCita;
     private Date fechaUltima;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,7 +26,7 @@ public class Consulta {
 
     public Consulta() {}
 
-    public Consulta(int idConsulta, String observaciones, String motivo, Date fechaCita, Date fechaAlta, Date fechaUltima, Mascota mascota) {
+    public Consulta(int idConsulta, String observaciones, String motivo, LocalDate fechaCita, Date fechaAlta, Date fechaUltima, Mascota mascota) {
         this.idConsulta = idConsulta;
         this.observaciones = observaciones;
         this.motivo = motivo;
@@ -47,9 +48,9 @@ public class Consulta {
 
     public void setMotivo(String motivo) {this.motivo = motivo;}
 
-    public Date getFechaCita() {return fechaCita;}
+    public LocalDate getFechaCita() {return fechaCita;}
 
-    public void setFechaCita(Date fechaCita) {this.fechaCita = fechaCita;}
+    public void setFechaCita(LocalDate fechaCita) {this.fechaCita = fechaCita;}
 
     public Date getFechaAlta() {return fechaAlta;}
 

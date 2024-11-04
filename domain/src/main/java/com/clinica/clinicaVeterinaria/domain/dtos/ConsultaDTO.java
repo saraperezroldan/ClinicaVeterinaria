@@ -4,6 +4,7 @@ import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
 import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -14,7 +15,7 @@ public class ConsultaDTO {
     private int idConsulta;
     private String motivo;
     private String observaciones;
-    private Date fechaCita;
+    private LocalDate fechaCita;
     private Date fechaAlta;
     private Date fechaUltima;
     private Integer mascota;
@@ -127,11 +128,11 @@ public class ConsultaDTO {
         this.motivo = motivo;
     }
 
-    public Date getFechaCita() {
+    public LocalDate getFechaCita() {
         return fechaCita;
     }
 
-    public void setFechaCita(Date fechaCita) {
+    public void setFechaCita(LocalDate fechaCita) {
         this.fechaCita = fechaCita;
     }
 

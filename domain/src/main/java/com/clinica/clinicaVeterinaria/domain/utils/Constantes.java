@@ -2,6 +2,12 @@ package com.clinica.clinicaVeterinaria.domain.utils;
 
 public class Constantes {
 
+    //GENERAL
+    public static final String DATE_PATTERN = "dd/MM/yyyy";
+    public static final String TIME_PATTERN = "HHmmss";
+    public static final String DATE_TIME_PATTERN = DATE_PATTERN + TIME_PATTERN;
+    public static final String EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
     /* USUARIO */
     public static int USUARIO_NOMBRE_MAX = 50;
     public static int USUARIO_APELLIDOS_MAX = 100;

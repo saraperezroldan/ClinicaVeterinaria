@@ -1,6 +1,8 @@
 package com.clinica.clinicaVeterinaria.business.usuario;
 
+import com.clinica.clinicaVeterinaria.business.rol.IRolRepository;
 import com.clinica.clinicaVeterinaria.business.rol.IRolService;
+import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
 import com.clinica.clinicaVeterinaria.domain.entities.Rol;
 import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
@@ -20,6 +22,8 @@ import java.util.List;
 public class UsuarioServiceImpl implements IUsuarioService {
     @Autowired
     private IUsuarioRepository usuarioRepository;
+    @Autowired
+    private IRolRepository rolRepository;
 
     @Autowired
     private IRolService rolService;
@@ -111,14 +115,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
     public UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuarioNuevo = UsuarioDTO.toDomain(usuarioDTO);
 
-        Rol rol = rolService.findById(usuarioDTO.getRol()).orElse(null);
-        if (rol == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.rolNoEncontrado");
+        Usuario usuarioEncontrado = usuarioRepository.findUsuarioById(usuarioDTO.getIdUsuario());
+        if (usuarioEncontrado != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.yaExisteUsuario");
         }
-
-        //validarUsuario(usuarioNuevo, 1);
-
-        usuarioNuevo.setRol(rol);
+        validarUsuario(usuarioNuevo);
         usuarioNuevo.setFechaAlta(new Date());
         usuarioRepository.save(usuarioNuevo);
 
@@ -127,18 +128,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public UsuarioDTO modificarUsuario(UsuarioDTO usuarioDTO) {
-        Usuario usuarioUpdate = usuarioRepository.findUsuarioById(usuarioDTO.getIdUsuario());
+        Usuario usuarioUpdate = UsuarioDTO.toDomain(usuarioDTO);
+        Usuario usuarioEncontrado = usuarioRepository.findUsuarioById(usuarioDTO.getIdUsuario());
 
-        existeUsuario(usuarioUpdate);
-        validarUsuario(usuarioUpdate, 2);
+        existeUsuario(usuarioEncontrado);
+        validarUsuario(usuarioUpdate);
 
-        usuarioUpdate.setNombre(usuarioDTO.getNombre());
-        usuarioUpdate.setApellidos(usuarioDTO.getApellidos());
-        usuarioUpdate.setDireccion(usuarioDTO.getDireccion());
-        usuarioUpdate.setTelefono(usuarioDTO.getTelefono());
-        usuarioUpdate.setDni(usuarioDTO.getDni());
         usuarioUpdate.setFechaModificacion(new Date());
-
         usuarioRepository.save(usuarioUpdate);
 
         return UsuarioDTO.toDTO(usuarioUpdate);
@@ -148,8 +144,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
     public UsuarioDTO eliminarUsuario(int idUsuario) {
         Usuario usuarioBorrar = usuarioRepository.findUsuarioById(idUsuario);
 
-        if (usuarioBorrar == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontrado");
+        existeUsuario(usuarioBorrar);
+        if (usuarioBorrar.getActivo() == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.yaEliminado");
         }
         usuarioBorrar.setActivo(0);
         usuarioBorrar.setFechaBaja(new Date());
@@ -163,60 +160,34 @@ public class UsuarioServiceImpl implements IUsuarioService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontrado");
         }
     }
-    private void validarUsuario(Usuario usuario, int tipo) {
-        if (tipo == 1) {
-            if (!StringUtils.hasText(usuario.getNombre())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoNombre");
-            }
-            if (usuario.getNombre().length() > Constantes.USUARIO_NOMBRE_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxNombre");
-            }
-            if (!StringUtils.hasText(usuario.getApellidos())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoApellidos");
-            }
-            if (usuario.getApellidos().length() > Constantes.USUARIO_APELLIDOS_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxApellidos");
-            }
-            if (!StringUtils.hasText(usuario.getDni())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDNI");
-            }
-            if (usuario.getDni().length() > Constantes.USUARIO_DNI_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDNI");
-            }
-            if (!StringUtils.hasText(usuario.getDireccion())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDireccion");
-            }
-            if (usuario.getDireccion().length() > Constantes.USUARIO_DIRECCION_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDireccion");
-            }
-            if (usuario.getRol().getIdRol() <= 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.rolNoEncontrado");
-            }
-        } else if (tipo == 2) {
-            if (!StringUtils.hasText(usuario.getNombre())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoNombre");
-            }
-            if (usuario.getNombre().length() > Constantes.USUARIO_NOMBRE_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxNombre");
-            }
-            if (!StringUtils.hasText(usuario.getApellidos())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoApellidos");
-            }
-            if (usuario.getApellidos().length() > Constantes.USUARIO_APELLIDOS_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxApellidos");
-            }
-            if (!StringUtils.hasText(usuario.getDni())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDNI");
-            }
-            if (usuario.getDni().length() > Constantes.USUARIO_DNI_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDNI");
-            }
-            if (!StringUtils.hasText(usuario.getDireccion())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDireccion");
-            }
-            if (usuario.getDireccion().length() > Constantes.USUARIO_DIRECCION_MAX) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDireccion");
-            }
+    private void validarUsuario(Usuario usuario) {
+        if (!StringUtils.hasText(usuario.getNombre())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoNombre");
+        }
+        if (usuario.getNombre().length() > Constantes.USUARIO_NOMBRE_MAX) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxNombre");
+        }
+        if (!StringUtils.hasText(usuario.getApellidos())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoApellidos");
+        }
+        if (usuario.getApellidos().length() > Constantes.USUARIO_APELLIDOS_MAX) {
+           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxApellidos");
+        }
+        if (!StringUtils.hasText(usuario.getDni())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDNI");
+        }
+        if (usuario.getDni().length() > Constantes.USUARIO_DNI_MAX) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDNI");
+        }
+        if (!StringUtils.hasText(usuario.getDireccion())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.requeridoDireccion");
+        }
+        if (usuario.getDireccion().length() > Constantes.USUARIO_DIRECCION_MAX) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.caracteresMaxDireccion");
+        }
+        Rol rol = rolRepository.findById(usuario.getRol().getIdRol()).orElse(null);
+        if (rol == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontradoRol");
         }
     }
 

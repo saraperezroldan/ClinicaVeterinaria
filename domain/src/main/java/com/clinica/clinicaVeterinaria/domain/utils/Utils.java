@@ -24,7 +24,9 @@ public class Utils {
 
             int anios = periodo.getYears();
             int meses = periodo.getMonths();
-
+            if (anios == 1) {
+                return anios + " año y " + meses + " meses";
+            }
             return anios + " años y " + meses + " meses";
         } else {
             throw new IllegalArgumentException("La fecha de nacimiento no puede ser futura o nula");

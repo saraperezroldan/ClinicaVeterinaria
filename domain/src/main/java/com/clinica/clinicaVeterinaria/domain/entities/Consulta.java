@@ -16,7 +16,7 @@ public class Consulta {
     private Date fechaCita;
     private Date fechaUltima;
 
-    @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_mascota")
     private Mascota mascota;
 

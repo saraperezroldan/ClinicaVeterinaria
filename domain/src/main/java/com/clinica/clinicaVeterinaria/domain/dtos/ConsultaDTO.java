@@ -1,6 +1,9 @@
 package com.clinica.clinicaVeterinaria.domain.dtos;
 
 import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
+import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
+import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -14,7 +17,7 @@ public class ConsultaDTO {
     private Date fechaCita;
     private Date fechaAlta;
     private Date fechaUltima;
-    private MascotaDTO mascota;
+    private Integer mascota;
     private List<ConsultaTratamientoDTO> tratamientosConsulta;
 
     public static ConsultaDTO toDTO(Consulta consulta){
@@ -34,9 +37,11 @@ public class ConsultaDTO {
         consultaDTO.setFechaCita(consulta.getFechaCita());
         consultaDTO.setFechaAlta(consulta.getFechaAlta());
         consultaDTO.setFechaUltima(consulta.getFechaUltima());
-        if(!Collections.emptyList().equals(includeRelacion) && includeRelacion.contains(MascotaDTO.class)){
+        consultaDTO.setMascota(consulta.getMascota() != null ? consulta.getMascota().getIdMascota() : null);
+
+        /*if(!Collections.emptyList().equals(includeRelacion) && includeRelacion.contains(MascotaDTO.class)){
             consultaDTO.setMascota(MascotaDTO.toDTO(consulta.getMascota()));
-        }
+        }*/
         /*if(!Collections.emptyList().equals(includeRelacion) && includeRelacion.contains(ConsultaTratamientoDTO.class)){
             consultaDTO.setTratamientosConsulta(ConsultaTratamientoDTO.toDTO(consulta.getTratamientosConsulta().stream().collect(Collectors.toList()), includeRelacion));
         }*/
@@ -76,7 +81,12 @@ public class ConsultaDTO {
         consulta.setFechaCita(consultaDTO.getFechaCita());
         consulta.setFechaAlta(consultaDTO.getFechaAlta());
         consulta.setFechaUltima(consultaDTO.getFechaUltima());
-        consulta.setMascota(MascotaDTO.toDomain(consultaDTO.getMascota()));
+        Mascota mascota = new Mascota();
+        mascota.setIdMascota(consultaDTO.getMascota());
+        consulta.setMascota(mascota);
+
+
+        //consulta.setMascota(MascotaDTO.toDomain(consultaDTO.getMascota()));
         //consulta.setTratamientosConsulta(ConsultaTratamientoDTO.toDomain(consultaDTO.getTratamientosConsulta()).stream().collect(Collectors.toSet()));
 
         return consulta;
@@ -139,13 +149,9 @@ public class ConsultaDTO {
         this.fechaUltima = fechaUltima;
     }
 
-    public MascotaDTO getMascota() {
-        return mascota;
-    }
+    public Integer getMascota() {return mascota;}
 
-    public void setMascota(MascotaDTO mascota) {
-        this.mascota = mascota;
-    }
+    public void setMascota(Integer mascota) {this.mascota = mascota;}
 
     public List<ConsultaTratamientoDTO> getTratamientosConsulta() {
         return tratamientosConsulta;

@@ -2,11 +2,13 @@ package com.clinica.clinicaVeterinaria.business.consulta;
 
 import com.clinica.clinicaVeterinaria.domain.dtos.ConsultaDTO;
 import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
+import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,18 +40,25 @@ public class ConsultaServiceImpl implements IConsultaService{
 
     @Override
     public ConsultaDTO crearConsulta(ConsultaDTO consultaDTO) {
-        Consulta consultaSaved = ConsultaDTO.toDomain(consultaDTO);
-        consultaSaved = consultaRepository.save(consultaSaved);
+        Consulta consultaNueva = ConsultaDTO.toDomain(consultaDTO);
 
-        return ConsultaDTO.toDTO(consultaSaved);
+        Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
+        if (consultaEncontrada != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.yaExisteConsulta");
+        }
+        consultaNueva.setFechaAlta(new Date());
+        consultaRepository.save(consultaNueva);
+
+        return ConsultaDTO.toDTO(consultaNueva);
     }
 
     @Override
     public ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO) {
-        Consulta consultaUpdate = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
+        Consulta consultaUpdate = ConsultaDTO.toDomain(consultaDTO);
+        Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
 
-        //existeConsulta(consultaUpdate);
-        //validarConsulta(consultaUpdate, 2);
+        existeConsulta(consultaEncontrada);
+        validarConsulta(consultaUpdate);
         consultaRepository.save(consultaUpdate);
 
         return consultaDTO.toDTO(consultaUpdate);
@@ -62,8 +71,16 @@ public class ConsultaServiceImpl implements IConsultaService{
         if (consultaBorrar == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEncontrado");
         }
-        consultaRepository.save(consultaBorrar);
+        consultaRepository.delete(consultaBorrar);
 
         return ConsultaDTO.toDTO(consultaBorrar);
+    }
+
+    private void existeConsulta (Consulta consulta) {
+        if (consulta == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "consulta.noEncontrada");
+        }
+    }
+    private void validarConsulta(Consulta consulta) {
     }
 }

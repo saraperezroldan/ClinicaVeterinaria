@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
 public class RazaControllerImpl implements IRazaController{
-
     @Autowired
     IRazaService razaService;
 
@@ -20,9 +18,20 @@ public class RazaControllerImpl implements IRazaController{
     public ResponseEntity<List<RazaDTO>> getRazas() {
         return new ResponseEntity<>(razaService.getRazas(), HttpStatus.OK);
     }
-
     @Override
     public ResponseEntity<RazaDTO> getRazaById (int idRaza) {
         return new ResponseEntity<>(razaService.getRazaById(idRaza), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<RazaDTO> crearRaza(RazaDTO razaDTO) {
+        return new ResponseEntity<>(razaService.crearRaza(razaDTO), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<RazaDTO> modificarRaza(RazaDTO razaDTO) {
+        return new ResponseEntity<>(razaService.modificarRaza(razaDTO), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<RazaDTO> eliminarRaza(int idRaza) {
+        return new ResponseEntity<>(razaService.eliminarRaza(idRaza), HttpStatus.OK);
     }
 }

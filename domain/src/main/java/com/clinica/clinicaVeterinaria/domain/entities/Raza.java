@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table(name = "raza")
 public class Raza {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRaza;
     private String nombre;
 
-    @ManyToOne(optional = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_especie")
     private Especie especie;
 

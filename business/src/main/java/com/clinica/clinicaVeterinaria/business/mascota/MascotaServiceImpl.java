@@ -5,7 +5,6 @@ import com.clinica.clinicaVeterinaria.business.raza.IRazaRepository;
 import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioRepository;
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.RazaDTO;
-import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.entities.Especie;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;

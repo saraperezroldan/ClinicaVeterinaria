@@ -2,18 +2,22 @@ package com.clinica.clinicaVeterinaria.rest.raza;
 
 import com.clinica.clinicaVeterinaria.domain.dtos.ConsultaDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.RazaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.RazaDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("raza")
 public interface IRazaController {
     @GetMapping("getRazas")
-    public ResponseEntity<List<RazaDTO>> getRazas();
+    ResponseEntity<List<RazaDTO>> getRazas();
     @GetMapping("getRazaById/{id}")
-    public ResponseEntity<RazaDTO> getRazaById(@PathVariable("id") int idRaza);
-
+    ResponseEntity<RazaDTO> getRazaById(@PathVariable("id") int idRaza);
+    @PostMapping("crearRaza")
+    ResponseEntity<RazaDTO> crearRaza(@RequestBody RazaDTO RazaDTO);
+    @PostMapping("modificarRaza")
+    ResponseEntity<RazaDTO> modificarRaza(@RequestBody RazaDTO RazaDTO);
+    @DeleteMapping("eliminarRaza/{id}")
+    ResponseEntity<RazaDTO> eliminarRaza(@PathVariable("id") int idRaza);
 }

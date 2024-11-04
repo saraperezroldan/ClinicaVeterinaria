@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class ConsultaServiceImpl implements IConsultaService{
-
     @Autowired
     IConsultaRepository consultaRepository;
 
@@ -43,5 +42,28 @@ public class ConsultaServiceImpl implements IConsultaService{
         consultaSaved = consultaRepository.save(consultaSaved);
 
         return ConsultaDTO.toDTO(consultaSaved);
+    }
+
+    @Override
+    public ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO) {
+        Consulta consultaUpdate = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
+
+        //existeConsulta(consultaUpdate);
+        //validarConsulta(consultaUpdate, 2);
+        consultaRepository.save(consultaUpdate);
+
+        return consultaDTO.toDTO(consultaUpdate);
+    }
+
+    @Override
+    public ConsultaDTO eliminarConsulta(int idConsulta) {
+        Consulta consultaBorrar = consultaRepository.findConsultaById(idConsulta);
+
+        if (consultaBorrar == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEncontrado");
+        }
+        consultaRepository.save(consultaBorrar);
+
+        return ConsultaDTO.toDTO(consultaBorrar);
     }
 }

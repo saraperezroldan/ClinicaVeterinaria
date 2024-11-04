@@ -4,7 +4,6 @@ package com.clinica.clinicaVeterinaria.business.usuario;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
-
 import java.util.List;
 
 public interface IUsuarioService {

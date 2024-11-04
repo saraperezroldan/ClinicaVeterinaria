@@ -3,7 +3,6 @@ package com.clinica.clinicaVeterinaria.business.mascota;
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.MascotaFiltroDTO;
-
 import java.util.List;
 
 public interface IMascotaService {

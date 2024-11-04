@@ -17,4 +17,20 @@ public class EspecieControllerImpl implements IEspecieController{
     public ResponseEntity<List<EspecieDTO>> getEspecies() {
         return new ResponseEntity<>(especieService.getEspecies(), HttpStatus.OK);
     }
+    @Override
+    public ResponseEntity<EspecieDTO> getEspecieById(int idEspecie) {
+        return new ResponseEntity<>(especieService.getEspecieById(idEspecie), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<EspecieDTO> crearEspecie(EspecieDTO EspecieDTO) {
+        return new ResponseEntity<>(especieService.crearEspecie(EspecieDTO), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<EspecieDTO> modificarEspecie(EspecieDTO EspecieDTO) {
+        return new ResponseEntity<>(especieService.modificarEspecie(EspecieDTO), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<EspecieDTO> eliminarEspecie(int idEspecie) {
+        return new ResponseEntity<>(especieService.eliminarEspecie(idEspecie), HttpStatus.OK);
+    }
 }

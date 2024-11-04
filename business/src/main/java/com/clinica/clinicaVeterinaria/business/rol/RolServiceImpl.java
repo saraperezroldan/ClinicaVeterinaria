@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class RolServiceImpl implements IRolService {
-
     @Autowired
     private IRolRepository rolRepositoryImpl;
 

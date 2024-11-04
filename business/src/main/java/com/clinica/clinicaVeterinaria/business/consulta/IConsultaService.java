@@ -5,9 +5,11 @@ import java.util.List;
 
 public interface IConsultaService {
 
-    public List<ConsultaDTO> getConsultasByIdMascota(int idMascota);
-    public ConsultaDTO getConsultaById(int idConsulta);
-    public ConsultaDTO crearConsulta(ConsultaDTO consultaDTO);
+    List<ConsultaDTO> getConsultasByIdMascota(int idMascota);
+    ConsultaDTO getConsultaById(int idConsulta);
+    ConsultaDTO crearConsulta(ConsultaDTO consultaDTO);
+    ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO);
+    ConsultaDTO eliminarConsulta(int idConsulta);
 
     //PageableResult<ConsultaDTO> getConsultasFiltrado(ConsultaDTO consultaDTO);
 }

@@ -1,5 +1,5 @@
-
 package com.clinica.clinicaVeterinaria.rest.usuario;
+
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
@@ -11,30 +11,22 @@ import java.util.List;
 public interface IUsuarioController {
 
     @GetMapping("getUsuarios")
-    public ResponseEntity<List<UsuarioDTO>> getUsuarios();
-
+    ResponseEntity<List<UsuarioDTO>> getUsuarios();
     @GetMapping("getUsuarioById/{id}")
-    public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable("id") int idUsuario);
-
+    ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable("id") int idUsuario);
     @GetMapping("getUsuariosByIdRol/{idRol}")
-    public ResponseEntity<List<UsuarioDTO>> getUsuariosByIdRol(@PathVariable("idRol") int idRol);
-
+    ResponseEntity<List<UsuarioDTO>> getUsuariosByIdRol(@PathVariable("idRol") int idRol);
     @GetMapping("getUsuarioByEmail/{email}")
-    public ResponseEntity<UsuarioDTO> getUsuarioByEmail(@PathVariable("email") String email);
-
+    ResponseEntity<UsuarioDTO> getUsuarioByEmail(@PathVariable("email") String email);
     @GetMapping("getUsuarioByDni/{dni}")
-    public ResponseEntity<UsuarioDTO> getUsuarioByDni(@PathVariable("dni") String dni);
-
+    ResponseEntity<UsuarioDTO> getUsuarioByDni(@PathVariable("dni") String dni);
     @PostMapping("getUsuarioConFiltro")
-    public ResponseEntity<PageableResult<UsuarioDTO>> getUsuarioConFiltro (@RequestBody UsuarioFiltroDTO filtro);
-
+    ResponseEntity<PageableResult<UsuarioDTO>> getUsuarioConFiltro (@RequestBody UsuarioFiltroDTO filtro);
     @PostMapping("crearUsuario")
-    public ResponseEntity<UsuarioDTO> crearUsuario(@RequestBody UsuarioDTO usuarioDTO);
-
+    ResponseEntity<UsuarioDTO> crearUsuario(@RequestBody UsuarioDTO usuarioDTO);
     @PostMapping("modificarUsuario")
-    public ResponseEntity<UsuarioDTO> modificarUsuario(@RequestBody UsuarioDTO usuarioDTO);
-
+    ResponseEntity<UsuarioDTO> modificarUsuario(@RequestBody UsuarioDTO usuarioDTO);
     @DeleteMapping("eliminarUsuario/{id}")
-    public ResponseEntity<UsuarioDTO> eliminarUsuario(@PathVariable("id") int idUsuario);
+    ResponseEntity<UsuarioDTO> eliminarUsuario(@PathVariable("id") int idUsuario);
 }
 

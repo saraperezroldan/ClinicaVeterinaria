@@ -1,4 +1,7 @@
 package com.clinica.clinicaVeterinaria.rest.consultaTratamiento;
 
-public class ConsultaTratamientoControllerImpl {
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ConsultaTratamientoControllerImpl implements IConsultaTratamientoController{
 }

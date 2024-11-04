@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ConsultaServiceImpl implements IConsultaService{
-
     @Autowired
     IConsultaRepository consultaRepository;
 
@@ -39,9 +40,54 @@ public class ConsultaServiceImpl implements IConsultaService{
 
     @Override
     public ConsultaDTO crearConsulta(ConsultaDTO consultaDTO) {
-        Consulta consultaSaved = ConsultaDTO.toDomain(consultaDTO);
-        consultaSaved = consultaRepository.save(consultaSaved);
+        Consulta consultaNueva = ConsultaDTO.toDomain(consultaDTO);
 
-        return ConsultaDTO.toDTO(consultaSaved);
+        Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
+        if (consultaEncontrada != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.yaExisteConsulta");
+        }
+        validarConsulta(consultaNueva);
+        consultaNueva.setFechaAlta(new Date());
+        consultaRepository.save(consultaNueva);
+
+        return ConsultaDTO.toDTO(consultaNueva);
+    }
+
+    @Override
+    public ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO) {
+        Consulta consultaUpdate = ConsultaDTO.toDomain(consultaDTO);
+        Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
+
+        existeConsulta(consultaEncontrada);
+        validarConsulta(consultaUpdate);
+        consultaRepository.save(consultaUpdate);
+
+        return consultaDTO.toDTO(consultaUpdate);
+    }
+
+    @Override
+    public ConsultaDTO eliminarConsulta(int idConsulta) {
+        Consulta consultaBorrar = consultaRepository.findConsultaById(idConsulta);
+
+        if (consultaBorrar == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEncontrado");
+        }
+        consultaRepository.delete(consultaBorrar);
+
+        return ConsultaDTO.toDTO(consultaBorrar);
+    }
+
+    private void existeConsulta (Consulta consulta) {
+        if (consulta == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "consulta.noEncontrada");
+        }
+    }
+    private void validarConsulta(Consulta consulta) {
+        LocalDate fechaCita = consulta.getFechaCita();
+        LocalDate fechaActual = LocalDate.now();
+        if (fechaCita.isBefore(fechaActual)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.fechaCitaPasada");
+        }
+
     }
 }

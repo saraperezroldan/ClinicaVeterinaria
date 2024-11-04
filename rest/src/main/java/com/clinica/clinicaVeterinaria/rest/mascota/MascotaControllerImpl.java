@@ -52,5 +52,4 @@ public class MascotaControllerImpl implements IMascotaController{
     public ResponseEntity<MascotaDTO> eliminarMascota(int idMascota) {
         return new ResponseEntity<>(mascotaService.eliminarMascota(idMascota), HttpStatus.OK);
     }
-
 }

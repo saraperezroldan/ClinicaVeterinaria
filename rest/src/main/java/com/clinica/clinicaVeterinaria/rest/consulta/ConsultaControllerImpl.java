@@ -18,6 +18,12 @@ public class ConsultaControllerImpl implements IConsultaController {
         return new ResponseEntity<>(consultaService.getConsultasByIdMascota(idMascota), HttpStatus.OK);
     }
     @Override
+    public ResponseEntity<List<ConsultaDTO>> getCitasByIdMascota(int idMascota) {
+        return new ResponseEntity<>(consultaService.getCitasByIdMascota(idMascota), HttpStatus.OK);
+
+    }
+
+    @Override
     public ResponseEntity<ConsultaDTO> getConsultaById (int idConsulta) {
         return new ResponseEntity<>(consultaService.getConsultaById(idConsulta), HttpStatus.OK);
     }

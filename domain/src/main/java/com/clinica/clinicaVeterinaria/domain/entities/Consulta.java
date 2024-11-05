@@ -11,8 +11,10 @@ public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idConsulta;
-    private String observaciones;
     private String motivo;
+    private String diagnostico;
+    private String observaciones;
+    private int esCita;
     private Date fechaAlta;
     private LocalDate fechaCita;
     private Date fechaUltima;
@@ -26,34 +28,19 @@ public class Consulta {
 
     public Consulta() {}
 
-    public Consulta(int idConsulta, String observaciones, String motivo, LocalDate fechaCita, Date fechaAlta, Date fechaUltima, Mascota mascota) {
-        this.idConsulta = idConsulta;
-        this.observaciones = observaciones;
-        this.motivo = motivo;
-        this.fechaCita = fechaCita;
-        this.fechaAlta = fechaAlta;
-        this.fechaUltima = fechaUltima;
-        this.mascota = mascota;
-    }
-
     public int getIdConsulta() {return idConsulta;}
-
     public void setIdConsulta(int idConsulta) {this.idConsulta = idConsulta;}
-
-    public String getObservaciones() {return observaciones;}
-
-    public void setObservaciones(String observaciones) {this.observaciones = observaciones;}
-
     public String getMotivo() {return motivo;}
-
     public void setMotivo(String motivo) {this.motivo = motivo;}
-
+    public String getDiagnostico() {return diagnostico;}
+    public void setDiagnostico(String diagnostico) {this.diagnostico = diagnostico;}
+    public String getObservaciones() {return observaciones;}
+    public void setObservaciones(String observaciones) {this.observaciones = observaciones;}
+    public int getEsCita() {return esCita;}
+    public void setEsCita(int esCita) {this.esCita = esCita;}
     public LocalDate getFechaCita() {return fechaCita;}
-
     public void setFechaCita(LocalDate fechaCita) {this.fechaCita = fechaCita;}
-
     public Date getFechaAlta() {return fechaAlta;}
-
     public void setFechaAlta(Date fechaAlta) {this.fechaAlta = fechaAlta;}
 
     public Date getFechaUltima() {return fechaUltima;}

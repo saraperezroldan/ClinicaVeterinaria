@@ -10,6 +10,8 @@ public interface IConsultaController {
 
     @GetMapping("getConsultasByIdMascota/{id}")
     ResponseEntity<List<ConsultaDTO>>getConsultasByIdMascota(@PathVariable("id") int idMascota);
+    @GetMapping("getCitasByIdMascota/{id}")
+    ResponseEntity<List<ConsultaDTO>>getCitasByIdMascota(@PathVariable("id") int idMascota);
 
     @GetMapping("getConsultaById/{id}")
     ResponseEntity<ConsultaDTO> getConsultaById(@PathVariable("id") int idConsulta);

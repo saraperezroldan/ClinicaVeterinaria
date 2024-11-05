@@ -18,19 +18,33 @@ public class ConsultaServiceImpl implements IConsultaService{
 
     @Override
     public List<ConsultaDTO> getConsultasByIdMascota(int idMascota){
-        List<Consulta> consultas = null;
+        List<Consulta> consultas = consultaRepository.findConsultasByIdMascota(idMascota);
         List<ConsultaDTO> consultasDTO = new ArrayList<>();
-        consultas = consultaRepository.findConsultasByIdMascota(idMascota);
 
-        if (consultas != null && !consultas.isEmpty()) {
-            consultas.forEach(consulta -> consultasDTO.add(ConsultaDTO.toDTO(consulta)));
+        if (consultas.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "consulta.noEncontrado");
         }
+        consultas.forEach(consulta -> consultasDTO.add(ConsultaDTO.toDTO(consulta)));
+
         return consultasDTO;
     }
+
+    @Override
+    public List<ConsultaDTO> getCitasByIdMascota(int idMascota) {
+        List<Consulta> consultas = consultaRepository.findCitasByIdMascota(idMascota);
+        List<ConsultaDTO> consultasDTO = new ArrayList<>();
+
+        if (consultas.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "consulta.noEncontrado");
+        }
+        consultas.forEach(consulta -> consultasDTO.add(ConsultaDTO.toDTO(consulta)));
+
+        return consultasDTO;
+    }
+
     @Override
     public ConsultaDTO getConsultaById(int idConsulta) {
-        Consulta consultaEncontrada = null;
-        consultaEncontrada = consultaRepository.findConsultaById(idConsulta);
+        Consulta consultaEncontrada = consultaRepository.findConsultaById(idConsulta);
 
         if (consultaEncontrada == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEncontrado");

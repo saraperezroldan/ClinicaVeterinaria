@@ -52,7 +52,7 @@ const routes: Routes = [
         component: NuevoClienteComponent
       },
       {
-        path: 'nueva-mascota',
+        path: 'nueva-mascota/:idUsuario',
         component: NuevaMascotaComponent
       },
       {

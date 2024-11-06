@@ -48,7 +48,7 @@ export class InfoClienteComponent implements OnInit {
   }
 
   nuevaMascota(): void {
-    this.router.navigate(['/usuario/nueva-mascota']);
+    this.router.navigate(['/usuario/nueva-mascota', this.cliente.idUsuario]);
   }
 
   goBack(){

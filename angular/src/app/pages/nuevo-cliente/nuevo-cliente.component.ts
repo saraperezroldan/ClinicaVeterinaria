@@ -40,7 +40,7 @@ export class NuevoClienteComponent {
 
   especies: any[] = [];
   razas: any[] = [];
-  razaOptions: any[] = []; // Para las razas filtradas
+  razaOptions: any[] = [];
 
   constructor(
       private especieService: EspecieService,
@@ -52,7 +52,7 @@ export class NuevoClienteComponent {
 
   ngOnInit() {
     this.getEspecies();
-    this.getAllRazas(); // Cargar todas las razas aquí
+    this.getAllRazas();
   }
 
   getAllRazas() {

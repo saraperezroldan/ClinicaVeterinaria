@@ -15,7 +15,6 @@ export class MascotaService {
   constructor(private http: HttpClient) {
   }
 
-  // Info mascota
   getInfoMascotaById(id: number) : Observable<Mascota>{
     return this.http.get<Mascota>(`${URLSERVER}mascota/getMascotaById/${id}`);
   }
@@ -30,6 +29,10 @@ export class MascotaService {
 
   editarMascota(mascota: Mascota) : Observable<any>{
     return this.http.post(`${URLSERVER}mascota/modificarMascota`, mascota);
+  }
+
+  crearMascota(mascota: Mascota) : Observable<any>{
+    return this.http.post(`${URLSERVER}mascota/crearMascota`, mascota);
   }
 
 }

@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="half-width">
                                     <label for="fecha-alta">Fecha alta</label>
-                                    <input type="date" id="fecha-alta" [(ngModel)]="mascota.fechaAlta" name="fecha-alta" required>
+                                    <input type="date" id="fecha-alta" [(ngModel)]="mascota.fechaAlta" name="fecha-alta" disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -86,12 +86,12 @@
                             <div class="row">
                                 <div class="half-width">
                                     <label for="ultima-visita">Última visita</label>
-                                    <input type="text" id="ultima-visita"  required>
+                                    <input type="text" id="ultima-visita"  disabled>
                                 </div>
                                 <div class="half-width">
                                     <label>Genero</label>
-                                    <mat-radio-group>
-                                        <mat-radio-button value="M" class="custom-radio" checked>M</mat-radio-button>
+                                    <mat-radio-group [(ngModel)]="mascota.genero" name="genero" required>
+                                        <mat-radio-button value="M" class="custom-radio">M</mat-radio-button>
                                         <mat-radio-button value="H" class="custom-radio">H</mat-radio-button>
                                     </mat-radio-group>
                                 </div>

@@ -79,7 +79,7 @@ p{
 }
 
 .half-width {
-  width: 48%;
+  width: 55%;
   margin-bottom: 5px;
   margin-left: 20px;
   flex: 0 0 48%;
@@ -97,10 +97,12 @@ p{
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: auto;
+  width: 49%;
   font-family: 'Arial', sans-serif;
   font-size: 14px;
 }
+
+
 
 .half-width input:focus {
   outline: none;

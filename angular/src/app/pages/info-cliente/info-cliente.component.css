@@ -78,6 +78,8 @@ p{
 }
 
 .half-width {
+  display: flex;
+  align-items: center;
   width: 48%;
   margin-bottom: 5px;
   margin-left: 20px;
@@ -200,7 +202,6 @@ table th{
   width: auto;
   height: auto;
   display: flex;
-  justify-content: center;
   align-items: center;
   position: absolute;
   padding: 10px;
@@ -228,6 +229,85 @@ table th{
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.half-width select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 57%;
+}
+
+.half-width select:focus {
+  outline: none;
+  border: 1px solid #8cb4d2;
+  box-shadow: none;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: white !important;
+}
+
+.half-width ng-select {
+  width: 20%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block !important;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  height: 30px;
+}
+
+.half-width ng-select:focus {
+  outline: none;
+  border: 1px solid #8cb4d2;
+  box-shadow: none;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: white !important;
+}
+
+::ng-deep ng-select .ng-option {
+  padding: 10px;
+  font-size: 14px;
+  color: #555;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+::ng-deep ng-select .ng-option:hover {
+  background-color: #f0f8ff;
+  color: #333;
+}
+
+::ng-deep ng-select .ng-option.selected {
+  background-color: #8cb4d2;
+  color: white;
+}
+
+mat-radio-group {
+  align-items: center;
+  display: inline-block;
+  justify-content: space-between;
+}
+
+mat-radio-button {
+  margin-right: auto;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: black;
+  --mdc-radio-disabled-unselected-icon-color: black;
+  --mdc-radio-unselected-hover-icon-color: #212121;
+  --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-selected-focus-icon-color: #8cb4d2;
+  --mdc-radio-selected-hover-icon-color: #8cb4d2;
+  --mdc-radio-selected-icon-color: #8cb4d2;
+  --mdc-radio-selected-pressed-icon-color: #8cb4d2;
+  --mat-radio-ripple-color: black;
+  --mat-radio-checked-ripple-color: #8cb4d2;
+  --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
 }
 
 

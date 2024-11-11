@@ -73,14 +73,14 @@
       <div class="container-data-mascotas">
         <div class="subcontainer-mascotas">
           <div class="details-section">
-            <form>
+            <form (ngSubmit)="crearMascota()">
               <div class="row">
                 <div class="half-width">
                   <label for="especie">Especie</label>
                   <ng-select
                           id="especie"
                           name="especie"
-                          [(ngModel)]="mascota.raza.especie.idEspecie"
+                          [(ngModel)]="selectedEspecie"
                           [items]="especies"
                           bindLabel="nombre"
                           bindValue="idEspecie"
@@ -93,7 +93,7 @@
                   <ng-select
                           id="raza"
                           name="raza"
-                          [(ngModel)]="mascota.raza.idRaza"
+                          [(ngModel)]="selectedRaza"
                           [items]="razaOptions"
                           bindLabel="nombre"
                           bindValue="idRaza"
@@ -104,29 +104,25 @@
               </div>
               <div class="row">
                 <div class="half-width">
-                  <label for="nombreAnimal">Nombre</label>
-                  <input type="text" id="nombreAnimal">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombreMascota"  [(ngModel)]="mascota.nombre" name="nombre">
                 </div>
                 <div class="half-width">
                   <label for="peso">Peso</label>
-                  <input type="text" id="peso">
+                  <input type="text" id="peso" [(ngModel)]="mascota.peso" name="peso">
                 </div>
               </div>
               <div class="row">
                 <div class="half-width">
                   <label for="edad">Edad</label>
-                  <input type="text" id="edad">
+                  <input type="text" id="edad" [(ngModel)]="mascota.edad" name="edad">
                 </div>
                 <div class="half-width">
                   <label for="fechaNacimiento">Nacimiento</label>
-                  <input type="text" id="fechaNacimiento">
+                  <input type="text" id="fechaNacimiento" [(ngModel)]="mascota.fechaNacimiento" name="fechaNacimiento">
                 </div>
               </div>
               <div class="row">
-                <div class="half-width">
-                  <label for="genero">Genero</label>
-                  <input type="text" id="genero">
-                </div>
                 <div class="half-width">
                   <label for="complexion">Complexión</label>
                   <select id="complexion" [(ngModel)]="mascota.complexion" name="complexion" required>
@@ -135,7 +131,15 @@
                     <option value="Grande">Grande</option>
                   </select>
                 </div>
+                <div class="half-width">
+                  <label>Genero</label>
+                  <mat-radio-group [(ngModel)]="mascota.genero" name="genero">
+                    <mat-radio-button value="M" class="custom-radio">M</mat-radio-button>
+                    <mat-radio-button value="H" class="custom-radio">H</mat-radio-button>
+                  </mat-radio-group>
+                </div>
               </div>
+              <button type="submit" class="save-button">Guardar</button>
             </form>
           </div>
         </div>

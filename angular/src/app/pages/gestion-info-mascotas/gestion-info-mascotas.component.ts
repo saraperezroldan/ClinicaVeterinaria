@@ -80,7 +80,9 @@ export class GestionInfoMascotasComponent implements OnInit{
     }
 
     extractDate(isoDate: string): string {
-        return isoDate.split('T')[0];
+        const date = new Date(isoDate);
+        date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+        return date.toISOString().split('T')[0];
     }
 
     goBack() {
@@ -93,6 +95,7 @@ export class GestionInfoMascotasComponent implements OnInit{
                 alert("Mascota actualizada con éxito");
             },
             (error) => {
+                console.log(this.mascota);
                 console.error("Error al actualizar la mascota:", error);
             }
         );

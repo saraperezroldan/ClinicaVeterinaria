@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EspecieService} from "../../services/especie.service";
 import {RazaService} from "../../services/raza.service";
 import {Especie} from "../../models/especie.model";
 import {Raza} from "../../models/raza.model";
 import {Mascota} from "../../models/mascota.model";
+import {MascotaService} from "../../services/mascota.service";
 
 @Component({
   selector: 'app-nuevo-cliente',
@@ -13,14 +14,18 @@ import {Mascota} from "../../models/mascota.model";
 })
 export class NuevoClienteComponent {
 
+  especies: Especie[] = [];
+  razaOptions: Raza[] = [];
+  selectedEspecie: number | null = null;
+  selectedRaza: number | null = null;
   mascota : Mascota = {
     idMascota: 0,
     nombre: "",
-    edad: 0,
-    peso: 0,
+    edad: null,
+    peso: null,
     genero: "",
     complexion: "",
-    imagen: "https://tse4.mm.bing.net/th?id=OIP.fgL7rbtfZsEahPyuW9t0PQHaIO&pid=Api",
+    imagen: "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg",
     activo: 1,
     fechaNacimiento: "",
     fechaAlta: "",
@@ -37,39 +42,14 @@ export class NuevoClienteComponent {
     }
   };
 
-
-  especies: any[] = [];
-  razas: any[] = [];
-  razaOptions: any[] = [];
-
   constructor(
       private especieService: EspecieService,
       private razaService: RazaService,
-      private route: Router
-  ) { }
+      private mascotaService : MascotaService
+  ) {}
 
-  private allRazas: Raza[] = [];
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.getEspecies();
-    this.getAllRazas();
-  }
-
-  getAllRazas() {
-    this.razaService.getRazas().subscribe(
-        (data: Raza[]) => {
-          this.allRazas = data;
-        },
-        (error) => {
-          console.error("Error al cargar las razas:", error);
-        }
-    );
-  }
-
-  getRazasPorEspecie(idEspecie: number) {
-    console.log('Razas obtenidas:', this.allRazas);
-    this.razaOptions = this.allRazas.filter(raza => raza.especie.idEspecie === idEspecie);
-    console.log('Razas filtradas:', this.razaOptions);
   }
 
   getEspecies() {
@@ -78,32 +58,70 @@ export class NuevoClienteComponent {
           this.especies = data;
         },
         (error) => {
-          console.error("Error al cargar las especies:", error);
+          console.error('Error al cargar las especies:', error);
         }
     );
   }
 
-  onEspecieChange(idEspecie: number) {
-    console.log('Especie seleccionada:', idEspecie);
+  onEspecieChange(selectedEspecie: Especie | null) {
+    if (!selectedEspecie) {
+      this.razaOptions = [];
+      this.selectedRaza = null;
+      this.mascota.raza = { idRaza: 0, nombre: "", especie: { idEspecie: 0, nombre: "" } };
+      return;
+    }
+
+    this.mascota.raza.especie = selectedEspecie;
+
+    console.log('Especie seleccionada:', selectedEspecie);
+    const idEspecie = selectedEspecie.idEspecie;
+
+    this.razaOptions = [];
+    this.selectedRaza = null;
+
     this.getRazasPorEspecie(idEspecie);
-    this.mascota.raza.idRaza = null;
   }
 
-  onRazaChange(event: any) {
-    console.log('Raza seleccionada:', event);
+  onRazaChange(selectedRaza: Raza | null) {
+    if (!selectedRaza) {
+      this.mascota.raza = { idRaza: 0, nombre: "", especie: this.mascota.raza.especie };
+      return;
+    }
+
+    this.mascota.raza = selectedRaza;
+    console.log('Raza seleccionada:', selectedRaza);
   }
 
-  save() {
-    // Lógica para guardar la mascota...
-    console.log(this.mascota);
+  getRazasPorEspecie(idEspecie: number) {
+    this.razaService.getRazas().subscribe(
+        (data: Raza[]) => {
+          data.forEach(raza => console.log(`Raza: ${raza.nombre}, Especie ID: ${raza.especie?.idEspecie}`));
+
+          this.razaOptions = data.filter((raza) => raza.especie && raza.especie.idEspecie === idEspecie);
+        },
+        (error) => {
+          console.error('Error al cargar las razas:', error);
+        }
+    );
   }
 
   goBack() {
-    this.route.navigate(['/usuario/inicio-veterinario']);
+    window.history.back();
+  }
+
+  crearMascota() {
+    console.log('Creando mascota:', this.mascota);
+    this.mascotaService.crearMascota(this.mascota).subscribe(
+        (response) => {
+          console.log('Mascota creada:', response);
+          alert('Mascota creada correctamente');
+          this.goBack();
+        },
+        (error) => {
+          console.error('Error al crear la mascota:', error);
+        }
+    );
   }
 }
 
-//cambiar css de genero
-//cambiar css input::hover
-//recolocar atributos
-//css de input y selector
+

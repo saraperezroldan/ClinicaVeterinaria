@@ -4,8 +4,8 @@ import {Raza} from "./raza.model";
 export interface Mascota{
     idMascota: number;
     nombre: string;
-    edad: number;
-    peso: number;
+    edad: number | null
+    peso: number | null;
     genero: string;
     complexion: string;
     fechaNacimiento: string;

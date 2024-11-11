@@ -64,6 +64,8 @@ h2 {
   margin-bottom: 5px;
   margin-left: 20px;
   flex: 0 0 48%;
+  display: flex;
+  align-items: center;
 }
 
 .half-width label {
@@ -78,7 +80,7 @@ h2 {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: auto;
+  width: 55%;
 }
 
 .container-mascotas{
@@ -159,7 +161,7 @@ h2 {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 53%;
+  width: 61%;
 }
 
 .half-width select:focus {
@@ -172,7 +174,7 @@ h2 {
 }
 
 .half-width ng-select {
-  width: 50%;
+  width: 61%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;

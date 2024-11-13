@@ -1,0 +1,50 @@
+<div class="contenedor">
+    <div class="icon-container">
+        <mat-icon>medical_information</mat-icon>
+        <h1>Historial clínico de {{mascota.nombre}}</h1>
+    </div>
+
+    <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="fechaConsulta">
+            <th mat-header-cell *matHeaderCellDef> Fecha consulta </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaCita | date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="veterinario">
+            <th mat-header-cell *matHeaderCellDef> Veterinario </th>
+            <td mat-cell *matCellDef="let element"> {{element.idVeterinario}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="motivo">
+            <th mat-header-cell *matHeaderCellDef> Motivo </th>
+            <td mat-cell *matCellDef="let element"> {{element.motivo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="diagnostico">
+            <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
+            <td mat-cell *matCellDef="let element"> {{element.diagnostico}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tratamiento">
+            <th mat-header-cell *matHeaderCellDef> Tratamiento </th>
+            <td mat-cell *matCellDef="let element"> {{element.tratamiento}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="detalles">
+            <th mat-header-cell *matHeaderCellDef> Detalles </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button  class="btn-mas-detalles" color="primary" [routerLink]="['/usuario/info-cliente', element.idUsuario]">
+                    <span class="material-icons">add</span> Más detalles
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+
+
+

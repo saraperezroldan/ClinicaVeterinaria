@@ -13,6 +13,7 @@ import {InicioAdministradorComponent} from "./pages/inicio-administrador/inicio-
 import {NuevoVeterinarioComponent} from "./pages/nuevo-veterinario/nuevo-veterinario.component";
 import {InfoVeterinarioComponent} from "./pages/info-veterinario/info-veterinario.component";
 import {GestionInfoMascotasComponent} from "./pages/gestion-info-mascotas/gestion-info-mascotas.component";
+import {HistorialMascotaComponent} from "./pages/historial-mascota/historial-mascota.component";
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: 'gestion-info-mascota/:idMascota',
         component : GestionInfoMascotasComponent
+      },
+      {
+        path: 'historial-mascota/:idMascota',
+        component: HistorialMascotaComponent
       }
     ]
   },

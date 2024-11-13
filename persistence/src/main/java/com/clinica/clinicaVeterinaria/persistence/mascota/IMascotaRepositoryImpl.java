@@ -7,6 +7,7 @@ import com.clinica.clinicaVeterinaria.persistence.IBaseRepositoryImpl;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import javax.persistence.TypedQuery;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +17,7 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
 
     @Override
     public List<Mascota> findMascotaPorFiltro (MascotaFiltroDTO filtro) {
-        String query = "SELECT m "
-                + "FROM Mascota m "
-                + "WHERE 1=1 ";
+        String query = "SELECT m FROM Mascota m WHERE 1=1 ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
@@ -39,9 +38,7 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
 
     @Override
     public int getResultMax(MascotaFiltroDTO filtro) {
-        String query =  "SELECT count(m) "
-                + "FROM Mascota m "
-                + "WHERE 1=1 ";
+        String query =  "SELECT count(m) FROM Mascota m WHERE 1=1 ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
@@ -52,12 +49,19 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
         }
         return typedQuery.getSingleResult().intValue();
     }
+
+    private Map<String,Object> getParameters(MascotaFiltroDTO filtro) {
+        Map<String,Object> parameters = new HashMap<>();
+
+        if (StringUtils.hasText(filtro.getTexto())) {
+            parameters.put("texto", "%" + filtro.getTexto().trim() + "%");
+        }
+
+        return parameters;
+    }
     private String getConditions(MascotaFiltroDTO filtro) {
         String queryConditions = "";
 
-        /*if (StringUtils.hasText(filtro.getRaza().getNombre())) {
-            queryConditions += " AND (m.raza.nombre LIKE :nombre) ";
-        }*/
         if (StringUtils.hasText(filtro.getTexto())) {
             queryConditions += " AND (m.nombre LIKE :texto )";
         }
@@ -65,22 +69,15 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
         return queryConditions;
     }
 
-    private Map<String,Object> getParameters(MascotaFiltroDTO filtro) {
-        Map<String,Object> parameters = new HashMap<>();
-
-        /*if (StringUtils.hasText(filtro.getRaza().getNombre())) {
-            parameters.put("nombre", "%" + filtro.getRaza().getNombre() + "%");
-        }*/
-        if (StringUtils.hasText(filtro.getTexto())) {
-            parameters.put("texto", "%" + filtro.getTexto().trim() + "%");
-        }
-
-        return parameters;
-    }
-
     private String getOrder(MascotaFiltroDTO filtro) {
         String orderQuery = " ORDER BY m.idMascota ";
-        //Posible futura ordenacion
+        List<String> orderParameters = Arrays.asList(" ");
+        if (StringUtils.hasText(filtro.getOrderBy()) && filtro.getOrderBy().equalsIgnoreCase("cc.nombreCanalComercial")) {
+            //orderQuery = "ORDER BY TRIM(UPPER(cc.nombreCanalComercial)) " + (filtro.getOrderDesc() ? " DESC" : " ASC");
+        } else if (StringUtils.hasText(filtro.getOrderBy()) && orderParameters.contains(filtro.getOrderBy())) {
+            orderQuery = "ORDER BY " + filtro.getOrderBy() + (filtro.getOrderDesc() ? " DESC" : " ASC");
+        }
+
         return orderQuery;
     }
 }

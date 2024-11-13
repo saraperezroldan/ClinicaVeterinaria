@@ -1,6 +1,10 @@
 package com.clinica.clinicaVeterinaria.business.consulta;
 
-public interface IConsultaRepositoryCustom {
+import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
+import com.clinica.clinicaVeterinaria.domain.filtros.ConsultaFiltroDTO;
+import java.util.List;
 
-    //añadir filtrado consultas (paginación)
+public interface IConsultaRepositoryCustom {
+    List<Consulta> findConsultasPorFiltro(ConsultaFiltroDTO filtro);
+    int getResultMax(ConsultaFiltroDTO filtro);
 }

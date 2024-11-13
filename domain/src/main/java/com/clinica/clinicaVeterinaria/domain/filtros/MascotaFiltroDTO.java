@@ -1,5 +1,6 @@
 package com.clinica.clinicaVeterinaria.domain.filtros;
 
-public class MascotaFiltroDTO extends BaseFiltroDTO{
+public class MascotaFiltroDTO extends BaseFiltroDTO {
+
 
 }

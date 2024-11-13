@@ -1,7 +1,11 @@
 package com.clinica.clinicaVeterinaria.business.consulta;
 
 import com.clinica.clinicaVeterinaria.domain.dtos.ConsultaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
+import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
+import com.clinica.clinicaVeterinaria.domain.filtros.ConsultaFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -50,6 +54,15 @@ public class ConsultaServiceImpl implements IConsultaService{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEncontrado");
         }
         return ConsultaDTO.toDTO(consultaEncontrada);
+    }
+
+    @Override
+    public PageableResult<ConsultaDTO> getConsultasConFiltro(ConsultaFiltroDTO filtro) {
+        List<Consulta> consultas = consultaRepository.findConsultasPorFiltro(filtro);
+        int resultMax = consultaRepository.getResultMax(filtro);
+        List<ConsultaDTO> consultasDTOs = ConsultaDTO.toDTO(consultas);
+
+        return new PageableResult<>(filtro.getPageNumber(),resultMax ,consultasDTOs);
     }
 
     @Override

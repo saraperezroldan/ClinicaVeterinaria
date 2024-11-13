@@ -37,17 +37,14 @@ public class MascotaControllerImpl implements IMascotaController{
     public ResponseEntity<PageableResult<MascotaDTO>> getMascotaConFiltro(MascotaFiltroDTO filtro) {
         return new ResponseEntity<>(mascotaService.getMascotaConFiltro(filtro), HttpStatus.OK);
     }
-
     @Override
     public ResponseEntity<MascotaDTO> crearMascota(MascotaDTO mascotaDTO) {
         return new ResponseEntity<>(mascotaService.crearMascota(mascotaDTO), HttpStatus.OK);
     }
-
     @Override
     public ResponseEntity<MascotaDTO> modificarMascota(MascotaDTO mascotaDTO) {
         return new ResponseEntity<>(mascotaService.modificarMascota(mascotaDTO), HttpStatus.OK);
     }
-
     @Override
     public ResponseEntity<MascotaDTO> eliminarMascota(int idMascota) {
         return new ResponseEntity<>(mascotaService.eliminarMascota(idMascota), HttpStatus.OK);

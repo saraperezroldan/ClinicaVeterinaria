@@ -1,27 +1,28 @@
-package com.clinica.clinicaVeterinaria.persistence.usuario;
+package com.clinica.clinicaVeterinaria.persistence.consulta;
 
-import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioRepositoryCustom;
-import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
-import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
+import com.clinica.clinicaVeterinaria.business.consulta.IConsultaRepositoryCustom;
+import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
+import com.clinica.clinicaVeterinaria.domain.filtros.ConsultaFiltroDTO;
 import com.clinica.clinicaVeterinaria.persistence.IBaseRepositoryImpl;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import javax.persistence.TypedQuery;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Repository
-public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsuarioRepositoryCustom {
+public class IConsultaRepositoryImpl extends IBaseRepositoryImpl implements IConsultaRepositoryCustom {
     @Override
-    public List<Usuario> findUsuarioPorFiltro(UsuarioFiltroDTO filtro) {
-        String query = "SELECT u FROM Usuario u WHERE 1=1 ";
+    public List<Consulta> findConsultasPorFiltro(ConsultaFiltroDTO filtro) {
+        String query = "SELECT c FROM Consulta c WHERE 1=1 ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
         String orderQuery = getOrder(filtro);
 
-        TypedQuery<Usuario> typedQuery = em.createQuery(query + queryConditions + orderQuery, Usuario.class);
+        TypedQuery<Consulta> typedQuery = em.createQuery(query + queryConditions + orderQuery, Consulta.class);
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {
             typedQuery.setParameter(entry.getKey(),entry.getValue());
         }
@@ -35,8 +36,8 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
     }
 
     @Override
-    public int getResultMax(UsuarioFiltroDTO filtro) {
-        String query =  "SELECT count(u) FROM Usuario u WHERE 1=1 ";
+    public int getResultMax(ConsultaFiltroDTO filtro) {
+        String query =  "SELECT count(c) FROM Consulta c WHERE 1=1 ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
@@ -48,39 +49,32 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
         return typedQuery.getSingleResult().intValue();
     }
 
-    private Map<String,Object> getParameters(UsuarioFiltroDTO filtro) {
+    private Map<String,Object> getParameters(ConsultaFiltroDTO filtro) {
         Map<String,Object> parameters = new HashMap<>();
-
+        if (filtro.getIdConsulta() > 0) {
+            parameters.put("idConsulta", + filtro.getIdConsulta());
+        }
         if (StringUtils.hasText(filtro.getTexto())) {
             parameters.put("texto", "%" + filtro.getTexto().trim() + "%");
         }
-        if (StringUtils.hasText(filtro.getDni())) {
-            parameters.put("u.dni", "%" + collateLiteral(filtro.getDni().trim()) + "%");
-        }
-        if (StringUtils.hasText(filtro.getEmail())) {
-            parameters.put("u.email", "%" + collateLiteral(filtro.getEmail().trim()) + "%");
-        }
-        if (StringUtils.hasText(filtro.getTelefono())) {
-            parameters.put("u.telefono", "%" + collateLiteral(filtro.getTelefono().trim()) + "%");
-        }
+
         return parameters;
     }
-
-
-    private String getConditions(UsuarioFiltroDTO filtro) {
+    private String getConditions(ConsultaFiltroDTO filtro) {
         StringBuilder queryConditions = new StringBuilder();
-
+        if (filtro.getIdConsulta() > 0) {
+            queryConditions.append(" AND (c.idConsulta IN :idConsulta)");
+        }
         if (StringUtils.hasText(filtro.getTexto())) {
-            queryConditions.append(" AND (m.nombre LIKE :texto)");
+            queryConditions.append(" AND (c.motivo LIKE :texto)");
         }
         return queryConditions.toString();
     }
 
+    private String getOrder(ConsultaFiltroDTO filtro) {
+        String orderQuery = " ORDER BY c.fechaAlta ";
+        List<String> orderParameters = Arrays.asList("");
 
-
-    private String getOrder(UsuarioFiltroDTO filtro) {
-        String orderQuery = " ORDER BY u.idUsuario ";
-        //Posible futura ordenacion
         return orderQuery;
     }
 }

@@ -2,6 +2,8 @@ package com.clinica.clinicaVeterinaria.rest.consulta;
 
 import com.clinica.clinicaVeterinaria.business.consulta.IConsultaService;
 import com.clinica.clinicaVeterinaria.domain.dtos.ConsultaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
+import com.clinica.clinicaVeterinaria.domain.filtros.ConsultaFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,13 @@ public class ConsultaControllerImpl implements IConsultaController {
     public ResponseEntity<ConsultaDTO> getConsultaById (int idConsulta) {
         return new ResponseEntity<>(consultaService.getConsultaById(idConsulta), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<PageableResult<ConsultaDTO>> getConsultasConFiltro(ConsultaFiltroDTO filtro) {
+        return new ResponseEntity<>(consultaService.getConsultasConFiltro(filtro), HttpStatus.OK);
+
+    }
+
     @Override
     public ResponseEntity<ConsultaDTO> crearConsulta(ConsultaDTO consultaDTO) {
         return new ResponseEntity<>(consultaService.crearConsulta(consultaDTO), HttpStatus.OK);

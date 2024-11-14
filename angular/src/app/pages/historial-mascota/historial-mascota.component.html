@@ -1,6 +1,9 @@
+<div class="icon-container-back">
+    <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
+</div>
 <div class="contenedor">
     <div class="icon-container">
-        <mat-icon>medical_information</mat-icon>
+        <mat-icon class="icon-medical">medical_information</mat-icon>
         <h1>Historial clínico de {{mascota.nombre}}</h1>
     </div>
 
@@ -13,7 +16,7 @@
 
         <ng-container matColumnDef="veterinario">
             <th mat-header-cell *matHeaderCellDef> Veterinario </th>
-            <td mat-cell *matCellDef="let element"> {{element.idVeterinario}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.nombreVeterinario}} </td>
         </ng-container>
 
         <ng-container matColumnDef="motivo">
@@ -28,13 +31,13 @@
 
         <ng-container matColumnDef="tratamiento">
             <th mat-header-cell *matHeaderCellDef> Tratamiento </th>
-            <td mat-cell *matCellDef="let element"> {{element.tratamiento}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.tratamientos}} </td>
         </ng-container>
 
         <ng-container matColumnDef="detalles">
             <th mat-header-cell *matHeaderCellDef> Detalles </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-raised-button  class="btn-mas-detalles" color="primary" [routerLink]="['/usuario/info-cliente', element.idUsuario]">
+                <button mat-raised-button  class="btn-mas-detalles" color="primary" [routerLink]="['/usuario/historial-mascota-detallado', element.idConsulta]">
                     <span class="material-icons">add</span> Más detalles
                 </button>
             </td>

@@ -5,7 +5,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ConsultaService} from "../../services/consulta.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {TratamientoService} from "../../services/tratamiento.service";
-import {forkJoin, map, switchMap} from "rxjs";
+import {catchError, forkJoin, map, of, switchMap} from "rxjs";
+import {UsuarioService} from "../../services/usuario.service";
+import {Usuario} from "../../models/usuario.model";
+import {Consulta} from "../../models/consulta.model";
+import {Tratamiento} from "../../models/tratamiento.model";
 
 @Component({
   selector: 'app-historial-mascota',
@@ -23,6 +27,7 @@ export class HistorialMascotaComponent implements OnInit{
   constructor(private mascotaService : MascotaService,
               private consultaService : ConsultaService,
               private tratamientoService : TratamientoService,
+              private usuarioService : UsuarioService,
               private  route : ActivatedRoute,
               private ruta: Router) { }
 
@@ -42,14 +47,49 @@ export class HistorialMascotaComponent implements OnInit{
     );
   }
 
-  cargarConsultas(): void {
-      this.consultaService.getConsultasByMascota(this.idMascota).subscribe(
-            (consultas: any) => {
-                this.dataSource.data = consultas;
+    cargarConsultas(): void {
+        this.consultaService.getConsultasByMascota(this.idMascota).pipe(
+            switchMap((consultas: Consulta[]) => {
+                const consultaObservables = consultas.map((consulta: Consulta) =>
+                    this.usuarioService.getUsuarioById(consulta.idVeterinario).pipe(
+                        switchMap((veterinario: Usuario) =>
+                            this.tratamientoService.getTratamientosByIdConsulta(consulta.idConsulta).pipe(
+                                switchMap((tratamientos: Tratamiento[]) => {
+                                    if (tratamientos.length === 0) {
+                                        // Retornar un observable que contiene "Sin tratamiento"
+                                        return [{ ...consulta, nombreVeterinario: veterinario.nombre, tratamientos: 'Sin tratamiento' }];
+                                    }
+
+                                    const tratamientoObservables = tratamientos.map((tratamiento: Tratamiento) =>
+                                        this.tratamientoService.getTratamientoById(tratamiento.idTratamiento).pipe(
+                                            map((tratamientoInfo: Tratamiento) => tratamientoInfo.nombre)
+                                        )
+                                    );
+
+                                    return forkJoin(tratamientoObservables).pipe(
+                                        map((nombresTratamientos: string[]) => ({
+                                            ...consulta,
+                                            nombreVeterinario: veterinario.nombre,
+                                            tratamientos: nombresTratamientos.join(', ')
+                                        }))
+                                    );
+                                })
+                            )
+                        )
+                    )
+                );
+                return forkJoin(consultaObservables);
+            })
+        ).subscribe(
+            (consultasConVeterinarioYTratamiento) => {
+                console.log('Consultas con veterinario y tratamiento:', consultasConVeterinarioYTratamiento);
+                this.dataSource.data = consultasConVeterinarioYTratamiento;
             }
-      )
+        );
+    }
+
+
+  goBack(){
+      window.history.back();
   }
-
-
-
 }

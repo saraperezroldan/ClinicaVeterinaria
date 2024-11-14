@@ -35,6 +35,7 @@ import { InfoVeterinarioComponent } from './pages/info-veterinario/info-veterina
 import { GestionInfoMascotasComponent } from './pages/gestion-info-mascotas/gestion-info-mascotas.component';
 import {NgSelectModule} from "@ng-select/ng-select";
 import { HistorialMascotaComponent } from './pages/historial-mascota/historial-mascota.component';
+import { HistorialMascotaDetalladoComponent } from './pages/historial-mascota-detallado/historial-mascota-detallado.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { HistorialMascotaComponent } from './pages/historial-mascota/historial-m
     InfoVeterinarioComponent,
     GestionInfoMascotasComponent,
     HistorialMascotaComponent,
+    HistorialMascotaDetalladoComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@
 
 .icon-container {
     display: flex;
-    margin-top: 5%;
+    margin-top: 6%;
     align-items: center;
     justify-content: center;
     margin-bottom: 2%;
@@ -21,7 +21,7 @@ h1 {
     margin: 0;
 }
 
-mat-icon {
+.icon-medical {
     font-size: 38px;
     line-height: 30px;
     color: #626161;
@@ -29,7 +29,7 @@ mat-icon {
     vertical-align: middle;
 }
 
-.icon-container mat-icon {
+.icon-container .icon-medical {
     width: 38px;
     height: 38px;
     display: flex;
@@ -51,7 +51,6 @@ mat-icon {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
     border : 1px solid #ccc;
 }
 
@@ -67,3 +66,21 @@ table th{
     background-color: #eaeaea;
     color: #4a4a4a;
 }
+
+.icon-container-back{
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.back-icon {
+    font-size: 35px;
+    cursor: pointer;
+    color: #8cb4d2;
+    padding: 7px;
+}
+

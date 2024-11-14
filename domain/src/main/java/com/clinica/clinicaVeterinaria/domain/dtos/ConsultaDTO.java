@@ -18,6 +18,7 @@ public class ConsultaDTO {
     private LocalDate fechaCita;
     private Date fechaAlta;
     private Date fechaUltima;
+    private int idVeterinario;
     private Integer mascota;
     private List<ConsultaTratamientoDTO> tratamientosConsulta;
 
@@ -34,12 +35,13 @@ public class ConsultaDTO {
 
         consultaDTO.setIdConsulta(consulta.getIdConsulta());
         consultaDTO.setMotivo(consulta.getMotivo());
-        consultaDTO.setDiagnostico(consultaDTO.getDiagnostico());
+        consultaDTO.setDiagnostico(consulta.getDiagnostico());
         consultaDTO.setObservaciones(consulta.getObservaciones());
         consultaDTO.setEsCita(consulta.getEsCita());
-        consultaDTO.setFechaCita(consulta.getFechaCita());
-        consultaDTO.setFechaAlta(consulta.getFechaAlta());
-        consultaDTO.setFechaUltima(consulta.getFechaUltima());
+        consultaDTO.setFechaCita(consulta.getFechaCita()!= null ? consulta.getFechaCita() : null);
+        consultaDTO.setFechaAlta(consulta.getFechaAlta()!= null ? consulta.getFechaAlta() : new Date());
+        consultaDTO.setFechaUltima(consulta.getFechaUltima()!= null ? consulta.getFechaUltima() : null);
+        consultaDTO.setIdVeterinario(consulta.getIdVeterinario() > 0 ? consulta.getIdVeterinario() : 1003);
         consultaDTO.setMascota(consulta.getMascota() != null ? consulta.getMascota().getIdMascota() : null);
 
         return consultaDTO;
@@ -80,6 +82,7 @@ public class ConsultaDTO {
         consulta.setFechaCita(consultaDTO.getFechaCita());
         consulta.setFechaAlta(consultaDTO.getFechaAlta());
         consulta.setFechaUltima(consultaDTO.getFechaUltima());
+        consulta.setIdVeterinario(consultaDTO.getIdVeterinario());
         Mascota mascota = new Mascota();
         mascota.setIdMascota(consultaDTO.getMascota());
         consulta.setMascota(mascota);
@@ -134,6 +137,9 @@ public class ConsultaDTO {
     }
     public Integer getMascota() {return mascota;}
     public void setMascota(Integer mascota) {this.mascota = mascota;}
+    public int getIdVeterinario() {return idVeterinario;}
+    public void setIdVeterinario(int idVeterinario) {this.idVeterinario = idVeterinario;}
+
     public List<ConsultaTratamientoDTO> getTratamientosConsulta() {
         return tratamientosConsulta;
     }

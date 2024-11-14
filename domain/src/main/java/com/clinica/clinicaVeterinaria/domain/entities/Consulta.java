@@ -19,6 +19,8 @@ public class Consulta {
     private LocalDate fechaCita;
     private Date fechaUltima;
 
+    private int idVeterinario;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_mascota")
     private Mascota mascota;
@@ -46,6 +48,13 @@ public class Consulta {
     public Date getFechaUltima() {return fechaUltima;}
 
     public void setFechaUltima(Date fechaUltima) {this.fechaUltima= fechaUltima;}
+
+    public int getIdVeterinario() {
+        return idVeterinario;
+    }
+    public void setIdVeterinario(int idVeterinario) {
+        this.idVeterinario = idVeterinario;
+    }
 
     public Mascota getMascota() {return mascota;}
 

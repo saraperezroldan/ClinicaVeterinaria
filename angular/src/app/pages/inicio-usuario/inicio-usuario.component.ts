@@ -21,7 +21,7 @@ export class InicioUsuarioComponent implements OnInit{
       this.usuario = JSON.parse(usuarioJSON);
       this.mascotaService.getMascotasByUsuarioId(this.usuario.idUsuario).subscribe(
         (mascotas) => {
-          this.mascotas = mascotas;
+          this.mascotas = mascotas.filter(mascota => mascota.activo === 1);
         }
       );
     }

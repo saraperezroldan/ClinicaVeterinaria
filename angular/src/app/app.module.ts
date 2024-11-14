@@ -34,6 +34,7 @@ import { ConfirmDeleteVeterinarioComponent } from './shared/confirm-delete-veter
 import { InfoVeterinarioComponent } from './pages/info-veterinario/info-veterinario.component';
 import { GestionInfoMascotasComponent } from './pages/gestion-info-mascotas/gestion-info-mascotas.component';
 import {NgSelectModule} from "@ng-select/ng-select";
+import { HistorialMascotaComponent } from './pages/historial-mascota/historial-mascota.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {NgSelectModule} from "@ng-select/ng-select";
     ConfirmDeleteVeterinarioComponent,
     InfoVeterinarioComponent,
     GestionInfoMascotasComponent,
+    HistorialMascotaComponent,
   ],
   imports: [
     BrowserModule,

@@ -83,6 +83,15 @@ h2 {
   width: 55%;
 }
 
+.half-width input:focus {
+  outline: none;
+  border: 1px solid #8cb4d2;
+  box-shadow: none;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: white !important;
+}
+
 .container-mascotas{
   width: 60%;
   margin: auto;
@@ -207,6 +216,37 @@ h2 {
   color: white;
 }
 
+form {
+  width: 100%;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: black;
+  --mdc-radio-disabled-unselected-icon-color: black;
+  --mdc-radio-unselected-hover-icon-color: #212121;
+  --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-selected-focus-icon-color: #8cb4d2;
+  --mdc-radio-selected-hover-icon-color: #8cb4d2;
+  --mdc-radio-selected-icon-color: #8cb4d2;
+  --mdc-radio-selected-pressed-icon-color: #8cb4d2;
+  --mat-radio-ripple-color: black;
+  --mat-radio-checked-ripple-color: #8cb4d2;
+  --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
+}
 
 
+.half-width input:-webkit-autofill,
+.half-width input:-webkit-autofill:focus {
+  background-color: #FFF !important;
+  -webkit-box-shadow: 0 0 0px 1000px #FFF inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.errorMensaje {
+  color: red;
+  font-size: 12px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
 

@@ -19,4 +19,8 @@ export class ConsultaService{
         return this.http.get<any>(`${URLSERVER}consulta/getConsultasByIdMascota/${idMascota}`);
     }
 
+    getConsultaById(idConsulta: number) : Observable<any>{
+        return this.http.get<any>(`${URLSERVER}consulta/getConsultaById/${idConsulta}`);
+    }
+
 }

@@ -34,7 +34,7 @@ mat-icon{
 
 
 .container {
-  border: 1px solid #ccc;
+  border: 1px solid #dadada;
   background-color: #EFEFEF;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -49,8 +49,8 @@ mat-icon{
   background-color: #f7f9fc;
   padding: 10px;
   text-align: center;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
   max-height: 100px;
   flex: none;
 }

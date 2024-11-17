@@ -74,22 +74,26 @@ h1 {
     flex-direction: column;
     width: 60%;
     height: 100%;
-    margin-bottom: 2%;
     margin-left: 2%;
+    margin-right: 2%;
+    overflow:auto;
+    box-sizing: border-box;
+
 }
 
 .tratamientos{
-    width: 30%;
+    width: 25%;
     border-collapse: collapse;
+    margin-right: 2%;
 }
 
 .tratamientos table {
     width: 100%;
     border-collapse: collapse;
+    border: 1px solid #ccc;
 }
 
 .tratamientos th, .tratamientos td {
-    border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
 }
@@ -121,24 +125,41 @@ input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: calc(100% - 120px);
+    width: 100%;
     margin-bottom: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    background-color: white;
+}
+
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    background-color: white;
 }
 
 .container-data-mascota {
     display: flex;
     flex-direction: row;
-    width: auto;
+    width: 100%;
+    gap: 20px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex: 1;
 }
 
 .form-group input{
-    width: 80%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 

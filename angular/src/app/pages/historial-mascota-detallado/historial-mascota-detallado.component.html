@@ -7,4 +7,61 @@
         <mat-icon class="icon-list">list_alt</mat-icon>
         <h1>Detalles de la consulta</h1>
     </div>
+
+    <div class="container-data">
+        <div class="info-consulta">
+
+            <div class="container-data-mascota">
+
+                <div class="form-group">
+                    <label for="mascota">Mascota</label>
+                    <input type="text" id="mascota" [(ngModel)]="consulta.mascota" name="mascota" required>
+                </div>
+                <div class="form-group">
+                    <label for="diagnostico">Fecha</label>
+                    <input type="text" id="fecha" [(ngModel)]="consulta.fechaCita" name="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label for="veterinario">Veterinario</label>
+                    <input type="text" id="veterinario" [(ngModel)]="consulta.veterinario" name="veterinario" required>
+                </div>
+
+            </div>
+
+            <label for="diagnostico">Diagnóstico</label>
+            <input type="text" id="diagnostico" [(ngModel)]="consulta.diagnostico" name="diagnostico" required>
+
+            <label for="observaciones">Observaciones</label>
+            <input type="text" id="observaciones" [(ngModel)]="consulta.observaciones" name="observaciones" required>
+
+        </div>
+        <div class="tratamientos">
+
+            <h3>Detalle tratamientos:</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Tratamiento</th>
+                    <th>Precio</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let tratamiento of tratamientos">
+                    <td>
+                        <img [src]="tratamiento.icono" alt="Icono" class="icono" />
+                        {{ tratamiento.nombre }}
+                    </td>
+                    <td>{{ tratamiento.precio | currency:'EUR' }}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td>{{ total | currency:'EUR' }}</td>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
 </div>

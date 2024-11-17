@@ -14,11 +14,11 @@
 }
 
 .container {
-    border: 1px solid #ccc;
+    border: 1px solid #dadada;
     background-color: #EFEFEF;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 80%;
     margin: auto;
     margin-top: 3%;
@@ -28,8 +28,11 @@
 .titulo {
     display: flex;
     width: 100%;
-    margin-bottom: 2%;
-    background-color: #c0bfbf;
+    height: 10%;
+    background-color: #dadada;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
 }
 
 h1 {
@@ -55,3 +58,87 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+.container-data{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:2%;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+}
+
+.info-consulta {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+}
+
+.tratamientos{
+    width: 30%;
+    border-collapse: collapse;
+}
+
+.tratamientos table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tratamientos th, .tratamientos td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.tratamientos th {
+    background-color: #f0f0f0;
+}
+
+.tratamientos tfoot td {
+    font-weight: bold;
+}
+
+.icono {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+label {
+    width: 100px;
+    text-align: left;
+    margin-right: 5px;
+    line-height: 35px;
+    display: inline-block;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 120px);
+    margin-bottom: 10px;
+}
+
+.container-data-mascota {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-group input{
+    width: 80%;
+}
+
+

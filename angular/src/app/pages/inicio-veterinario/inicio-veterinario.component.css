@@ -73,11 +73,11 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  border : 1px solid #ccc;
+  border : 1px solid #dadada;
 }
 
 table th, table td {
-  border: 1px solid #ccc;
+  border: 1px solid #dadada;
   padding: 10px;
   text-align: center;
   font-family: 'Arial', sans-serif;

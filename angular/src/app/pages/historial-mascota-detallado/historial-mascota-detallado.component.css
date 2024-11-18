@@ -1,0 +1,165 @@
+.icon-container{
+    width: auto;
+    height: auto;
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.back-icon {
+    font-size: 35px;
+    cursor: pointer;
+    color: #8cb4d2;
+    padding: 7px;
+}
+
+.container {
+    border: 1px solid #dadada;
+    background-color: #EFEFEF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    margin-top: 3%;
+    font-family: 'Arial', sans-serif;
+}
+
+.titulo {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    background-color: #dadada;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 25px;
+    color: #626161;
+    margin: 0;
+}
+
+.icon-list {
+    font-size: 38px;
+    line-height: 30px;
+    color: #626161;
+    margin-right: 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.titulo .icon-list {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-data{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:2%;
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+}
+
+.info-consulta {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
+    overflow:auto;
+    box-sizing: border-box;
+
+}
+
+.tratamientos{
+    width: 25%;
+    border-collapse: collapse;
+    margin-right: 2%;
+}
+
+.tratamientos table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.tratamientos th, .tratamientos td {
+    padding: 10px;
+    text-align: left;
+}
+
+.tratamientos th {
+    background-color: #f0f0f0;
+}
+
+.tratamientos tfoot td {
+    font-weight: bold;
+}
+
+.icono {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+label {
+    width: 100px;
+    text-align: left;
+    margin-right: 5px;
+    line-height: 35px;
+    display: inline-block;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    background-color: white;
+}
+
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    background-color: white;
+}
+
+.container-data-mascota {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.form-group input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+

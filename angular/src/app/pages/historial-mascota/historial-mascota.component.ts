@@ -56,7 +56,6 @@ export class HistorialMascotaComponent implements OnInit{
                             this.tratamientoService.getTratamientosByIdConsulta(consulta.idConsulta).pipe(
                                 switchMap((tratamientos: Tratamiento[]) => {
                                     if (tratamientos.length === 0) {
-                                        // Retornar un observable que contiene "Sin tratamiento"
                                         return [{ ...consulta, nombreVeterinario: veterinario.nombre, tratamientos: 'Sin tratamiento' }];
                                     }
 

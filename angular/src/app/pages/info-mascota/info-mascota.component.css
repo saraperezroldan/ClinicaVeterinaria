@@ -1,5 +1,5 @@
 .container {
-  border: 1px solid #ccc;
+  border: 1px solid #dadada;
   background-color: #EFEFEF;
   display: flex;
   width: 800px;
@@ -18,8 +18,8 @@
   background-color: #f7f9fc;
   padding: 10px;
   text-align: center;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
   max-height: 25%;
   margin-bottom: 7%;
 }
@@ -80,9 +80,9 @@
 h2 {
   margin-top: 0;
   margin-bottom: 0;
-  border: 1px solid #ccc;
+  border: 1px solid #dadada;
   color: #555;
-  background-color: #ccc;
+  background-color: #dadada;
   padding: 10px;
 }
 

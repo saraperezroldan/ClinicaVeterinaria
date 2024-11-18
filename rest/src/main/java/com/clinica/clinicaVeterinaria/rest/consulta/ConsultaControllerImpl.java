@@ -24,21 +24,30 @@ public class ConsultaControllerImpl implements IConsultaController {
         return new ResponseEntity<>(consultaService.getCitasByIdMascota(idMascota), HttpStatus.OK);
 
     }
-
+    @Override
+    public ResponseEntity<List<ConsultaDTO>>getVacunasByIdMascota(int idMascota) {
+        return new ResponseEntity<>(consultaService.getVacunasByIdMascota(idMascota), HttpStatus.OK);
+    }
     @Override
     public ResponseEntity<ConsultaDTO> getConsultaById (int idConsulta) {
         return new ResponseEntity<>(consultaService.getConsultaById(idConsulta), HttpStatus.OK);
     }
 
     @Override
+    public ResponseEntity<ConsultaDTO> getCitaById (int idCita) {
+        return new ResponseEntity<>(consultaService.getCitaById(idCita), HttpStatus.OK);
+    }
+    @Override
     public ResponseEntity<PageableResult<ConsultaDTO>> getConsultasConFiltro(ConsultaFiltroDTO filtro) {
         return new ResponseEntity<>(consultaService.getConsultasConFiltro(filtro), HttpStatus.OK);
-
     }
-
     @Override
     public ResponseEntity<ConsultaDTO> crearConsulta(ConsultaDTO consultaDTO) {
         return new ResponseEntity<>(consultaService.crearConsulta(consultaDTO), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<ConsultaDTO> crearCita(ConsultaDTO citaDTO) {
+        return new ResponseEntity<>(consultaService.crearCita(citaDTO), HttpStatus.OK);
     }
     @Override
     public ResponseEntity<ConsultaDTO> modificarConsulta(ConsultaDTO consultaDTO) {

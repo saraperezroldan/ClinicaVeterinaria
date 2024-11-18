@@ -9,6 +9,7 @@ public class TratamientoDTO {
     private int idTratamiento;
     private String nombre;
     private String descripcion;
+    private int esVacuna;
     private float precio;
 
     public static TratamientoDTO toDTO(Tratamiento tratamiento){
@@ -21,6 +22,7 @@ public class TratamientoDTO {
         tratamientoDTO.setIdTratamiento(tratamiento.getIdTratamiento());
         tratamientoDTO.setNombre(tratamiento.getNombre());
         tratamientoDTO.setDescripcion(tratamiento.getDescripcion());
+        tratamientoDTO.setEsVacuna(tratamiento.getEsVacuna());
         tratamientoDTO.setPrecio(tratamiento.getPrecio());
 
         return tratamientoDTO;
@@ -46,6 +48,7 @@ public class TratamientoDTO {
         tratamiento.setIdTratamiento(tratamientoDTO.getIdTratamiento());
         tratamiento.setNombre(tratamientoDTO.getNombre());
         tratamiento.setDescripcion(tratamientoDTO.getDescripcion());
+        tratamiento.setEsVacuna(tratamientoDTO.getEsVacuna());
         tratamiento.setPrecio(tratamientoDTO.getPrecio());
 
         return tratamiento;
@@ -61,35 +64,29 @@ public class TratamientoDTO {
                 .collect(Collectors.toList());
     }
 
-
     public int getIdTratamiento() {
         return idTratamiento;
     }
-
     public void setIdTratamiento(int idTratamiento) {
         this.idTratamiento = idTratamiento;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    public int getEsVacuna() {return esVacuna;}
+    public void setEsVacuna(int esVacuna) {this.esVacuna = esVacuna;}
     public float getPrecio() {
         return precio;
     }
-
     public void setPrecio(float precio) {
         this.precio = precio;
     }

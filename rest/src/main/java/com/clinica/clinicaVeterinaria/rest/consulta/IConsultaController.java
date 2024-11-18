@@ -16,12 +16,18 @@ public interface IConsultaController {
     ResponseEntity<List<ConsultaDTO>>getConsultasByIdMascota(@PathVariable("id") int idMascota);
     @GetMapping("getCitasByIdMascota/{id}")
     ResponseEntity<List<ConsultaDTO>>getCitasByIdMascota(@PathVariable("id") int idMascota);
+    @GetMapping("getVacunasByIdMascota/{id}")
+    ResponseEntity<List<ConsultaDTO>> getVacunasByIdMascota(@PathVariable("id") int idMascota);
     @GetMapping("getConsultaById/{id}")
     ResponseEntity<ConsultaDTO> getConsultaById(@PathVariable("id") int idConsulta);
+    @GetMapping("getCitaById/{id}")
+    ResponseEntity<ConsultaDTO> getCitaById(@PathVariable("id") int idCita);
     @PostMapping("getConsultasConFiltro")
     ResponseEntity<PageableResult<ConsultaDTO>> getConsultasConFiltro (@RequestBody ConsultaFiltroDTO filtro);
     @PostMapping("crearConsulta")
     ResponseEntity<ConsultaDTO> crearConsulta(@RequestBody ConsultaDTO consultaDTO);
+    @PostMapping("crearCita")
+    ResponseEntity<ConsultaDTO> crearCita(@RequestBody ConsultaDTO citaDTO);
     @PostMapping("modificarConsulta")
     ResponseEntity<ConsultaDTO> modificarConsulta(@RequestBody ConsultaDTO ConsultaDTO);
     @DeleteMapping("eliminarConsulta/{id}")

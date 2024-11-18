@@ -1,6 +1,8 @@
 package com.clinica.clinicaVeterinaria.domain.entities;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
@@ -18,4 +20,5 @@ public class ConsultaTratamientoID implements Serializable {
     public int getIdTratamiento() {return idTratamiento;}
 
     public void setIdTratamiento(int idTratamiento) {this.idTratamiento = idTratamiento;}
+
 }

@@ -1,12 +1,13 @@
 package com.clinica.clinicaVeterinaria.domain.dtos;
 
 import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
+import com.clinica.clinicaVeterinaria.domain.entities.ConsultaTratamiento;
+import com.clinica.clinicaVeterinaria.domain.entities.ConsultaTratamientoID;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
+import org.springframework.util.StringUtils;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ConsultaDTO {
@@ -15,9 +16,10 @@ public class ConsultaDTO {
     private String diagnostico;
     private String observaciones;
     private int esCita;
-    private LocalDate fechaCita;
+    private LocalDate fechaCitaConsulta;
     private Date fechaAlta;
     private Date fechaUltima;
+    private LocalTime horaCita; //TIME
     private int idVeterinario;
     private Integer mascota;
     private List<ConsultaTratamientoDTO> tratamientosConsulta;
@@ -34,16 +36,30 @@ public class ConsultaDTO {
         }
 
         consultaDTO.setIdConsulta(consulta.getIdConsulta());
-        consultaDTO.setMotivo(consulta.getMotivo());
-        consultaDTO.setDiagnostico(consulta.getDiagnostico());
-        consultaDTO.setObservaciones(consulta.getObservaciones());
+        consultaDTO.setMotivo(StringUtils.hasText(consulta.getMotivo()) ? consulta.getMotivo().trim() : "");
+        consultaDTO.setDiagnostico(StringUtils.hasText(consulta.getDiagnostico()) ? consulta.getDiagnostico().trim() : "");
+        consultaDTO.setObservaciones(StringUtils.hasText(consulta.getObservaciones()) ? consulta.getObservaciones().trim() : "");
         consultaDTO.setEsCita(consulta.getEsCita());
-        consultaDTO.setFechaCita(consulta.getFechaCita()!= null ? consulta.getFechaCita() : null);
+        consultaDTO.setFechaCitaConsulta(consulta.getFechaCitaConsulta()!= null ? consulta.getFechaCitaConsulta() : null);
+        consultaDTO.setHoraCita(consulta.getHoraCita()!= null ? consulta.getHoraCita() : null);
         consultaDTO.setFechaAlta(consulta.getFechaAlta()!= null ? consulta.getFechaAlta() : new Date());
         consultaDTO.setFechaUltima(consulta.getFechaUltima()!= null ? consulta.getFechaUltima() : null);
         consultaDTO.setIdVeterinario(consulta.getIdVeterinario() > 0 ? consulta.getIdVeterinario() : 1003);
         consultaDTO.setMascota(consulta.getMascota() != null ? consulta.getMascota().getIdMascota() : null);
+        Set<ConsultaTratamiento> tratamientos = consulta.getTratamientosConsulta();
+        if (!tratamientos.isEmpty() && tratamientos.size() > 0) {
+            List<ConsultaTratamientoDTO> tratamientosDTO = tratamientos.stream()
+                    .map(tratamiento -> {
+                        ConsultaTratamientoDTO dto = new ConsultaTratamientoDTO();
 
+                        dto.setIdTratamiento(tratamiento.getId().getIdTratamiento());
+                        dto.setIdConsulta(tratamiento.getId().getIdConsulta());
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
+
+            consultaDTO.setTratamientosConsulta(tratamientosDTO);
+        }
         return consultaDTO;
     }
 
@@ -70,22 +86,39 @@ public class ConsultaDTO {
     public static Consulta toDomain(ConsultaDTO consultaDTO){
         Consulta consulta = new Consulta();
 
-        if(consultaDTO == null){
+        if (consultaDTO == null){
             return null;
         }
 
         consulta.setIdConsulta(consultaDTO.getIdConsulta());
-        consulta.setMotivo(consultaDTO.getMotivo());
-        consulta.setDiagnostico(consultaDTO.getDiagnostico());
-        consulta.setObservaciones(consultaDTO.getObservaciones());
+        consulta.setMotivo(StringUtils.hasText(consultaDTO.getMotivo()) ? consultaDTO.getMotivo().trim() : "");
+        consulta.setDiagnostico(StringUtils.hasText(consultaDTO.getDiagnostico()) ? consultaDTO.getDiagnostico().trim() : "");
+        consulta.setObservaciones(StringUtils.hasText(consultaDTO.getObservaciones()) ? consultaDTO.getObservaciones().trim() : "");
         consulta.setEsCita(consultaDTO.getEsCita());
-        consulta.setFechaCita(consultaDTO.getFechaCita());
+        consulta.setFechaCitaConsulta(consultaDTO.getFechaCitaConsulta());
+        consulta.setHoraCita(consultaDTO.getHoraCita());
         consulta.setFechaAlta(consultaDTO.getFechaAlta());
         consulta.setFechaUltima(consultaDTO.getFechaUltima());
         consulta.setIdVeterinario(consultaDTO.getIdVeterinario());
         Mascota mascota = new Mascota();
         mascota.setIdMascota(consultaDTO.getMascota());
         consulta.setMascota(mascota);
+        List<ConsultaTratamientoDTO> tratamientosDTO = consultaDTO.getTratamientosConsulta();
+        if (tratamientosDTO != null) {
+            Set<ConsultaTratamiento> tratamientos = tratamientosDTO.stream()
+                    .map(tratamientoDTO -> {
+                        ConsultaTratamiento tratamiento = new ConsultaTratamiento();
+                        ConsultaTratamientoID id = new ConsultaTratamientoID();
+                        id.setIdTratamiento(tratamientoDTO.getIdTratamiento());
+                        id.setIdConsulta(tratamientoDTO.getIdConsulta());
+                        tratamiento.setId(id);
+                        return tratamiento;
+                    })
+                    .collect(Collectors.toSet());
+            consulta.setTratamientosConsulta(tratamientos);
+        } else {
+            consulta.setTratamientosConsulta(new HashSet<>());
+        }
 
         return consulta;
     }
@@ -100,41 +133,24 @@ public class ConsultaDTO {
                 .collect(Collectors.toList());
     }
 
-
-    public int getIdConsulta() {
-        return idConsulta;
-    }
-    public void setIdConsulta(int idConsulta) {
-        this.idConsulta = idConsulta;
-    }
-    public String getMotivo() {
-        return motivo;
-    }
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-    public String getObservaciones() {
-        return observaciones;
-    }
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
+    public int getIdConsulta() {return idConsulta;}
+    public void setIdConsulta(int idConsulta) {this.idConsulta = idConsulta;}
+    public String getMotivo() {return motivo;}
+    public void setMotivo(String motivo) {this.motivo = motivo;}
+    public String getObservaciones() {return observaciones;}
+    public void setObservaciones(String observaciones) {this.observaciones = observaciones;}
     public String getDiagnostico() {return diagnostico;}
     public void setDiagnostico(String diagnostico) {this.diagnostico = diagnostico;}
     public int getEsCita() {return esCita;}
     public void setEsCita(int esCita) {this.esCita = esCita;}
-    public LocalDate getFechaCita() {return fechaCita;}
-    public void setFechaCita(LocalDate fechaCita) {this.fechaCita = fechaCita;}
+    public LocalDate getFechaCitaConsulta() {return fechaCitaConsulta;}
+    public void setFechaCitaConsulta(LocalDate fechaCitaConsulta) {this.fechaCitaConsulta = fechaCitaConsulta;}
+    public LocalTime getHoraCita() {return horaCita;}
+    public void setHoraCita(LocalTime horaCita) {this.horaCita = horaCita;}
     public Date getFechaAlta() {return fechaAlta;}
-    public void setFechaAlta(Date fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
-    public Date getFechaUltima() {
-        return fechaUltima;
-    }
-    public void setFechaUltima(Date fechaUltima) {
-        this.fechaUltima = fechaUltima;
-    }
+    public void setFechaAlta(Date fechaAlta) {this.fechaAlta = fechaAlta;}
+    public Date getFechaUltima() {return fechaUltima;}
+    public void setFechaUltima(Date fechaUltima) {this.fechaUltima = fechaUltima;}
     public Integer getMascota() {return mascota;}
     public void setMascota(Integer mascota) {this.mascota = mascota;}
     public int getIdVeterinario() {return idVeterinario;}

@@ -2,6 +2,7 @@ package com.clinica.clinicaVeterinaria.domain.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -16,9 +17,9 @@ public class Consulta {
     private String observaciones;
     private int esCita;
     private Date fechaAlta;
-    private LocalDate fechaCita;
+    private LocalDate fechaCitaConsulta;
+    private LocalTime horaCita;
     private Date fechaUltima;
-
     private int idVeterinario;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,7 +27,8 @@ public class Consulta {
     private Mascota mascota;
 
     //@OneToMany(mappedBy = "consulta", cascade = {CascadeType.REMOVE})
-    //private Set<ConsultaTratamiento> tratamientosConsulta;
+    @OneToMany(mappedBy = "consulta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<ConsultaTratamiento> tratamientosConsulta;
 
     public Consulta() {}
 
@@ -40,27 +42,22 @@ public class Consulta {
     public void setObservaciones(String observaciones) {this.observaciones = observaciones;}
     public int getEsCita() {return esCita;}
     public void setEsCita(int esCita) {this.esCita = esCita;}
-    public LocalDate getFechaCita() {return fechaCita;}
-    public void setFechaCita(LocalDate fechaCita) {this.fechaCita = fechaCita;}
     public Date getFechaAlta() {return fechaAlta;}
     public void setFechaAlta(Date fechaAlta) {this.fechaAlta = fechaAlta;}
-
     public Date getFechaUltima() {return fechaUltima;}
-
     public void setFechaUltima(Date fechaUltima) {this.fechaUltima= fechaUltima;}
-
+    public LocalDate getFechaCitaConsulta() {return fechaCitaConsulta;}
+    public void setFechaCitaConsulta(LocalDate fechaCitaConsulta) {this.fechaCitaConsulta = fechaCitaConsulta;}
+    public LocalTime getHoraCita() {return horaCita;}
+    public void setHoraCita(LocalTime horaCita) {this.horaCita = horaCita;}
     public int getIdVeterinario() {
         return idVeterinario;
     }
     public void setIdVeterinario(int idVeterinario) {
         this.idVeterinario = idVeterinario;
     }
-
     public Mascota getMascota() {return mascota;}
-
     public void setMascota(Mascota mascota) {this.mascota = mascota;}
-
-    //public Set<ConsultaTratamiento> getTratamientosConsulta() {return tratamientosConsulta;}
-
-    //public void setTratamientosConsulta(Set<ConsultaTratamiento> tratamientosConsulta) {this.tratamientosConsulta = tratamientosConsulta;}
+    public Set<ConsultaTratamiento> getTratamientosConsulta() {return tratamientosConsulta;}
+    public void setTratamientosConsulta(Set<ConsultaTratamiento> tratamientosConsulta) {this.tratamientosConsulta = tratamientosConsulta;}
 }

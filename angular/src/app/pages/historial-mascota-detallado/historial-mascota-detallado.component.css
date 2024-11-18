@@ -91,6 +91,11 @@ h1 {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #ccc;
+    background-color: white;
+}
+
+thead {
+    background-color: #ccc;
 }
 
 .tratamientos th, .tratamientos td {
@@ -141,6 +146,7 @@ textarea {
     box-sizing: border-box;
     flex-grow: 1;
     background-color: white;
+    font-family: 'Arial', sans-serif;
 }
 
 .container-data-mascota {
@@ -160,6 +166,14 @@ textarea {
 .form-group input{
     width: 100%;
     box-sizing: border-box;
+}
+
+.tratamientos label{
+  width: 100%;
+}
+
+tfoot{
+  border-top: 1px solid #ccc;
 }
 
 

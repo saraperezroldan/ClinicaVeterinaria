@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {map, switchMap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {ConsultaService} from "../../services/consulta.service";
 import {UsuarioService} from "../../services/usuario.service";

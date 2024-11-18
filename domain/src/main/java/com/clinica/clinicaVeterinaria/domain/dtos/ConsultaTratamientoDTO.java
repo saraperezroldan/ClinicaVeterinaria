@@ -10,6 +10,13 @@ public class ConsultaTratamientoDTO {
     private int idConsulta;
     private int idTratamiento;
     private float importe;
+    public ConsultaTratamientoDTO() {
+    }
+
+    public ConsultaTratamientoDTO( int idConsulta, int idTratamiento) {
+        this.idConsulta = idConsulta;
+        this.idTratamiento = idTratamiento;
+    }
 
     public static ConsultaTratamientoDTO toDTO(ConsultaTratamiento consultaTratamiento){
         return ConsultaTratamientoDTO.toDTO(consultaTratamiento, Arrays.asList(ConsultaDTO.class, TratamientoDTO.class));

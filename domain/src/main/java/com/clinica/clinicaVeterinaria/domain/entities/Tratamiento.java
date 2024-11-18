@@ -1,9 +1,7 @@
 package com.clinica.clinicaVeterinaria.domain.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tratamiento")
@@ -14,6 +12,7 @@ public class Tratamiento {
     private int idTratamiento;
     private String nombre;
     private String descripcion;
+    private int esVacuna;
     private float precio;
 
     public Tratamiento() {
@@ -34,6 +33,8 @@ public class Tratamiento {
     public void setNombre(String nombre) {this.nombre = nombre;}
     public String getDescripcion() {return descripcion;}
     public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
+    public int getEsVacuna() {return esVacuna;}
+    public void setEsVacuna(int esVacuna) {this.esVacuna = esVacuna;}
     public float getPrecio() {return precio;}
     public void setPrecio(float precio) {this.precio = precio;}
 }

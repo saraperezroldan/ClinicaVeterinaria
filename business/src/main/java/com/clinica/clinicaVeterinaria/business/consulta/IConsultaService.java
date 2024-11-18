@@ -12,9 +12,12 @@ public interface IConsultaService {
 
     List<ConsultaDTO> getConsultasByIdMascota(int idMascota);
     List<ConsultaDTO> getCitasByIdMascota(int idMascota);
+    List<ConsultaDTO> getVacunasByIdMascota (int idMascota);
     ConsultaDTO getConsultaById(int idConsulta);
+    ConsultaDTO getCitaById(int idCita);
     PageableResult<ConsultaDTO> getConsultasConFiltro(ConsultaFiltroDTO filtro);
     ConsultaDTO crearConsulta(ConsultaDTO consultaDTO);
+    ConsultaDTO crearCita(ConsultaDTO citaDTO);
     ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO);
     ConsultaDTO eliminarConsulta(int idConsulta);
 }

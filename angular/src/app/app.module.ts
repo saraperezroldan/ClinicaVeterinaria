@@ -36,6 +36,11 @@ import { GestionInfoMascotasComponent } from './pages/gestion-info-mascotas/gest
 import {NgSelectModule} from "@ng-select/ng-select";
 import { HistorialMascotaComponent } from './pages/historial-mascota/historial-mascota.component';
 import { HistorialMascotaDetalladoComponent } from './pages/historial-mascota-detallado/historial-mascota-detallado.component';
+import {HoraFormatPipe} from "./shared/pipes/HoraFormatPipe";
+import { ConfirmDeleteCitaComponent } from './shared/confirm-delete-cita/confirm-delete-cita.component';
+import { GestionCitasVeterinarioComponent } from './pages/gestion-citas-veterinario/gestion-citas-veterinario.component';
+import { GestionConsultasVeterinarioComponent } from './pages/gestion-consultas-veterinario/gestion-consultas-veterinario.component';
+import { NuevaConsultaComponent } from './pages/nueva-consulta/nueva-consulta.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +50,7 @@ import { HistorialMascotaDetalladoComponent } from './pages/historial-mascota-de
     InfoMascotaComponent,
     DateFormatPipe,
     EdadFormatPipe,
+    HoraFormatPipe,
     CabeceraComponent,
     LoginComponent,
     InicioVeterinarioComponent,
@@ -60,6 +66,10 @@ import { HistorialMascotaDetalladoComponent } from './pages/historial-mascota-de
     GestionInfoMascotasComponent,
     HistorialMascotaComponent,
     HistorialMascotaDetalladoComponent,
+    ConfirmDeleteCitaComponent,
+    GestionCitasVeterinarioComponent,
+    GestionConsultasVeterinarioComponent,
+    NuevaConsultaComponent,
   ],
   imports: [
     BrowserModule,

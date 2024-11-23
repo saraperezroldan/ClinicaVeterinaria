@@ -13,6 +13,35 @@
       </div>
       <div class="container-data">
         <h2 [routerLink]="['/usuario/info-mascota', mascota.idMascota]">{{mascota.nombre}}</h2>
+        <div class="container-citas">
+
+          <div *ngIf="mascota.citas && mascota.citas.length > 0; else noCitas">
+
+            <div *ngFor="let cita of mascota.citas" class="cita">
+
+              <div>
+                <p>Próxima cita: </p>
+                <div class="fecha">
+                  <mat-icon>event</mat-icon> <strong>Fecha:</strong> {{ cita.fechaCitaConsulta | date:'dd/MM/yyyy' }}<br />
+                  <mat-icon>schedule</mat-icon> <strong>Hora:</strong> {{ cita.horaCita | horaFormato }}<br />
+                </div>
+                <div class="fecha">
+                  <mat-icon>assignment</mat-icon> <strong>Motivo:</strong> {{ cita.motivo }}
+                </div>
+              </div>
+              <button class="boton-cancelar" (click)="eliminarCita(cita.idConsulta)">Cancelar</button>
+            </div>
+            <button class="boton-nueva-cita">Nueva cita</button>
+
+          </div>
+          <ng-template #noCitas>
+            <p class="no-citas-mensaje">No tiene citas pendientes.</p>
+            <button class="boton-nueva-cita">Nueva cita</button>
+          </ng-template>
+
+
+
+        </div>
       </div>
 
     </div>

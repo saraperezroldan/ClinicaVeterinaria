@@ -12,14 +12,14 @@
   min-height: 50px;
 }
 
-p{
+.titulo p{
   margin-left: 5px;
   font-size: 25px;
   margin: 0;
   line-height: 1.2;
 }
 
-mat-icon{
+.titulo mat-icon{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -97,3 +97,89 @@ h2 {
   height: 85%;
   object-fit: contain;
 }
+
+.no-citas-mensaje {
+  color: #666;
+  font-family: 'Arial', sans-serif;
+  margin-top: 15px;
+  margin-left: 15px;
+  font-size: 14px;
+}
+
+.container-citas{
+  margin-bottom: 20px;
+}
+
+.cita{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #dadada;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.boton-cancelar{
+  background-color: #ffb7b7;
+  color: #626161;
+  letter-spacing: normal;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 7px 15px;
+  margin-right: 30px;
+  border: none;
+}
+
+.boton-cancelar:hover {
+  background-color: #ff9999;
+}
+
+.boton-nueva-cita{
+  background-color: #A5D6A7;
+  color: #626161;
+  letter-spacing: normal;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 7px 15px;
+  margin-right: 20px;
+  margin-top: 20px;
+  border: none;
+  display: flex;
+  float: right;
+}
+
+.boton-nueva-cita:hover {
+  background-color: #91d094;
+}
+
+.fecha{
+  display: flex;
+  align-items: center;
+  font-family: 'Georgia', serif;
+  margin-top: 3%;
+  min-height: 20px;
+}
+
+.fecha mat-icon{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+  box-sizing: content-box;
+  overflow: visible;
+  font-size: 20px;
+  color: #626161;
+  margin-right: 2px;
+  margin-left: 5px;
+}
+
+strong{
+  margin-right: 5px;
+}
+

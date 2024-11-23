@@ -23,4 +23,8 @@ export class ConsultaService{
         return this.http.get<any>(`${URLSERVER}consulta/getConsultaById/${idConsulta}`);
     }
 
+    getCitasByIdMascota(idMascota: number) : Observable<any>{
+        return this.http.get<any>(`${URLSERVER}consulta/getCitasByIdMascota/${idMascota}`);
+    }
+
 }

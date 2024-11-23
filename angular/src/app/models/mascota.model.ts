@@ -1,5 +1,6 @@
 import {Usuario} from "./usuario.model";
 import {Raza} from "./raza.model";
+import {Consulta} from "./consulta.model";
 
 export interface Mascota{
     idMascota: number;
@@ -16,4 +17,5 @@ export interface Mascota{
     usuario: number;
     raza: Raza;
     activo : number;
+    citas? : Consulta[];
 }

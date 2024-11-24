@@ -10,5 +10,4 @@ public interface ITratamientoRepository extends JpaRepository<Tratamiento, Integ
 
     @Query("SELECT t FROM Tratamiento t WHERE t.idTratamiento = :idTratamiento")
     Tratamiento findTratamientoById (int idTratamiento);
-
 }

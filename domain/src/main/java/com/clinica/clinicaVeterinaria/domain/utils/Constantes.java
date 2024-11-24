@@ -24,6 +24,13 @@ public class Constantes {
     public static int MASCOR_DNI_MAX = 9;
     public static int MASCOTA_DIRECCION_MAX = 150;
 
+    /*TRATAMIENTO*/
+    public static int TRATAMIENTO_URGENCIA = 12;
+
+    /*ROL*/
+    public static int ROL_ADMIN = 1;
+    public static int ROL_VETERINARIO = 2;
+    public static int ROL_CLIENTE = 3;
 
 }
 

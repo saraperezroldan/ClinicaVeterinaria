@@ -45,11 +45,10 @@ public class RazaServiceImpl implements IRazaService{
     @Override
     public RazaDTO modificarRaza(RazaDTO razaDTO) {
         Raza razaUpdate = RazaDTO.toDomain(razaDTO);
-        if (existeRaza(razaUpdate)) {
-            razaUpdate.setNombre(razaDTO.getNombre());
-            razaUpdate.setEspecie(razaUpdate.getEspecie());
-            razaRepository.save(razaUpdate);
-        }
+        existeRaza(razaUpdate);
+        razaUpdate.setNombre(razaDTO.getNombre());
+        razaUpdate.setEspecie(razaUpdate.getEspecie());
+        razaRepository.save(razaUpdate);
 
         return RazaDTO.toDTO(razaUpdate);
     }
@@ -58,20 +57,17 @@ public class RazaServiceImpl implements IRazaService{
     public RazaDTO eliminarRaza(int idRaza) {
         Raza razaBorrar = razaRepository.findRazaById(idRaza);
 
-        if (existeRaza(razaBorrar)) {
-            razaRepository.delete(razaBorrar);
-        }
+        existeRaza(razaBorrar);
+        razaRepository.delete(razaBorrar);
+
         return RazaDTO.toDTO(razaBorrar);
     }
     private void validarRaza(Raza raza){
-        if (existeRaza(raza)){
 
-        }
     }
-    private boolean existeRaza(Raza raza) {
+    private void existeRaza(Raza raza) {
         if (raza == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "raza.noEncontrado");
         }
-        return true;
     }
 }

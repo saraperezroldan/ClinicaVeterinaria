@@ -15,7 +15,7 @@ import java.util.Map;
 public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsuarioRepositoryCustom {
     @Override
     public List<Usuario> findUsuarioPorFiltro(UsuarioFiltroDTO filtro) {
-        String query = "SELECT u FROM Usuario u WHERE 1=1 ";
+        String query = "SELECT u FROM Usuario u WHERE u.activo = 1 ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
@@ -36,7 +36,7 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
 
     @Override
     public int getResultMax(UsuarioFiltroDTO filtro) {
-        String query =  "SELECT count(u) FROM Usuario u WHERE 1=1 ";
+        String query =  "SELECT count(u) FROM Usuario u WHERE u.activo = 1  ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
@@ -55,13 +55,13 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
             parameters.put("texto", "%" + filtro.getTexto().trim() + "%");
         }
         if (StringUtils.hasText(filtro.getDni())) {
-            parameters.put("u.dni", "%" + collateLiteral(filtro.getDni().trim()) + "%");
+            parameters.put("dni", "%" + collateLiteral(filtro.getDni().trim()) + "%");
         }
         if (StringUtils.hasText(filtro.getEmail())) {
-            parameters.put("u.email", "%" + collateLiteral(filtro.getEmail().trim()) + "%");
+            parameters.put("email", "%" + collateLiteral(filtro.getEmail().trim()) + "%");
         }
         if (StringUtils.hasText(filtro.getTelefono())) {
-            parameters.put("u.telefono", "%" + collateLiteral(filtro.getTelefono().trim()) + "%");
+            parameters.put("telefono", "%" + collateLiteral(filtro.getTelefono().trim()) + "%");
         }
         return parameters;
     }
@@ -70,8 +70,17 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
     private String getConditions(UsuarioFiltroDTO filtro) {
         StringBuilder queryConditions = new StringBuilder();
 
+        if (StringUtils.hasText(filtro.getEmail())) {
+            queryConditions.append(" AND (u.email LIKE :email)");
+        }
+        if (StringUtils.hasText(filtro.getTelefono())) {
+            queryConditions.append(" AND (u.telefono LIKE :telefono)");
+        }
+        if (StringUtils.hasText(filtro.getDni())) {
+            queryConditions.append(" AND (u.dni LIKE :dni)");
+        }
         if (StringUtils.hasText(filtro.getTexto())) {
-            queryConditions.append(" AND (m.nombre LIKE :texto)");
+            queryConditions.append(" AND (u.nombre LIKE :texto)");
         }
         return queryConditions.toString();
     }

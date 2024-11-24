@@ -26,7 +26,6 @@ public class Consulta {
     @JoinColumn(name = "id_mascota")
     private Mascota mascota;
 
-    //@OneToMany(mappedBy = "consulta", cascade = {CascadeType.REMOVE})
     @OneToMany(mappedBy = "consulta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ConsultaTratamiento> tratamientosConsulta;
 

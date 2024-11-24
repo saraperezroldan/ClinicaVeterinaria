@@ -10,14 +10,17 @@ import java.util.List;
 
 public interface IConsultaService {
 
-    List<ConsultaDTO> getConsultasByIdMascota(int idMascota);
-    List<ConsultaDTO> getCitasByIdMascota(int idMascota);
-    List<ConsultaDTO> getVacunasByIdMascota (int idMascota);
-    ConsultaDTO getConsultaById(int idConsulta);
     ConsultaDTO getCitaById(int idCita);
+    ConsultaDTO getConsultaById(int idConsulta);
+    List<ConsultaDTO> getCitasByIdMascota(int idMascota);
+    List<ConsultaDTO> getConsultasByIdMascota(int idMascota);
+    List<ConsultaDTO> getVacunasByIdMascota (int idMascota);
+    PageableResult<ConsultaDTO> getCitasConFiltro(ConsultaFiltroDTO filtro);
     PageableResult<ConsultaDTO> getConsultasConFiltro(ConsultaFiltroDTO filtro);
-    ConsultaDTO crearConsulta(ConsultaDTO consultaDTO);
     ConsultaDTO crearCita(ConsultaDTO citaDTO);
+    ConsultaDTO crearConsulta(ConsultaDTO consultaDTO);
+    ConsultaDTO modificarCita(ConsultaDTO consultaDTO);
     ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO);
+    ConsultaDTO eliminarCita(int idCita);
     ConsultaDTO eliminarConsulta(int idConsulta);
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class ConsultaTratamientoDTO {
     private int idConsulta;
     private int idTratamiento;
-    private float importe;
+
     public ConsultaTratamientoDTO() {
     }
 
@@ -31,7 +31,6 @@ public class ConsultaTratamientoDTO {
 
         consultaTratamientoDTO.setIdConsulta(consultaTratamiento.getId().getIdConsulta());
         consultaTratamientoDTO.setIdTratamiento(consultaTratamiento.getId().getIdTratamiento());
-        consultaTratamientoDTO.setImporte(consultaTratamiento.getImporte());
 
         return consultaTratamientoDTO;
     }
@@ -67,7 +66,6 @@ public class ConsultaTratamientoDTO {
         consultaTratamientoID.setIdConsulta(consultaTratamientoDTO.getIdConsulta());
         consultaTratamientoID.setIdTratamiento(consultaTratamientoDTO.getIdTratamiento());
         consultaTratamiento.setId(consultaTratamientoID);
-        consultaTratamiento.setImporte(consultaTratamientoDTO.getImporte());
 
         return consultaTratamiento;
     }
@@ -83,19 +81,8 @@ public class ConsultaTratamientoDTO {
     }
 
     public int getIdConsulta() {return idConsulta;}
-
     public void setIdConsulta(int idConsulta) {this.idConsulta = idConsulta;}
-
     public int getIdTratamiento() {return idTratamiento;}
-
     public void setIdTratamiento(int idTratamiento) {this.idTratamiento = idTratamiento;}
-
-    public float getImporte() {
-        return importe;
-    }
-
-    public void setImporte(float importe) {
-        this.importe = importe;
-    }
 
 }

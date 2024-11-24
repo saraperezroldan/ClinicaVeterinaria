@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface IUsuarioRepositoryCustom {
     List<Usuario> findUsuarioPorFiltro(UsuarioFiltroDTO filtro);
-
     int getResultMax(UsuarioFiltroDTO filtro);
 }

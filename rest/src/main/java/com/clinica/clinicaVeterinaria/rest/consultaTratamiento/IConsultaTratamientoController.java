@@ -11,4 +11,6 @@ import java.util.List;
 public interface IConsultaTratamientoController{
     @GetMapping("getTratamientosByIdConsulta/{idConsulta}")
     ResponseEntity<List<ConsultaTratamientoDTO>> getTratamientosByIdConsulta(@PathVariable("idConsulta") int idConsulta);
+    @GetMapping("getConsultasByIdTratamiento/{idTratamiento}")
+    ResponseEntity<List<ConsultaTratamientoDTO>> getConsultasByIdTratamiento(@PathVariable("idTratamiento") int idTratamiento);
 }

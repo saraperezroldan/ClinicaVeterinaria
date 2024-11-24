@@ -18,6 +18,10 @@ public class ConsultaTratamientoControllerImpl implements IConsultaTratamientoCo
     @Override
     public ResponseEntity<List<ConsultaTratamientoDTO>> getTratamientosByIdConsulta(int idConsulta) {
         return new ResponseEntity<>(ctService.getTratamientosByIdConsulta(idConsulta), HttpStatus.OK);
-
+    }
+    @Override
+    public ResponseEntity<List<ConsultaTratamientoDTO>> getConsultasByIdTratamiento(int idTratamiento) {
+        return new ResponseEntity<>(ctService.getConsultasByIdTratamiento(idTratamiento), HttpStatus.OK);
     }
 }
+

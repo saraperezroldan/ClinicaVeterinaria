@@ -2,10 +2,11 @@ package com.clinica.clinicaVeterinaria.business.especie;
 
 import com.clinica.clinicaVeterinaria.domain.dtos.EspecieDTO;
 import com.clinica.clinicaVeterinaria.domain.entities.Especie;
-import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
+import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
@@ -22,12 +23,9 @@ public class EspecieServiceImpl implements IEspecieService{
 
     @Override
     public EspecieDTO getEspecieById(int idEspecie) {
-        Especie especieEncontrada = null;
-        especieEncontrada = especieRepository.findEspecieById(idEspecie);
+        Especie especieEncontrada = especieRepository.findEspecieById(idEspecie);
+        existeEspecie(especieEncontrada);
 
-        if (especieEncontrada == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "especie.noEncontrado");
-        }
         return EspecieDTO.toDTO(especieEncontrada);
     }
 
@@ -45,8 +43,8 @@ public class EspecieServiceImpl implements IEspecieService{
     @Override
     public EspecieDTO modificarEspecie(EspecieDTO especieDTO) {
         Especie especieUpdate = especieRepository.findEspecieById(especieDTO.getIdEspecie());
+        existeEspecie(especieUpdate);
         validarEspecie(especieUpdate);
-
         especieUpdate.setNombre(especieDTO.getNombre());
         especieRepository.save(especieUpdate);
 
@@ -62,17 +60,17 @@ public class EspecieServiceImpl implements IEspecieService{
 
         return EspecieDTO.toDTO(especieBorrar);
     }
-
-
-    private void validarEspecie(Especie especie){
-        if (existeEspecie(especie)){
-
+    private void existeEspecie(Especie especie) {
+        if (especie == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "especie.noEncontrada");
         }
     }
-    private boolean existeEspecie(Especie especie) {
-        if (especie == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontrado");
+    private void validarEspecie(Especie especie){
+        if (!StringUtils.hasText(especie.getNombre())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "especie.requeridoNombre");
         }
-        return true;
+        if (especie.getNombre().length() > Constantes.ESPECIE_NOMBRE_MAX) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "especie.caracteresMaxNombre");
+        }
     }
 }

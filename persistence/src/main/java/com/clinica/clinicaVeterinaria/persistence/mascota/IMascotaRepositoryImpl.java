@@ -17,7 +17,7 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
 
     @Override
     public List<Mascota> findMascotaPorFiltro (MascotaFiltroDTO filtro) {
-        String query = "SELECT m FROM Mascota m WHERE 1=1 ";
+        String query = "SELECT m FROM Mascota m WHERE m.activo = 1 ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
@@ -38,7 +38,7 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
 
     @Override
     public int getResultMax(MascotaFiltroDTO filtro) {
-        String query =  "SELECT count(m) FROM Mascota m WHERE 1=1 ";
+        String query =  "SELECT count(m) FROM Mascota m WHERE m.activo = 1 ";
 
         Map<String,Object> parameters = getParameters(filtro);
         String queryConditions = getConditions(filtro);
@@ -56,6 +56,9 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
         if (StringUtils.hasText(filtro.getTexto())) {
             parameters.put("texto", "%" + filtro.getTexto().trim() + "%");
         }
+        if (StringUtils.hasText(filtro.getNombre())) {
+            parameters.put("nombre", "%" + filtro.getNombre().trim() + "%");
+        }
 
         return parameters;
     }
@@ -65,6 +68,9 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
         if (StringUtils.hasText(filtro.getTexto())) {
             queryConditions += " AND (m.nombre LIKE :texto )";
         }
+        if (StringUtils.hasText(filtro.getNombre())) {
+            queryConditions += " AND (m.nombre LIKE :nombre )";
+        }
 
         return queryConditions;
     }
@@ -72,11 +78,6 @@ public class IMascotaRepositoryImpl extends IBaseRepositoryImpl implements IMasc
     private String getOrder(MascotaFiltroDTO filtro) {
         String orderQuery = " ORDER BY m.idMascota ";
         List<String> orderParameters = Arrays.asList(" ");
-        if (StringUtils.hasText(filtro.getOrderBy()) && filtro.getOrderBy().equalsIgnoreCase("cc.nombreCanalComercial")) {
-            //orderQuery = "ORDER BY TRIM(UPPER(cc.nombreCanalComercial)) " + (filtro.getOrderDesc() ? " DESC" : " ASC");
-        } else if (StringUtils.hasText(filtro.getOrderBy()) && orderParameters.contains(filtro.getOrderBy())) {
-            orderQuery = "ORDER BY " + filtro.getOrderBy() + (filtro.getOrderDesc() ? " DESC" : " ASC");
-        }
 
         return orderQuery;
     }

@@ -17,6 +17,7 @@ import {HistorialMascotaComponent} from "./pages/historial-mascota/historial-mas
 import {
   HistorialMascotaDetalladoComponent
 } from "./pages/historial-mascota-detallado/historial-mascota-detallado.component";
+import {NuevaConsultaComponent} from "./pages/nueva-consulta/nueva-consulta.component";
 
 const routes: Routes = [
   {
@@ -78,6 +79,10 @@ const routes: Routes = [
       {
         path: 'historial-mascota-detallado/:idConsulta',
         component: HistorialMascotaDetalladoComponent
+      },
+      {
+        path: 'nueva-consulta/:idMascota',
+        component: NuevaConsultaComponent
       }
     ]
   },

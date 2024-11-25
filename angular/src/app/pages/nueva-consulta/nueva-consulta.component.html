@@ -1,1 +1,88 @@
-<p>nueva-consulta works!</p>
+<div class="icon-container">
+  <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
+</div>
+
+<div class="container">
+  <div class="titulo">
+    <mat-icon class="icon-list">list_alt</mat-icon>
+    <h1>Detalles de la consulta</h1>
+  </div>
+
+  <div class="container-data">
+    <div class="info-consulta">
+
+      <div class="container-data-mascota">
+
+        <div class="form-group">
+          <label for="mascota">Mascota</label>
+          <input type="text" id="mascota" [(ngModel)]="nombreMascota" name="mascota" disabled>
+        </div>
+        <div class="form-group">
+          <label for="diagnostico">Fecha</label>
+          <input type="text" id="fecha" [(ngModel)]="fecha" name="fecha" disabled>
+        </div>
+        <div class="form-group">
+          <label for="veterinario">Veterinario</label>
+          <input type="text" id="veterinario" [(ngModel)]="nombreVeterinario" name="veterinario" disabled>
+        </div>
+
+      </div>
+
+      <label for="motivo">Motivo visita</label>
+      <textarea id="motivo" name="motivo" rows="3" required></textarea>
+
+      <label for="diagnostico">Diagnóstico</label>
+      <textarea id="diagnostico"  name="diagnostico" rows="3" required></textarea>
+
+      <label for="observaciones">Observaciones</label>
+      <textarea id="observaciones"  name="observaciones" rows="3" required></textarea>
+
+
+    </div>
+    <div class="tratamientos">
+
+      <label>Añade un tratamiento</label>
+
+      <ng-select
+        [items]="listaTratamientos"
+        bindLabel="nombre"
+        [(ngModel)]="tratamientoSeleccionado"
+        [searchable]="true"
+        [clearable]="true"
+        placeholder="Selecciona un tratamiento"
+        (change)="onTratamientoSeleccionado(tratamientoSeleccionado)">
+      </ng-select>
+
+      <label>Tratamientos:</label>
+      <table>
+        <thead>
+        <tr>
+          <th>Tratamiento</th>
+          <th>Precio</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let tratamiento of tratamientos; let i = index">
+          <td>
+            {{ tratamiento.nombre }}
+          </td>
+          <td>{{ tratamiento.precio | currency:'EUR' }}</td>
+          <td>
+            <mat-icon class="close" (click)="eliminarTratamiento(i)">close</mat-icon>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td>TOTAL</td>
+          <td>{{ total | currency:'EUR' }}</td>
+        </tr>
+        </tfoot>
+      </table>
+
+      <button class="save-button">Guardar</button>
+
+    </div>
+  </div>
+</div>

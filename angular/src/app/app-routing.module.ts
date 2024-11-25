@@ -18,6 +18,10 @@ import {
   HistorialMascotaDetalladoComponent
 } from "./pages/historial-mascota-detallado/historial-mascota-detallado.component";
 import {NuevaConsultaComponent} from "./pages/nueva-consulta/nueva-consulta.component";
+import {GestionCitasVeterinarioComponent} from "./pages/gestion-citas-veterinario/gestion-citas-veterinario.component";
+import {
+  GestionConsultasVeterinarioComponent
+} from "./pages/gestion-consultas-veterinario/gestion-consultas-veterinario.component";
 
 const routes: Routes = [
   {
@@ -83,6 +87,14 @@ const routes: Routes = [
       {
         path: 'nueva-consulta/:idMascota',
         component: NuevaConsultaComponent
+      },
+      {
+        path: 'gestion-citas-veterinario',
+        component: GestionCitasVeterinarioComponent
+      },
+      {
+        path: 'gestion-consultas-veterinario',
+        component: GestionConsultasVeterinarioComponent
       }
     ]
   },

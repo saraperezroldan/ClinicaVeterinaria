@@ -22,7 +22,7 @@ public class RazaServiceImpl implements IRazaService{
     public List<RazaDTO> getRazas() {
         List<Raza> razas= razaRepository.findAll();
         existeRazas(razas);
-        
+
         return RazaDTO.toDTO(razas);
     }
 

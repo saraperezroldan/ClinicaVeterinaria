@@ -55,7 +55,6 @@ public class TratamientoServiceImpl implements ITratamientoService {
     public TratamientoDTO crearTratamiento(TratamientoDTO TratamientoDTO) {
         Tratamiento tratamientoNuevo = TratamientoDTO.toDomain(TratamientoDTO);
         validarTratamiento(tratamientoNuevo);
-
         tratamientoRepository.save(tratamientoNuevo);
 
         return TratamientoDTO.toDTO(tratamientoNuevo);
@@ -65,6 +64,7 @@ public class TratamientoServiceImpl implements ITratamientoService {
     public TratamientoDTO modificarTratamiento(TratamientoDTO TratamientoDTO) {
         Tratamiento tratamientoUpdate = TratamientoDTO.toDomain(TratamientoDTO);
         existeTratamiento(tratamientoUpdate);
+        validarTratamiento(tratamientoUpdate);
         tratamientoRepository.save(tratamientoUpdate);
 
         return TratamientoDTO.toDTO(tratamientoUpdate);

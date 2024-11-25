@@ -2,6 +2,7 @@ package com.clinica.clinicaVeterinaria.business.consulta;
 
 import com.clinica.clinicaVeterinaria.business.consultaTratamiento.IConsultaTratamientoRepository;
 import com.clinica.clinicaVeterinaria.business.mascota.IMascotaRepository;
+import com.clinica.clinicaVeterinaria.business.rol.IRolRepository;
 import com.clinica.clinicaVeterinaria.business.tratamiento.ITratamientoRepository;
 import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioRepository;
 import com.clinica.clinicaVeterinaria.domain.dtos.ConsultaDTO;
@@ -30,6 +31,8 @@ public class ConsultaServiceImpl implements IConsultaService {
     ITratamientoRepository tratamientoRepository;
     @Autowired
     IUsuarioRepository usuarioRepository;
+    @Autowired
+    IRolRepository rolRepository;
 
     @Override
     public ConsultaDTO getCitaById(int idCita) {
@@ -164,9 +167,6 @@ public class ConsultaServiceImpl implements IConsultaService {
     public ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO) {
         Consulta consultaUpdate = ConsultaDTO.toDomain(consultaDTO);
         Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
-        if (consultaEncontrada.getEsCita() == 1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEsConsulta");
-        }
         existeConsultaCita(consultaEncontrada);
         validarConsulta(consultaUpdate);
         consultaUpdate.setEsCita(0);
@@ -176,6 +176,10 @@ public class ConsultaServiceImpl implements IConsultaService {
             for (ConsultaTratamiento t : tratamientos) {
                 int idConsulta = consultaDTO.getIdConsulta();
                 int idTratamiento = t.getId().getIdTratamiento();
+                ConsultaTratamiento encontrado = ctRepository.existeConsultaTratamiento(idConsulta, idTratamiento);
+                if (encontrado != null) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consultaTratamiento.yaExisteConsultaTratamiento");
+                }
                 Tratamiento tratamiento = tratamientoRepository.findTratamientoById(idTratamiento);
                 Consulta consulta = consultaRepository.findConsultaById(idConsulta);
                 existeConsultaCita(consulta);
@@ -206,6 +210,7 @@ public class ConsultaServiceImpl implements IConsultaService {
             for (ConsultaTratamiento t : tratamientos) {
                 int idConsulta = citaDTO.getIdConsulta();
                 int idTratamiento = t.getId().getIdTratamiento();
+
                 Tratamiento tratamiento = tratamientoRepository.findTratamientoById(idTratamiento);
                 Consulta consulta = consultaRepository.findConsultaById(idConsulta);
                 if (consulta == null) {
@@ -285,6 +290,14 @@ public class ConsultaServiceImpl implements IConsultaService {
     private void validarConsulta(Consulta consulta) {
         if (!StringUtils.hasText(consulta.getDiagnostico())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.requeridoDiagnostico");
+        }
+        if (consulta.getIdVeterinario() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.requeridoIdVeterinario");
+        }
+        int idRol = usuarioRepository.findUsuarioById(consulta.getIdVeterinario()).getRol().getIdRol();
+        Rol rol = rolRepository.findRolById(idRol);
+        if (rol.getIdRol() == Constantes.ROL_CLIENTE) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noValidoIdCliente");
         }
     }
 

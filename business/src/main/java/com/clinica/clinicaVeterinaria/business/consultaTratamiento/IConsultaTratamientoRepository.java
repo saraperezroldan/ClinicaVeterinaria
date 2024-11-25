@@ -14,4 +14,7 @@ public interface IConsultaTratamientoRepository extends JpaRepository<ConsultaTr
 
     @Query("SELECT ct FROM ConsultaTratamiento ct WHERE ct.id.idTratamiento= :idTratamiento")
     List<ConsultaTratamiento> findConsultasByIdTratamiento (int idTratamiento);
+    @Query("SELECT ct FROM ConsultaTratamiento ct " +
+            "WHERE ct.id.idTratamiento= :idTratamiento AND ct.id.idConsulta = :idConsulta ")
+    ConsultaTratamiento existeConsultaTratamiento (int idConsulta, int idTratamiento);
 }

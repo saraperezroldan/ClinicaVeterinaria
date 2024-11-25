@@ -125,7 +125,7 @@ public class IConsultaRepositoryImpl extends IBaseRepositoryImpl implements ICon
     }
 
     private String getOrder(ConsultaFiltroDTO filtro) {
-        String orderQuery = " ORDER BY c.fechaAlta ";
+        String orderQuery = " ORDER BY c.fechaCitaConsulta DESC ";
         List<String> orderParameters = Arrays.asList("");
 
         return orderQuery;

@@ -30,7 +30,6 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
             typedQuery.setFirstResult(filtro.getPageNumber() * filtro.getPageElements());
             typedQuery.setMaxResults(filtro.getPageElements());
         }
-
         return typedQuery.getResultList();
     }
 
@@ -63,6 +62,12 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
         if (StringUtils.hasText(filtro.getTelefono())) {
             parameters.put("telefono", "%" + collateLiteral(filtro.getTelefono().trim()) + "%");
         }
+        if (filtro.getIdRol() > 0) {
+            parameters.put("idRol", + filtro.getIdRol());
+        }
+        if (StringUtils.hasText(filtro.getNombre())) {
+            parameters.put("nombre", "%" + collateLiteral(filtro.getNombre().trim()) + "%");
+        }
         return parameters;
     }
 
@@ -79,17 +84,17 @@ public class IUsuarioRepositoryImpl extends IBaseRepositoryImpl implements IUsua
         if (StringUtils.hasText(filtro.getDni())) {
             queryConditions.append(" AND (u.dni LIKE :dni)");
         }
-        if (StringUtils.hasText(filtro.getTexto())) {
-            queryConditions.append(" AND (u.nombre LIKE :texto)");
+        if (filtro.getIdRol() > 0) {
+            queryConditions.append(" AND (u.rol.idRol IN :idRol)");
+        }
+        if (StringUtils.hasText(filtro.getNombre())) {
+            queryConditions.append(" AND (u.nombre LIKE :nombre)");
         }
         return queryConditions.toString();
     }
 
-
-
     private String getOrder(UsuarioFiltroDTO filtro) {
         String orderQuery = " ORDER BY u.idUsuario ";
-        //Posible futura ordenacion
         return orderQuery;
     }
 }

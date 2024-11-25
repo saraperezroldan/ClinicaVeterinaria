@@ -9,7 +9,7 @@ import java.util.Set;
 public class Tratamiento {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int idTratamiento;
     private String nombre;
     private String descripcion;

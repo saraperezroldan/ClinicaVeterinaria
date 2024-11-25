@@ -2,7 +2,6 @@ package com.clinica.clinicaVeterinaria.business.usuario;
 
 import com.clinica.clinicaVeterinaria.business.rol.IRolRepository;
 import com.clinica.clinicaVeterinaria.business.rol.IRolService;
-import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
 import com.clinica.clinicaVeterinaria.domain.entities.Rol;
 import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
@@ -25,48 +24,31 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Autowired
     private IRolRepository rolRepository;
 
-    @Autowired
-    private IRolService rolService;
-
     @Override
     public List<UsuarioDTO> getUsuarios() {
-        List<Usuario> usuarios = null;
+        List<Usuario> usuarios = usuarioRepository.findUsuariosActivos();
         List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+        existenUsuarios(usuarios);
+        usuarios.forEach(usuario -> usuariosDTO.add(UsuarioDTO.toDTO(usuario)));
 
-        usuarios = usuarioRepository.findUsuariosActivos();
-
-        if (usuarios != null && !usuarios.isEmpty()) {
-            usuarios.forEach(usuario -> usuariosDTO.add(UsuarioDTO.toDTO(usuario)));
-        }
         return usuariosDTO;
     }
 
     @Override
     public UsuarioDTO getUsuarioById(int idUsuario) {
-        Usuario usuarioEncontrado = null;
+        Usuario usuarioEncontrado = usuarioRepository.findUsuarioById(idUsuario);
+        existeUsuario(usuarioEncontrado);
 
-        if (idUsuario > 0) {
-            usuarioEncontrado  =  usuarioRepository.findUsuarioById(idUsuario);
-            if (usuarioEncontrado != null) {
-                return UsuarioDTO.toDTO(usuarioEncontrado);
-            } else {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontrado");
-            }
-        } else  {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El código del usuario debe ser mayor que cero.");
-        }
+        return UsuarioDTO.toDTO(usuarioEncontrado);
     }
 
     @Override
     public List<UsuarioDTO> getUsuariosByIdRol(int idRol) {
-        List<Usuario> usuarios = null;
+        List<Usuario> usuarios = usuarioRepository.findUsuariosByIdRol(idRol);
         List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+        existenUsuarios(usuarios);
+        usuarios.forEach(usuario -> usuariosDTO.add(UsuarioDTO.toDTO(usuario)));
 
-        usuarios = usuarioRepository.findUsuariosByIdRol(idRol);
-
-        if (usuarios != null && !usuarios.isEmpty()) {
-            usuarios.forEach(usuario -> usuariosDTO.add(UsuarioDTO.toDTO(usuario)));
-        }
         return usuariosDTO;
     }
 
@@ -158,6 +140,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
     private void existeUsuario(Usuario usuario) {
         if (usuario == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontrado");
+        }
+    }
+    private void existenUsuarios(List<Usuario> usuarios) {
+        if (usuarios == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontradoListado");
         }
     }
     private void validarUsuario(Usuario usuario) {

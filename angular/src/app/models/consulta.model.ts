@@ -1,6 +1,7 @@
 export interface Consulta{
     idConsulta: number;
     idMascota: number;
+    mascota: number;
     idVeterinario: number;
     fechaCitaConsulta: string;
     horaCita: string;

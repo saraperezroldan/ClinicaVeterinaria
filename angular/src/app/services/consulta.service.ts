@@ -38,4 +38,17 @@ export class ConsultaService{
       return this.http.post<any>(`${URLSERVER}consulta/getCitasConFiltro`, body);
     }
 
+    getConsultasByVeterinario(idVeterinario: number, pageNumber: number = 0, pageElements: number = 5 ) : Observable<any>{
+        const body = {
+            idVeterinario: idVeterinario,
+            pageNumber: pageNumber,
+            pageElements: pageElements,
+            pageable : true,
+            orderDesc : true
+        };
+        return this.http.post<any>(`${URLSERVER}consulta/getConsultasConFiltro`, body);
+    }
+
+
+
 }

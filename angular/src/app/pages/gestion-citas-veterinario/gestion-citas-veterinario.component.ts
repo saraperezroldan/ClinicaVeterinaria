@@ -95,8 +95,5 @@ export class GestionCitasVeterinarioComponent implements OnInit{
         this.obtenerCitas();
     }
 
-  goBack(){
-    window.history.back();
-  }
 
 }

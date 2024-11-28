@@ -37,17 +37,6 @@ h1 {
     justify-content: center;
 }
 
-.btn-mas-detalles {
-    background-color: #8cb4d2;
-    color: white;
-    border-radius: 7px;
-    padding: 10px 20px;
-    font-family: 'Arial', sans-serif;
-    cursor: pointer;
-    font-size: 14px;
-    text-align: center;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -67,18 +56,13 @@ table th{
     color: #4a4a4a;
 }
 
-.material-icon-editar{
-    margin-right: 5px;
-    font-size: 20px;
-    color: #3f6e8f;
-    cursor: pointer;
-}
-
 .material-icon-eliminar{
     font-size: 20px;
     color: #ff8484;
     cursor: pointer;
 }
+
+
 
 .contenedorIconos{
     display: flex;
@@ -88,13 +72,64 @@ table th{
 
 .paginator-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
 }
 
 mat-paginator {
     background-color: transparent;
     width: auto;
+}
+
+.boton {
+    background-color: #8cb4d2;
+    color: white;
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    width: 110px;
+    height: 45px;
+    margin-top: 20px;
+}
+
+.icon-container-button{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2%;
+    background-color: #8cb4d2;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    width: 140px;
+    height: 45px;
+}
+
+.icon-container-button:hover{
+    background-color: #6f9dbf;
+}
+
+.icon-add {
+    font-size: 20px;
+    line-height: 30px;
+    color: white;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.icon-container-button .icon-add {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

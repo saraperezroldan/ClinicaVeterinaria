@@ -36,7 +36,7 @@ export class CabeceraComponent implements OnInit{
     {label: 'Personal', icon: 'person', route: '/usuario/inicio-administrador'},
     {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/gestion-citas-administrador'},
     {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/gestion-consultas-administrador'},
-    {label: 'Tratamientos', icon: 'medical_services', route: '/usuario/tratamientos'},
+    {label: 'Tratamientos', icon: 'vaccines', route: '/usuario/gestion-tratamientos'},
   ];
 
   constructor(private usuarioService : UsuarioService, private loginService : LoginService, private router : Router) {}

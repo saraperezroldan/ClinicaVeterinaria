@@ -28,6 +28,7 @@ import {
 import {
   GestionConsultasAdministradorComponent
 } from "./pages/gestion-consultas-administrador/gestion-consultas-administrador.component";
+import {GestionTratamientosComponent} from "./pages/gestion-tratamientos/gestion-tratamientos.component";
 
 const routes: Routes = [
   {
@@ -109,6 +110,10 @@ const routes: Routes = [
       {
         path: 'gestion-consultas-administrador',
         component: GestionConsultasAdministradorComponent
+      },
+      {
+        path: 'gestion-tratamientos',
+        component: GestionTratamientosComponent
       }
     ]
   },

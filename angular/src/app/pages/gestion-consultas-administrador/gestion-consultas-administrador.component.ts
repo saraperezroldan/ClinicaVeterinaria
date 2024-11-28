@@ -102,8 +102,4 @@ export class GestionConsultasAdministradorComponent {
     this.obtenerCitas();
   }
 
-  goBack(){
-    window.history.back();
-  }
-
 }

@@ -27,4 +27,14 @@ export class TratamientoService{
         return this.http.get<any>(`${URLSERVER}tratamiento/getTratamientos`);
     }
 
+    getTratamientosConFiltro(pageElements: number = 5, pageNumber:number=0) : Observable<any>{
+        const body = {
+            pageElements: pageElements,
+            pageNumber: pageNumber,
+            pageable : true,
+            orderDesc : false
+        };
+        return this.http.post<any>(`${URLSERVER}tratamiento/getTratamientosConFiltro`, body);
+    }
+
 }

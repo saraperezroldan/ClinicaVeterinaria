@@ -1,0 +1,89 @@
+.popup{
+    width: 500px;
+    height: auto;
+    background-color: white;
+    border: 1px solid #737373;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Georgia', sans-serif !important;
+}
+
+.toolbar {
+    background-color: #8cb4d2;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px 10px 0 0;
+    padding: 0px;
+}
+
+.dialog-text{
+    margin: 20px 0;
+    text-align: center;
+    font-size: 18px;
+    color: #5b5a5a;
+    font-family: 'Georgia', sans-serif !important;
+}
+
+.dialog-actions{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+::ng-deep mat-dialog-container {
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Georgia', sans-serif !important;
+}
+
+label {
+    width: 100px;
+    text-align: left;
+    margin-right: 5px;
+    line-height: 35px;
+    display: inline-block;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 49%;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #8cb4d2;
+    box-shadow: none;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: white !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    background-color: #FFF !important;
+    -webkit-box-shadow: 0 0 0px 1000px #FFF inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.save-button{
+    background-color: #8cb4d2;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 7px;
+    height: 35px;
+    width: 100px;
+    margin-top: 10px;
+    float: right;
+}

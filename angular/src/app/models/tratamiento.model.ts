@@ -4,4 +4,5 @@ export interface Tratamiento {
     descripcion: string;
     precio: number;
     esVacuna: boolean;
+    stock: number;
 }

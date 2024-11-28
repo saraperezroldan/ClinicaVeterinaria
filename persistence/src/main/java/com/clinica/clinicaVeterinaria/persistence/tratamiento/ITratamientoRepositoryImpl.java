@@ -53,8 +53,11 @@ public class ITratamientoRepositoryImpl extends IBaseRepositoryImpl implements I
         if (StringUtils.hasText(filtro.getNombre())) {
             parameters.put("nombre", "%" + filtro.getNombre().trim() + "%");
         }
-        if (filtro.getEsVacuna() >= 0) {
+        if (filtro.getEsVacuna() > 0) {
             parameters.put("esVacuna", + filtro.getEsVacuna());
+        }
+        if (filtro.getStock() > 0) {
+            parameters.put("stock", + filtro.getStock());
         }
         if (StringUtils.hasText(filtro.getTexto())) {
             parameters.put("texto", "%" + filtro.getTexto().trim() + "%");
@@ -68,8 +71,11 @@ public class ITratamientoRepositoryImpl extends IBaseRepositoryImpl implements I
         if (StringUtils.hasText(filtro.getNombre())) {
             queryConditions.append(" AND (t.nombre LIKE :nombre)");
         }
-        if (filtro.getEsVacuna() >= 0) {
+        if (filtro.getEsVacuna() > 0) {
             queryConditions.append(" AND (t.esVacuna IN :esVacuna)");
+        }
+        if (filtro.getStock() > 0){
+            queryConditions.append(" AND (t.stock <= :stock)");
         }
         return queryConditions.toString();
     }

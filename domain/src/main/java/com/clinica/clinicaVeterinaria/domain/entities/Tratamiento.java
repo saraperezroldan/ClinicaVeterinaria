@@ -16,6 +16,8 @@ public class Tratamiento {
     private int esVacuna;
     private float precio;
 
+    private int stock;
+
     @OneToMany(mappedBy = "tratamiento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ConsultaTratamiento> tratamientosConsulta;
 
@@ -39,6 +41,8 @@ public class Tratamiento {
     public void setEsVacuna(int esVacuna) {this.esVacuna = esVacuna;}
     public float getPrecio() {return precio;}
     public void setPrecio(float precio) {this.precio = precio;}
+    public int getStock() {return stock;}
+    public void setStock(int stock) {this.stock = stock;}
     public Set<ConsultaTratamiento> getTratamientosConsulta() {return tratamientosConsulta;}
     public void setTratamientosConsulta(Set<ConsultaTratamiento> tratamientosConsulta) {this.tratamientosConsulta = tratamientosConsulta;}
 }

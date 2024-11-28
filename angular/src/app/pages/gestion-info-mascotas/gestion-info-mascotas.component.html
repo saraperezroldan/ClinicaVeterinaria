@@ -10,7 +10,7 @@
                     <img [src]="mascota.imagen" alt="Profile Image" class="profile-image">
                 </div>
                 <button class="btn-change">Cambiar</button>
-                <div class="imagen-section">
+                <div class="imagen-section" [routerLink]="['/usuario/historial-mascota', mascota.idMascota]">
                     <img src="../../../assets/images/Imagen1.png" class="imagen"/>
                     <p>Historial clínico</p>
                 </div>
@@ -106,7 +106,7 @@
         </div>
         <div>
             <button class="proxima-cita-button">Próxima cita</button>
-            <button class="nueva-consulta-button">Nueva consulta</button>
+            <button class="nueva-consulta-button" [routerLink]="['/usuario/nueva-consulta', mascota.idMascota]">Nueva consulta</button>
         </div>
     </div>
 </div>

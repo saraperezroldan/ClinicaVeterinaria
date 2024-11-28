@@ -23,4 +23,8 @@ export class TratamientoService{
         return this.http.get<any>(`${URLSERVER}tratamiento/getTratamientoById/${idTratamiento}`);
     }
 
+    getTratamientos() : Observable<any>{
+        return this.http.get<any>(`${URLSERVER}tratamiento/getTratamientos`);
+    }
+
 }

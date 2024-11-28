@@ -28,14 +28,14 @@ export class CabeceraComponent implements OnInit{
   ];
   veterinarioMenuOpciones: Menu[] = [
     {label: 'Inicio', icon: 'home', route: '/usuario/inicio-veterinario'},
-    {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/citas'},
-    {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/consultas'},
+    {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/gestion-citas-veterinario'},
+    {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/gestion-consultas-veterinario'},
     {label: 'Mi perfil', icon: 'person', route: '/usuario/perfil'},
   ];
   administradorMenuOpciones: Menu[] = [
     {label: 'Personal', icon: 'person', route: '/usuario/inicio-administrador'},
-    {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/citas'},
-    {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/consultas'},
+    {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/gestion-citas-administrador'},
+    {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/gestion-consultas-administrador'},
     {label: 'Tratamientos', icon: 'medical_services', route: '/usuario/tratamientos'},
   ];
 

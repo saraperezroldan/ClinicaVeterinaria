@@ -11,18 +11,18 @@ import {forkJoin, map, Observable} from "rxjs";
 import {Consulta} from "../../models/consulta.model";
 
 @Component({
-  selector: 'app-gestion-consultas-veterinario',
-  templateUrl: './gestion-consultas-veterinario.component.html',
-  styleUrl: './gestion-consultas-veterinario.component.css'
+  selector: 'app-gestion-consultas-administrador',
+  templateUrl: './gestion-consultas-administrador.component.html',
+  styleUrl: './gestion-consultas-administrador.component.css'
 })
-export class GestionConsultasVeterinarioComponent {
+export class GestionConsultasAdministradorComponent {
 
   mascota! : Mascota;
   idMascota! : number;
   idVeterinario! : number;
   currentUser! : Usuario;
 
-  displayedColumns: string[] = ['idConsulta', 'idMascota', 'nombreMascota', 'especieMascota', 'fechaConsulta', 'horaConsulta', 'motivo', 'acciones'];
+  displayedColumns: string[] = ['idConsulta', 'idMascota', 'nombreMascota', 'especieMascota', 'fechaConsulta', 'horaConsulta', 'motivo', 'nombreVeterinario', 'acciones'];
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -33,13 +33,10 @@ export class GestionConsultasVeterinarioComponent {
 
   constructor(private mascotaService : MascotaService,
               private consultaService : ConsultaService,
-              private usuarioService : UsuarioService,
-              private  route : ActivatedRoute,
-              private ruta: Router) { }
+              private usuarioService : UsuarioService) { }
 
   ngOnInit( ): void {
-    this.currentUser = this.usuarioService.getCurrentUser();
-    this.idVeterinario = this.currentUser.idUsuario;
+    this.idVeterinario = 0;
     this.obtenerCitas();
   }
 
@@ -50,16 +47,30 @@ export class GestionConsultasVeterinarioComponent {
         this.totalItems = response.count;
         const citas = response.results;
 
-        const observables: Observable<any>[] = citas.map((cita: Consulta) =>
-            this.mascotaService.getInfoMascotaById(cita.mascota).pipe(
-                map((mascota: Mascota) => ({
-                  ...cita,
-                  idMascota: mascota?.idMascota,
-                  nombreMascota: mascota?.nombre,
-                  especieMascota: mascota?.raza?.especie?.nombre
-                }))
-            )
-        );
+        const observables: Observable<any>[] = citas.map((cita: Consulta) => {
+          const mascotaObservable = this.mascotaService.getInfoMascotaById(cita.mascota).pipe(
+              map((mascota: Mascota) => ({
+                ...cita,
+                idMascota: mascota?.idMascota,
+                nombreMascota: mascota?.nombre,
+                especieMascota: mascota?.raza?.especie?.nombre
+              }))
+          );
+
+          const veterinarioObservable = this.usuarioService.getUsuarioById(cita.idVeterinario).pipe(
+              map((veterinario: Usuario) => ({
+                ...cita,
+                nombreVeterinario: `${veterinario.nombre} ${veterinario.apellidos}`
+              }))
+          );
+
+          return forkJoin([mascotaObservable, veterinarioObservable]).pipe(
+              map(([citaConMascota, citaConVeterinario]) => ({
+                ...citaConMascota,
+                nombreVeterinario: citaConVeterinario.nombreVeterinario
+              }))
+          );
+        });
 
         forkJoin(observables).subscribe({
           next: (result) => {
@@ -70,7 +81,7 @@ export class GestionConsultasVeterinarioComponent {
             }
           },
           error: (err) => {
-            console.error('Error al obtener detalles de mascotas:', err);
+            console.error('Error al obtener detalles de mascotas o veterinarios:', err);
           }
         });
       },
@@ -94,6 +105,5 @@ export class GestionConsultasVeterinarioComponent {
   goBack(){
     window.history.back();
   }
-
 
 }

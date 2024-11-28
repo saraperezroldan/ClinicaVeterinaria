@@ -41,6 +41,8 @@ import { ConfirmDeleteCitaComponent } from './shared/confirm-delete-cita/confirm
 import { GestionCitasVeterinarioComponent } from './pages/gestion-citas-veterinario/gestion-citas-veterinario.component';
 import { GestionConsultasVeterinarioComponent } from './pages/gestion-consultas-veterinario/gestion-consultas-veterinario.component';
 import { NuevaConsultaComponent } from './pages/nueva-consulta/nueva-consulta.component';
+import { GestionCitasAdministradorComponent } from './pages/gestion-citas-administrador/gestion-citas-administrador.component';
+import { GestionConsultasAdministradorComponent } from './pages/gestion-consultas-administrador/gestion-consultas-administrador.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { NuevaConsultaComponent } from './pages/nueva-consulta/nueva-consulta.co
     GestionCitasVeterinarioComponent,
     GestionConsultasVeterinarioComponent,
     NuevaConsultaComponent,
+    GestionCitasAdministradorComponent,
+    GestionConsultasAdministradorComponent,
   ],
   imports: [
     BrowserModule,

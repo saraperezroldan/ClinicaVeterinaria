@@ -22,6 +22,12 @@ import {GestionCitasVeterinarioComponent} from "./pages/gestion-citas-veterinari
 import {
   GestionConsultasVeterinarioComponent
 } from "./pages/gestion-consultas-veterinario/gestion-consultas-veterinario.component";
+import {
+  GestionCitasAdministradorComponent
+} from "./pages/gestion-citas-administrador/gestion-citas-administrador.component";
+import {
+  GestionConsultasAdministradorComponent
+} from "./pages/gestion-consultas-administrador/gestion-consultas-administrador.component";
 
 const routes: Routes = [
   {
@@ -95,6 +101,14 @@ const routes: Routes = [
       {
         path: 'gestion-consultas-veterinario',
         component: GestionConsultasVeterinarioComponent
+      },
+      {
+        path: 'gestion-citas-administrador',
+        component: GestionCitasAdministradorComponent
+      },
+      {
+        path: 'gestion-consultas-administrador',
+        component: GestionConsultasAdministradorComponent
       }
     ]
   },

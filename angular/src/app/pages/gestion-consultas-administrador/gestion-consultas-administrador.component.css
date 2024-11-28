@@ -1,0 +1,120 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.icon-container {
+    display: flex;
+    margin-top: 6%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 25px;
+    color: #626161;
+    margin: 0;
+}
+
+.icon-medical {
+    font-size: 38px;
+    line-height: 30px;
+    color: #626161;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.icon-container .icon-medical {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-mas-detalles {
+    background-color: #8cb4d2;
+    color: white;
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border : 1px solid #ccc;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+}
+
+table th{
+    background-color: #eaeaea;
+    color: #4a4a4a;
+}
+
+.icon-container-back{
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.back-icon {
+    font-size: 35px;
+    cursor: pointer;
+    color: #8cb4d2;
+    padding: 7px;
+}
+
+.material-icon-editar{
+    margin-right: 5px;
+    font-size: 20px;
+    color: #3f6e8f;
+    cursor: pointer;
+}
+
+.material-icon-eliminar{
+    font-size: 20px;
+    color: #ff8484;
+    cursor: pointer;
+}
+
+
+
+.contenedorIconos{
+    display: flex;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.paginator-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* MatPaginator */
+mat-paginator {
+    background-color: transparent;
+    width: auto;
+}
+
+

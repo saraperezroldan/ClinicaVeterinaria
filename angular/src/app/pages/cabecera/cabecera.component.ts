@@ -34,8 +34,8 @@ export class CabeceraComponent implements OnInit{
   ];
   administradorMenuOpciones: Menu[] = [
     {label: 'Personal', icon: 'person', route: '/usuario/inicio-administrador'},
-    {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/citas'},
-    {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/consultas'},
+    {label: 'Gestion citas', icon: 'calendar_month', route: '/usuario/gestion-citas-administrador'},
+    {label: 'Gestion consultas', icon: 'content_paste', route: '/usuario/gestion-consultas-administrador'},
     {label: 'Tratamientos', icon: 'medical_services', route: '/usuario/tratamientos'},
   ];
 

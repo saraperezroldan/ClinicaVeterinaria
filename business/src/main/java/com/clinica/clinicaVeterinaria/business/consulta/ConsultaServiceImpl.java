@@ -231,7 +231,7 @@ public class ConsultaServiceImpl implements IConsultaService {
 
     @Override
     public ConsultaDTO eliminarCita(int idCita) {
-        Consulta citaBorrar = consultaRepository.findConsultaById(idCita);
+        Consulta citaBorrar = consultaRepository.findCitaById(idCita);
         existeConsultaCita(citaBorrar);
 
         List<ConsultaTratamiento> consultaTratamientos = ctRepository.findTratamientosByIdConsulta(idCita);

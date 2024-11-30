@@ -62,20 +62,20 @@ export class GestionTratamientosComponent implements OnInit{
   eliminarTratamiento(idTratamiento: number): void {
     const dialogRef = this.dialog.open(ConfirmDeleteTratamientoComponent, { });
 
-    /*dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.mascotaService.eliminarMascota(id).subscribe(
+        this.tratamientoService.eliminarTratamiento(idTratamiento).subscribe(
             response => {
-              console.log('Mascota eliminada:', response);
-              alert('La mascota ha sido eliminada correctamente');
+              console.log('Tratamiento eliminado:', response);
+              alert('El tratamiento ha sido eliminado correctamente');
               this.ngOnInit();
             },
             error => {
-              console.error('Error al eliminar la mascota:', error);
+              console.error('Error al eliminar el tratamiento:', error);
             }
         );
       }
-    });*/
+    });
   }
 
   nuevoTratamiento(): void {

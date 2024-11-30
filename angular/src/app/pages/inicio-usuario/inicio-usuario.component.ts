@@ -44,19 +44,19 @@ export class InicioUsuarioComponent implements OnInit{
   eliminarCita(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDeleteCitaComponent, {});
 
-    /*dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.usuarioService.eliminarUsuario(id).subscribe(
+        this.consultaService.eliminarCita(id).subscribe(
           response => {
-            console.log('Veterinario eliminado:', response);
-            alert('El veterinario ha sido eliminado correctamente');
-            this.getVeterinarios();
+            console.log('Cita eliminada:', response);
+            alert('La cita se ha eliminado correctamente');
+            this.ngOnInit();
           },
           error => {
-            console.error('Error al eliminar el veterinario:', error);
+            console.error('Error al eliminar la cita:', error);
           }
         );
       }
-    });*/
+    });
   }
 }

@@ -49,6 +49,14 @@ export class ConsultaService{
         return this.http.post<any>(`${URLSERVER}consulta/getConsultasConFiltro`, body);
     }
 
+    eliminarCita(idCita: number) : Observable<any>{
+        return this.http.delete<any>(`${URLSERVER}consulta/eliminarCita/${idCita}`);
+    }
+
+    eliminarConsulta(idConsulta: number) : Observable<any>{
+        return this.http.delete<any>(`${URLSERVER}consulta/eliminarConsulta/${idConsulta}`);
+    }
+
 
 
 }

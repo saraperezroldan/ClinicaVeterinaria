@@ -37,4 +37,8 @@ export class TratamientoService{
         return this.http.post<any>(`${URLSERVER}tratamiento/getTratamientosConFiltro`, body);
     }
 
+    eliminarTratamiento(idTratamiento: number) : Observable<any>{
+        return this.http.delete<any>(`${URLSERVER}tratamiento/eliminarTratamiento/${idTratamiento}`);
+    }
+
 }

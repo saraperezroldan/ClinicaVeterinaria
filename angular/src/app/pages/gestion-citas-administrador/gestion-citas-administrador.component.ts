@@ -102,8 +102,4 @@ export class GestionCitasAdministradorComponent {
     this.obtenerCitas();
   }
 
-  goBack(){
-    window.history.back();
-  }
-
 }

@@ -1,0 +1,54 @@
+<div class="popup">
+    <mat-toolbar class="toolbar">
+        <mat-icon>vaccines</mat-icon>
+        <span>Nuevo tratamiento</span>
+    </mat-toolbar>
+    <form (ngSubmit)="onSubmit()" #tratamientoForm="ngForm">
+        <div>
+            <label for="nombre">Nombre del Tratamiento:</label>
+            <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    [(ngModel)]="tratamiento.nombre"
+                    required
+            />
+        </div>
+
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    [(ngModel)]="tratamiento.descripcion"
+                    required
+            ></textarea>
+        </div>
+
+        <div>
+            <label for="precio">Precio:</label>
+            <input
+                    type="number"
+                    id="precio"
+                    name="precio"
+                    [(ngModel)]="tratamiento.precio"
+                    required
+                    min="0"
+            />
+        </div>
+
+        <div>
+            <label for="esVacuna">¿Es una vacuna?:</label>
+            <input
+                    type="checkbox"
+                    id="esVacuna"
+                    name="esVacuna"
+                    [(ngModel)]="tratamiento.esVacuna"
+            />
+        </div>
+
+        <button type="submit" [disabled]="!tratamientoForm.valid" class="save-button">Guardar</button>
+    </form>
+
+</div>
+

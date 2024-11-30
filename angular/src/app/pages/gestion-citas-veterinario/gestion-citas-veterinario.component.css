@@ -67,23 +67,6 @@ table th{
   color: #4a4a4a;
 }
 
-.icon-container-back{
-  width: auto;
-  height: auto;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.back-icon {
-  font-size: 35px;
-  cursor: pointer;
-  color: #8cb4d2;
-  padding: 7px;
-}
-
 .material-icon-editar{
   margin-right: 5px;
   font-size: 20px;

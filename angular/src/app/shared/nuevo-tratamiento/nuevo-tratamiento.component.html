@@ -1,54 +1,57 @@
-<div class="popup">
-    <mat-toolbar class="toolbar">
-        <mat-icon>vaccines</mat-icon>
-        <span>Nuevo tratamiento</span>
-    </mat-toolbar>
-    <form (ngSubmit)="onSubmit()" #tratamientoForm="ngForm">
-        <div>
-            <label for="nombre">Nombre del Tratamiento:</label>
-            <input
-                    type="text"
-                    id="nombre"
-                    name="nombre"
-                    [(ngModel)]="tratamiento.nombre"
-                    required
-            />
+    <div class="popup">
+        <div class="logo">
+            <mat-icon>vaccines</mat-icon>
+            <h2>Nuevo tratamiento</h2>
         </div>
+        <form (ngSubmit)="onSubmit()" #tratamientoForm="ngForm">
+            <div>
+                <label for="nombre">Nombre del Tratamiento:</label>
+                <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        [(ngModel)]="tratamiento.nombre"
+                        required
+                />
+            </div>
 
-        <div>
-            <label for="descripcion">Descripción:</label>
-            <textarea
-                    id="descripcion"
-                    name="descripcion"
-                    [(ngModel)]="tratamiento.descripcion"
-                    required
-            ></textarea>
-        </div>
+            <div>
+                <label for="descripcion">Descripción:</label>
+                <textarea
+                        id="descripcion"
+                        name="descripcion"
+                        [(ngModel)]="tratamiento.descripcion"
+                        required
+                ></textarea>
+            </div>
 
-        <div>
-            <label for="precio">Precio:</label>
-            <input
-                    type="number"
-                    id="precio"
-                    name="precio"
-                    [(ngModel)]="tratamiento.precio"
-                    required
-                    min="0"
-            />
-        </div>
+            <div>
+                <label for="precio">Precio:</label>
+                <input
+                        type="number"
+                        id="precio"
+                        name="precio"
+                        [(ngModel)]="tratamiento.precio"
+                        required
+                        min="0"
+                />
+            </div>
 
-        <div>
-            <label for="esVacuna">¿Es una vacuna?:</label>
-            <input
-                    type="checkbox"
-                    id="esVacuna"
-                    name="esVacuna"
-                    [(ngModel)]="tratamiento.esVacuna"
-            />
-        </div>
+            <div class="esVacuna">
+                <label for="esVacuna">¿Es una vacuna?</label>
+                <mat-radio-group [(ngModel)]="tratamiento.esVacuna" name="esVacuna" id="esVacuna">
+                    <mat-radio-button value="1" class="custom-radio">Sí</mat-radio-button>
+                    <mat-radio-button value="0" class="custom-radio">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
 
-        <button type="submit" [disabled]="!tratamientoForm.valid" class="save-button">Guardar</button>
-    </form>
-
-</div>
+            <div *ngIf="errorMensaje" class="errorMensaje">
+                {{errorMensaje}}
+            </div>
+            <div>
+                <button class="cancel-button" (click)="onClose()">Cancelar</button>
+                <button type="submit" class="save-button">Guardar</button>
+            </div>
+        </form>
+    </div>
 

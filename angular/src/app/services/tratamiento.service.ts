@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Usuario} from "../models/usuario.model";
 import {Mascota} from "../models/mascota.model";
+import {Tratamiento} from "../models/tratamiento.model";
 
 const URLSERVER = 'http://localhost:8080/clinica_veterinaria/rest/';
 
@@ -39,6 +40,10 @@ export class TratamientoService{
 
     eliminarTratamiento(idTratamiento: number) : Observable<any>{
         return this.http.delete<any>(`${URLSERVER}tratamiento/eliminarTratamiento/${idTratamiento}`);
+    }
+
+    crearTratamiento(tratamiento: Tratamiento) : Observable<any>{
+        return this.http.post<any>(`${URLSERVER}tratamiento/crearTratamiento`, tratamiento);
     }
 
 }

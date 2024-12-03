@@ -3,6 +3,6 @@ export interface Tratamiento {
     nombre: string;
     descripcion: string;
     precio: number;
-    esVacuna: boolean;
+    esVacuna: number;
     stock: number;
 }

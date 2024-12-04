@@ -20,6 +20,8 @@ public interface IConsultaController {
     ResponseEntity<List<ConsultaDTO>>getConsultasByIdMascota(@PathVariable("id") int idMascota);
     @GetMapping("getVacunasByIdMascota/{id}")
     ResponseEntity<List<ConsultaDTO>> getVacunasByIdMascota(@PathVariable("id") int idMascota);
+    @GetMapping("getCitasByIdVeterinario/{id}")
+    ResponseEntity<List<ConsultaDTO>> getCitasByIdVeterinario(@PathVariable("id") int idVeterinario);
     @PostMapping("getCitasConFiltro")
     ResponseEntity<PageableResult<ConsultaDTO>> getCitasConFiltro (@RequestBody ConsultaFiltroDTO filtro);
     @PostMapping("getConsultasConFiltro")

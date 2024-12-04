@@ -37,6 +37,10 @@ public class ConsultaControllerImpl implements IConsultaController {
         return new ResponseEntity<>(consultaService.getVacunasByIdMascota(idMascota), HttpStatus.OK);
     }
     @Override
+    public ResponseEntity<List<ConsultaDTO>> getCitasByIdVeterinario(int idVeterinario) {
+        return new ResponseEntity<>(consultaService.getCitasByIdVeterinario(idVeterinario), HttpStatus.OK);
+    }
+    @Override
     public ResponseEntity<PageableResult<ConsultaDTO>> getCitasConFiltro(ConsultaFiltroDTO filtro) {
         return new ResponseEntity<>(consultaService.getCitasConFiltro(filtro), HttpStatus.OK);
     }

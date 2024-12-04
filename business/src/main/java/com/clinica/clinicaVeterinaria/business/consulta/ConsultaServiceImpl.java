@@ -94,6 +94,17 @@ public class ConsultaServiceImpl implements IConsultaService {
     }
 
     @Override
+    public List<ConsultaDTO> getCitasByIdVeterinario(int idVeterinario) {
+        validaVeterinario(idVeterinario);
+        List<Consulta> citas = consultaRepository.findCitasByIdVeterinario(idVeterinario);
+        List<ConsultaDTO> citasDTO = new ArrayList<>();
+
+        citas.forEach(cita -> citasDTO.add(ConsultaDTO.toDTO(cita)));
+
+        return citasDTO;
+    }
+
+    @Override
     public PageableResult<ConsultaDTO> getConsultasConFiltro(ConsultaFiltroDTO filtro) {
         List<Consulta> consultas = consultaRepository.findConsultasPorFiltro(filtro);
         existeConsultasCitasVacunas(consultas);
@@ -284,6 +295,21 @@ public class ConsultaServiceImpl implements IConsultaService {
     private void validaIdMascota (int idMascota) {
         if (idMascota <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noValidoIdMascota");
+        }
+    }
+    private void validaVeterinario (int idVeterinario) {
+        if (idVeterinario <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noValidoIdVeterinario");
+        }
+        if (idVeterinario > 0) {
+            Usuario veterinario = usuarioRepository.findUsuarioById(idVeterinario);
+            if (veterinario == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontradoVeterinario");
+            }
+            int rol = veterinario.getRol().getIdRol();
+            if (rol == Constantes.ROL_CLIENTE) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEsVeterinarioNiAdmin");
+            }
         }
     }
 

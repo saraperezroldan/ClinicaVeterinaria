@@ -15,6 +15,7 @@ public interface IConsultaService {
     List<ConsultaDTO> getCitasByIdMascota(int idMascota);
     List<ConsultaDTO> getConsultasByIdMascota(int idMascota);
     List<ConsultaDTO> getVacunasByIdMascota (int idMascota);
+    List<ConsultaDTO> getCitasByIdVeterinario (int idVeterinario);
     PageableResult<ConsultaDTO> getCitasConFiltro(ConsultaFiltroDTO filtro);
     PageableResult<ConsultaDTO> getConsultasConFiltro(ConsultaFiltroDTO filtro);
     ConsultaDTO crearCita(ConsultaDTO citaDTO);

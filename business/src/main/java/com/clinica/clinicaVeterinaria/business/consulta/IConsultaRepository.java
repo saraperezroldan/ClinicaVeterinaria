@@ -1,6 +1,7 @@
 package com.clinica.clinicaVeterinaria.business.consulta;
 
 import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
@@ -20,4 +21,9 @@ public interface IConsultaRepository extends JpaRepository<Consulta, Integer>, I
             "JOIN tc.tratamiento t " +
             "WHERE c.mascota.idMascota = :idMascota AND c.esCita = 1 AND t.esVacuna = 1")
     List<Consulta> findCitasConVacunasByIdMascota (int idMascota);
+
+   @Query("SELECT c FROM Consulta c " +
+            "WHERE c.idVeterinario = :idVeterinario AND c.esCita = 1 " +
+            "ORDER BY c.fechaCitaConsulta ASC ")
+    List<Consulta> findCitasByIdVeterinario (int idVeterinario);
 }

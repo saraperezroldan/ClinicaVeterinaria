@@ -11,6 +11,8 @@ import {Consulta} from "../../models/consulta.model";
 import {Usuario} from "../../models/usuario.model";
 import {Tratamiento} from "../../models/tratamiento.model";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {ConfirmDeleteCitaComponent} from "../../shared/confirm-delete-cita/confirm-delete-cita.component";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -38,8 +40,7 @@ export class GestionCitasVeterinarioComponent implements OnInit{
   constructor(private mascotaService : MascotaService,
               private consultaService : ConsultaService,
               private usuarioService : UsuarioService,
-              private  route : ActivatedRoute,
-              private ruta: Router) { }
+              public dialog : MatDialog) { }
 
   ngOnInit( ): void {
     this.currentUser = this.usuarioService.getCurrentUser();
@@ -85,8 +86,23 @@ export class GestionCitasVeterinarioComponent implements OnInit{
     }
 
 
-  eliminarCita(idConsulta: number): void {
-    console.log(`Eliminar consulta con ID: ${idConsulta}`);
+  eliminarCita(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteCitaComponent, {});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.consultaService.eliminarCita(id).subscribe(
+          response => {
+            console.log('Cita eliminada:', response);
+            alert('La cita se ha eliminado correctamente');
+            this.ngOnInit();
+          },
+          error => {
+            console.error('Error al eliminar la cita:', error);
+          }
+        );
+      }
+    });
   }
 
     onPageChange(event: PageEvent): void {

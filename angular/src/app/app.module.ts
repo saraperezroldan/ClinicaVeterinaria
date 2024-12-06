@@ -46,6 +46,7 @@ import { GestionConsultasAdministradorComponent } from './pages/gestion-consulta
 import { ConfirmDeleteTratamientoComponent } from './shared/confirm-delete-tratamiento/confirm-delete-tratamiento.component';
 import { NuevoTratamientoComponent } from './shared/nuevo-tratamiento/nuevo-tratamiento.component';
 import { GestionTratamientosComponent } from './pages/gestion-tratamientos/gestion-tratamientos.component';
+import { ProximosTratamientosComponent } from './shared/proximos-tratamientos/proximos-tratamientos.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { GestionTratamientosComponent } from './pages/gestion-tratamientos/gesti
     ConfirmDeleteTratamientoComponent,
     NuevoTratamientoComponent,
     GestionTratamientosComponent,
+    ProximosTratamientosComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,85 @@
+.popup {
+  width: 450px;
+  text-align: center;
+  border: 1px solid darkgray;
+  border-radius: 12px;
+  background-color: #e0e0e0;
+  box-shadow: none;
+  outline: none;
+  overflow: hidden;
+}
+
+.cabecera {
+  background-color: #8cb4d2;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 4%;
+  height: 70px;
+  margin: 0;
+}
+
+.cabecera h2 {
+  font-size: 25px;
+  margin: 0;
+  color: #626161;
+  font-family: 'Arial', sans-serif;
+}
+
+mat-icon {
+  font-size: 25px;
+  color: #626161;
+  vertical-align: middle;
+  margin-right: 2%;
+}
+
+button {
+  background-color: #8cb4d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 250px;
+  height: 40px;
+  margin-top: 20px;
+  outline: none;
+}
+
+.noTratamientos {
+  font-size: 16px;
+  color: #626161;
+  font-family: 'Arial', sans-serif;
+  margin: 20px;
+}
+
+.fecha{
+  display: flex;
+  align-items: center;
+  font-family: 'Arial', serif;
+  margin-top: 3%;
+  min-height: 20px;
+}
+
+.tratamiento{
+  display: flex;
+  font-family: 'Arial', serif;
+  margin-top: 3%;
+  min-height: 20px;
+}
+
+.cita{
+  border: 2px solid #ccc;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.contenedor{
+  padding: 30px;
+}

@@ -56,6 +56,13 @@ export class ConsultaService{
     eliminarConsulta(idConsulta: number) : Observable<any>{
         return this.http.delete<any>(`${URLSERVER}consulta/eliminarConsulta/${idConsulta}`);
     }
+    getVacunasByIdMascota(idMascota: number) : Observable<any>{
+        return this.http.get<any>(`${URLSERVER}consulta/getVacunasByIdMascota/${idMascota}`);
+    }
+
+    getCitasByIdVeterinario(idVterinario: number) : Observable<any>{
+        return this.http.get<any>(`${URLSERVER}consulta/getCitasByIdVeterinario/${idVterinario}`);
+    }
 
 
 

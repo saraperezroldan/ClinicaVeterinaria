@@ -1,0 +1,34 @@
+<div class="popup">
+  <div class="cabecera">
+    <mat-icon>vaccines</mat-icon>
+    <h2>Próximos tratamientos</h2>
+  </div>
+  <div class="contenedor">
+    <div *ngFor="let vacuna of vacunas" #noTratamientos>
+
+      <div class="cita">
+        <div class="fecha">
+          <mat-icon>event</mat-icon>
+          <strong>Fecha recomendada:</strong>
+          <span>{{ vacuna.fechaCitaConsulta | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="tratamiento">
+          <p>Tratamiento: &nbsp; </p>
+          <span>{{ vacuna.motivo }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="botones">
+      <button class="button" (click)="cerrar()">Aceptar</button>
+    </div>
+  </div>
+
+  <div *ngIf="vacunas.length == 0" #noTratamientos class="noTratamientos">
+    <p>No hay próximas vacunas para tu mascota</p>
+  </div>
+
+
+</div>
+

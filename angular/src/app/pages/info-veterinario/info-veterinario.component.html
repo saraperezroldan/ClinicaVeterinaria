@@ -71,10 +71,25 @@
 
   </div>
   <div class="container-mascotas">
-    <h2>Próximas consultas</h2>
+    <h2>Próximas citas</h2>
 
     <div class="container-info-consultas">
       <div class="citas">
+
+        <div *ngFor="let cita of citas">
+
+          <div class="cita">
+            <mat-icon>event</mat-icon>
+            <span>{{ cita.fechaCitaConsulta | date:'dd/MM/yyyy' }}</span>
+            <mat-icon>schedule</mat-icon>
+            <span>{{ cita.horaCita | horaFormato }}</span>
+            <mat-icon>assignment</mat-icon>
+            <strong>Motivo: &nbsp;</strong>
+            <span>{{ cita.motivo }}</span>
+            <button class="boton-cancelar" (click)="eliminarCita(cita.idConsulta)">Cancelar</button>
+          </div>
+
+        </div>
 
       </div>
       <div class="imagen-section" [routerLink]="[]">

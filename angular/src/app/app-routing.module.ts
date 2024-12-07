@@ -29,6 +29,9 @@ import {
   GestionConsultasAdministradorComponent
 } from "./pages/gestion-consultas-administrador/gestion-consultas-administrador.component";
 import {GestionTratamientosComponent} from "./pages/gestion-tratamientos/gestion-tratamientos.component";
+import {
+  HistorialCitasVeterinarioComponent
+} from "./pages/historial-citas-veterinario/historial-citas-veterinario.component";
 
 const routes: Routes = [
   {
@@ -114,6 +117,10 @@ const routes: Routes = [
       {
         path: 'gestion-tratamientos',
         component: GestionTratamientosComponent
+      },
+      {
+        path: 'historial-citas-veterinario/:idUsuario',
+        component: HistorialCitasVeterinarioComponent
       }
     ]
   },

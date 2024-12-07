@@ -47,6 +47,7 @@ import { ConfirmDeleteTratamientoComponent } from './shared/confirm-delete-trata
 import { NuevoTratamientoComponent } from './shared/nuevo-tratamiento/nuevo-tratamiento.component';
 import { GestionTratamientosComponent } from './pages/gestion-tratamientos/gestion-tratamientos.component';
 import { ProximosTratamientosComponent } from './shared/proximos-tratamientos/proximos-tratamientos.component';
+import { HistorialCitasVeterinarioComponent } from './pages/historial-citas-veterinario/historial-citas-veterinario.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { ProximosTratamientosComponent } from './shared/proximos-tratamientos/pr
     NuevoTratamientoComponent,
     GestionTratamientosComponent,
     ProximosTratamientosComponent,
+    HistorialCitasVeterinarioComponent,
   ],
   imports: [
     BrowserModule,

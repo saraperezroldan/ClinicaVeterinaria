@@ -11,11 +11,11 @@ import {forkJoin, map, Observable} from "rxjs";
 import {Consulta} from "../../models/consulta.model";
 
 @Component({
-  selector: 'app-gestion-consultas-veterinario',
-  templateUrl: './gestion-consultas-veterinario.component.html',
-  styleUrl: './gestion-consultas-veterinario.component.css'
+  selector: 'app-historial-citas-veterinario',
+  templateUrl: './historial-citas-veterinario.component.html',
+  styleUrl: './historial-citas-veterinario.component.css'
 })
-export class GestionConsultasVeterinarioComponent {
+export class HistorialCitasVeterinarioComponent {
 
   mascota! : Mascota;
   idMascota! : number;
@@ -37,11 +37,13 @@ export class GestionConsultasVeterinarioComponent {
               private  route : ActivatedRoute,
               private ruta: Router) { }
 
-  ngOnInit( ): void {
-    this.currentUser = this.usuarioService.getCurrentUser();
-    this.idVeterinario = this.currentUser.idUsuario;
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+    this.idVeterinario = Number(params.get('idVeterinario'));
     this.obtenerCitas();
+    });
   }
+
 
   obtenerCitas(): void {
     this.consultaService.getConsultasByVeterinario(this.idVeterinario, this.pageIndex, this.pageSize).subscribe({
@@ -51,14 +53,14 @@ export class GestionConsultasVeterinarioComponent {
         const citas = response.results;
 
         const observables: Observable<any>[] = citas.map((cita: Consulta) =>
-            this.mascotaService.getInfoMascotaById(cita.mascota).pipe(
-                map((mascota: Mascota) => ({
-                  ...cita,
-                  idMascota: mascota?.idMascota,
-                  nombreMascota: mascota?.nombre,
-                  especieMascota: mascota?.raza?.especie?.nombre
-                }))
-            )
+          this.mascotaService.getInfoMascotaById(cita.mascota).pipe(
+            map((mascota: Mascota) => ({
+              ...cita,
+              idMascota: mascota?.idMascota,
+              nombreMascota: mascota?.nombre,
+              especieMascota: mascota?.raza?.especie?.nombre
+            }))
+          )
         );
 
         forkJoin(observables).subscribe({
@@ -89,6 +91,10 @@ export class GestionConsultasVeterinarioComponent {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.obtenerCitas();
+  }
+
+  goBack(){
+    window.history.back();
   }
 
 }

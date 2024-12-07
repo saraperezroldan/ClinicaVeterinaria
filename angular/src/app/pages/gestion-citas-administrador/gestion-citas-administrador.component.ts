@@ -12,17 +12,24 @@ import {Consulta} from "../../models/consulta.model";
 import {ConfirmDeleteCitaComponent} from "../../shared/confirm-delete-cita/confirm-delete-cita.component";
 import {MatDialog} from "@angular/material/dialog";
 
+interface VeterinarioSimplificado {
+  idUsuario: number;
+  nombre: string;
+}
+
 @Component({
   selector: 'app-gestion-citas-administrador',
   templateUrl: './gestion-citas-administrador.component.html',
   styleUrl: './gestion-citas-administrador.component.css'
 })
+
 export class GestionCitasAdministradorComponent {
 
   mascota! : Mascota;
   idMascota! : number;
   idVeterinario! : number;
   currentUser! : Usuario;
+  veterinarios! : VeterinarioSimplificado[];
 
   displayedColumns: string[] = ['idConsulta', 'idMascota', 'nombreMascota', 'especieMascota', 'fechaConsulta', 'horaConsulta', 'motivo', 'nombreVeterinario', 'acciones'];
   dataSource = new MatTableDataSource<any>([]);
@@ -40,7 +47,17 @@ export class GestionCitasAdministradorComponent {
 
   ngOnInit( ): void {
     this.idVeterinario = 0;
+    this.cargarVeterinarios();
     this.obtenerCitas();
+  }
+
+  cargarVeterinarios(): void {
+    this.usuarioService.getUsariosByRol(2).subscribe(
+      veterinarios => {
+        console.log(veterinarios);
+        this.veterinarios = veterinarios.filter(veterinario => veterinario.activo === 1);
+      }
+    )
   }
 
   obtenerCitas(): void {
@@ -61,10 +78,19 @@ export class GestionCitasAdministradorComponent {
           );
 
           const veterinarioObservable = this.usuarioService.getUsuarioById(cita.idVeterinario).pipe(
-              map((veterinario: Usuario) => ({
+            map((veterinario: Usuario) => {
+              // Agregar veterinario a la lista si aún no está
+              if (!this.veterinarios.some(v => v.idUsuario === veterinario.idUsuario)) {
+                this.veterinarios.push({
+                  idUsuario: veterinario.idUsuario,
+                  nombre: `${veterinario.nombre} ${veterinario.apellidos}`
+                });
+              }
+              return {
                 ...cita,
                 nombreVeterinario: `${veterinario.nombre} ${veterinario.apellidos}`
-              }))
+              };
+            })
           );
 
           return forkJoin([mascotaObservable, veterinarioObservable]).pipe(
@@ -118,6 +144,11 @@ export class GestionCitasAdministradorComponent {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.obtenerCitas();
+  }
+
+  filtrarPorVeterinario(): void {
+    this.pageIndex = 0; // Reiniciar a la primera página
+    this.obtenerCitas(); // Actualizar las citas con el filtro actual
   }
 
 }

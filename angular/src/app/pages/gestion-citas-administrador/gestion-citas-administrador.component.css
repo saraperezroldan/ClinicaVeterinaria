@@ -97,4 +97,75 @@ mat-paginator {
     width: auto;
 }
 
+.cabecera-tabla {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+mat-form-field {
+
+  height: auto;
+  margin-top: auto;
+}
+
+::ng-deep .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: #8cb4d2 !important;
+}
+
+::ng-deep .mat-primary {
+  --mat-full-pseudo-checkbox-selected-icon-color: #8cb4d2 !important;
+  --mat-full-pseudo-checkbox-selected-checkmark-color: #fafafa;
+  --mat-full-pseudo-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mat-full-pseudo-checkbox-disabled-selected-checkmark-color: #fafafa;
+  --mat-full-pseudo-checkbox-disabled-unselected-icon-color: #b0b0b0;
+  --mat-full-pseudo-checkbox-disabled-selected-icon-color: #b0b0b0;
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color: #8cb4d2 !important;
+  --mat-minimal-pseudo-checkbox-disabled-selected-checkmark-color: #b0b0b0;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above {
+  color: #8cb4d2 !important;
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+  color: #8cb4d2 !important;
+}
+
+::ng-deep .mdc-line-ripple ng-tns-c3736059725-2 ng-star-inserted mdc-line-ripple--active {
+  background-color: #8cb4d2 !important;
+  color: #8cb4d2 !important;
+}
+
+::ng-deep .mat-mdc-select {
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  color: var(--mat-select-enabled-trigger-text-color);
+  font-family: sans-serif !important;
+  line-height: var(--mat-select-trigger-text-line-height);
+  font-size: 15px !important;
+  font-weight: var(--mat-select-trigger-text-weight);
+  letter-spacing: var(--mat-select-trigger-text-tracking);
+}
+
+::ng-deep .mdc-text-field--filled .mdc-floating-label {
+  font-family: sans-serif !important;
+  font-size: 13px !important;
+  font-weight: var(--mdc-filled-text-field-label-text-weight);
+  letter-spacing: var(--mdc-filled-text-field-label-text-tracking);
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper mat-mdc-form-field-bottom-align ng-tns-c3736059725-2{
+  height: 0px !important;
+}
+
+::ng-deep .mdc-list-item__primary-text{
+  font-family: sans-serif !important;
+  font-size: 15px !important;
+}
+
+
 

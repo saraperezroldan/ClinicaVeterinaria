@@ -1,8 +1,21 @@
 <div class="contenedor">
+  <div class="cabecera-tabla">
     <div class="icon-container">
-        <mat-icon class="icon-medical">topic</mat-icon>
-        <h1>Gestión de citas</h1>
+      <mat-icon class="icon-medical">topic</mat-icon>
+      <h1>Gestión de citas</h1>
     </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Filtrar por Veterinario</mat-label>
+      <mat-select [(value)]="idVeterinario" (selectionChange)="filtrarPorVeterinario()">
+        <mat-option [value]="0">Todos</mat-option>
+        <mat-option *ngFor="let vet of veterinarios" [value]="vet.idUsuario">
+          {{ vet.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
 
     <table mat-table [dataSource]="dataSource">
 

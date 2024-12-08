@@ -19,9 +19,18 @@
       <!-- Agrega más opciones de horarios aquí -->
     </select>
 
+    <h3>Seleccione un veterinario:</h3>
+    <select class="form-select" [(ngModel)]="selectedVeterinario" name="veterinario">
+      <option disabled selected>Selecciona el veterinario</option>
+      <option *ngFor="let veterinario of veterinarios" [value]="veterinario.idUsuario">
+        {{ veterinario.nombre }} {{ veterinario.apellidos }}
+      </option>
+    </select>
+
+
     <h3>Escriba el motivo:</h3>
     <textarea class="form-textarea" placeholder="Escriba el motivo"></textarea>
 
-    <button class="btn-create">Crear cita</button>
+    <button class="btn-create" (click)="crearCita()">Crear cita</button>
   </div>
 </div>

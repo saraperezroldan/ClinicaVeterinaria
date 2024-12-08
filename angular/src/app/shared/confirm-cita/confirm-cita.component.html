@@ -1,0 +1,24 @@
+<div class="popup">
+  <mat-toolbar class="toolbar"></mat-toolbar>
+  <mat-dialog-content>
+    <p class="dialog-text">¿Desea confirmar la cita?</p>
+  </mat-dialog-content>
+
+  <div class="cita">
+    <div class="fecha">
+      <mat-icon>event</mat-icon>
+      <strong>Fecha recomendada:</strong>
+      <!--<span>{{ vacuna.fechaCitaConsulta | date:'dd/MM/yyyy' }}</span>-->
+    </div>
+    <div class="tratamiento">
+      <p>Motivo: &nbsp; </p>
+      <!--<span>{{ vacuna.motivo }}</span>-->
+    </div>
+  </div>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onClose()" class="botonCancelar">Cancelar</button>
+    <button mat-button (click)="onSubmit()" class="botonAceptar">Aceptar</button>
+  </mat-dialog-actions>
+</div>
+

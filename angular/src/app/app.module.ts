@@ -51,6 +51,7 @@ import { HistorialCitasVeterinarioComponent } from './pages/historial-citas-vete
 import { NuevaCitaComponent } from './pages/nueva-cita/nueva-cita.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import { ConfirmCitaComponent } from './shared/confirm-cita/confirm-cita.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
     ProximosTratamientosComponent,
     HistorialCitasVeterinarioComponent,
     NuevaCitaComponent,
+    ConfirmCitaComponent,
   ],
   imports: [
     BrowserModule,

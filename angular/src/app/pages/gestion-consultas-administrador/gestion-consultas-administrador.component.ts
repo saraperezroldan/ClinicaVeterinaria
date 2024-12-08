@@ -13,6 +13,7 @@ import {Consulta} from "../../models/consulta.model";
 interface VeterinarioSimplificado {
   idUsuario: number;
   nombre: string;
+  apellidos?: string;
 }
 
 @Component({
@@ -88,7 +89,8 @@ export class GestionConsultasAdministradorComponent {
               if (!this.veterinarios.some(v => v.idUsuario === veterinario.idUsuario)) {
                 this.veterinarios.push({
                   idUsuario: veterinario.idUsuario,
-                  nombre: `${veterinario.nombre} ${veterinario.apellidos}`
+                  nombre: veterinario.nombre,
+                  apellidos: veterinario.apellidos
                 });
               }
               return {

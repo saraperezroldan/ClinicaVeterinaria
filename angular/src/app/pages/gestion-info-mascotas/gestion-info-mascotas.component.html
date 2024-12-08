@@ -105,7 +105,7 @@
             </div>
         </div>
         <div>
-            <button class="proxima-cita-button">Próxima cita</button>
+            <button class="proxima-cita-button" [routerLink]="['/usuario/nueva-cita', mascota.idMascota]">Nueva cita</button>
             <button class="nueva-consulta-button" [routerLink]="['/usuario/nueva-consulta', mascota.idMascota]">Nueva consulta</button>
         </div>
     </div>

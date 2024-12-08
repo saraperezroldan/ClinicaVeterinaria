@@ -15,6 +15,7 @@ import {MatDialog} from "@angular/material/dialog";
 interface VeterinarioSimplificado {
   idUsuario: number;
   nombre: string;
+  apellidos?: string;
 }
 
 @Component({
@@ -91,7 +92,8 @@ export class GestionCitasAdministradorComponent {
               if (!this.veterinarios.some(v => v.idUsuario === veterinario.idUsuario)) {
                 this.veterinarios.push({
                   idUsuario: veterinario.idUsuario,
-                  nombre: `${veterinario.nombre} ${veterinario.apellidos}`
+                  nombre: veterinario.nombre,
+                  apellidos: veterinario.apellidos
                 });
               }
               return {

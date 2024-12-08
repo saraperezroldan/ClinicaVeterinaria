@@ -49,7 +49,8 @@ import { GestionTratamientosComponent } from './pages/gestion-tratamientos/gesti
 import { ProximosTratamientosComponent } from './shared/proximos-tratamientos/proximos-tratamientos.component';
 import { HistorialCitasVeterinarioComponent } from './pages/historial-citas-veterinario/historial-citas-veterinario.component';
 import { NuevaCitaComponent } from './pages/nueva-cita/nueva-cita.component';
-import {CalendarModule} from "primeng/calendar";
+import {FullCalendarModule} from "@fullcalendar/angular";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 @NgModule({
   declarations: [
@@ -104,7 +105,7 @@ import {CalendarModule} from "primeng/calendar";
     MatDatepickerModule,
     MatNativeDateModule,
     NgSelectModule,
-    CalendarModule
+    FullCalendarModule
   ],
   providers: [
     provideAnimationsAsync()

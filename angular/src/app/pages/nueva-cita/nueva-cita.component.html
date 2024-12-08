@@ -1,6 +1,27 @@
 <div class="icon-container">
   <mat-icon class="back-icon" (click)="goBack()">reply</mat-icon>
 </div>
+<div class="nueva-cita-container">
+  <div class="calendar-section">
+    <div class="calendar-container">
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+  </div>
 
-<p-calendar [(ngModel)]="dateValue" inline="true" dateFormat="dd/mm/yy"></p-calendar>
 
+  <div class="form-section">
+    <h3>Seleccione la hora de la cita:</h3>
+    <select class="form-select">
+      <option disabled selected>Selecciona la hora</option>
+      <option>08:00 AM</option>
+      <option>09:00 AM</option>
+      <option>10:00 AM</option>
+      <!-- Agrega más opciones de horarios aquí -->
+    </select>
+
+    <h3>Escriba el motivo:</h3>
+    <textarea class="form-textarea" placeholder="Escriba el motivo"></textarea>
+
+    <button class="btn-create">Crear cita</button>
+  </div>
+</div>

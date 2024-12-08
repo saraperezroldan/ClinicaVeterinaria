@@ -30,6 +30,7 @@ export class GestionCitasAdministradorComponent {
   idVeterinario! : number;
   currentUser! : Usuario;
   veterinarios! : VeterinarioSimplificado[];
+  noCitasEncontradas: boolean = false;
 
   displayedColumns: string[] = ['idConsulta', 'idMascota', 'nombreMascota', 'especieMascota', 'fechaConsulta', 'horaConsulta', 'motivo', 'nombreVeterinario', 'acciones'];
   dataSource = new MatTableDataSource<any>([]);
@@ -67,6 +68,14 @@ export class GestionCitasAdministradorComponent {
         this.totalItems = response.count;
         const citas = response.results;
 
+        if (citas.length === 0) {
+          this.noCitasEncontradas = true;
+          this.dataSource.data = [];
+          return;
+        } else {
+          this.noCitasEncontradas = false;
+        }
+
         const observables: Observable<any>[] = citas.map((cita: Consulta) => {
           const mascotaObservable = this.mascotaService.getInfoMascotaById(cita.mascota).pipe(
               map((mascota: Mascota) => ({
@@ -79,7 +88,6 @@ export class GestionCitasAdministradorComponent {
 
           const veterinarioObservable = this.usuarioService.getUsuarioById(cita.idVeterinario).pipe(
             map((veterinario: Usuario) => {
-              // Agregar veterinario a la lista si aún no está
               if (!this.veterinarios.some(v => v.idUsuario === veterinario.idUsuario)) {
                 this.veterinarios.push({
                   idUsuario: veterinario.idUsuario,
@@ -115,7 +123,13 @@ export class GestionCitasAdministradorComponent {
         });
       },
       error: (err) => {
-        console.error('Error al obtener citas:', err);
+        if (err.status === 404) {
+          console.warn('No se encontraron citas disponibles para este veterinario.');
+          this.noCitasEncontradas = true;
+          this.dataSource.data = [];
+        } else {
+          console.error('Error al obtener citas:', err);
+        }
       }
     });
   }
@@ -147,8 +161,8 @@ export class GestionCitasAdministradorComponent {
   }
 
   filtrarPorVeterinario(): void {
-    this.pageIndex = 0; // Reiniciar a la primera página
-    this.obtenerCitas(); // Actualizar las citas con el filtro actual
+    this.pageIndex = 0;
+    this.obtenerCitas();
   }
 
 }

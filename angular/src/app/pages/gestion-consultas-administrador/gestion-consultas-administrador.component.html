@@ -1,10 +1,28 @@
 <div class="contenedor">
+  <div class="cabecera-tabla">
     <div class="icon-container">
-        <mat-icon class="icon-medical">topic</mat-icon>
-        <h1>Gestión de consultas</h1>
+      <mat-icon class="icon-medical">topic</mat-icon>
+      <h1>Gestión de consultas</h1>
     </div>
 
-    <table mat-table [dataSource]="dataSource">
+    <mat-form-field appearance="fill">
+      <mat-label>Filtrar por Veterinario</mat-label>
+      <mat-select [(value)]="idVeterinario" (selectionChange)="filtrarPorVeterinario()">
+        <mat-option [value]="0">Todos</mat-option>
+        <mat-option *ngFor="let vet of veterinarios" [value]="vet.idUsuario">
+          {{ vet.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div *ngIf="noCitasEncontradas" class="mensaje-sin-citas">
+    <p>No se encontraron consultas disponibles para este veterinario.</p>
+  </div>
+
+
+    <table mat-table [dataSource]="dataSource" *ngIf="!noCitasEncontradas">
 
         <ng-container matColumnDef="idConsulta">
             <th mat-header-cell *matHeaderCellDef> Id Consulta </th>
@@ -68,7 +86,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <div class="paginator-container">
+    <div class="paginator-container" *ngIf="!noCitasEncontradas">
         <mat-paginator [length]="totalItems"
                        [pageSize]="pageSize"
                        showFirstLastButtons

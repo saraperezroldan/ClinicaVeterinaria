@@ -16,8 +16,11 @@
     </mat-form-field>
   </div>
 
+  <div *ngIf="noCitasEncontradas" class="mensaje-sin-citas">
+    <p>No se encontraron citas disponibles para este veterinario.</p>
+  </div>
 
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" *ngIf="!noCitasEncontradas">
 
         <ng-container matColumnDef="idConsulta">
             <th mat-header-cell *matHeaderCellDef> Id Consulta </th>
@@ -79,7 +82,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <div class="paginator-container">
+    <div class="paginator-container" *ngIf="!noCitasEncontradas">
         <mat-paginator [length]="totalItems"
                        [pageSize]="pageSize"
                        showFirstLastButtons

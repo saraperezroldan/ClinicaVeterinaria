@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Mascota} from "../../models/mascota.model";
 import {Usuario} from "../../models/usuario.model";
 import {MatTableDataSource} from "@angular/material/table";
@@ -9,6 +9,11 @@ import {UsuarioService} from "../../services/usuario.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {forkJoin, map, Observable} from "rxjs";
 import {Consulta} from "../../models/consulta.model";
+
+interface VeterinarioSimplificado {
+  idUsuario: number;
+  nombre: string;
+}
 
 @Component({
   selector: 'app-gestion-consultas-administrador',
@@ -21,6 +26,8 @@ export class GestionConsultasAdministradorComponent {
   idMascota! : number;
   idVeterinario! : number;
   currentUser! : Usuario;
+  veterinarios! : VeterinarioSimplificado[];
+  noCitasEncontradas: boolean = false;
 
   displayedColumns: string[] = ['idConsulta', 'idMascota', 'nombreMascota', 'especieMascota', 'fechaConsulta', 'horaConsulta', 'motivo', 'nombreVeterinario', 'acciones'];
   dataSource = new MatTableDataSource<any>([]);
@@ -33,11 +40,22 @@ export class GestionConsultasAdministradorComponent {
 
   constructor(private mascotaService : MascotaService,
               private consultaService : ConsultaService,
-              private usuarioService : UsuarioService) { }
+              private usuarioService : UsuarioService,
+              private cdr : ChangeDetectorRef) { }
 
   ngOnInit( ): void {
     this.idVeterinario = 0;
+    this.cargarVeterinarios();
     this.obtenerCitas();
+  }
+
+  cargarVeterinarios(): void {
+    this.usuarioService.getUsariosByRol(2).subscribe(
+      veterinarios => {
+        console.log(veterinarios);
+        this.veterinarios = veterinarios.filter(veterinario => veterinario.activo === 1);
+      }
+    )
   }
 
   obtenerCitas(): void {
@@ -46,6 +64,14 @@ export class GestionConsultasAdministradorComponent {
         console.log(response);
         this.totalItems = response.count;
         const citas = response.results;
+
+        if (citas.length === 0) {
+          this.noCitasEncontradas = true;
+          this.dataSource.data = [];
+          return;
+        } else {
+          this.noCitasEncontradas = false;
+        }
 
         const observables: Observable<any>[] = citas.map((cita: Consulta) => {
           const mascotaObservable = this.mascotaService.getInfoMascotaById(cita.mascota).pipe(
@@ -58,10 +84,18 @@ export class GestionConsultasAdministradorComponent {
           );
 
           const veterinarioObservable = this.usuarioService.getUsuarioById(cita.idVeterinario).pipe(
-              map((veterinario: Usuario) => ({
+            map((veterinario: Usuario) => {
+              if (!this.veterinarios.some(v => v.idUsuario === veterinario.idUsuario)) {
+                this.veterinarios.push({
+                  idUsuario: veterinario.idUsuario,
+                  nombre: `${veterinario.nombre} ${veterinario.apellidos}`
+                });
+              }
+              return {
                 ...cita,
                 nombreVeterinario: `${veterinario.nombre} ${veterinario.apellidos}`
-              }))
+              };
+            })
           );
 
           return forkJoin([mascotaObservable, veterinarioObservable]).pipe(
@@ -86,7 +120,13 @@ export class GestionConsultasAdministradorComponent {
         });
       },
       error: (err) => {
-        console.error('Error al obtener citas:', err);
+        if (err.status === 404) {
+          console.warn('No se encontraron citas disponibles para este veterinario.');
+          this.noCitasEncontradas = true;
+          this.dataSource.data = [];
+        } else {
+          console.error('Error al obtener citas:', err);
+        }
       }
     });
   }
@@ -99,6 +139,11 @@ export class GestionConsultasAdministradorComponent {
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.obtenerCitas();
+  }
+
+  filtrarPorVeterinario(): void {
+    this.pageIndex = 0;
     this.obtenerCitas();
   }
 

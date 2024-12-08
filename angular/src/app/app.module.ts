@@ -48,6 +48,8 @@ import { NuevoTratamientoComponent } from './shared/nuevo-tratamiento/nuevo-trat
 import { GestionTratamientosComponent } from './pages/gestion-tratamientos/gestion-tratamientos.component';
 import { ProximosTratamientosComponent } from './shared/proximos-tratamientos/proximos-tratamientos.component';
 import { HistorialCitasVeterinarioComponent } from './pages/historial-citas-veterinario/historial-citas-veterinario.component';
+import { NuevaCitaComponent } from './pages/nueva-cita/nueva-cita.component';
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -84,6 +86,7 @@ import { HistorialCitasVeterinarioComponent } from './pages/historial-citas-vete
     GestionTratamientosComponent,
     ProximosTratamientosComponent,
     HistorialCitasVeterinarioComponent,
+    NuevaCitaComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ import { HistorialCitasVeterinarioComponent } from './pages/historial-citas-vete
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgSelectModule
+    NgSelectModule,
+    CalendarModule
   ],
   providers: [
     provideAnimationsAsync()

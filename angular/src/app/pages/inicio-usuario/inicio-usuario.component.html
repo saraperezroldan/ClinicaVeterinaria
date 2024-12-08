@@ -31,12 +31,12 @@
               </div>
               <button class="boton-cancelar" (click)="eliminarCita(cita.idConsulta)">Cancelar</button>
             </div>
-            <button class="boton-nueva-cita">Nueva cita</button>
+            <button class="boton-nueva-cita" [routerLink]="['/usuario/nueva-cita', mascota.idMascota]">Nueva cita</button>
 
           </div>
           <ng-template #noCitas>
             <p class="no-citas-mensaje">No tiene citas pendientes.</p>
-            <button class="boton-nueva-cita">Nueva cita</button>
+            <button class="boton-nueva-cita" [routerLink]="['/usuario/nueva-cita', mascota.idMascota]">Nueva cita</button>
           </ng-template>
 
 

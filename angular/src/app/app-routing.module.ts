@@ -32,6 +32,7 @@ import {GestionTratamientosComponent} from "./pages/gestion-tratamientos/gestion
 import {
   HistorialCitasVeterinarioComponent
 } from "./pages/historial-citas-veterinario/historial-citas-veterinario.component";
+import {NuevaCitaComponent} from "./pages/nueva-cita/nueva-cita.component";
 
 const routes: Routes = [
   {
@@ -121,6 +122,10 @@ const routes: Routes = [
       {
         path: 'historial-citas-veterinario/:idUsuario',
         component: HistorialCitasVeterinarioComponent
+      },
+      {
+        path: 'nueva-cita/:idMascota',
+        component: NuevaCitaComponent
       }
     ]
   },

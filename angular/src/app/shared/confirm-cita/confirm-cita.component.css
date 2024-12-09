@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: auto; /* Centrado adicional si el padre es más grande */
+  margin: auto;
   position: relative;
 }
 

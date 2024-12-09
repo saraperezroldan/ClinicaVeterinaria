@@ -13,14 +13,13 @@
     <h3>Seleccione la hora de la cita:</h3>
     <select class="form-select">
       <option disabled selected>Selecciona la hora</option>
-      <option>08:00 AM</option>
-      <option>09:00 AM</option>
-      <option>10:00 AM</option>
-      <!-- Agrega más opciones de horarios aquí -->
+      <option *ngFor="let hora of horasDisponibles" [disabled]="citasOcupadas.includes(hora)">
+        {{ hora }}
+      </option>
     </select>
 
     <h3>Seleccione un veterinario:</h3>
-    <select class="form-select" [(ngModel)]="selectedVeterinario" name="veterinario">
+    <select class="form-select" [(ngModel)]="selectedVeterinario" name="veterinario" (change)="onVeterinarioChange()">
       <option disabled selected>Selecciona el veterinario</option>
       <option *ngFor="let veterinario of veterinarios" [value]="veterinario.idUsuario">
         {{ veterinario.nombre }} {{ veterinario.apellidos }}

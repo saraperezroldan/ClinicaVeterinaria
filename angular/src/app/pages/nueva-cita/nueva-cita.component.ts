@@ -6,6 +6,8 @@ import {Usuario} from "../../models/usuario.model";
 import {ProximosTratamientosComponent} from "../../shared/proximos-tratamientos/proximos-tratamientos.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmCitaComponent} from "../../shared/confirm-cita/confirm-cita.component";
+import {ConsultaService} from "../../services/consulta.service";
+import {Consulta} from "../../models/consulta.model";
 
 @Component({
   selector: 'app-nueva-cita',
@@ -15,10 +17,13 @@ import {ConfirmCitaComponent} from "../../shared/confirm-cita/confirm-cita.compo
 export class NuevaCitaComponent implements OnInit{
 
   veterinarios : Usuario[] = [];
-  selectedVeterinario : Usuario | undefined;
+  selectedVeterinario : number | undefined;
+  citasOcupadas: string[] = [];
+  horasDisponibles: string[] = [];
 
   constructor(public usuarioService : UsuarioService,
-              public dialog : MatDialog) { }
+              public dialog : MatDialog,
+              public consultaService : ConsultaService) { }
 
   calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin],
@@ -35,6 +40,7 @@ export class NuevaCitaComponent implements OnInit{
     this.usuarioService.getUsariosByRol(2).subscribe((data: Usuario[]) => {
       this.veterinarios = data;
     });
+    this.generarHorasDisponibles();
   }
 
   handleDateClick(arg: any) {
@@ -53,6 +59,44 @@ export class NuevaCitaComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  onVeterinarioChange() {
+    if (!this.selectedVeterinario) return;
+
+    // Reinicia el listado de horas disponibles
+    this.generarHorasDisponibles();
+
+    // Llama al servicio para obtener las citas del veterinario seleccionado
+    this.consultaService.getCitasByIdVeterinario(this.selectedVeterinario).subscribe(citas => {
+      this.citasOcupadas = citas.map((cita : Consulta) => this.formatHora(cita.horaCita));
+
+      // Filtra las horas ocupadas solo para el veterinario seleccionado
+      this.actualizarHorasDisponibles();
+    });
+  }
+
+  generarHorasDisponibles() {
+    const horas = [];
+    const inicio = 8;
+    const fin = 20;
+
+    for (let h = inicio; h < fin; h++) {
+      horas.push(this.formatHora(`${h}:00:00`));
+      horas.push(this.formatHora(`${h}:30:00`));
+    }
+
+    this.horasDisponibles = horas; // Reinicia la lista de horas disponibles
+  }
+
+  actualizarHorasDisponibles() {
+    this.horasDisponibles = this.horasDisponibles.filter(hora => !this.citasOcupadas.includes(hora));
+  }
+
+  formatHora(hora: string): string {
+    const [h, m] = hora.split(':');
+    const horaInt = parseInt(h, 10);
+    return `${horaInt.toString().padStart(2, '0')}:${m}`;
   }
 
 }

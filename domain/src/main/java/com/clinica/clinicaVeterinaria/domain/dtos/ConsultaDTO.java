@@ -41,7 +41,7 @@ public class ConsultaDTO {
         consultaDTO.setObservaciones(StringUtils.hasText(consulta.getObservaciones()) ? consulta.getObservaciones().trim() : "");
         consultaDTO.setEsCita(consulta.getEsCita());
         consultaDTO.setFechaCitaConsulta(consulta.getFechaCitaConsulta()!= null ? consulta.getFechaCitaConsulta() : null);
-        consultaDTO.setHoraCita(consulta.getHoraCita()!= null ? consulta.getHoraCita() : null);
+        consultaDTO.setHoraCita(consulta.getHoraCita()!= null ? consulta.getHoraFormateada(LocalTime.now()) : null);
         consultaDTO.setFechaAlta(consulta.getFechaAlta()!= null ? consulta.getFechaAlta() : new Date());
         consultaDTO.setFechaUltima(consulta.getFechaUltima()!= null ? consulta.getFechaUltima() : null);
         consultaDTO.setIdVeterinario(consulta.getIdVeterinario() > 0 ? consulta.getIdVeterinario() : 1003);
@@ -96,7 +96,7 @@ public class ConsultaDTO {
         consulta.setObservaciones(StringUtils.hasText(consultaDTO.getObservaciones()) ? consultaDTO.getObservaciones().trim() : "");
         consulta.setEsCita(consultaDTO.getEsCita());
         consulta.setFechaCitaConsulta(consultaDTO.getFechaCitaConsulta());
-        consulta.setHoraCita(consultaDTO.getHoraCita());
+        consulta.setHoraCita(consultaDTO.getHoraCita() != null ? consultaDTO.getHoraCita() : consultaDTO.getHoraFormateada(LocalTime.now()));
         consulta.setFechaAlta(consultaDTO.getFechaAlta());
         consulta.setFechaUltima(consultaDTO.getFechaUltima());
         consulta.setIdVeterinario(consultaDTO.getIdVeterinario());
@@ -161,5 +161,27 @@ public class ConsultaDTO {
     }
     public void setTratamientosConsulta(List<ConsultaTratamientoDTO> tratamientosConsulta) {
         this.tratamientosConsulta = tratamientosConsulta;
+    }
+    public LocalTime getHoraFormateada (LocalTime horaCita) {
+        if (horaCita != null) {
+            int hora = horaCita.getHour();
+            int minutos = horaCita.getMinute();
+            if (minutos > 0 && minutos <= 15) {
+                minutos = 15;
+            } else if (minutos > 15 && minutos <= 30) {
+                minutos = 30;
+            } else if (minutos > 30 && minutos <= 45) {
+                minutos = 45;
+            } else if (minutos > 45 && minutos <= 59) {
+                minutos = 0;
+                if (hora == 23) {
+                    hora = 00;
+                } else {
+                    hora = hora + 1;
+                }
+            }
+            return LocalTime.of(hora, minutos, 0);
+        }
+        return LocalTime.now();
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 @Service
@@ -94,9 +95,9 @@ public class ConsultaServiceImpl implements IConsultaService {
     }
 
     @Override
-    public List<ConsultaDTO> getCitasByIdVeterinario(int idVeterinario) {
-        validaVeterinario(idVeterinario);
-        List<Consulta> citas = consultaRepository.findCitasByIdVeterinario(idVeterinario);
+    public List<ConsultaDTO> getCitasByIdVeterinario(int idVeterinario, LocalDate fechaConcreta) {
+        validaCitasVeterinario(idVeterinario, fechaConcreta);
+        List<Consulta> citas = consultaRepository.findCitasByIdVeterinario(idVeterinario, fechaConcreta);
         List<ConsultaDTO> citasDTO = new ArrayList<>();
 
         citas.forEach(cita -> citasDTO.add(ConsultaDTO.toDTO(cita)));
@@ -128,32 +129,58 @@ public class ConsultaServiceImpl implements IConsultaService {
     }
 
     @Override
-    /*Crear una consulta sin cita previa, consulta de urgencia*/
     public ConsultaDTO crearConsulta(ConsultaDTO consultaDTO) {
         Consulta consultaNueva = ConsultaDTO.toDomain(consultaDTO);
-
         Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
         if (consultaEncontrada != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.yaExisteConsulta");
         }
         validarConsulta(consultaNueva);
         consultaNueva.setEsCita(0);
+        consultaNueva.setFechaCitaConsulta(LocalDate.now());
+        consultaNueva.setHoraCita(LocalTime.now());
         consultaNueva.setFechaAlta(new Date());
         consultaRepository.save(consultaNueva);
-        Consulta consultaCreada = consultaRepository.findConsultaById(consultaNueva.getIdConsulta());
-        Tratamiento tratamientoUrgencia = tratamientoRepository.findTratamientoById(Constantes.TRATAMIENTO_URGENCIA);
-        existeConsultaCita(consultaCreada);
-        if (tratamientoUrgencia == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "tratamiento.noEncontradaConsulta");
-        }
-        ConsultaTratamientoID consultaTratamientoID = new ConsultaTratamientoID(consultaCreada.getIdConsulta(), Constantes.TRATAMIENTO_URGENCIA);
-        ConsultaTratamiento consultaTratamiento = new ConsultaTratamiento();
-        consultaTratamiento.setConsulta(consultaCreada);
-        consultaTratamiento.setTratamiento(tratamientoUrgencia);
-        consultaTratamiento.setId(consultaTratamientoID);
-        ctRepository.save(consultaTratamiento);
 
         return ConsultaDTO.toDTO(consultaNueva);
+    }
+
+    @Override
+    public ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO) {
+        Consulta consultaUpdate = ConsultaDTO.toDomain(consultaDTO);
+        Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
+        existeConsultaCita(consultaEncontrada);
+
+        consultaUpdate.setFechaUltima(new Date());
+        Set<ConsultaTratamiento> constratamientos = new HashSet<>();
+        Set<ConsultaTratamiento> tratamientos = consultaUpdate.getTratamientosConsulta();
+        if (tratamientos != null) {
+            for (ConsultaTratamiento t : tratamientos) {
+                int idConsulta = consultaDTO.getIdConsulta();
+                int idTratamiento = t.getId().getIdTratamiento();
+                ConsultaTratamiento encontrado = ctRepository.existeConsultaTratamiento(idConsulta, idTratamiento);
+                if (encontrado != null) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consultaTratamiento.yaExisteConsultaTratamiento");
+                }
+                Tratamiento tratamiento = tratamientoRepository.findTratamientoById(idTratamiento);
+                Consulta consulta = consultaRepository.findConsultaById(idConsulta);
+                existeConsultaCita(consulta);
+                if (tratamiento == null){
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "tratamiento.noEncontrado");
+                }
+                ConsultaTratamientoID consultaTratamientoID = new ConsultaTratamientoID(idConsulta,idTratamiento);
+                ConsultaTratamiento consultaTratamiento = new ConsultaTratamiento();
+                consultaTratamiento.setConsulta(consultaUpdate);
+                consultaTratamiento.setTratamiento(tratamiento);
+                consultaTratamiento.setId(consultaTratamientoID);
+                ctRepository.save(consultaTratamiento);
+                constratamientos.add(consultaTratamiento);
+            }
+        }
+        consultaUpdate.setTratamientosConsulta(constratamientos);
+        consultaRepository.save(consultaUpdate);
+
+        return consultaDTO.toDTO(consultaUpdate);
     }
 
     @Override
@@ -175,36 +202,43 @@ public class ConsultaServiceImpl implements IConsultaService {
     }
 
     @Override
-    public ConsultaDTO modificarConsulta(ConsultaDTO consultaDTO) {
-        Consulta consultaUpdate = ConsultaDTO.toDomain(consultaDTO);
-        Consulta consultaEncontrada = consultaRepository.findConsultaById(consultaDTO.getIdConsulta());
-        existeConsultaCita(consultaEncontrada);
-        validarConsulta(consultaUpdate);
-        consultaUpdate.setEsCita(0);
-        consultaUpdate.setFechaUltima(new Date());
-        Set<ConsultaTratamiento> tratamientos = consultaUpdate.getTratamientosConsulta();
+    public ConsultaDTO convertirCitaConsulta(ConsultaDTO citaDTO) {
+        Consulta citaUpdate = ConsultaDTO.toDomain(citaDTO);
+        int idCitaConsulta = citaDTO.getIdConsulta();
+        Consulta citaEncontrada = consultaRepository.findCitaById(idCitaConsulta);
+        existeConsultaCita(citaEncontrada);
+        validarConsulta(citaUpdate);
+        citaUpdate.setEsCita(0);
+        citaUpdate.setMotivo(citaEncontrada.getMotivo());
+        citaUpdate.setFechaCitaConsulta(LocalDate.now());
+        citaUpdate.setHoraCita(LocalTime.now());
+        citaUpdate.setFechaUltima(new Date());
+        Set<ConsultaTratamiento> constratamientos = new HashSet<>();
+        Set<ConsultaTratamiento> tratamientos = citaUpdate.getTratamientosConsulta();
         if (tratamientos != null) {
             for (ConsultaTratamiento t : tratamientos) {
-                int idConsulta = consultaDTO.getIdConsulta();
                 int idTratamiento = t.getId().getIdTratamiento();
-                ConsultaTratamiento encontrado = ctRepository.existeConsultaTratamiento(idConsulta, idTratamiento);
+                ConsultaTratamiento encontrado = ctRepository.existeConsultaTratamiento(idCitaConsulta, idTratamiento);
                 if (encontrado != null) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consultaTratamiento.yaExisteConsultaTratamiento");
                 }
                 Tratamiento tratamiento = tratamientoRepository.findTratamientoById(idTratamiento);
-                Consulta consulta = consultaRepository.findConsultaById(idConsulta);
-                existeConsultaCita(consulta);
                 if (tratamiento == null){
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "tratamiento.noEncontrado");
                 }
-                ConsultaTratamientoDTO nuevoTratamiento = new ConsultaTratamientoDTO(idConsulta, idTratamiento );
-                ConsultaTratamiento ct = ConsultaTratamientoDTO.toDomain(nuevoTratamiento);
-                ctRepository.save(ct);
+                ConsultaTratamientoID consultaTratamientoID = new ConsultaTratamientoID(idCitaConsulta ,idTratamiento);
+                ConsultaTratamiento consultaTratamiento = new ConsultaTratamiento();
+                consultaTratamiento.setConsulta(citaUpdate);
+                consultaTratamiento.setTratamiento(tratamiento);
+                consultaTratamiento.setId(consultaTratamientoID);
+                ctRepository.save(consultaTratamiento);
+                constratamientos.add(consultaTratamiento);
             }
         }
-        consultaRepository.save(consultaUpdate);
+        citaUpdate.setTratamientosConsulta(constratamientos);
+        consultaRepository.save(citaUpdate);
 
-        return consultaDTO.toDTO(consultaUpdate);
+        return citaDTO.toDTO(citaUpdate);
     }
 
     @Override
@@ -216,25 +250,6 @@ public class ConsultaServiceImpl implements IConsultaService {
         validarCita(citaUpdate);
         citaUpdate.setEsCita(0);
         citaUpdate.setFechaUltima(new Date());
-        Set<ConsultaTratamiento> tratamientos = citaUpdate.getTratamientosConsulta();
-        if (tratamientos != null) {
-            for (ConsultaTratamiento t : tratamientos) {
-                int idConsulta = citaDTO.getIdConsulta();
-                int idTratamiento = t.getId().getIdTratamiento();
-
-                Tratamiento tratamiento = tratamientoRepository.findTratamientoById(idTratamiento);
-                Consulta consulta = consultaRepository.findConsultaById(idConsulta);
-                if (consulta == null) {
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "consulta.noEncontrado");
-                }
-                if (tratamiento == null){
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "tratamiento.noEncontrado");
-                }
-                ConsultaTratamientoDTO nuevoTratamiento = new ConsultaTratamientoDTO(idConsulta, idTratamiento );
-                ConsultaTratamiento ct = ConsultaTratamientoDTO.toDomain(nuevoTratamiento);
-                ctRepository.save(ct);
-            }
-        }
         consultaRepository.save(citaUpdate);
 
         return citaDTO.toDTO(citaUpdate);
@@ -297,7 +312,7 @@ public class ConsultaServiceImpl implements IConsultaService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noValidoIdMascota");
         }
     }
-    private void validaVeterinario (int idVeterinario) {
+    private void validaCitasVeterinario (int idVeterinario, LocalDate fechaConcreta) {
         if (idVeterinario <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noValidoIdVeterinario");
         }
@@ -310,6 +325,10 @@ public class ConsultaServiceImpl implements IConsultaService {
             if (rol == Constantes.ROL_CLIENTE) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEsVeterinarioNiAdmin");
             }
+        }
+        LocalDate fechaActual = LocalDate.now();
+        if (fechaConcreta.isBefore(fechaActual)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.fechaCitaPasada");
         }
     }
 

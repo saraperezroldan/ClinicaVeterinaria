@@ -59,4 +59,27 @@ public class Consulta {
     public void setMascota(Mascota mascota) {this.mascota = mascota;}
     public Set<ConsultaTratamiento> getTratamientosConsulta() {return tratamientosConsulta;}
     public void setTratamientosConsulta(Set<ConsultaTratamiento> tratamientosConsulta) {this.tratamientosConsulta = tratamientosConsulta;}
+
+    public LocalTime getHoraFormateada(LocalTime horaCita) {
+        if (horaCita != null) {
+            int hora = horaCita.getHour();
+            int minutos = horaCita.getMinute();
+            if (minutos > 0 && minutos <= 15) {
+                minutos = 15;
+            } else if (minutos > 15 && minutos <= 30) {
+                minutos = 30;
+            } else if (minutos > 30 && minutos <= 45) {
+                minutos = 45;
+            } else if (minutos > 45 && minutos <= 59) {
+                minutos = 0;
+                if (hora == 23) {
+                    hora = 00;
+                } else {
+                    hora = hora + 1;
+                }
+            }
+            return LocalTime.of(hora, minutos, 0);
+        }
+        return LocalTime.now();
+    }
 }

@@ -3,8 +3,11 @@ package com.clinica.clinicaVeterinaria.rest.consulta;
 import com.clinica.clinicaVeterinaria.domain.dtos.ConsultaDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.ConsultaFiltroDTO;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RequestMapping("consulta")
@@ -21,7 +24,10 @@ public interface IConsultaController {
     @GetMapping("getVacunasByIdMascota/{id}")
     ResponseEntity<List<ConsultaDTO>> getVacunasByIdMascota(@PathVariable("id") int idMascota);
     @GetMapping("getCitasByIdVeterinario/{id}")
-    ResponseEntity<List<ConsultaDTO>> getCitasByIdVeterinario(@PathVariable("id") int idVeterinario);
+    ResponseEntity<List<ConsultaDTO>> getCitasByIdVeterinario(
+            @PathVariable("id") int idVeterinario,
+            @RequestParam(value = "fechaConcreta", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaConcreta);
     @PostMapping("getCitasConFiltro")
     ResponseEntity<PageableResult<ConsultaDTO>> getCitasConFiltro (@RequestBody ConsultaFiltroDTO filtro);
     @PostMapping("getConsultasConFiltro")
@@ -34,6 +40,8 @@ public interface IConsultaController {
     ResponseEntity<ConsultaDTO> modificarCita(@RequestBody ConsultaDTO ConsultaDTO);
     @PostMapping("modificarConsulta")
     ResponseEntity<ConsultaDTO> modificarConsulta(@RequestBody ConsultaDTO ConsultaDTO);
+    @PostMapping("convertirCitaConsulta")
+    ResponseEntity<ConsultaDTO> convertirCitaConsulta(@RequestBody ConsultaDTO citaDTO);
     @DeleteMapping("eliminarCita/{id}")
     ResponseEntity<ConsultaDTO> eliminarCita(@PathVariable("id") int idCita);
     @DeleteMapping("eliminarConsulta/{id}")

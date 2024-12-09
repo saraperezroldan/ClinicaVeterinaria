@@ -4,6 +4,8 @@ import com.clinica.clinicaVeterinaria.domain.entities.Consulta;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IConsultaRepository extends JpaRepository<Consulta, Integer>, IConsultaRepositoryCustom{
@@ -24,6 +26,7 @@ public interface IConsultaRepository extends JpaRepository<Consulta, Integer>, I
 
    @Query("SELECT c FROM Consulta c " +
             "WHERE c.idVeterinario = :idVeterinario AND c.esCita = 1 " +
+            " AND (:fechaConcreta IS NULL OR c.fechaCitaConsulta = :fechaConcreta) " +
             "ORDER BY c.fechaCitaConsulta ASC ")
-    List<Consulta> findCitasByIdVeterinario (int idVeterinario);
+    List<Consulta> findCitasByIdVeterinario (int idVeterinario, LocalDate fechaConcreta);
 }

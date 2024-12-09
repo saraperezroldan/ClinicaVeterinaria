@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -37,8 +39,8 @@ public class ConsultaControllerImpl implements IConsultaController {
         return new ResponseEntity<>(consultaService.getVacunasByIdMascota(idMascota), HttpStatus.OK);
     }
     @Override
-    public ResponseEntity<List<ConsultaDTO>> getCitasByIdVeterinario(int idVeterinario) {
-        return new ResponseEntity<>(consultaService.getCitasByIdVeterinario(idVeterinario), HttpStatus.OK);
+    public ResponseEntity<List<ConsultaDTO>> getCitasByIdVeterinario(int idVeterinario, LocalDate fechaConcreta) {
+        return new ResponseEntity<>(consultaService.getCitasByIdVeterinario(idVeterinario, fechaConcreta), HttpStatus.OK);
     }
     @Override
     public ResponseEntity<PageableResult<ConsultaDTO>> getCitasConFiltro(ConsultaFiltroDTO filtro) {
@@ -64,6 +66,11 @@ public class ConsultaControllerImpl implements IConsultaController {
     public ResponseEntity<ConsultaDTO> modificarConsulta(ConsultaDTO consultaDTO) {
         return new ResponseEntity<>(consultaService.modificarConsulta(consultaDTO), HttpStatus.OK);
     }
+    @Override
+    public ResponseEntity<ConsultaDTO> convertirCitaConsulta(ConsultaDTO citaDTO) {
+        return new ResponseEntity<>(consultaService.convertirCitaConsulta(citaDTO), HttpStatus.OK);
+    }
+
     @Override
     public ResponseEntity<ConsultaDTO> eliminarCita(int idCita) {
         return new ResponseEntity<>(consultaService.eliminarCita(idCita), HttpStatus.OK);

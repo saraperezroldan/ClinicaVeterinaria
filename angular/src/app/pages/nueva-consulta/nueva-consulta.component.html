@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
           <label for="diagnostico">Fecha</label>
-          <input type="text" id="fecha" [(ngModel)]="fecha" name="fecha" disabled>
+          <input type="text" id="fecha" [(ngModel)]="consulta.fechaCitaConsulta" name="fecha" disabled>
         </div>
         <div class="form-group">
           <label for="veterinario">Veterinario</label>
@@ -29,13 +29,13 @@
       </div>
 
       <label for="motivo">Motivo visita</label>
-      <textarea id="motivo" name="motivo" rows="3" required></textarea>
+      <textarea id="motivo" name="motivo" rows="3" [(ngModel)]="consulta.motivo" required></textarea>
 
       <label for="diagnostico">Diagnóstico</label>
-      <textarea id="diagnostico"  name="diagnostico" rows="3" required></textarea>
+      <textarea id="diagnostico"  name="diagnostico" rows="3" [(ngModel)]="consulta.diagnostico" required></textarea>
 
       <label for="observaciones">Observaciones</label>
-      <textarea id="observaciones"  name="observaciones" rows="3" required></textarea>
+      <textarea id="observaciones"  name="observaciones" rows="3" [(ngModel)]="consulta.observaciones" required></textarea>
 
 
     </div>
@@ -81,7 +81,7 @@
         </tfoot>
       </table>
 
-      <button class="save-button">Guardar</button>
+      <button class="save-button" (click)="nuevaConsulta()">Guardar</button>
 
     </div>
   </div>

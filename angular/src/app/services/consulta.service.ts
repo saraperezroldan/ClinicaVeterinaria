@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Usuario} from "../models/usuario.model";
 import {Mascota} from "../models/mascota.model";
+import {Consulta} from "../models/consulta.model";
 
 const URLSERVER = 'http://localhost:8080/clinica_veterinaria/rest/';
 
@@ -62,6 +63,14 @@ export class ConsultaService{
 
     getCitasByIdVeterinario(idVterinario: number) : Observable<any>{
         return this.http.get<any>(`${URLSERVER}consulta/getCitasByIdVeterinario/${idVterinario}`);
+    }
+
+    crearConsulta(consulta: Consulta) : Observable<any>{
+        return this.http.post<any>(`${URLSERVER}consulta/crearConsulta`, consulta);
+    }
+
+    modificarConsulta(consulta: Consulta) : Observable<any>{
+        return this.http.post<any>(`${URLSERVER}consulta/modificarConsulta`, consulta);
     }
 
 

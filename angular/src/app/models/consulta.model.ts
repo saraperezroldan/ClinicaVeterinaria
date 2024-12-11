@@ -10,4 +10,5 @@ export interface Consulta{
     observaciones: string;
     fechaAlta: string;
     fechaModificacion: string;
+    tratamientos: any[];
 }

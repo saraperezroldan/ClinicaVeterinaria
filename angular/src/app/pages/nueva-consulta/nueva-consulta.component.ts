@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Tratamiento} from "../../models/tratamiento.model";
 import {ActivatedRoute} from "@angular/router";
 import {ConsultaService} from "../../services/consulta.service";
@@ -14,7 +14,7 @@ import {Usuario} from "../../models/usuario.model";
   templateUrl: './nueva-consulta.component.html',
   styleUrl: './nueva-consulta.component.css'
 })
-export class NuevaConsultaComponent {
+export class NuevaConsultaComponent implements OnInit{
 
   mascota!: Mascota;
   idMascota!: number;
@@ -22,13 +22,27 @@ export class NuevaConsultaComponent {
   nombreVeterinario: string = '';
   currentUser: any = null;
   usuario!: Usuario;
-  consulta!: Consulta;
   fecha: string = new Date().toLocaleDateString();
 
   tratamientos: Tratamiento[] = [];
   listaTratamientos: Tratamiento[] = [];
   tratamientoSeleccionado!: Tratamiento;
   total: number = 0;
+
+  consulta: Consulta = {
+    idConsulta: 0,
+    fechaCitaConsulta: this.fecha,
+    horaCita: new Date().toLocaleTimeString(),
+    idMascota: this.idMascota,
+    mascota: this.idMascota,
+    idVeterinario: 0,
+    motivo: '',
+    diagnostico: '',
+    observaciones: '',
+    fechaAlta: '',
+    fechaModificacion: '',
+    tratamientos: []
+  };
 
 
   constructor(
@@ -84,5 +98,63 @@ export class NuevaConsultaComponent {
   goBack(){
     window.history.back();
   }
+
+  nuevaConsulta(): void {
+
+      if (consulta) {
+        this.convertirCitaEnConsulta(consulta);
+      } else {
+        this.crearConsulta();
+      }
+    
+  }
+
+  crearConsulta(): void {
+
+    this.consulta.tratamientos = [];
+    this.consulta.idVeterinario = this.currentUser.idUsuario;
+    this.consulta.idMascota = this.idMascota;
+    this.consulta.mascota = this.idMascota;
+    this.consulta.fechaCitaConsulta = new Date().toISOString().split('T')[0];
+    console.log('Creando consulta:', this.consulta);
+
+    this.consultaService.crearConsulta(this.consulta).subscribe({
+      next: (response) => {
+        console.log('Consulta creada:', response);
+
+        this.consulta.idConsulta = response.idConsulta;
+
+        this.modificarConsultaConTratamientos();
+      },
+      error: (error) => {
+        console.error('Error al crear la consulta:', error);
+      }
+    });
+  }
+
+  modificarConsultaConTratamientos(): void {
+    const consultaModificada = {
+      ...this.consulta,
+      tratamientosConsulta: this.tratamientos.map(t => ({ idTratamiento: t.idTratamiento }))
+    };
+
+    this.consultaService.modificarConsulta(consultaModificada).subscribe({
+      next: (response) => {
+        console.log('Consulta actualizada con tratamientos:', response);
+        alert('Consulta creada correctamente');
+        window.history.back();
+
+      },
+      error: (error) => {
+        console.error('Error al actualizar la consulta con tratamientos:', error);
+
+      }
+    });
+  }
+
+  convertirCitaEnConsulta(consulta: Consulta): void {
+
+  }
+
 
 }

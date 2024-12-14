@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Consulta} from "../../models/consulta.model";
 
 @Component({
   selector: 'app-confirm-cita',
@@ -8,7 +9,10 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class ConfirmCitaComponent {
 
-  constructor(public dialogRef: MatDialogRef<ConfirmCitaComponent>) { }
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmCitaComponent>,
+    @Inject(MAT_DIALOG_DATA) public cita: Consulta
+  ) { }
 
   onClose(){
     this.dialogRef.close(false);

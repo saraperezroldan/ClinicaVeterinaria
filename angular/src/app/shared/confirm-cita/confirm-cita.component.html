@@ -7,12 +7,22 @@
   <div class="cita">
     <div class="fecha">
       <mat-icon>event</mat-icon>
-      <strong>Fecha recomendada:</strong>
-      <!--<span>{{ vacuna.fechaCitaConsulta | date:'dd/MM/yyyy' }}</span>-->
+      <strong>Fecha cita:&nbsp;</strong>
+      <span>{{ cita.fechaCitaConsulta | date:'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="fecha">
+      <mat-icon>schedule</mat-icon>
+      <strong>Hora cita:&nbsp;</strong>
+      <span>{{ cita.horaCita }}</span>
+    </div>
+    <div class="fecha">
+      <mat-icon>person</mat-icon>
+      <strong>Veterinario:&nbsp;</strong>
+      <span>{{ cita.horaCita }}</span>
     </div>
     <div class="tratamiento">
       <p>Motivo: &nbsp; </p>
-      <!--<span>{{ vacuna.motivo }}</span>-->
+      <span>{{ cita.motivo }}</span>
     </div>
   </div>
 

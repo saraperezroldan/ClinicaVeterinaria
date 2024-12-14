@@ -41,7 +41,8 @@ export class NuevaConsultaComponent implements OnInit {
     observaciones: '',
     fechaAlta: '',
     fechaModificacion: '',
-    tratamientos: []
+    tratamientos: [],
+    esCita : 0,
   };
 
 

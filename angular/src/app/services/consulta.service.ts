@@ -78,6 +78,10 @@ export class ConsultaService{
       return this.http.post<any>(`${URLSERVER}consulta/convertirCitaConsulta`, data);
     }
 
+    crearCita(cita:Consulta) : Observable<any>{
+        return this.http.post<any>(`${URLSERVER}consulta/crearCita`, cita);
+    }
+
 
 
 }

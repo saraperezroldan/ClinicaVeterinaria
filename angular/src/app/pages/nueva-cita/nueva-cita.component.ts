@@ -64,14 +64,11 @@ export class NuevaCitaComponent implements OnInit{
   onVeterinarioChange() {
     if (!this.selectedVeterinario) return;
 
-    // Reinicia el listado de horas disponibles
     this.generarHorasDisponibles();
 
-    // Llama al servicio para obtener las citas del veterinario seleccionado
     this.consultaService.getCitasByIdVeterinario(this.selectedVeterinario).subscribe(citas => {
       this.citasOcupadas = citas.map((cita : Consulta) => this.formatHora(cita.horaCita));
-
-      // Filtra las horas ocupadas solo para el veterinario seleccionado
+      
       this.actualizarHorasDisponibles();
     });
   }

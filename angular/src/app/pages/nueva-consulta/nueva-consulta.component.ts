@@ -14,7 +14,7 @@ import {Usuario} from "../../models/usuario.model";
   templateUrl: './nueva-consulta.component.html',
   styleUrl: './nueva-consulta.component.css'
 })
-export class NuevaConsultaComponent implements OnInit{
+export class NuevaConsultaComponent implements OnInit {
 
   mascota!: Mascota;
   idMascota!: number;
@@ -51,7 +51,8 @@ export class NuevaConsultaComponent implements OnInit{
     private usuarioService: UsuarioService,
     private tratamientoService: TratamientoService,
     private mascotaService: MascotaService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.idMascota = this.route.snapshot.params['idMascota'];
@@ -60,7 +61,7 @@ export class NuevaConsultaComponent implements OnInit{
         (mascota: Mascota) => {
           this.mascota = mascota;
           this.nombreMascota = mascota.nombre;
-      });
+        });
 
       this.currentUser = this.usuarioService.getCurrentUser();
       console.log(this.currentUser);
@@ -70,8 +71,35 @@ export class NuevaConsultaComponent implements OnInit{
         this.listaTratamientos = data;
         console.log(this.listaTratamientos);
       });
+
+      this.verificarCitaExistente();
     }
   }
+
+  verificarCitaExistente(): void {
+    const fechaActual = new Date().toISOString().split('T')[0];
+
+    this.consultaService.getCitasByIdMascota(this.idMascota).subscribe({
+      next: (citas: any[]) => {
+        const citaExistente = citas.find(cita => cita.fechaCitaConsulta === fechaActual);
+
+        if (citaExistente) {
+          console.log('Cita existente encontrada:', citaExistente);
+
+          this.consulta.idConsulta = citaExistente.idConsulta;
+          this.consulta.motivo = citaExistente.motivo;
+          this.consulta.horaCita = citaExistente.horaCita;
+          this.consulta.idVeterinario = citaExistente.idVeterinario;
+        } else {
+          console.log('No hay citas para hoy.');
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener las citas:', error);
+      }
+    });
+  }
+
 
   onTratamientoSeleccionado(tratamientoSeleccionado: Tratamiento): void {
     if (tratamientoSeleccionado) {
@@ -95,19 +123,18 @@ export class NuevaConsultaComponent implements OnInit{
     this.tratamientos.splice(index, 1);
   }
 
-  goBack(){
+  goBack() {
     window.history.back();
   }
 
   nuevaConsulta(): void {
-
-      if (consulta) {
-        this.convertirCitaEnConsulta(consulta);
-      } else {
-        this.crearConsulta();
-      }
-    
+    if (this.consulta.idConsulta !== 0) {
+      this.convertirCitaEnConsulta();
+    } else {
+      this.crearConsulta();
+    }
   }
+
 
   crearConsulta(): void {
 
@@ -135,7 +162,7 @@ export class NuevaConsultaComponent implements OnInit{
   modificarConsultaConTratamientos(): void {
     const consultaModificada = {
       ...this.consulta,
-      tratamientosConsulta: this.tratamientos.map(t => ({ idTratamiento: t.idTratamiento }))
+      tratamientosConsulta: this.tratamientos.map(t => ({idTratamiento: t.idTratamiento}))
     };
 
     this.consultaService.modificarConsulta(consultaModificada).subscribe({
@@ -152,9 +179,34 @@ export class NuevaConsultaComponent implements OnInit{
     });
   }
 
-  convertirCitaEnConsulta(consulta: Consulta): void {
+  convertirCitaEnConsulta(): void {
+    const consultaConvertida = {
+      idConsulta: this.consulta.idConsulta,
+      diagnostico: this.consulta.diagnostico,
+      observaciones: this.consulta.observaciones,
+      mascota: Number(this.idMascota),
+      idVeterinario: this.currentUser.idUsuario,
+      tratamientosConsulta: this.tratamientos.map(t => ({
+        idConsulta: this.consulta.idConsulta,
+        idTratamiento: t.idTratamiento
+      }))
+    };
 
+    console.log('Datos enviados al backend para convertir cita:', consultaConvertida);
+
+    this.consultaService.convertirCitaEnConsulta(consultaConvertida).subscribe({
+      next: (response) => {
+        console.log('Cita convertida en consulta:', response);
+        alert('La cita ha sido convertida exitosamente en una consulta.');
+        window.history.back();
+      },
+      error: (error) => {
+        console.error('Error al convertir la cita en consulta:', error);
+        alert('Hubo un error al intentar convertir la cita en consulta.');
+      }
+    });
   }
 
 
 }
+

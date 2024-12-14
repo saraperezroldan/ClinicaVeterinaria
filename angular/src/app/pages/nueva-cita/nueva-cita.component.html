@@ -11,7 +11,7 @@
 
   <div class="form-section">
     <h3>Seleccione la hora de la cita:</h3>
-    <select class="form-select">
+    <select class="form-select" [(ngModel)]="selectedHora">
       <option disabled selected>Selecciona la hora</option>
       <option *ngFor="let hora of horasDisponibles" [disabled]="citasOcupadas.includes(hora)">
         {{ hora }}
@@ -28,7 +28,7 @@
 
 
     <h3>Escriba el motivo:</h3>
-    <textarea class="form-textarea" placeholder="Escriba el motivo"></textarea>
+    <textarea class="form-textarea" [(ngModel)]="motivo" placeholder="Escriba el motivo"></textarea>
 
     <button class="btn-create" (click)="crearCita()">Crear cita</button>
   </div>

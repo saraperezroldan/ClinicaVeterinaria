@@ -9,10 +9,15 @@ import {Consulta} from "../../models/consulta.model";
 })
 export class ConfirmCitaComponent {
 
+  cita: Consulta;
+  nombreVeterinario: string = '';
   constructor(
     public dialogRef: MatDialogRef<ConfirmCitaComponent>,
-    @Inject(MAT_DIALOG_DATA) public cita: Consulta
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: { cita: Consulta; nombreVeterinario: string }
+  ) {
+    this.cita = data.cita;
+    this.nombreVeterinario = data.nombreVeterinario
+  }
 
   onClose(){
     this.dialogRef.close(false);

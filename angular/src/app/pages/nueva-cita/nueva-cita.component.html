@@ -30,6 +30,8 @@
     <h3>Escriba el motivo:</h3>
     <textarea class="form-textarea" [(ngModel)]="motivo" placeholder="Escriba el motivo"></textarea>
 
+    <p class="errorMensaje">{{errorMensaje}}</p>
+
     <button class="btn-create" (click)="crearCita()">Crear cita</button>
   </div>
 </div>

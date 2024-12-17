@@ -19,12 +19,14 @@ export class NuevaCitaComponent implements OnInit{
 
   veterinarios : Usuario[] = [];
   selectedVeterinario : number | undefined;
+  selectedVeterinaroNombre : string = '';
   citasOcupadas: string[] = [];
   horasDisponibles: string[] = [];
   selectedHora: string = '';
   motivo: string = '';
   selectedFecha: string = '';
   mascotaId : number | undefined;
+  errorMensaje : string = '';
 
   constructor(public usuarioService : UsuarioService,
               public dialog : MatDialog,
@@ -62,11 +64,10 @@ export class NuevaCitaComponent implements OnInit{
   crearCita(){
 
     if (!this.selectedFecha || !this.selectedHora || !this.selectedVeterinario || !this.motivo) {
-      alert("Por favor, complete todos los campos (fecha, hora, veterinario, y motivo).");
+      this.errorMensaje = "Por favor, complete todos los campos (fecha, hora, veterinario, y motivo).";
       return;
     }
 
-    // Crea un objeto de cita con la información que se ha seleccionado
     const cita: Consulta = {
       idConsulta: 0,
       mascota: this.mascotaId!,
@@ -84,7 +85,10 @@ export class NuevaCitaComponent implements OnInit{
     };
 
     const dialogRef = this.dialog.open(ConfirmCitaComponent, {
-      data: cita
+      data: {
+        cita: cita,
+        nombreVeterinario: this.selectedVeterinaroNombre
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -105,7 +109,7 @@ export class NuevaCitaComponent implements OnInit{
     });
   }
 
-  onVeterinarioChange() {
+  onVeterinarioChange(){
     if (!this.selectedVeterinario) return;
 
     this.generarHorasDisponibles();
@@ -114,6 +118,9 @@ export class NuevaCitaComponent implements OnInit{
       this.citasOcupadas = citas.map((cita : Consulta) => this.formatHora(cita.horaCita));
 
       this.actualizarHorasDisponibles();
+    });
+    this.usuarioService.getUsuarioById(this.selectedVeterinario).subscribe((veterinario: Usuario) => {
+      this.selectedVeterinaroNombre = veterinario.nombre + ' ' + veterinario.apellidos;
     });
   }
 
@@ -127,7 +134,7 @@ export class NuevaCitaComponent implements OnInit{
       horas.push(this.formatHora(`${h}:30:00`));
     }
 
-    this.horasDisponibles = horas; // Reinicia la lista de horas disponibles
+    this.horasDisponibles = horas;
   }
 
   actualizarHorasDisponibles() {

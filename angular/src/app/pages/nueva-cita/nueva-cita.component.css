@@ -142,3 +142,8 @@ select:focus {
   font-size: 12px;
 }
 
+.fc-daygrid-day.fc-selected {
+  background-color: #007bff !important; /* Color de fondo */
+  color: white; /* Color del texto */
+}
+

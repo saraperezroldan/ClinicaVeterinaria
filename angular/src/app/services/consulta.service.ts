@@ -82,6 +82,14 @@ export class ConsultaService{
         return this.http.post<any>(`${URLSERVER}consulta/crearCita`, cita);
     }
 
+    modificarCita(cita:Consulta) : Observable<any>{
+        return this.http.post<any>(`${URLSERVER}consulta/modificarCita`, cita);
+    }
+
+    getCitaById(idCita: number) : Observable<any>{
+        return this.http.get<any>(`${URLSERVER}consulta/getCitaById/${idCita}`);
+    }
+
 
 
 }

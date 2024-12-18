@@ -126,6 +126,10 @@ const routes: Routes = [
       {
         path: 'nueva-cita/:idMascota',
         component: NuevaCitaComponent
+      },
+      {
+        path: 'editar-cita/:idCita',
+        component: NuevaCitaComponent
       }
     ]
   },

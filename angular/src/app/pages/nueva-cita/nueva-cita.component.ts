@@ -77,12 +77,6 @@ export class NuevaCitaComponent implements OnInit{
         this.agregarEventoCita(cita.fechaCitaConsulta);
 
         this.cdr.detectChanges();
-        console.log(cita);
-        console.log(this.selectedVeterinario);
-        console.log(this.selectedVeterinarioNombre);
-        console.log(this.selectedFecha);
-        console.log(this.selectedHora);
-        console.log(this.mascotaId);
       });
     } else {
       this.isEditMode = false;
@@ -163,6 +157,8 @@ export class NuevaCitaComponent implements OnInit{
       tratamientos: [],
     };
 
+    console.log("Datos enviados al dialogo de confirmación: ", cita, this.selectedVeterinarioNombre, this.isEditMode ? "Modificación" : "Creación")
+
     const dialogRef = this.dialog.open(ConfirmCitaComponent, {
       data: {
         cita : cita,
@@ -185,7 +181,6 @@ export class NuevaCitaComponent implements OnInit{
             },
           });
         } else {
-          // Crear nueva cita
           this.consultaService.crearCita(cita).subscribe({
             next: () => {
               console.log('Cita creada exitosamente');
@@ -211,12 +206,18 @@ export class NuevaCitaComponent implements OnInit{
     this.consultaService.getCitasByIdVeterinario(this.selectedVeterinario).subscribe(citas => {
       this.citasOcupadas = citas.map((cita : Consulta) => this.formatHora(cita.horaCita));
 
-      this.actualizarHorasDisponibles();
     });
     this.usuarioService.getUsuarioById(this.selectedVeterinario).subscribe((veterinario: Usuario) => {
       this.selectedVeterinarioNombre = veterinario.nombre + ' ' + veterinario.apellidos;
     });
   }
+
+  onHoraChange(event: Event): void {
+    console.log('Hora seleccionada antes de detectar cambios:', this.selectedHora);
+    this.cdr.detectChanges(); // Forzar actualización del modelo
+    console.log('Hora seleccionada después de detectar cambios:', this.selectedHora);
+  }
+
 
   generarHorasDisponibles() {
     const horas = [];
@@ -229,10 +230,6 @@ export class NuevaCitaComponent implements OnInit{
     }
 
     this.horasDisponibles = horas;
-  }
-
-  actualizarHorasDisponibles() {
-    this.horasDisponibles = this.horasDisponibles.filter(hora => !this.citasOcupadas.includes(hora));
   }
 
   formatHora(hora: string): string {

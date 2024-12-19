@@ -12,8 +12,11 @@
   <div class="form-section">
     <h3>Seleccione la hora de la cita:</h3>
     <select class="form-select" [(ngModel)]="selectedHora">
-      <option>Selecciona la hora</option>
-      <option *ngFor="let hora of horasDisponibles" [value]="selectedHora">
+      <option disabled selected>Selecciona la hora</option>
+      <option *ngIf="isEditMode" [value]="selectedHora">
+        {{ selectedHora }}
+      </option>
+      <option *ngFor="let hora of horasDisponibles" [value]="hora">
         {{ hora }}
       </option>
     </select>

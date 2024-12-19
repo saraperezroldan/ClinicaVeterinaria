@@ -3,14 +3,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {UsuarioService} from "../../services/usuario.service";
 import {Usuario} from "../../models/usuario.model";
-import {ProximosTratamientosComponent} from "../../shared/proximos-tratamientos/proximos-tratamientos.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmCitaComponent} from "../../shared/confirm-cita/confirm-cita.component";
 import {ConsultaService} from "../../services/consulta.service";
 import {Consulta} from "../../models/consulta.model";
 import {ActivatedRoute} from "@angular/router";
 import {FullCalendarComponent} from "@fullcalendar/angular";
-import { EventApi } from '@fullcalendar/core';  // Importa EventApi
+import { EventApi } from '@fullcalendar/core';
 
 
 @Component({
@@ -34,6 +33,7 @@ export class NuevaCitaComponent implements OnInit{
   errorMensaje : string = '';
   isEditMode: boolean = false;
   citaToEdit?: Consulta;
+  selectedHoraOriginal: string = '';
 
   constructor(public usuarioService : UsuarioService,
               public dialog : MatDialog,
@@ -64,6 +64,11 @@ export class NuevaCitaComponent implements OnInit{
         this.selectedVeterinario = cita.idVeterinario;
         this.motivo = cita.motivo;
         this.mascotaId = cita.mascota;
+
+        this.generarHorasDisponibles();
+        this.usuarioService.getUsariosByRol(2).subscribe((data: Usuario[]) => {
+          this.veterinarios = data;
+        });
 
         this.usuarioService.getUsuarioById(cita.idVeterinario).subscribe((veterinario: Usuario) => {
           this.selectedVeterinarioNombre = veterinario.nombre + ' ' + veterinario.apellidos;

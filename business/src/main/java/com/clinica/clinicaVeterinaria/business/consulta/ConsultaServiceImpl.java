@@ -248,7 +248,7 @@ public class ConsultaServiceImpl implements IConsultaService {
 
         existeConsultaCita(citaEncontrada);
         validarCita(citaUpdate);
-        citaUpdate.setEsCita(0);
+        citaUpdate.setEsCita(1);
         citaUpdate.setFechaUltima(new Date());
         consultaRepository.save(citaUpdate);
 

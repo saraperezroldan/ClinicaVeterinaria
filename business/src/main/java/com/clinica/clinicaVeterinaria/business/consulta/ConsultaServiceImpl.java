@@ -138,7 +138,7 @@ public class ConsultaServiceImpl implements IConsultaService {
         validarConsulta(consultaNueva);
         consultaNueva.setEsCita(0);
         consultaNueva.setFechaCitaConsulta(LocalDate.now());
-        consultaNueva.setHoraCita(LocalTime.now());
+        consultaNueva.setHoraCita(consultaDTO.getHoraFormateada(LocalTime.now()));
         consultaNueva.setFechaAlta(new Date());
         consultaRepository.save(consultaNueva);
 
@@ -194,7 +194,6 @@ public class ConsultaServiceImpl implements IConsultaService {
 
         validarCita(citaNueva);
         citaNueva.setEsCita(1);
-
         citaNueva.setFechaAlta(new Date());
         consultaRepository.save(citaNueva);
 
@@ -365,4 +364,5 @@ public class ConsultaServiceImpl implements IConsultaService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.requeridoMotivo");
         }
     }
+
 }

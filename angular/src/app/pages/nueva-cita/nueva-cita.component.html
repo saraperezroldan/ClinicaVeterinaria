@@ -10,16 +10,7 @@
 
 
   <div class="form-section">
-    <h3>Seleccione la hora de la cita:</h3>
-    <select class="form-select" [(ngModel)]="selectedHora">
-      <option disabled selected>Selecciona la hora</option>
-      <option *ngIf="isEditMode" [value]="selectedHora">
-        {{ selectedHora }}
-      </option>
-      <option *ngFor="let hora of horasDisponibles" [value]="hora">
-        {{ hora }}
-      </option>
-    </select>
+
 
     <h3>Seleccione un veterinario:</h3>
     <select class="form-select" [(ngModel)]="selectedVeterinario" (change)="onVeterinarioChange()">
@@ -28,6 +19,20 @@
         {{ veterinario.nombre }} {{ veterinario.apellidos }}
       </option>
     </select>
+
+    <h3>Seleccione la hora de la cita:</h3>
+    <select class="form-select" [(ngModel)]="selectedHora" [disabled]="!selectedVeterinario || !selectedFecha">
+      <option disabled selected>Selecciona la hora</option>
+      <option *ngIf="isEditMode" [value]="selectedHora" >
+        {{ selectedHora }}
+      </option>
+      <option *ngFor="let hora of horasDisponibles" [value]="hora">
+        {{ hora }}
+      </option>
+    </select>
+    <p *ngIf="!selectedVeterinario || !selectedFecha" style="color: black; font-size: 11px;">
+      Seleccione un veterinario y una fecha para ver las horas disponibles.
+    </p>
 
 
     <h3>Escriba el motivo:</h3>

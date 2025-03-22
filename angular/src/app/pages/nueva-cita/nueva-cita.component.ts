@@ -12,6 +12,7 @@ import {FullCalendarComponent} from "@fullcalendar/angular";
 import { EventApi } from '@fullcalendar/core';
 
 
+
 @Component({
   selector: 'app-nueva-cita',
   templateUrl: './nueva-cita.component.html',
@@ -48,7 +49,7 @@ export class NuevaCitaComponent implements OnInit{
     firstDay: 1,
     editable: true,
     selectable: true,
-    events: [],
+    events: [] as any[],
     dateClick: this.handleDateClick.bind(this),
     initialDate: new Date(),
   };
@@ -86,12 +87,37 @@ export class NuevaCitaComponent implements OnInit{
       });
       this.generarHorasDisponibles();
     }
+    if (this.mascotaId) {
+      this.consultaService.getCitasByIdMascota(this.mascotaId).subscribe((citas: Consulta[]) => {
+
+        console.log('Consultas obtenidas para la mascota:', citas);
+        const eventos = citas.map(cita => ({
+          title: `${this.formatHora(cita.horaCita)} Cita Veterinaria`,
+          start: new Date(cita.fechaCitaConsulta),
+          allDay: true,
+          color: '#ff5733',
+        }));
+        console.log('Eventos a agregar al calendario:', eventos);
+
+
+        this.calendarOptions.events = [...this.calendarOptions.events, ...eventos];
+
+        this.cdr.detectChanges();
+      });
+    }
   }
 
 
   handleDateClick(arg: any) {
     this.selectedFecha = arg.dateStr;
     console.log(`Fecha seleccionada: ${this.selectedFecha}`);
+
+    if (this.selectedVeterinario) {
+      this.consultaService.getCitasByIdVeterinario(this.selectedVeterinario, this.selectedFecha).subscribe(citas => {
+        this.citasOcupadas = citas.map((cita: Consulta) => this.formatHora(cita.horaCita));
+        this.generarHorasDisponibles();
+      });
+    }
 
     let calendarApi = arg.view.calendar;
 
@@ -185,6 +211,7 @@ export class NuevaCitaComponent implements OnInit{
             next: () => {
               console.log('Cita creada exitosamente');
               alert('Cita creada exitosamente.');
+              window.history.back();
             },
             error: (error) => {
               console.error('Error al crear la cita:', error);
@@ -201,20 +228,21 @@ export class NuevaCitaComponent implements OnInit{
   onVeterinarioChange(){
     if (!this.selectedVeterinario) return;
 
-    this.generarHorasDisponibles();
-
-    this.consultaService.getCitasByIdVeterinario(this.selectedVeterinario).subscribe(citas => {
-      this.citasOcupadas = citas.map((cita : Consulta) => this.formatHora(cita.horaCita));
-
+    this.consultaService.getCitasByIdVeterinario(this.selectedVeterinario, this.selectedFecha).subscribe(citas => {
+      this.citasOcupadas = citas.map((cita: Consulta) => this.formatHora(cita.horaCita));
+      this.generarHorasDisponibles();
     });
     this.usuarioService.getUsuarioById(this.selectedVeterinario).subscribe((veterinario: Usuario) => {
       this.selectedVeterinarioNombre = veterinario.nombre + ' ' + veterinario.apellidos;
     });
+
+    console.log('Veterinario seleccionado:', this.selectedVeterinario);
+    console.log('Fecha seleccionada:', this.selectedFecha);
   }
 
   onHoraChange(event: Event): void {
     console.log('Hora seleccionada antes de detectar cambios:', this.selectedHora);
-    this.cdr.detectChanges(); // Forzar actualización del modelo
+    this.cdr.detectChanges();
     console.log('Hora seleccionada después de detectar cambios:', this.selectedHora);
   }
 
@@ -225,12 +253,23 @@ export class NuevaCitaComponent implements OnInit{
     const fin = 20;
 
     for (let h = inicio; h < fin; h++) {
-      horas.push(this.formatHora(`${h}:00:00`));
-      horas.push(this.formatHora(`${h}:30:00`));
+      const horaCompleta = `${h}:00:00`;
+      const mediaHora = `${h}:30:00`;
+
+      if (!this.citasOcupadas.includes(this.formatHora(horaCompleta))) {
+        horas.push(this.formatHora(horaCompleta));
+      }
+      if (!this.citasOcupadas.includes(this.formatHora(mediaHora))) {
+        horas.push(this.formatHora(mediaHora));
+      }
     }
+
+    console.log('Horas disponibles:', horas);
+    console.log('Horas ocupadas:', this.citasOcupadas);
 
     this.horasDisponibles = horas;
   }
+
 
   formatHora(hora: string): string {
     const [h, m] = hora.split(':');

@@ -61,8 +61,12 @@ export class ConsultaService{
         return this.http.get<any>(`${URLSERVER}consulta/getVacunasByIdMascota/${idMascota}`);
     }
 
-    getCitasByIdVeterinario(idVterinario: number) : Observable<any>{
-        return this.http.get<any>(`${URLSERVER}consulta/getCitasByIdVeterinario/${idVterinario}`);
+    getCitasByIdVeterinario(idVterinario: number, fechaConcreta?:string) : Observable<any>{
+      let params: any={};
+      if(fechaConcreta){
+        params.fechaConcreta = fechaConcreta;
+      }
+        return this.http.get<any>(`${URLSERVER}consulta/getCitasByIdVeterinario/${idVterinario}`, {params: params});
     }
 
     crearConsulta(consulta: Consulta) : Observable<any>{
@@ -89,7 +93,5 @@ export class ConsultaService{
     getCitaById(idCita: number) : Observable<any>{
         return this.http.get<any>(`${URLSERVER}consulta/getCitaById/${idCita}`);
     }
-
-
 
 }

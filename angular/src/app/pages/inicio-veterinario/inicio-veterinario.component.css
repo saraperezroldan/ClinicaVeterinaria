@@ -127,3 +127,14 @@ button {
   margin-left: 10px;
 }
 
+.paginator-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+mat-paginator {
+  background-color: transparent;
+  width: auto;
+}
+

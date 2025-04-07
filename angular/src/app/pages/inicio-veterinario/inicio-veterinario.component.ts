@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UsuarioService} from "../../services/usuario.service";
 import {Router} from "@angular/router";
 import {Usuario} from "../../models/usuario.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDeleteClienteComponent} from "../../shared/confirm-delete-cliente/./confirm-delete-cliente.component";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-inicio-veterinario',
@@ -12,6 +13,12 @@ import {ConfirmDeleteClienteComponent} from "../../shared/confirm-delete-cliente
   styleUrl: './inicio-veterinario.component.css'
 })
 export class InicioVeterinarioComponent implements OnInit{
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  totalItems = 0;
+  pageSize = 7;
+  pageIndex = 0;
 
   usuario : Usuario | undefined;
   veterinario: Usuario | undefined;
@@ -28,6 +35,15 @@ export class InicioVeterinarioComponent implements OnInit{
     if(usuarioJSON){
       this.veterinario = JSON.parse(usuarioJSON);
     }
+
+    this.usuarioService.getUsariosByRol(3).subscribe(
+      (usuarios) => {
+        this.dataSource.data = usuarios;
+      },
+      (error) => {
+        console.error('Error al obtener los usuarios con rol 3:', error);
+      }
+    );
   }
 
 
@@ -78,6 +94,12 @@ export class InicioVeterinarioComponent implements OnInit{
 
       }
     });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+
   }
 
 

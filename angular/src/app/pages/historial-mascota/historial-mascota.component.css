@@ -84,3 +84,18 @@ table th{
     padding: 7px;
 }
 
+.mensaje-sin-historial {
+  margin-top: 2%;
+  margin-left: 3%;
+  display: flex;
+  vertical-align: middle;
+  font-size: small;
+}
+
+.mensaje-sin-historial mat-icon{
+  margin-right: 3px;
+  vertical-align: middle;
+}
+
+
+

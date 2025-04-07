@@ -80,5 +80,10 @@ export class GestionTratamientosComponent implements OnInit{
 
   nuevoTratamiento(): void {
     const dialogRef = this.dialog.open(NuevoTratamientoComponent, { });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.ngOnInit();
+      }
+    });
   }
 }

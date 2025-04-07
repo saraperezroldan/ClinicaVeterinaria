@@ -7,7 +7,12 @@
         <h1>Historial clínico de {{mascota.nombre}}</h1>
     </div>
 
-    <table mat-table [dataSource]="dataSource">
+    <div *ngIf="dataSource.data.length === 0" class="mensaje-sin-historial">
+      <mat-icon color="warn">info</mat-icon>
+      <p>No hay historial clínico registrado para esta mascota.</p>
+    </div>
+
+    <table *ngIf="dataSource.data.length > 0" mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="fechaConsulta">
             <th mat-header-cell *matHeaderCellDef> Fecha consulta </th>

@@ -17,7 +17,7 @@ export class NuevoTratamientoComponent {
     descripcion: '',
     esVacuna: 0,
     precio: 0,
-    stock: 200
+    stock: 0
   };
   errorMensaje = '';
 
@@ -37,6 +37,7 @@ export class NuevoTratamientoComponent {
       (response) => {
         alert('Tratamiento creado correctamente');
         this.dialogRef.close(true);
+        console.log('Tratamiento creado:', response);
       },
       (error) => {
         this.errorMensaje = 'Hubo un problema al crear el tratamiento. Inténtelo de nuevo';

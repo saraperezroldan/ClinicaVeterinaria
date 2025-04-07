@@ -140,6 +140,7 @@ export class NuevoClienteComponent {
     this.usuarioService.crearUsuario(this.usuario).subscribe(
         (usuarioCreado) => {
           console.log('Usuario creado:', usuarioCreado);
+          alert('Usuario creado correctamente');
           this.mascota.usuario = usuarioCreado.idUsuario;
 
           this.mascotaService.crearMascota(this.mascota).subscribe(

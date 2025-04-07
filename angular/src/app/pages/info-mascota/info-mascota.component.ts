@@ -7,6 +7,7 @@ import {
 } from "../../shared/confirm-delete-tratamiento/confirm-delete-tratamiento.component";
 import {ProximosTratamientosComponent} from "../../shared/proximos-tratamientos/proximos-tratamientos.component";
 import {MatDialog} from "@angular/material/dialog";
+import {ConsultaService} from "../../services/consulta.service";
 
 @Component({
   selector: 'app-info-mascota',
@@ -18,6 +19,7 @@ export class InfoMascotaComponent implements OnInit{
   mascota! : Mascota;
   idMascota! : number;
   constructor(private mascotaService : MascotaService,
+              private consultaService: ConsultaService,
               private  route : ActivatedRoute,
               private ruta: Router,
               public dialog : MatDialog) { }

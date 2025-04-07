@@ -8,6 +8,8 @@ import {RazaService} from "../../services/raza.service";
 import {Especie} from "../../models/especie.model";
 import {Raza} from "../../models/raza.model";
 import {forkJoin} from "rxjs";
+import {ConsultaService} from "../../services/consulta.service";
+import {Consulta} from "../../models/consulta.model";
 
 @Component({
   selector: 'app-gestion-info-mascotas',
@@ -20,13 +22,15 @@ export class GestionInfoMascotasComponent implements OnInit{
     idMascota!: number;
     especies: Especie[] = [];
     razaOptions: Raza[] = [];
+    ultimaConsulta: string = '';
 
     constructor(
         private mascotaService: MascotaService,
         private route: ActivatedRoute,
         private especieService: EspecieService,
         private razaService: RazaService,
-        private router: Router
+        private router: Router,
+        private consultaService: ConsultaService
     ) { }
 
     ngOnInit(): void {
@@ -35,6 +39,7 @@ export class GestionInfoMascotasComponent implements OnInit{
             this.getInfoMascota(this.idMascota);
         }
         this.getEspecies();
+        this.getUltimaConsulta();
     }
 
     getEspecies() {
@@ -79,7 +84,21 @@ export class GestionInfoMascotasComponent implements OnInit{
         );
     }
 
-    extractDate(isoDate: string): string {
+  getUltimaConsulta() {
+    this.consultaService.getConsultasByMascota(this.idMascota).subscribe(
+      (consultas: Consulta[]) => {
+        if (consultas.length > 0) {
+          console.log('Consultas:', consultas);
+          const ultima = consultas[consultas.length - 1];
+          this.ultimaConsulta = ultima.fechaCitaConsulta;
+          console.log('Ultima consulta:', this.ultimaConsulta);
+        }
+      }
+    );
+  }
+
+
+  extractDate(isoDate: string): string {
         const date = new Date(isoDate);
         date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
         return date.toISOString().split('T')[0];

@@ -20,14 +20,16 @@
 
     </div>
 
+    <div *ngIf="vacunas.length == 0" #noTratamientos class="noTratamientos">
+      <p>No hay próximas vacunas para tu mascota</p>
+    </div>
+
     <div class="botones">
       <button class="button" (click)="cerrar()">Aceptar</button>
     </div>
   </div>
 
-  <div *ngIf="vacunas.length == 0" #noTratamientos class="noTratamientos">
-    <p>No hay próximas vacunas para tu mascota</p>
-  </div>
+
 
 
 </div>

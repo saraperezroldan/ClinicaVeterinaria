@@ -105,6 +105,7 @@ export class NuevaCitaComponent implements OnInit{
         this.cdr.detectChanges();
       });
     }
+
   }
 
 
@@ -200,6 +201,7 @@ export class NuevaCitaComponent implements OnInit{
             next: () => {
               console.log('Cita actualizada exitosamente');
               alert('Cita actualizada exitosamente.');
+              window.history.back();
             },
             error: (error) => {
               console.error('Error al actualizar la cita:', error);

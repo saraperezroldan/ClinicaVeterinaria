@@ -37,6 +37,17 @@
                 />
             </div>
 
+          <div>
+            <label for="precio">Stock:</label>
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              [(ngModel)]="tratamiento.stock"
+              min="0"
+            />
+          </div>
+
             <div class="esVacuna">
                 <label for="esVacuna">¿Es una vacuna?</label>
                 <mat-radio-group [(ngModel)]="tratamiento.esVacuna" name="esVacuna" id="esVacuna">

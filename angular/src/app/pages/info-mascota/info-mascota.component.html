@@ -53,9 +53,9 @@
             </div>
             <div class="row">
               <div class="half-width">
-                <label>Genero</label>
-                <mat-radio-group>
-                  <mat-radio-button value="M" class="custom-radio" checked>M</mat-radio-button>
+                <label>Género</label>
+                <mat-radio-group [(ngModel)]="mascota.genero" name="genero" [disabled]="true">
+                  <mat-radio-button value="M" class="custom-radio">M</mat-radio-button>
                   <mat-radio-button value="H" class="custom-radio">H</mat-radio-button>
                 </mat-radio-group>
               </div>

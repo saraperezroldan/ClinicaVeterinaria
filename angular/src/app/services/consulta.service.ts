@@ -94,4 +94,6 @@ export class ConsultaService{
         return this.http.get<any>(`${URLSERVER}consulta/getCitaById/${idCita}`);
     }
 
+
+
 }

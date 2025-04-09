@@ -41,6 +41,7 @@ export class InfoVeterinarioComponent implements OnInit{
     this.consultaService.getCitasByIdVeterinario(this.idUsuario).subscribe(
       (data: Consulta[]) => {
         this.citas = data.slice(0, 3);
+        console.log(this.citas);
       },
       (error) => {
         console.error("Error al cargar las citas del veterinario:", error);

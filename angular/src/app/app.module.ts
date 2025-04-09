@@ -52,6 +52,7 @@ import { NuevaCitaComponent } from './pages/nueva-cita/nueva-cita.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { ConfirmCitaComponent } from './shared/confirm-cita/confirm-cita.component';
+import { ConfirmDeleteConsultaComponent } from './shared/confirm-delete-consulta/confirm-delete-consulta.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { ConfirmCitaComponent } from './shared/confirm-cita/confirm-cita.compone
     HistorialCitasVeterinarioComponent,
     NuevaCitaComponent,
     ConfirmCitaComponent,
+    ConfirmDeleteConsultaComponent,
   ],
   imports: [
     BrowserModule,

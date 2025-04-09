@@ -45,7 +45,8 @@ export class GestionCitasAdministradorComponent {
   constructor(private mascotaService : MascotaService,
               private consultaService : ConsultaService,
               private usuarioService : UsuarioService,
-              public dialog : MatDialog) { }
+              public dialog : MatDialog,
+              private router : Router) { }
 
   ngOnInit( ): void {
     this.idVeterinario = 0;
@@ -165,6 +166,10 @@ export class GestionCitasAdministradorComponent {
   filtrarPorVeterinario(): void {
     this.pageIndex = 0;
     this.obtenerCitas();
+  }
+
+  editarCita(id: number): void {
+    this.router.navigate(['/usuario/editar-cita', id]);
   }
 
 }

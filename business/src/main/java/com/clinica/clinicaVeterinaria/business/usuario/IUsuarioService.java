@@ -4,6 +4,8 @@ package com.clinica.clinicaVeterinaria.business.usuario;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface IUsuarioService {
@@ -17,5 +19,6 @@ public interface IUsuarioService {
     UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO);
     UsuarioDTO modificarUsuario(UsuarioDTO usuarioDTO);
     UsuarioDTO eliminarUsuario(int idUsuario);
+    UsuarioDTO cambiarFoto(int idUsuario, MultipartFile image);
 }
 

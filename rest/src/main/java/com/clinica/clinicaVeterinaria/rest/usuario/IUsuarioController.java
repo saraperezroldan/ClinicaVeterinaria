@@ -5,6 +5,8 @@ import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RequestMapping("usuario")
@@ -28,5 +30,8 @@ public interface IUsuarioController {
     ResponseEntity<UsuarioDTO> modificarUsuario(@RequestBody UsuarioDTO usuarioDTO);
     @DeleteMapping("eliminarUsuario/{id}")
     ResponseEntity<UsuarioDTO> eliminarUsuario(@PathVariable("id") int idUsuario);
+    @PostMapping("/cambiarFoto/{id}")
+    ResponseEntity<UsuarioDTO> cambiarFoto(
+            @PathVariable("id") int idUsuario, @RequestParam("image") MultipartFile image);
 }
 

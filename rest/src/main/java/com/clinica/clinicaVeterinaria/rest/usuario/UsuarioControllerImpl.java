@@ -7,7 +7,10 @@ import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RestController
@@ -51,5 +54,9 @@ public class UsuarioControllerImpl implements IUsuarioController {
     @Override
     public ResponseEntity<UsuarioDTO> eliminarUsuario(int idUsuario) {
         return new ResponseEntity<>(usuarioService.eliminarUsuario(idUsuario), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<UsuarioDTO> cambiarFoto(int idUsuario, MultipartFile image) {
+        return new ResponseEntity<>(usuarioService.cambiarFoto(idUsuario,image), HttpStatus.OK);
     }
 }

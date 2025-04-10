@@ -315,18 +315,16 @@ public class ConsultaServiceImpl implements IConsultaService {
         if (idVeterinario <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noValidoIdVeterinario");
         }
-        if (idVeterinario > 0) {
-            Usuario veterinario = usuarioRepository.findUsuarioById(idVeterinario);
-            if (veterinario == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontradoVeterinario");
-            }
-            int rol = veterinario.getRol().getIdRol();
-            if (rol == Constantes.ROL_CLIENTE) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEsVeterinarioNiAdmin");
-            }
+        Usuario veterinario = usuarioRepository.findUsuarioById(idVeterinario);
+        if (veterinario == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEncontradoVeterinario");
+        }
+        int rol = veterinario.getRol().getIdRol();
+        if (rol == Constantes.ROL_CLIENTE) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.noEsVeterinarioNiAdmin");
         }
         LocalDate fechaActual = LocalDate.now();
-        if (fechaConcreta.isBefore(fechaActual)){
+        if (fechaConcreta != null && fechaConcreta.isBefore(fechaActual)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "consulta.fechaCitaPasada");
         }
     }

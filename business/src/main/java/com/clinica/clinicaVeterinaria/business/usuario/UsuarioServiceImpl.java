@@ -1,18 +1,24 @@
 package com.clinica.clinicaVeterinaria.business.usuario;
 
 import com.clinica.clinicaVeterinaria.business.rol.IRolRepository;
-import com.clinica.clinicaVeterinaria.business.rol.IRolService;
-import com.clinica.clinicaVeterinaria.domain.entities.Rol;
-import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
+import com.clinica.clinicaVeterinaria.domain.entities.Rol;
 import com.clinica.clinicaVeterinaria.domain.entities.Usuario;
 import com.clinica.clinicaVeterinaria.domain.filtros.UsuarioFiltroDTO;
+import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +29,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
     private IUsuarioRepository usuarioRepository;
     @Autowired
     private IRolRepository rolRepository;
+
+    @Value("${dir.imagenes}")
+    private Path directorio;
 
     @Override
     public List<UsuarioDTO> getUsuarios() {
@@ -135,6 +144,30 @@ public class UsuarioServiceImpl implements IUsuarioService {
         usuarioRepository.save(usuarioBorrar);
 
         return UsuarioDTO.toDTO(usuarioBorrar);
+    }
+
+    @Override
+    public UsuarioDTO cambiarFoto(int idUsuario, MultipartFile image) {
+        Usuario usuario = usuarioRepository.findUsuarioById(idUsuario);
+        if (usuario == null)  {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontrado");
+        }
+        try {
+            String filename = "/images/" + image.getOriginalFilename();
+            Files.createDirectories(Paths.get(String.valueOf(directorio)));
+
+            Path path = Paths.get(directorio + filename);
+            Files.write(path, image.getBytes());
+
+            usuario.setImagen(filename);
+            usuario.setFechaModificacion(new Date());
+            usuarioRepository.save(usuario);
+
+            return UsuarioDTO.toDTO(usuario);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error al guardar la imagen", e);
+        }
     }
 
     private void existeUsuario(Usuario usuario) {

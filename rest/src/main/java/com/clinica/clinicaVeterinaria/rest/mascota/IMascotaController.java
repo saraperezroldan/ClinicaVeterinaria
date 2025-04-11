@@ -1,10 +1,13 @@
 package com.clinica.clinicaVeterinaria.rest.mascota;
 
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.MascotaFiltroDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RequestMapping("mascota")
@@ -29,5 +32,8 @@ public interface IMascotaController {
 
     @DeleteMapping("eliminarMascota/{id}")
     ResponseEntity<MascotaDTO> eliminarMascota(@PathVariable("id") int idMascota);
+    @PostMapping("/cambiarFotoMascota/{id}")
+    ResponseEntity<MascotaDTO> cambiarFotoMascota(
+            @PathVariable("id") int idMascota, @RequestParam("image") MultipartFile image);
 }
 

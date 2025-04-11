@@ -12,7 +12,7 @@ public class TratamientoDTO {
     private int esVacuna;
     private float precio;
     private int stock;
-
+    private int tieneStock;
     public static TratamientoDTO toDTO(Tratamiento tratamiento){
         TratamientoDTO tratamientoDTO = new TratamientoDTO();
 
@@ -27,6 +27,7 @@ public class TratamientoDTO {
         tratamientoDTO.setPrecio(tratamiento.getPrecio());
         tratamientoDTO.setPrecio(tratamiento.getPrecio());
         tratamientoDTO.setStock(tratamiento.getStock());
+        tratamientoDTO.setTieneStock(tratamiento.getTieneStock());
 
         return tratamientoDTO;
     }
@@ -54,6 +55,7 @@ public class TratamientoDTO {
         tratamiento.setEsVacuna(tratamientoDTO.getEsVacuna());
         tratamiento.setPrecio(tratamientoDTO.getPrecio());
         tratamiento.setStock(tratamientoDTO.getStock());
+        tratamiento.setTieneStock(tratamientoDTO.getTieneStock());
 
         return tratamiento;
     }
@@ -96,4 +98,7 @@ public class TratamientoDTO {
     }
     public int getStock() {return stock;}
     public void setStock(int stock) {this.stock = stock;}
+    public int getTieneStock() {return tieneStock;}
+    public void setTieneStock(int tieneStock) {this.tieneStock = tieneStock;}
+
 }

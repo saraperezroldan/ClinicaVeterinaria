@@ -4,6 +4,7 @@ import com.clinica.clinicaVeterinaria.business.especie.IEspecieRepository;
 import com.clinica.clinicaVeterinaria.business.raza.IRazaRepository;
 import com.clinica.clinicaVeterinaria.business.usuario.IUsuarioRepository;
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.entities.Especie;
 import com.clinica.clinicaVeterinaria.domain.entities.Mascota;
@@ -13,10 +14,17 @@ import com.clinica.clinicaVeterinaria.domain.filtros.MascotaFiltroDTO;
 import com.clinica.clinicaVeterinaria.domain.utils.Constantes;
 import com.clinica.clinicaVeterinaria.domain.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +40,8 @@ public class MascotaServiceImpl implements IMascotaService{
     private IRazaRepository razaRepository;
     @Autowired
     private IEspecieRepository especieRepository;
+    @Value("${dir.imagenes}")
+    private Path directorio;
 
     @Override
     public List<MascotaDTO> getMascotas() {
@@ -135,6 +145,31 @@ public class MascotaServiceImpl implements IMascotaService{
 
         return MascotaDTO.toDTO(mascotaBorrar);
     }
+
+    @Override
+    public MascotaDTO cambiarFotoMascota(int idMascota, MultipartFile image) {
+        Mascota mascota = mascotaRepository.findMascotaById(idMascota);
+        if (mascota == null)  {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mascota.noEncontrado");
+        }
+        try {
+            String filename = "/images/" + image.getOriginalFilename();
+            Files.createDirectories(Paths.get(String.valueOf(directorio)));
+
+            Path path = Paths.get(directorio + filename);
+            Files.write(path, image.getBytes());
+
+            mascota.setImagen(filename);
+            mascota.setFechaModificacion(new Date());
+            mascotaRepository.save(mascota);
+
+            return MascotaDTO.toDTO(mascota);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error al guardar la imagen de la mascota", e);
+        }
+    }
+
     private void existeMascota (Mascota mascota) {
         if (mascota == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "mascota.noEncontrada");

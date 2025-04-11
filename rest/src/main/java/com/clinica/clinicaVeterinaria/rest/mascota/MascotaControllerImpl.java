@@ -2,12 +2,14 @@ package com.clinica.clinicaVeterinaria.rest.mascota;
 
 import com.clinica.clinicaVeterinaria.business.mascota.IMascotaService;
 import com.clinica.clinicaVeterinaria.domain.dtos.MascotaDTO;
+import com.clinica.clinicaVeterinaria.domain.dtos.UsuarioDTO;
 import com.clinica.clinicaVeterinaria.domain.dtos.pageable.PageableResult;
 import com.clinica.clinicaVeterinaria.domain.filtros.MascotaFiltroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -48,5 +50,9 @@ public class MascotaControllerImpl implements IMascotaController{
     @Override
     public ResponseEntity<MascotaDTO> eliminarMascota(int idMascota) {
         return new ResponseEntity<>(mascotaService.eliminarMascota(idMascota), HttpStatus.OK);
+    }
+    @Override
+    public ResponseEntity<MascotaDTO> cambiarFotoMascota(int idMascota, MultipartFile image) {
+        return new ResponseEntity<>(mascotaService.cambiarFotoMascota(idMascota,image), HttpStatus.OK);
     }
 }

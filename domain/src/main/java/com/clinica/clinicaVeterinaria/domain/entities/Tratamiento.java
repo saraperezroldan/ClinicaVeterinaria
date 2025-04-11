@@ -1,7 +1,6 @@
 package com.clinica.clinicaVeterinaria.domain.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,8 +14,8 @@ public class Tratamiento {
     private String descripcion;
     private int esVacuna;
     private float precio;
-
     private int stock;
+    private int tieneStock;
 
     @OneToMany(mappedBy = "tratamiento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ConsultaTratamiento> tratamientosConsulta;
@@ -43,6 +42,8 @@ public class Tratamiento {
     public void setPrecio(float precio) {this.precio = precio;}
     public int getStock() {return stock;}
     public void setStock(int stock) {this.stock = stock;}
+    public int getTieneStock() {return tieneStock;}
+    public void setTieneStock(int tieneStock) {this.tieneStock = tieneStock;}
     public Set<ConsultaTratamiento> getTratamientosConsulta() {return tratamientosConsulta;}
     public void setTratamientosConsulta(Set<ConsultaTratamiento> tratamientosConsulta) {this.tratamientosConsulta = tratamientosConsulta;}
 }

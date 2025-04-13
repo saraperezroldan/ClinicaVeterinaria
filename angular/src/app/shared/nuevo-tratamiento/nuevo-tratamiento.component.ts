@@ -17,7 +17,8 @@ export class NuevoTratamientoComponent {
     descripcion: '',
     esVacuna: 0,
     precio: 0,
-    stock: 0
+    stock: 0,
+    tieneStock: 0
   };
   errorMensaje = '';
 

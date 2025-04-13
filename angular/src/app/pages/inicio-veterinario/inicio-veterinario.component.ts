@@ -36,9 +36,15 @@ export class InicioVeterinarioComponent implements OnInit{
       this.veterinario = JSON.parse(usuarioJSON);
     }
 
-    this.usuarioService.getUsariosByRol(3).subscribe(
-      (usuarios) => {
-        this.dataSource.data = usuarios;
+    this.obtenerClientes();
+  }
+
+  obtenerClientes(): void {
+    this.usuarioService.getUsuariosConFiltro(3, this.pageIndex, this.pageSize).subscribe(
+      (response) => {
+        console.log(response);
+        this.totalItems = response.count;
+        this.dataSource.data = response.results;
       },
       (error) => {
         console.error('Error al obtener los usuarios con rol 3:', error);
@@ -99,6 +105,7 @@ export class InicioVeterinarioComponent implements OnInit{
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.obtenerClientes();
 
   }
 

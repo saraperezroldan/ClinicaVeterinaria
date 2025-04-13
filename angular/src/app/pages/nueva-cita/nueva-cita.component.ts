@@ -23,6 +23,7 @@ export class NuevaCitaComponent implements OnInit{
   @ViewChild(FullCalendarComponent) calendarComponent: FullCalendarComponent | undefined;
 
   veterinarios : Usuario[] = [];
+  currentUser: any = null;
   selectedVeterinario : number | undefined;
   selectedVeterinarioNombre : string = '';
   citasOcupadas: string[] = [];
@@ -105,6 +106,20 @@ export class NuevaCitaComponent implements OnInit{
         this.cdr.detectChanges();
       });
     }
+
+    this.currentUser = this.usuarioService.getCurrentUser();
+    console.log(this.currentUser);
+    if(this.currentUser && this.currentUser.rol===2){
+      this.selectedVeterinario = this.currentUser.idUsuario;
+      console.log('Veterinario actual:', this.selectedVeterinario);
+      this.usuarioService.getUsuarioById(this.selectedVeterinario!).subscribe((veterinario: Usuario) => {
+        this.selectedVeterinarioNombre = veterinario.nombre + ' ' + veterinario.apellidos;
+      });
+    }
+
+
+
+
 
   }
 

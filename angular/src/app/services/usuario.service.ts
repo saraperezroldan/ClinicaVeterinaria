@@ -58,4 +58,15 @@ export class UsuarioService {
   editarUsuario(usuario: Usuario) : Observable<Usuario>{
     return this.http.post<Usuario>(`${URLSERVER}usuario/modificarUsuario`, usuario);
   }
+
+  getUsuariosConFiltro(idRol: number, pageNumber: number = 0, pageElements: number = 5 ) : Observable<any>{
+    const body = {
+      idRol: idRol,
+      pageNumber: pageNumber,
+      pageElements: pageElements,
+      pageable : true,
+      orderDesc : true
+    };
+    return this.http.post<any>(`${URLSERVER}usuario/getUsuarioConFiltro`, body);
+  }
 }

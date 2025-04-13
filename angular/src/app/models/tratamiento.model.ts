@@ -5,4 +5,5 @@ export interface Tratamiento {
     precio: number;
     esVacuna: number;
     stock: number;
+    tieneStock : number;
 }

@@ -130,7 +130,8 @@ const routes: Routes = [
       {
         path: 'editar-cita/:idCita',
         component: NuevaCitaComponent
-      }
+      },
+
     ]
   },
 ];

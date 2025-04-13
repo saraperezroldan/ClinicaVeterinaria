@@ -86,7 +86,10 @@
                             <div class="row">
                                 <div class="half-width">
                                     <label for="ultima-visita">Última visita</label>
-                                    <input type="text" id="ultima-visita" [value]="ultimaConsulta | date:'dd/MM/yyyy'" disabled>
+                                    <input type="text"
+                                           id="ultima-visita"
+                                           [value]="ultimaConsulta ? (ultimaConsulta | date:'dd/MM/yyyy') : '-'"
+                                           disabled>
                                 </div>
                                 <div class="half-width">
                                     <label>Genero</label>

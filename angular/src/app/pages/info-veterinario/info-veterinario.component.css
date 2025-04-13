@@ -175,15 +175,15 @@ h2 {
 .citas{
   display: flex;
   flex-direction: column;
-  width: 75%;
-  margin: 20px;
+  width: 77%;
+  margin:20px;
   gap: 15px;
 }
 
 .imagen-section{
   background-color: white;
   border: 1px solid #8cb4d2;
-  width: 15%;
+  width: 13%;
   height: 5%;
   display: flex;
   flex-direction: column;
@@ -192,10 +192,17 @@ h2 {
   cursor: pointer;
 }
 
+.imagen-section p{
+  text-align: center;
+  font-size: 14px;
+  margin-top:10px
+}
+
 .imagen{
-  width: 85%;
-  height: 85%;
+  width: 70%;
+  height: 70%;
   object-fit: contain;
+  margin-top: 2px;
 }
 
 .cita{

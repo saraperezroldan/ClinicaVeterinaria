@@ -53,6 +53,7 @@ import {FullCalendarModule} from "@fullcalendar/angular";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { ConfirmCitaComponent } from './shared/confirm-cita/confirm-cita.component';
 import { ConfirmDeleteConsultaComponent } from './shared/confirm-delete-consulta/confirm-delete-consulta.component';
+import { CambiarPasswordComponent } from './shared/cambiar-password/cambiar-password.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { ConfirmDeleteConsultaComponent } from './shared/confirm-delete-consulta
     NuevaCitaComponent,
     ConfirmCitaComponent,
     ConfirmDeleteConsultaComponent,
+    CambiarPasswordComponent,
   ],
   imports: [
     BrowserModule,

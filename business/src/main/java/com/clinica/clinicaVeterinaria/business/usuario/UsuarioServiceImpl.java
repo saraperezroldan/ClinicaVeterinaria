@@ -170,6 +170,18 @@ public class UsuarioServiceImpl implements IUsuarioService {
         }
     }
 
+    @Override
+    public UsuarioDTO cambiarPassword (int idUsuario, UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioRepository.findUsuarioById(idUsuario);
+        if (usuario == null)  {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "usuario.noEncontrado");
+        }
+        usuario.setPassword(usuarioDTO.getPassword());
+        usuario.setFechaModificacion(new Date());
+        usuarioRepository.save(usuario);
+        return UsuarioDTO.toDTO(usuario);
+    }
+
     private void existeUsuario(Usuario usuario) {
         if (usuario == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "usuario.noEncontrado");

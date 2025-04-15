@@ -59,4 +59,8 @@ public class UsuarioControllerImpl implements IUsuarioController {
     public ResponseEntity<UsuarioDTO> cambiarFoto(int idUsuario, MultipartFile image) {
         return new ResponseEntity<>(usuarioService.cambiarFoto(idUsuario,image), HttpStatus.OK);
     }
+    @Override
+    public ResponseEntity<UsuarioDTO> cambiarPassword (int idUsuario, UsuarioDTO usuarioDTO) {
+        return new ResponseEntity<>(usuarioService.cambiarPassword(idUsuario, usuarioDTO), HttpStatus.OK);
+    }
 }

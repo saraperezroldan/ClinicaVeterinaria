@@ -33,5 +33,7 @@ public interface IUsuarioController {
     @PostMapping("/cambiarFoto/{id}")
     ResponseEntity<UsuarioDTO> cambiarFoto(
             @PathVariable("id") int idUsuario, @RequestParam("image") MultipartFile image);
+    @PostMapping("/cambiarPassword/{id}")
+    ResponseEntity<UsuarioDTO> cambiarPassword(@PathVariable("id") int idUsuario, @RequestBody UsuarioDTO usuarioDTO);
 }
 

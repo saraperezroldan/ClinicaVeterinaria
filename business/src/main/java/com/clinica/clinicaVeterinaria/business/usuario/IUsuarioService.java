@@ -20,5 +20,6 @@ public interface IUsuarioService {
     UsuarioDTO modificarUsuario(UsuarioDTO usuarioDTO);
     UsuarioDTO eliminarUsuario(int idUsuario);
     UsuarioDTO cambiarFoto(int idUsuario, MultipartFile image);
+    UsuarioDTO cambiarPassword(int idUsuario, UsuarioDTO usuarioDTO);
 }
 

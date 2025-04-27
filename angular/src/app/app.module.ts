@@ -54,6 +54,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import { ConfirmCitaComponent } from './shared/confirm-cita/confirm-cita.component';
 import { ConfirmDeleteConsultaComponent } from './shared/confirm-delete-consulta/confirm-delete-consulta.component';
 import { CambiarPasswordComponent } from './shared/cambiar-password/cambiar-password.component';
+import { CambiarFotoComponent } from './shared/cambiar-foto/cambiar-foto.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { CambiarPasswordComponent } from './shared/cambiar-password/cambiar-pass
     ConfirmCitaComponent,
     ConfirmDeleteConsultaComponent,
     CambiarPasswordComponent,
+    CambiarFotoComponent,
   ],
   imports: [
     BrowserModule,

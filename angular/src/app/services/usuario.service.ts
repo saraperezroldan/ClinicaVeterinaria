@@ -69,4 +69,9 @@ export class UsuarioService {
     };
     return this.http.post<any>(`${URLSERVER}usuario/getUsuarioConFiltro`, body);
   }
+
+  cambiarFoto(idUsuario: number, formData: FormData): Observable<Usuario> {
+    return this.http.post<Usuario>(`${URLSERVER}usuario/cambiarFoto/${idUsuario}`, formData);
+  }
+
 }

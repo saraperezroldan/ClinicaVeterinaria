@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ProximosTratamientosComponent} from "../../shared/proximos-tratamientos/proximos-tratamientos.component";
 import {MatDialog} from "@angular/material/dialog";
 import {CambiarPasswordComponent} from "../../shared/cambiar-password/cambiar-password.component";
+import {CambiarFotoComponent} from "../../shared/cambiar-foto/cambiar-foto.component";
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -35,6 +36,20 @@ export class PerfilUsuarioComponent implements OnInit{
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  cambiarFoto() {
+    const dialogRef = this.dialog.open(CambiarFotoComponent, {
+      data: { usuario: this.usuario }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.usuario = result;
+        localStorage.setItem('currentUser', JSON.stringify(this.usuario));
+      }
+    });
+  }
+
 
 
 }

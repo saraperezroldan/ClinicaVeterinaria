@@ -1,0 +1,17 @@
+<div class="popup">
+  <mat-toolbar class="toolbar"></mat-toolbar>
+  <mat-dialog-content class="dialog-content">
+    <div class="mensaje-inicial">
+      Por favor seleccione un archivo:
+    </div>
+    <input type="file" (change)="onFileSelected($event)">
+    <br><br>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="cancelar()" class="botonCancelar">Cancelar</button>
+    <button mat-button (click)="uploadImage()" class="botonAceptar">Aceptar</button>
+  </mat-dialog-actions>
+</div>
+
+

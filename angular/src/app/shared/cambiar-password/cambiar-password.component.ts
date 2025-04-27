@@ -33,14 +33,15 @@ export class CambiarPasswordComponent {
 
     this.usuario = this.data.usuario;
 
-    this.usuarioService.editarUsuario(this.usuario).subscribe({
+    this.usuarioService.cambiarPassword(this.usuario.idUsuario, this.nuevaPassword).subscribe({
       next: () => {
         this.dialogRef.close(true);
+        alert('La contraseña ha sido cambiada con éxito');
       },
-      error: err => {
+      error: (err) => {
         this.error = 'Error al actualizar la contraseña';
         console.error(err);
-      }
+      },
     });
   }
 

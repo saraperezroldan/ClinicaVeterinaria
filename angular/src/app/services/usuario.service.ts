@@ -74,4 +74,9 @@ export class UsuarioService {
     return this.http.post<Usuario>(`${URLSERVER}usuario/cambiarFoto/${idUsuario}`, formData);
   }
 
+  cambiarPassword(idUsuario: number, nuevaPassword: string): Observable<any> {
+    const body = { password: nuevaPassword };
+    return this.http.post(`${URLSERVER}usuario/cambiarPassword/${idUsuario}`, body);
+  }
+
 }

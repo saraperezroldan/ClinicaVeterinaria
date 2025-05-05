@@ -20,26 +20,8 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-	@Value("${app.path.static}")
-	private String pathStatic;
-	
 	@Autowired
 	private ServletContextListenerConfig servletConfig;
-	
-	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-        	.addResourceHandler("/**")
-	        .addResourceLocations("classpath:"+pathStatic)
-	        .resourceChain(true)
-	        .addResolver(new PathResourceResolver() {
-	            @Override
-	            protected Resource getResource(String resourcePath, Resource location) throws IOException {
-	                Resource requestedResource = location.createRelative(resourcePath);
-	                return requestedResource.exists() && requestedResource.isReadable()? requestedResource : new ClassPathResource(pathStatic + "index.html");
-	            }
-	        });
-	}
 
 	@Override
 	public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {
@@ -49,7 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 	
 	/**
-	 * Log filter built in in Spring Boot to logging request HTTP.
+	 * Log filter built in Spring Boot to logging request HTTP.
 	 * @return
 	 */
 	@Bean

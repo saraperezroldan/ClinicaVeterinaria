@@ -1,7 +1,7 @@
 <div class="container">
   <div class="foto-perfil">
     <div class="profile-section">
-      <img [src]="usuario?.imagen" alt="Profile Image" class="profile-image">
+      <img [src]="'http://localhost:8080/clinica_veterinaria' + usuario?.imagen"  alt="Profile Image" class="profile-image" >
     </div>
     <button class="btn-change" (click)="cambiarFoto()">Cambiar</button>
   </div>

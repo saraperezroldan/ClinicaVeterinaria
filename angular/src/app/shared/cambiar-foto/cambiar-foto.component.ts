@@ -30,10 +30,12 @@ export class CambiarFotoComponent {
 
     this.usuarioService.cambiarFoto(this.data.usuario.idUsuario, formData).subscribe({
       next: (updatedUser) => {
-        this.dialogRef.close(updatedUser); // Cierra popup y devuelve el nuevo usuario
+        this.dialogRef.close(updatedUser);
+        alert('Foto actualizada correctamente');
       },
       error: (error) => {
         console.error('Error al subir la foto', error);
+        alert('Error al subir la foto');
       }
     });
   }
